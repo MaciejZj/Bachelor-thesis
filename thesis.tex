@@ -1,0 +1,51 @@
+\documentclass[a4paper, 11pt]{report}
+\usepackage{geometry}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {graphics/} }
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[hidelinks]{hyperref}
+\usepackage{minted}
+\renewcommand\listoflistingscaption{Spis listingów}
+\usepackage[polish]{babel}
+
+\begin{document}
+
+\input{titlepage}
+
+\pagenumbering{gobble}
+
+% Introductory pages
+\begin{abstract}
+Tematem pracy jest...
+\end{abstract}
+ 
+\chapter*{Deklaracja}
+Deklaruję że...
+ 
+\chapter*{Podziękowania}
+Pragnę podziękować...
+ 
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+
+% Chapters
+\chapter{Wstęp}
+\input{chapters/introduction}
+
+% Lists of objects
+\listoffigures
+\listoftables
+\listoflistings
+
+% Bibliography
+\nocite{*}
+\bibliographystyle{plplain}
+\bibliography{references}
+
+\end{document}
