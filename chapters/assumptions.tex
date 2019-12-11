@@ -103,7 +103,47 @@ zakresu temperatur, jaki jest wbudowany w~program FLIR Tools.
 \section{Narzędzia programistyczne}
 
 \subsection{Język programowania Python}
+Założenia projektu wymagają użycia języka programowania pozwalającego
+na zaawansowaną obróbkę obrazu oraz wydajne budowanie sieci neuronowych.
+W~obu tych dziedzinach wiodącym językiem jest Python, posiadający bogaty
+zestaw bibliotek.
+Język ten oferuje dużą wygodę programowania, co jest istotne przy
+prototypowaniu oraz pracy badawczej.
+Jednocześnie Python jest zaopatrzony w~wydajną bibliotekę obliczeń
+numerycznych NumPy.
+Oferuje ona klasy macierzy numerycznych oraz bogaty zestaw operacji
+matematycznych.
+Macierze biblioteki NumPy są mniej elastyczne niż zwykłe listy języka Python,
+jednak oferują dużo większą wydajność obliczeniową, między innymi dzięki
+wsparciu obliczeń wektorowych na różnych procesorach.
+Wiele innych bibliotek wykorzystuje pakiet NumPy, na przykład przy
+przetwarzaniu obrazów, co pozwala na wysoką wydajność obliczeń.
+Połączenie wygody programowania z~zadowalającą wydajnością bibliotek
+numerycznych, sprawia że język Python jest dobrym wyborem do realizacji
+założeń projektu.
 
 \subsection{Biblioteka przetwarzania obrazu scikit-image}
+Język Python oferuje bogaty zestaw bibliotek przetwarzania obrazu.
+Najbardziej popularną z~nich jest biblioteka OpenCV napisana w~języku C++.
+Zdecydowano się jednak na wybór mniej znanego pakietu Scikit-image.
+Jest to biblioteka nastawiona bardziej na obliczenia naukowe i~badawcze
+oraz napisana bezpośrednio z~myślą o~języku Python.
+Scikit-image, w~porównaniu z OpenCV, oferuje bardziej spójny interfejs
+programisty oraz lepiej wykorzystuje charakterystykę języka Python.
+Dodatkowo wybrana biblioteka jest częścią zestawu Scikit, w~skład
+którego wchodzi pakiet Scikit-learn służący do uczenia maszynowego.
+Może on być przydatny przy tworzeniu sieci neuronowej, a~spójność bibliotek
+z~pakietu Scikit jest niewątpliwie zaletą.
+Wybrana biblioteka charakteryzuje się również dobrą dokumentacją oraz
+zestawem przydatnych przykładów.
 
 \subsection{Interfejs sieci neuronowych Keras i~biblioteka TensorFlow}
+Wybór bibliotek głębokiego uczenia w~języku Python jest bardzo szeroki.
+Do najpopularniejszych pakietów należą: Keras, TensorFlow oraz PyTorch.
+Zdecydowano się na wybór interfejsu biblioteki Keras.
+Jest to pakiet nastawiony na elastyczność i~możliwość eksperymentowania,
+oferuje wysokopoziomową, matematyczną warstwę abstrakcji opisu sieci
+neuronowych.
+Keras nie jest jednak pełnym rozwiązaniem, a~raczej abstrakcyjnym interfejsem.
+Używanie go wymaga wyboru wewnętrznego silnika biblioteki.
+Zdecydowano się na wybór domyślnej opcji i~użycie zaplecza pakietu TensorFlow.
