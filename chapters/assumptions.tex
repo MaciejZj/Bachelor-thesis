@@ -3,10 +3,102 @@
 \section{Rodzaje termowizji i~idea wykorzystania pomiarów termowizyjnych}
 
 \section{Kamera termowizyjna FLIR A320}
+Przedmiotem projektu jest analiza obrazów pochodzących z~przemysłowej
+kamery termowizyjnej FLIR A320.
+Jest to kamera łącząca wysoką jakość pomiaru z~nowoczesnymi funkcjami
+integracji z~oprogramowaniem komputerowym.
+Urządzenie łączy się z~komputerem za pomocą kabla ethernetowego,
+pozwalając na kontrolę z~poziomu oprogramowania oraz bibliotek
+programistycznych.
+Dodatkowo kamera posiada możliwość planowania automatycznych pomiarów,
+alarmów, funkcje analityczne oraz wbudowany serwer internetowy.
 
 \subsection{Opis sprzętowy wykorzystywanej kamery}
+Kamera ma postać podłużnego korpusu, do którego swobodnie można podłączać
+pasujące obiektywy.
+Na rysunku \ref{fig:camera} przedstawiono zdjęcie wykorzystywanego urządzenia.
+Egzemplarz kamery znajdujący się w~laboratorium termowizji Politechniki
+Śląskiej został wyposażony w~obiektyw typu makro, pozwalający oglądać
+ziarna rud miedzi w~bardzo dużym powiększeniu.
+% TODO: więcej o obiektywie, dopytać się.
+Kamera cechuje się następującymi parametrami:
+\begin{itemize}
+	\item typ detektora: niechłodzony mikrobolometr
+	\item rozdzielczość: \num{320} na \num{240} pikseli,
+	\item częstotliwość odświeżania: \num{9}\si{\hertz} do \num{30}\si{\hertz}
+	\item szerokość otworu: \textit{f}\num{1,3},
+	\item autofokus z wbudowanym silnikiem,
+	\item zakres pomiarowy temperatur: 
+		\begin{enumerate}
+			\item od \num{-15}\si{\celsius} do \num{+50}\si{\celsius},
+			\item od \num{0}\si{\celsius} do \num{350}\si{\celsius},
+		\end{enumerate}
+	\item dokładność: $\pm$ \num{2}\si{\celsius} lub $\pm$ \num{2}\% odczytu,
+	\item zakres wykrywanego widma promieniowania: \num{7,5}\si{\micro\meter}
+          do \num{13}\si{\micro\meter}.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{flir_a320.png}
+    \caption{Kamera termowizyjna FLIR A320}
+    \label{fig:camera}
+\end{figure}
+
+Kamera wykrywa temperaturę przez detektor zwany \emph{bolometrem},
+który mierzy energię niesioną przez fale elektromagnetyczne w~spektrum
+podczerwieni.
+Kiedy fala pada na detektor kamery, temperatura komórek matrycy rośnie
+i~zwiększa się ich rezystancja elektryczna, co wpływa na natężenie prądu
+przepływającego przez obwody w~czujniku.
+Wartości natężenia prądu są mierzone, a~na ich podstawie określana jest
+mierzona temperatura.
+
+Zakres temperatur kamery jest odpowiedni do przeprowadzenia eksperymentów
+z~pomiarami metodą termowizji aktywnej.
+Próbki planuje się podgrzewać do temperatury maksymalnie około
+\num{80}\si{\celsius}, wartość ta mieści się w~zakresie pracy urządzenia.
+Dokładność kamery jest zadowalająca, próbne materiały nagraniowe
+wskazały, że na zdjęciach widocznych jest wiele szczegółów i~detali
+badanego materiału.
+Przy klasyfikacji obrazów i~wzorców stygnięcia materiału jest to 
+bardziej istotne niż liczbowa dokładność pomiarowa przyrządu.
+
+W~porównaniu ze zwykłymi, współczesnymi aparatami rozdzielczość kamery
+termowizyjnej może wydawać się bardzo mała.
+Należy sobie jednak uzmysłowić, że w~standardowych aparatach piksele mają
+rozkład Bayera, a~wartości składowych koloru są interpolowane.
+W~kamerze termowizyjnej każdy piksel dokonuje pełnego pomiaru wartości
+temperatury, dlatego bezpośrednie porównanie rozdzielczości używanego
+przyrządu z~popularnymi aparatami może być mylące.
+Oczywiście większa rozdzielczość kamery byłaby pożądana, jednak jej obecne
+możliwości pozwalają na szczegółowe pomiary i~obserwacje wielu detali ziaren
+rud miedzi.
 
 \subsection{Oprogramowanie do obsługi kamery}
+Jedną z~najważniejszych cech kamery jest łatwość jej integracji
+z~oprogramowaniem komputerowym.
+Kamerę można obsługiwać za pomocą programu FLIR Tools.
+Pozwala on na podgląd obrazu z~kamery oraz wykonywanie zdjęć termowizyjnych.
+Producent dostarcza również bibliotekę LabVIEW pozwalającą na zaawansowaną
+pracę z~kamerą.
+Do obsługi stanowiska został napisany program używający tych bibliotek,
+który pozwala na nagrywanie materiałów wideo przy pomocy kamery.
+Nagrane materiały mają własnościowy format firmy FLIR, jednak można je
+odtwarzać w~programie FLIR Tools.
+Program pozwala także na eksport stopklatek z~nagrania, w~postaci plików jpg.
+Przy obsłudze narzędzia ważne jest ustawianie zakresu temperatur na obrazie.
+Wybrany zakres decyduje w jaki sposób wartości temperatury są mapowane na
+kolory w obrazie zawarte w tablicy LUT.
+Program oferuje tablice w skali szarości, takie zostały użyte
+w~projekcie, możliwy jest także wybór tablic w postaci kolorowych gradientów.
+Wybór zakresu wpływa na wygląd wyświetlanego obrazu oraz eksportowanych
+stopklatek.
+Jego nieodpowiedni dobór może skutkować zbyt ciemnym, jasnym, lub mało
+kontrastowym obrazem.
+Aby zapewnić najlepsze wykorzystanie nagrań z~kamery oraz powtarzalny
+charakter eksportu stopklatek korzystano z~opcji automatycznego doboru
+zakresu temperatur, jaki jest wbudowany w~program FLIR Tools.
 
 \section{Narzędzia programistyczne}
 
