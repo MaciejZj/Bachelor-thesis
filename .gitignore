@@ -17,6 +17,7 @@
 
 ## Intermediate documents:
 *.dvi
+*.ps
 *.xdv
 *-converted-to.*
 # these rules might exclude image files for figures etc.
