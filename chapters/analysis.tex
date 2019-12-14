@@ -165,13 +165,12 @@ przedstawiono na listingu \ref{lst:temp_bounds}.
 		\caption{Kadr z~liczbą po binaryzacji}
 		\label{fig:temp_bounds_bin}
 	\end{subfigure}
-	
 	\caption{Przygotowanie zakresu temperatur do odczytu przez sieć neuronową}
 	\label{fig:temp_bounds}
 \end{figure}
 
 % TODO: This code might be not ready
-\begin{listing}[h]
+\begin{listing}[htbp]
 \begin{minted}{python}
 def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
                                        ((219, 236), (283, 318)))):
@@ -197,10 +196,171 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
 \label{lst:temp_bounds}
 \end{listing}
 
-
 \section{Poszukiwanie zależności użytecznych w~klasyfikacji}
+Aby móc klasyfikować dane należy zastanowić się nad cechami które je
+odróżniają.
+Na rysunku \ref{fig:samplecompare} przedstawiono porównanie stygnięcia
+dwóch rodzajów próbek: E5R oraz E6R.
+W~klasyfikacji użyteczne będą dane które są unikalne dla danej klasy.
+Ponieważ dane stanowią serię obrazów postępującego studzenia materiału, aby
+wykorzystać pełnię możliwości zebranych zdjęć warto szukać cech
+charakterystycznych dla przebiegu procesu chłodzenia.
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_0}
+		\caption{Próbka 104\_E5R\_0}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_1}
+		\caption{Próbka 104\_E5R\_1}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_2}
+		\caption{Próbka 104\_E5R\_2}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_3}
+		\caption{Próbka 104\_E5R\_3}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_4}
+		\caption{Próbka 104\_E5R\_4}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/117_E6R_0}
+		\caption{Próbka 117\_E6R\_0}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/117_E6R_1}
+		\caption{Próbka 117\_E6R\_1}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/117_E6R_2}
+		\caption{Próbka 117\_E6R\_2}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/117_E6R_3}
+		\caption{Próbka 117\_E6R\_3}
+	\end{subfigure}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/117_E6R_4}
+		\caption{Próbka 117\_E6R\_4}
+	\end{subfigure}
+	\caption{Porównanie procesu stygnięcia próbek klasy E5R oraz E6R}
+	\label{fig:samplecompare}
+\end{figure}
 
-\subsection{Rozważane możliwości użycia cech obrazu w~klasyfikacji}
+\subsection{Wybór cech obrazu użytecznych w~klasyfikacji}
+Po przyjrzeniu się rysunkowi \ref{fig:samplecompare} widoczne  jest, że
+w~próbce E6R temperatura ziaren zaczęła wyrównywać się szybciej.
+Na podstawie obserwacji zebranych danych rozpatrzono następujące możliwości
+obserwacji cech charakterystycznych materiałów:
+\begin{enumerate}[a)]
+	\item \label{it:imgcnn} 
+	      klasyfikacja zdjęć w~całości jako macierzy danych przez złożoną sieć
+	      konwolucyjną,
+	\item \label{it:fft} 
+	      analiza częstotliwościowa obrazów w~celu śledzenia tempa rozmycia
+	      kolejnych zdjęć,
+	\item \label{it:glcm} 
+	      użycie macierzy GLCM jako wejścia sieci neuronowych,
+	\item \label{it:edge}
+	      wykrywanie krawędzi ziaren i~wyznaczanie reprezentacji liczbowej
+	      ich kształtów oraz powierzchni,
+	\item \label{it:blob}
+	      śledzenie zlewania się i~zanikania małych detali na obrazie.
+\end{enumerate}
+
+Wszystkie przedstawione opcje mają uzasadnienie i~mogą sprawdzić się dobrze
+jako podstawa klasyfikacji.
+Należy jednak ocenić której z~nich użyć w~pierwszej próbie konstrukcji
+klasyfikatora. Metoda \ref{it:imgcnn}, z~użyciem sieci konwolucyjnych może
+wykorzystywać najnowsze rozwiązania w~dziecinie uczenia maszynowego,
+jednak przy jej użyciu na przeszkodzie może stać bardzo mały rozmiar zbioru
+uczącego.
+Na niewielu zgromadzonych obrazach znajduje się wiele informacji i~szumów,
+a~złożoność jednego zdjęcia jest na tę chwilę nieproporcjonalna do wielkości
+zbioru danych.
+Pomysł ten można spróbować zrealizować po rozszerzeniu pomiarów.
+Kolejna opcja \ref{it:fft} z~użyciem analizy częstotliwościowej wymaga
+złożonych operacji matematycznych i~może być wrażliwa na szumu na obrazie.
+Po analizie innych opcji zdecydowano, że istnieją bardziej obiecujące
+alternatywy.
+Macierz glcm (\textit{Gray-Level Co-Occurrence Matrix}), na której może
+bazować opcja \ref{it:glcm}, to tablica zawierająca informacje o~relacjach
+wszystkich par pikseli na obrazie.
+Pozwala ona na analizę takich wartości jak: kontrast, korelacja, energia
+oraz homogeniczność.
+Jest to opcja dająca możliwość analizy dużej ilości informacji, z~pewnością
+warta rozpatrzenia, jednak dosyć skomplikowana.
+Na obrazie można także wykrywać kształty ziaren za pomocą filtrów detekcji
+krawędzi.
+Opcję tę testowano przy pomocy filtra \emph{Canny}.
+Krawędzie ziaren okazały się jedank trudne do wykrycia kształtów i~dalszej
+segmentacji ze względu na małą rodzielczość oraz duże upakowanie ziaren.
+Operacje morfologiczne domykania kształtów powodowały bardzo duże zmiany
+w~obrazie i~zlewały ziarna.
+Rozwój takiego podejścia przy analizowanych obrazach wymaga zaawansowanej
+i~ostrożnej obróbki zdjęć.
+Ostatnia opcja \ref{it:blob} wynika z~obserwacji detali na obrazach.
+Na przedstawionych zdjęciach próbek można zauważyć drobne ciemne punkty,
+które są obszarami o~wolniejszej wymianie ciepła z~otoczeniem niż reszta
+powierzchni ziaren.
+Na rysunku \ref{fig:blobdetail} przedstawiono zbliżenie na grupę takich
+detali, w~czterech częściach procesu stygnięcia.
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/detail_119_E5R_0}
+		\caption{Detale w~119\_E5R\_0}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\centering
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/detail_119_E5R_1}
+		\caption{Detale w~119\_E5R\_1}
+	\end{subfigure}
+	\hspace{0.24cm}
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/detail_119_E5R_2}
+		\caption{Detale w~119\_E5R\_2}
+	\end{subfigure}
+	\caption{Zbliżenie na charakterystyczne grupy detali materiału}
+	\label{fig:blobdetail}
+\end{figure}
+Analizując próbki można zauważyć, że wraz ze stygnięciem ciemne punkty
+w~grupach zlewają się, a~następnie zanikają.
+Dodatkowo ich liczba na poszczególnych klasach materiałów jest różna.
+Zdecydowano się na wybór metody polegającej na śledzeniu liczby tych punktów
+i~ich zaniku.
+Taka analiza wiąże się z~przetwarzaniem obrazów i~utworzeniem algorytmów
+śledzenia detali.
+Opcja ta wydaje się jednak obiecująca, ponieważ nawet podczas wstępnej
+obserwacji próbek można dopatrywać się zależności miedzy klasami a~obecnością
+omawianych detali.
 
 \subsection{Wybór algorytmu detekcji ziaren}
 
