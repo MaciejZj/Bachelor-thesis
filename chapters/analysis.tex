@@ -1,4 +1,40 @@
 \section{Proces pomiarowy i~budowa zbioru danych}
+Zgodnie z~opisem technik termowizyjnych przedstawionym w~sekcji
+\ref{sec:thermovision} zdecydowano się na przeprowadzenie pomiarów za pomocą
+termowizji aktywnej.
+Aby zrealizować pomiary uprzednio przygotowano stanowisko laboratoryjne.
+Kamera termowizyjna została umieszczona na statywie, a~do ogrzewania próbek
+zdecydowano się wykorzystać lampę halogenową.
+
+W~procesie termowizji aktywnej istotna jest charakter procesu nagrzewania
+materiału.
+Przy przygotowaniu pomiarów należało zdecydować przy jakim warunku zakończyć
+przekazywanie ciepła do próbki.
+Rozważono dwie możliwości:
+\begin{enumerate}[a)]
+	\item ogrzewanie próbek do osiągnięcia ustalonej temperatury,
+	\item \label{it:heatmethod} ogrzewanie próbek przez określony, stały czas.
+\end{enumerate}
+Zdecydowano się na metodę \ref{it:heatmethod}, ze względu na wygodę jej
+realizacji.
+Doprowadzenie każdej próbki do tej samej temperatury wymagałoby pomiarów
+w~czasie nagrzewania, co jest bardziej wymagające do realizacji.
+Zgodnie ze wstępnymi obserwacjami nagrzewanie materiału przez określony
+czas pozwala na obserwację jego cech unikalnych i~wzorców zachowania podczas
+stygnięcia.
+Następnie należy wybrać czas nagrywania materiałów wideo kamerą.
+Na podstawie wstępnych obserwacji i~próbnych nagrań zdecydowano się na
+ogrzewanie próbek przez jedną minutę oraz rejestrację ich stygnięcia przez
+cztery minuty.
+Taka konfiguracja daje przy badanych pyłach rud miedzi ostry i~szczegółowy
+obraz w~początkowej fazie nagrywania oraz widocznie rozmazany i~mniej
+kontrastowy materiał pod koniec stygnięcia próbek.
+Charakter procesu przejścia między tymi stanami pozwoli na klasyfikację
+badanych próbek.
+Ostatnia decyzja kształtująca charakter pomiarów dotyczy chwili
+przechwytywania stopklatek z~pozyskanych materiałów wideo.
+Na podstawie obserwacji zdecydowano się eksportować 5 klatek na początku
+każdej minuty nagrania.
 
 \section{Analiza zebranych obrazów termowizyjnych}
 
@@ -62,6 +98,7 @@ przedstawiono na listingu \ref{lst:temp_bounds}.
 	\label{fig:temp_bounds}
 \end{figure}
 
+% TODO: This code might be not ready
 \begin{listing}[h]
 \begin{minted}{python}
 def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
@@ -75,7 +112,7 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
         thr = threshold_otsu(bound_img)
         img_txt = bound_img > thr
         img_txt = Image.fromarray(img_txt)
-        temp = pytesseract.image_to_string(img_txt, config='digits')
+        temp = pytesseract.image_to_string(img_txt)
         if temp is not '': 
             temp = float(temp)
         else:
