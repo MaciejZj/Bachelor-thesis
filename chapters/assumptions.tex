@@ -40,9 +40,11 @@ aby zmaksymalizować ilość danych zgromadzonych w~trakcie eksperymentu.
 \section{Kamera termowizyjna FLIR A320}
 Przedmiotem projektu jest analiza obrazów pochodzących z~przemysłowej
 kamery termowizyjnej FLIR A320.
-Jest to kamera łącząca wysoką jakość pomiaru z~nowoczesnymi funkcjami
+Firma FLIR zajmuje się produkcją wysokiej jakości kamer i~detektorów do celów
+profesjonalnych i~przemysłowych.
+Używana kamera łączący wysoką jakość pomiaru z~nowoczesnymi funkcjami
 integracji z~oprogramowaniem komputerowym.
-Urządzenie łączy się z~komputerem za pomocą kabla ethernetowego,
+Urządzenie komunikuje się z~komputerem za pomocą kabla ethernetowego,
 pozwalając na kontrolę z~poziomu oprogramowania oraz bibliotek
 programistycznych.
 Dodatkowo kamera posiada możliwość planowania automatycznych pomiarów,
@@ -52,10 +54,16 @@ alarmów, oferuje funkcje analityczne oraz wbudowany serwer internetowy.
 Kamera ma postać podłużnego korpusu, do którego swobodnie można podłączać
 pasujące obiektywy.
 Na rysunku \ref{fig:camera} przedstawiono zdjęcie wykorzystywanego urządzenia.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{flir_a320}
+    \caption{Kamera termowizyjna FLIR A320}
+    \label{fig:camera}
+\end{figure}
 Egzemplarz kamery znajdujący się w~laboratorium termowizji Politechniki
-Śląskiej został wyposażony w~obiektyw typu makro, pozwalający oglądać
-ziarna rud miedzi w~bardzo dużym powiększeniu.
-% TODO: więcej o obiektywie, dopytać się.
+Śląskiej został wyposażony w~obiektyw, pozwalający oglądać
+ziarna rud miedzi w~powiększeniu.
+% TODO: Datasheet bib ref or footnote
 Kamera cechuje się następującymi parametrami:
 \begin{itemize}
 	\item typ detektora: niechłodzony mikrobolometr
@@ -72,13 +80,6 @@ Kamera cechuje się następującymi parametrami:
 	\item zakres wykrywanego widma promieniowania: \num{7,5}\si{\micro\meter}
           do \num{13}\si{\micro\meter}.
 \end{itemize}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{flir_a320.png}
-    \caption{Kamera termowizyjna FLIR A320}
-    \label{fig:camera}
-\end{figure}
 
 Kamera wykrywa temperaturę przez detektor zwany \emph{bolometrem},
 który mierzy energię niesioną przez fale elektromagnetyczne w~spektrum
@@ -112,18 +113,59 @@ rud miedzi.
 
 \subsection{Obiektyw kamery}
 
+Kamerę wyposażono w~obiektyw zbliżeniowy FLIR T19741, pozwalający obserwować
+ziarna rud miedzy.
+Jest to sprzęt zaprojektowany przez producentów używanej kamery i~dedykowany
+pracy z~urządzeniami termowizyjnymi.
+Przyrząd przedstawiono na rysunku \ref{fig:lens}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{flir_lens}
+    \caption{Obiektyw FLIR T197415}
+    \label{fig:lens}
+\end{figure}
+Wybrany obiektyw jest przygotowany z~myślą o~obserwacji drobnych detali
+powierzchni w~dużym zbliżeniu.
+Używany model ma następujące parametry:
+\begin{itemize}
+	\item ogniskowa: \num{18,2}\si{\milli\meter},
+	% TODO: Powiększenie bez sensu
+	\item powiększenie: \num{1x1},
+	\item pole widzenia: \num{8}\si{\milli\meter} na \num{6}\si{\milli\meter},
+	\item odległość od płaszczyzny ostrzenia: \num{20}\si{\milli\meter},
+	\item głębia ostrości: \num{0,3}\si{\milli\meter},
+	\item przysłona: bez regulacji, równa otworowi systemu montażu kamery,
+	\item budowa: trzy soczewki asferyczne.
+\end{itemize}
+
+% TODO: Datasheet bib ref or footnote
+Zgodnie ze specyfikacją producenta obiektyw ma powiększenie \num{1x1}, co może
+wydawać się niedużą wartością.
+Należy mieć jednak świadomość, że zwykłe obiektywy zmniejszają obraz
+padający na matrycę, powszechnie przyjmuje się jako granicę makrofotografii
+powiększenie \num{1x1}.
+W~obserwacji ziaren i~detali powierzchni nie jest jednak istotne powiększenie,
+ale to że używany obiektyw jest \emph{zbliżeniowy}.
+Oznacza to, że ma on bardzo małą odległość ostrzenia, czyli można go przysunąć
+blisko obserwowanej powierzchni.
+Obiektyw zbliżeniowy pozwala na obserwację z~dystansu
+\num{20}\si{\milli\meter}, typowe obiektywy ostrzą z~odległości parudziesięciu
+centymetrów do ponad metra.
+Dzięki temu obiektyw zbliżeniowy pozwala na obserwację bardzo drobnych
+detali powierzchni.
+
 \subsection{Oprogramowanie do obsługi kamery} \label{subsec:camsoft}
 Jedną z~najważniejszych cech kamery jest łatwość jej integracji
 z~oprogramowaniem komputerowym.
 Kamerę można obsługiwać za pomocą programu FLIR Tools.
-Pozwala on na podgląd obrazu z~kamery oraz wykonywanie zdjęć termowizyjnych.
+Pozwala on na podgląd obrazu oraz wykonywanie zdjęć termowizyjnych.
 Producent dostarcza również bibliotekę LabVIEW pozwalającą na zaawansowaną
 pracę z~kamerą.
 Do obsługi stanowiska został napisany program używający tych bibliotek,
 który pozwala na nagrywanie materiałów wideo przy pomocy kamery.
 Nagrane materiały mają własnościowy format firmy FLIR, jednak można je
 odtwarzać w~programie FLIR Tools.
-Program pozwala także na eksport stopklatek z~nagrania, w~postaci plików jpg.
+Program pozwala także na eksport stopklatek z~nagrania, w~postaci plików JPEG.
 Przy obsłudze narzędzia ważne jest ustawianie zakresu temperatur na obrazie.
 Wybrany zakres decyduje w jaki sposób wartości temperatury są mapowane na
 kolory w obrazie zawarte w tablicy LUT.
