@@ -271,6 +271,7 @@ charakterystycznych dla przebiegu procesu chłodzenia.
 \end{figure}
 
 \subsection{Wybór cech obrazu użytecznych w~klasyfikacji}
+\label{subsec:featureextr}
 Po przyjrzeniu się rysunkowi \ref{fig:samplecompare} widoczne  jest, że
 w~próbce E6R temperatura ziaren zaczęła wyrównywać się szybciej.
 Na podstawie obserwacji zebranych danych rozpatrzono następujące możliwości
@@ -333,20 +334,20 @@ detali, w~czterech częściach procesu stygnięcia.
 	\begin{subfigure}{0.3\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/detail_119_E5R_0}
-		\caption{Detale w~119\_E5R\_0}
+		\caption{Grupa detali w~próbce 119\_E5R\_0}
 	\end{subfigure}
 	\hspace{0.25cm}
 	\centering
 	\begin{subfigure}{0.3\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/detail_119_E5R_1}
-		\caption{Detale w~119\_E5R\_1}
+		\caption{Grupa detali w~próbce 119\_E5R\_1}
 	\end{subfigure}
 	\hspace{0.24cm}
 	\begin{subfigure}{0.3\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/detail_119_E5R_2}
-		\caption{Detale w~119\_E5R\_2}
+		\caption{Grupa detali w~próbce 119\_E5R\_2}
 	\end{subfigure}
 	\caption{Zbliżenie na charakterystyczne grupy detali materiału}
 	\label{fig:blobdetail}
@@ -363,6 +364,122 @@ obserwacji próbek można dopatrywać się zależności miedzy klasami a~obecno�
 omawianych detali.
 
 \subsection{Wybór algorytmu detekcji ziaren}
+Zgodnie z~rozważaniami przedstawionymi w~podsekcji \ref{subsec:featureextr}
+w celu klasyfikacji ziaren zdecydowano się na obserwację ilości ciemnych,
+drobnych detali na obrazach.
+Należy więc wybrać metodę detekcji charakterystycznych punktów.
+W~wykrywaniu omawianych detali użyteczne są algorytmy wykrywania plam na
+podstawie analizy pochodnych wartości na obrazie.
+Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
+\begin{enumerate}[a)]
+	\item laplasjan funkcji Gaussa,
+	\item różnica funkcji Gaussa,
+	\item wyznacznik Hesjanu.
+\end{enumerate}
+
+Metoda bazująca na laplasjanie funkcji Gaussa jest najdokładniejsza, ale
+także najwolniejsza.
+Funkcja Gaussa, której wykres ma charakterystyczny kształt krzywej dzwonowej
+jest dana wzorem \ref{eq:gaussian}, gdzie:
+\begin{itemize}
+	\item $ \sigma $ to odchylenie standardowe,
+	\item $ \mu $ to wartość średnia.
+\end{itemize}
+\begin{equation}
+	P(x) = \frac{1}{{\sigma \sqrt {2\pi } }}
+	e^{{{ - \left( {x - \mu } \right)^2 }
+	\mathord{\left/ {\vphantom {{ - \left( {x - \mu } \right)^2 }
+	{2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}}
+\label{eq:gaussian}
+\end{equation}
+Laplasjan to operator różniczkowy drugiego rzędu.
+Omawiany algorytm oblicza wartości funkcji Gaussa dla coraz większego
+odchylenia standardowego i~układa je w~sześcianie.
+Poszukiwane plamy to lokalne maksima w~tym sześcianie.
+Wadą tego rozwiązania jest bardzo wolne wykrywanie dużych plam z~powodu
+złożoności obliczeniowej.
+
+Różnica funkcji Gaussa jest metodą podobną do poprzedniej.
+Ponownie rozmywa ona obrazu z~narastającymi odchyleniami standardowymi
+z~użyciem funkcji Gaussa.
+Następnie różnice rozmytych obrazów są układane w~sześcianie, gdzie
+maksima to plamy.
+Metoda ta jest szybsza i~mniej dokładna od algorytmu bazującego na laplasjanie
+funkcji Gaussa, ale podobnie jak ona jest wolna w wykrywaniu dużych elementów.
+
+Ostatnia metoda jest najszybsza, ale najmniej dokładna.
+Polega ona na wyszukiwaniu maksimów w~macierzy Hesjanu, jest to macierz
+drugich pochodnych cząstkowych.
+Postać takiej macierzy w~n-wymiarowej przestrzeni przedstawia wzór
+\ref{eq:hessian}.
+Prędkość tej metody nie zależy od wielkości wykrywanych plam, ale małe
+elementy mogą nie zostać przez nią wykryte.
+\begin{equation}
+	H = \begin{bmatrix}
+	\dfrac{\partial^2 f}{\partial x_1^2} & 
+	\dfrac{\partial^2 f}{\partial x_1\,\partial x_2} & 
+	\cdots & \dfrac{\partial^2 f}{\partial x_1\,\partial x_n} \\[2.2ex]
+	\dfrac{\partial^2 f}{\partial x_2\,\partial x_1} &
+	\dfrac{\partial^2 f}{\partial x_2^2} &
+	\cdots & \dfrac{\partial^2 f}{\partial x_2\,\partial x_n} \\[2.2ex]
+	\vdots & \vdots & \ddots & \vdots \\[2.2ex]
+	\dfrac{\partial^2 f}{\partial x_n\,\partial x_1} &
+	\dfrac{\partial^2 f}{\partial x_n\,\partial x_2} &
+	\cdots &
+	\dfrac{\partial^2 f}{\partial x_n^2}
+	\end{bmatrix}
+\label{eq:hessian}
+\end{equation}
+
+Porównanie działania wymienionych metod przedstawiono na grafice
+\ref{fig:blobcompare}.
+Jak można było spodziewać się po opisie funkcji najlepsza okazała się metoda
+Laplasjanu funkcji Gaussa.
+Funkcję korzystającą z~wyznacznika Hesjanu należy odrzucić, ponieważ
+w~rozważanym przypadku istotne jest wykrywanie małych plam.
+Z~tego samego powodu korzystne jest użycie najbardziej dokładnej funkcji.
+Ponieważ program nie ma wykrywać dużych elementów nie ma ryzyka zbyt
+powolnych obliczeń na obszernych plamach.
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Laplasjan funkcji Gaussa}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Różnica funkcji Gaussa}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Wyznacznik Hesjanu}
+	\end{subfigure}
+	\caption{Porównanie bibliotecznych algorytmów wykrywania plam w~obrazie}
+	\label{fig:blobcompare}
+\end{figure}
+
+Aby wybrana funkcja laplasjanu funkcji Gaussa wykrywała, zgodnie
+zamierzeniami tylko małe plamy należy podać jej odpowiednie parametry,
+co uczyniono już na etapie porównania metod detekcji.
+Wywołanie omawianej funkcji ma postać:
+\mintinline{python}{blobs = blob_dog(img, max_sigma=2, threshold=0.1)}.
+Funkcji podano dwa dodatkowe argumenty, które są istotne dla pożądanego
+działania.
+Argument \mintinline{python}{max_sigma=2} ogranicza odchylenie standardowe
+obliczanych funkcji Gaussa, przez co wykrywane są tylko małe elementy.
+Drugi argument \mintinline{python}{threshold=0.1} decyduje o~poziomie
+powyżej jakiego punkt jest uznany za maksimum w~sześcianie laplasjanów.
+Domyślna wartość tego argumentu \mintinline{python}{threshold=2.0} okazała 
+się za duża, zmniejszono jej wartość aby wykrywać bardziej subtelne detale.
+Na podstawie opisanego wywołania metody Laplasjanu funkcji Gaussa
+opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
 
 \subsection{Algorytm śledzenia ziaren w~serii zdjęć}
 
