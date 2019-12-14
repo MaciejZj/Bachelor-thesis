@@ -1,4 +1,4 @@
-\section{Proces pomiarowy i~budowa zbioru danych}
+\section{Proces pomiarowy i~budowa zbioru danych} \label{sec:meas}
 Zgodnie z~opisem technik termowizyjnych przedstawionym w~sekcji
 \ref{sec:thermovision} zdecydowano się na przeprowadzenie pomiarów za pomocą
 termowizji aktywnej.
@@ -35,10 +35,83 @@ Ostatnia decyzja kształtująca charakter pomiarów dotyczy chwili
 przechwytywania stopklatek z~pozyskanych materiałów wideo.
 Na podstawie obserwacji zdecydowano się eksportować 5 klatek na początku
 każdej minuty nagrania.
+Po ustaleniu planu eksperymentu pomiarowego przystąpiono do jego wykonania.
+Zgodnie z~opisem badanych materiałów w~sekcji \ref{sec:grains}, zgromadzono
+materiały wideo dla czterech klas ziaren rudy miedzi.
+Ze względu na czasochłonność pomiarów dla każdej klasy materiału nagrano trzy
+materiały wideo.
+Z~pozyskanych nagrań wyeksportowano stopklatki używając programu FLIR Tools,
+pamiętając o~używaniu algorytmu automatycznego doboru zakresu temperatur
+zgodnie z~opisem w~podsekcji \ref{subsec:camsoft}.
+
+% TODO: Potem można tu wspomnieć że są wnioski na temat rozmiaru.
 
 \section{Analiza zebranych obrazów termowizyjnych}
+Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:meas} z~każdego
+nagrania wybrano pięć stopklatek.
+Podczas eksperymentu uzyskano łącznie dwanaście pomiarów, zawierających
+sumarycznie 60 zdjęć.
+W~ramach uczenia maszynowego jest to bardzo mały zbiór danych, biorąc jednak
+pod uwagę wstępno-badawczy charakter pracy oraz czasochłonność procesu 
+pomiarowego zdecydowano, że jest to rozmiar zadawalający do pierwszych
+prób klasyfikacji.
+% TODO: może przenieść do glosariusza
+Zebrane materiały mają format JPEG, do oznaczania zdjęć przyjęto schemat
+nazw jak w~przykładzie: 115\_E11R\_1, gdzie człony nazwy oznaczają kolejno:
+\begin{itemize}
+	\item automatyczny numer nagrania w~programie FLIR Tools,
+	\item klasę próbki,
+	\item minutę nagrania.
+\end{itemize}
 
 \subsection{Prezentacja przykładowej serii pomiarowej}
+Jak opisano w rozdziale \ref{sec:meas} jedna próbka w~zbiorze danych 
+składa się z~serii pięciu zdjęć o~malejącym kontraście i~szczegółowości.
+Na rysunku \ref{fig:sample} przedstawiono przykładową próbkę 104 klasy E5R.
+Widoczny jest proces stygnięcia materiału.
+Skala po prawej stronie obrazów ma malejące na kolejnych obrazach wartości
+co pokazuje że następuje zmniejszenie temperatury na całym obrazie.
+Dodatkowo obraz staje się coraz mniej wyraźny i~kontrastowy.
+Ze względu na budowę materiału nagrzana próbka emituje ciepłoze swoich
+zróżnicowanych struktur w~niejednorodny sposób.
+Wraz z~ochłodzeniem próbki jej temperatura się wyrównuje i~kamera termowizyjna
+rejestruje coraz mniej szczegółów.
+Detale i~elementy charakterystyczne obrazu zlewają się na kolejnych zdjęciach,
+wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szumów.
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_0}
+		\caption{Obraz z~próbki 104\_E5R\_0}
+	\end{subfigure}
+	\hspace{0.75cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_1}
+		\caption{Obraz z~próbki 104\_E5R\_1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_2}
+		\caption{Obraz z~próbki 104\_E5R\_2}
+	\end{subfigure}
+	\hspace{0.75cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_3}
+		\caption{Obraz z~próbki 104\_E5R\_3}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sample/104_E5R_4}
+		\caption{Obraz z~próbki 104\_E5R\_4}
+	\end{subfigure}
+	\caption{Zdjęcia procesu stygnięcia w~przykładowej próbce 104 klasy E5R}
+	\label{fig:sample}
+\end{figure}
 
 \subsection{Przetwarzanie danych wizyjnych}
 
@@ -77,17 +150,16 @@ Na rysunku \ref{fig:temp_bounds} przedstawiono kolejne etapy przygotowania
 obrazu do rozpoznania liczb.
 Implementację opisanego mechanizmu odczytywania zakresu temperatur ze zdjęć
 przedstawiono na listingu \ref{lst:temp_bounds}.
-
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\centering
-	\begin{subfigure}[h]{0.45\textwidth}
+	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{temp_bounds_scale}
 		\caption{Przeskalowany kadr z~liczbą}
 		\label{fig:temp_bounds_scale}
 	\end{subfigure}
-	\quad
-	\begin{subfigure}[h]{0.45\textwidth}
+	\hspace{0.5cm}
+	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{temp_bounds_bin}
 		\caption{Kadr z~liczbą po binaryzacji}
