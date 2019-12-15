@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \graphicspath{ {graphics/} }
+\usepackage{diagbox}
 \usepackage[justification=centering]{caption}
 \usepackage{subcaption}
 \usepackage{setspace}
@@ -17,6 +18,7 @@
 \usepackage{minted}
 \renewcommand\listoflistingscaption{Spis listingów}
 \usepackage[polish]{babel}
+
 
 \fancyhead{}
 \fancyhead[RO,LE]{\chaptername: \rightmark}
@@ -56,7 +58,7 @@ Pragnę podziękować...
 \chapter{Prototypowanie sieci neuronowej klasyfikującej ziarna miedzi}
 \input{chapters/neuralnetwork}
 
-\chapter{Podsumowanie}
+\chapter{Podsumowanie} \label{ch:conclusions}
 \input{chapters/summary}
 
 % Lists of objects

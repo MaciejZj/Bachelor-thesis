@@ -40,11 +40,33 @@ Zgodnie z~opisem badanych materiałów w~sekcji \ref{sec:grains}, zgromadzono
 materiały wideo dla czterech klas ziaren rudy miedzi.
 Ze względu na czasochłonność pomiarów dla każdej klasy materiału nagrano trzy
 materiały wideo.
+Przy nagrywaniu stygnięcia tej samej klasy materiały pomiędzy pomiarami
+próbkę poddawano przemieszaniu, aby uniknąć powtarzania struktur
+ułożenia ziaren dla tej samej klasy rud miedzi.
 Z~pozyskanych nagrań wyeksportowano stopklatki używając programu FLIR Tools,
 pamiętając o~używaniu algorytmu automatycznego doboru zakresu temperatur
 zgodnie z~opisem w~podsekcji \ref{subsec:camsoft}.
 
-% TODO: Potem można tu wspomnieć że są wnioski na temat rozmiaru.
+Proces pomiarowy w~protypowych warunkach był obarczony brakiem dużej precyzji
+i~powtarzalności.
+Obserwacja uzyskanych nagrań pokazała, że obrazy tej samej klasy ziaren
+niekoniecznie osiągały tę samą temperaturę po ogrzewaniu przez ustalony czas.
+Problemem okazało się również dostosowanie ostrości obrazu z~kamery.
+Jak wytłumaczono w~podsekcji \ref{subsec:lens} wykorzystywany aparat cechuje
+się bardzo małą głębią ostrości, co powoduje że drobne ruchy kamery
+mogą spowodować utratę czytelności obrazu.
+Z~kolei proces pomiarowy wymagał ciągłego przenoszenia próbki między
+stanowiskiem do podgrzewania materiału oraz nagrywania filmów.
+Należy mieć na uwadze że w~czasie układania próbek pod kamerą oraz poprawiania
+ostrości postępowało stygnięcie ziaren, co sprzyjało brakowi powtarzalności
+pomiarów.
+Ze względu na przypadkowe utraty ostrości przy nagrywaniu oraz zbyt długi czas
+przenoszenia i~przygotowania próbki do nagrywania, eksperyment wymagał czasem
+powtórnego nagrania próbki.
+Ocenę jakości procesu pomiarowego przestawiono na podstawie jego użyteczności
+w~klasyfikacji ziaren, pod koniec pracy.
+Wnioski na temat stosowności i~rozmiaru zbioru danych przedstawiono
+w~rozdziale \ref{ch:conclusions}.
 
 \section{Analiza zebranych obrazów termowizyjnych}
 Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:meas} z~każdego
@@ -362,8 +384,14 @@ Taka analiza wiąże się z~przetwarzaniem obrazów i~utworzeniem algorytmów
 Opcja ta wydaje się jednak obiecująca, ponieważ nawet podczas wstępnej
 obserwacji próbek można dopatrywać się zależności miedzy klasami a~obecnością
 omawianych detali.
+Można również zaobserwować, że w~czasie stygnięcia na kolejnych zdjęciach
+pojawiają się sporadycznie także nowe detale.
+Zjawisko ich powstawania jest jednak pomijalne przy zdecydowanej tendencji
+do zanika i~rozmywania plam, którą omówiono.
+Fakt pojawiania się nowych detali wzięto pod uwagę przy późniejszym procesie
+projektowania algorytmów ich śledzenia.
 
-\subsection{Wybór algorytmu detekcji ziaren}
+\subsection{Wybór algorytmu detekcji ziaren} \label{subsec:blobdetect}
 Zgodnie z~rozważaniami przedstawionymi w~podsekcji \ref{subsec:featureextr}
 w celu klasyfikacji ziaren zdecydowano się na obserwację ilości ciemnych,
 drobnych detali na obrazach.
@@ -373,9 +401,19 @@ podstawie analizy pochodnych wartości na obrazie.
 Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
 \begin{enumerate}[a)]
 	\item laplasjan funkcji Gaussa,
-	\item różnica funkcji Gaussa,
+	\item różnicę funkcji Gaussa,
 	\item wyznacznik Hesjanu.
 \end{enumerate}
+Algorytmy te pozwalają na wykrycie na obrazie plam o~kształcie zbliżonym
+do kolistego, oraz oszacowanie ich promienia.
+Stosuje się je na przykład w~analizie obrazów astronomicznych do detekcji
+i~zliczania ciał niebieskich na zdjęciach wykonanych z~użyciem teleskopów.
+% TODO: cite
+Badane detale, przedstawione na rysunku \ref{ch:conclusions},
+mają kształt zbliżony do kolistego, więc próba użycia rozpatrywanych
+algorytmów jest uzasadniona.
+Należy porównać dostępne warianty detekcji i~wybrać algorytm, który
+działa najskuteczniej na zgromadzonych próbkach.
 
 Metoda bazująca na laplasjanie funkcji Gaussa jest najdokładniejsza, ale
 także najwolniejsza.
@@ -410,8 +448,8 @@ funkcji Gaussa, ale podobnie jak ona jest wolna w wykrywaniu dużych elementów.
 Ostatnia metoda jest najszybsza, ale najmniej dokładna.
 Polega ona na wyszukiwaniu maksimów w~macierzy Hesjanu, jest to macierz
 drugich pochodnych cząstkowych.
-Postać takiej macierzy w~n-wymiarowej przestrzeni przedstawia wzór
-\ref{eq:hessian}.
+Postać takiej macierzy w~n-wymiarowej przestrzeni zmiennych $ x $ przedstawia
+wzór \ref{eq:hessian}.
 Prędkość tej metody nie zależy od wielkości wykrywanych plam, ale małe
 elementy mogą nie zostać przez nią wykryte.
 \begin{equation}
@@ -438,9 +476,8 @@ Laplasjanu funkcji Gaussa.
 Funkcję korzystającą z~wyznacznika Hesjanu należy odrzucić, ponieważ
 w~rozważanym przypadku istotne jest wykrywanie małych plam.
 Z~tego samego powodu korzystne jest użycie najbardziej dokładnej funkcji.
-Ponieważ program nie ma wykrywać dużych elementów nie ma ryzyka zbyt
+Ponieważ program nie powinien wykrywać dużych elementów nie ma ryzyka zbyt
 powolnych obliczeń na obszernych plamach.
-
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
@@ -468,8 +505,8 @@ powolnych obliczeń na obszernych plamach.
 Aby wybrana funkcja laplasjanu funkcji Gaussa wykrywała, zgodnie
 zamierzeniami tylko małe plamy należy podać jej odpowiednie parametry,
 co uczyniono już na etapie porównania metod detekcji.
-Wywołanie omawianej funkcji ma postać:
-\mintinline{python}{blobs = blob_dog(img, max_sigma=2, threshold=0.1)}.
+Wywołanie omawianej funkcji ma postać przedstawioną na listingu
+\ref{lst:find_blobs}.
 Funkcji podano dwa dodatkowe argumenty, które są istotne dla pożądanego
 działania.
 Argument \mintinline{python}{max_sigma=2} ogranicza odchylenie standardowe
@@ -480,7 +517,387 @@ Domyślna wartość tego argumentu \mintinline{python}{threshold=2.0} okazała
 się za duża, zmniejszono jej wartość aby wykrywać bardziej subtelne detale.
 Na podstawie opisanego wywołania metody Laplasjanu funkcji Gaussa
 opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def find_blobs(img):
+    '''
+    Find blobs in given image and get list of their positions and 
+    radiuses.
+    '''
+    # Detect blobs with Difference of Gaussian
+    blobs = blob_dog(img, max_sigma=2, threshold=0.1)
+    # Get blobs radiuses from each kernel sigma
+    blobs[:, 2] = blobs[:, 2] * sqrt(2)
+    return blobs
+\end{minted}
+\caption{Funkcja języka Python do wykrywania detali w obrazie}
+\label{lst:find_blobs}
+\end{listing}
 
 \subsection{Algorytm śledzenia ziaren w~serii zdjęć}
+\label{subsec:blobtracking}
+Użycie funkcji bibliotecznych opisanych w~podsekcji \ref{subsec:blobdetect}
+pozwala na detekcję detali na pojedynczym zdjęciu.
+Aby wykorzystać detekcję plam w~serii pięciu zdjęć które reprezentują
+stygnięcie jednej próbki należy opracować zestaw funkcji śledzący zmiany 
+na obrazie.
+Na tym etapie prac niejednoznaczne jest jaki sposób obserwacji i~zliczania
+detali będzie najlepszy do późniejszego prototypowania sieci neuronowej
+klasyfikującej klasę ziaren.
+Dlatego zdecydowano się na napisanie funkcji zliczania plam w~serii, tak by
+możliwe były trzy warianty pracy algorytmu:
+\begin{enumerate}[I.]
+	\item \label{it:allblob}
+	      zliczanie wszystkich detali na każdym etapie stygnięcia,
+	\item \label{it:remainingblob}
+	      zliczanie na kolejnych etapach stygnięcia jedynie tych detali,
+	      które były obecne od początku stygnięcia,
+	\item \label{it:percentblob}
+	      zliczanie na kolejnych etapach pozostałego procentu ziaren, które
+	      były obecne od początku stygnięcia.
+\end{enumerate}
+
+W~celu realizacji planu śledzenia detali utworzono funkcję języka Python.
+Jej kod przedstawiono na listingu \ref{lst:find_blob_series}.
+Aby umożliwić wariantowość algorytmu funkcja posiada opcjonalny parametr,
+który pozwala włączyć lub wyłączyć śledzenie jedynie ziaren, które
+były obecne od początku stygnięcia.
+Przedstawiony kod wykorzystuje funkcję wykrywania detali w zdjęciu
+przedstawioną na listingu \ref{lst:find_blobs}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def find_blob_series(imgs, only_remaining=True):
+    '''
+    Return list of list of blobs found in each of given images.
+    '''
+    stages = []
+    remaining = None
+    for img in imgs:
+        new_blobs = find_blobs(img)
+        if remaining is not None and only_remaining:
+            remaining = find_remaining_blobs(new_blobs, remaining)
+        else:
+            remaining = new_blobs
+        stages.append(remaining)
+    return stages
+\end{minted}
+\caption{Funkcja języka Python do śledzenia detali w~serii zdjęć}
+\label{lst:find_blob_series}
+\end{listing}
+Jeżeli opcja detekcji jedynie ziaren obecnych od początku jest aktywna
+zostaje wykorzystana utworzona funkcja porównania ziaren wykrytych
+na obecnym etapie z~ziarnami obecnymi poprzednio.
+Po analizie każdego zdjęcia nowy zestaw ziaren staje się zbiorem poprzednim
+w~kolejnej iteracji.
+Dzieje się tak, by uwzględnić fakt że podczas zlewania się ziaren środki
+ciężkości i~promienie detali ulegają zmianie.
+Dlatego kolejne grupy plam nie są zawsze porównywane z~grupą z~początku
+serii, a~z~zestawem z poprzedniego analizowanego zdjęcia.
+
+Na listingu \ref{lst:find_remaining_blobs} przedstawiono funkcję testującą
+które z~detali znajdują się na kolejnych etapach stygnięcia.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def find_remaining_blobs(new_blobs, old_blobs):
+    '''
+    Return list of blobs present in both lists, where blob
+    is considerd same if is in proximity of 2 times it's radius.
+    '''
+    remaining = []
+    for new_blob in new_blobs:
+        yn, xn, rn = new_blob
+        for old_blob in old_blobs:
+            yo, xo, ro = old_blob
+            if inside_circle(xn, yn, xo, yo, 2 * ro):
+                remaining.append(new_blob)
+    return unique(remaining)
+\end{minted}
+\caption{Funkcja języka Python do wykrywania tych samych detali w~kolejnych
+         obrazach}
+\label{lst:find_remaining_blobs}
+\end{listing}
+Przyjmuje ona listy plam wykrytych w~dwóch kolejnych etapach iteracji.
+Następnie następuje porównanie każdego ziarna z~nowej i~starej próbki.
+Jeżeli nowy punkt znajduje się w~odległości do dwóch promieni od środka
+starej plamy to zostaje on uznany za powtarzający się.
+Powtarzające się punkty są dołączane do zwracanej listy.
+Aby zrealizować ten zamysł zaimplementowano funkcję przedstawioną na listingu
+\ref{lst:inside_circle}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def inside_circle(x, y, a, b, r):
+    '''
+    Return True if point (x, y) lies inside circle 
+    with center of (a, b) and radius r.
+    '''
+    return (x - a) * (x - a) + (y - b) * (y - b) < r * r
+\end{minted}
+\caption{Funkcja języka Python sprawdzająca czy dany punkt leży wewnątrz
+         podanego okręgu}
+\label{lst:inside_circle}
+\end{listing}
+Kod tej funkcji wynika wprost z~równania matematycznego okręgu, punkty
+znajdują się w~jego wnętrzu jeśli spełniają nierówność przedstawioną we
+wzorze, gdzie:
+\begin{itemize}
+	\item $ \left( x, y \right) $ to współrzędne danego punktu,
+	\item $ \left( a, b \right) $ to współrzędne środka okręgu,
+	\item $ r $ to promień okręgu.
+\end{itemize}
+\begin{equation}
+\left( x - a \right) ^2 + \left( y - b \right )^2 < r^2
+\label{eq:circle}	
+\end{equation}
+Ponieważ wiele punktów może znajdować się blisko siebie istnieje ryzyko,
+że zostaną one zliczone wiele razy.
+Z~tego powodu z~listy przed jej zwróceniem z~funkcji należy usunąć duplikaty.
+W~tym celu utworzono funkcje pomocniczą widoczną na listingu \ref{lst:unique}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def unique(multilist):
+    '''Get list without repeating values.'''
+    return list(set(tuple(i) for i in multilist))
+\end{minted}
+\caption{Funkcja języka Python usuwająca duplikaty z~listy}
+\label{lst:unique}
+\end{listing}
+Najprostszym sposobem eliminacji powtarzających się wartości w~języki Python
+jest konwersja listy na zbiór, który jest agregatem unikalnych 
+nieuszeregowanych wartości.
+Aby zwrócić z~funkcji listę należy z~powrotem skonwertować zbiór na typ
+listowy.
+W~naszym przypadku argument funkcji jest listą, której elementy są listami
+zawierającymi współrzędne oraz promień każdej plamy.
+Lista list jest nie podlega konwersji do zbioru ponieważ typ jej elementów
+nie jest hashowalny.
+Dlatego każdy punkt na liście zamieniono przed konwersją w~zbiór na typ
+krotki.
+W~ten sposób wszystkie konieczne przekształcenia są możliwe.
+Aby zrealizować pomysł zliczania procentu plam pozostałych w~kolejnych etapach
+stygnięcia zaimplementowano funkcje przedstawioną na listingu.
+\ref{lst:percent}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def percent_of_remaining_blobs_in_stages(stages):
+    '''
+    In each stage calculate the percentage of blobs that are
+    present in the first stage and remain at given stage.
+    '''
+    num_of_blobs = [len(stage) for stage in stages]
+    return [remaining / num_of_blobs[0] for remaining in num_of_blobs]
+\end{minted}
+\caption{Funkcja języka Python obliczająca ile procent ziaren z~początku
+         stygnięcia pozostało w~jego kolejnych etapach}
+\label{lst:percent}
+\end{listing}
+
+Przyglądając się zaimplementowanym funkcjom można docenić wybór języka
+Python do realizacji projektu.
+Elastyczność języka Python, w~szczególności jego list oraz wygoda
+dynamicznego typowania pozwoliły na szybkie i~eleganckie zaimplementowanie
+potrzebnych funkcji.
+Wykorzystano bardzo zwięzły i~ekspresyjny element języka nazywany
+\emph{wyrażeniami listowymi}.
+Pozwala on na efektywne stosowanie jednolinijkowych pętli do przeglądania
+i modyfikowania obiektów iterowalnych.
+Użyteczność tego mechanizmu można zaobserwować w~przedstawionych listingach.
+Podczas budowania funkcji dbano i~ich zwięzłość, dobry podział realizowanych
+zadań oraz ograniczenie długości bloków kodu.
+Dzięki temu program zachowuje zasady dobrego programowania.
+Każdą funkcję opatrzono w~specjalny komentarz \emph{docstring} będący
+standardem w~świecie języka Python.
+Funkcje umieszczono w~odpowiednich plikach, które zawierają także
+przykłady ich użycia i~obrazują działania oraz porównują efekty.
+Kod przykładów posłużył do generowania wykresów i~obrazów zawartych
+w~pracy.
+% TODO: forma załączników
+Pełen listing programów znajduje się w~załącznikach.
+
+Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam
+w~serii zdjęć na trzy sposoby.
+Efekty działania utworzonego kodu przetestowano na obrazach pomiarowych.
+Działanie sposobów zliczania ziaren \ref{it:allblob}~oraz
+\ref{it:remainingblob} przedstawiono na rysunku \ref{fig:blobcount}.
+Zaznaczono na nim wykryte detale, oraz wyróżniono wśród nich te które
+są śledzone od początku etapu stygnięcia.
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Obraz z~próbki 104\_E5R\_0}
+	\end{subfigure}
+	\hspace{0.75cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Obraz z~próbki 104\_E5R\_1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Obraz z~próbki 104\_E5R\_2}
+	\end{subfigure}
+	\hspace{0.75cm}
+	\vspace{0.5cm}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Obraz z~próbki 104\_E5R\_3}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Obraz z~próbki 104\_E5R\_4}
+	\end{subfigure}
+	\caption{Zliczanie śledzonych detali w~próbce dwoma sposobami}
+	\label{fig:blobcount}
+\end{figure}
+Dodatkowo metodę śledzenia plam i~ich zanikania przedstawiono na rysunku
+\ref{fig:blobremain}.
+Pokazuje on położenie plam wykrytych w~kolejnych etapach stygnięcia.
+Wykryte punkty zaznaczono na obrazie z~początku tego procesu.
+Zmieniające się kolory obrazują detale wykryte w~kolejnych chwilach.
+Pozawala to zaobserwować przemieszczanie się środków ciężkości i~promieni
+plam podczas stygnięcia i zlewania się.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption{Wykryte detale, śledzone od początku stygnięcia, zaznaczone na
+             pierwszym obrazie w~serii pomiarowej}
+    \label{fig:blobremain}
+\end{figure}
+Działanie metody \ref{it:percentblob}, zliczającej procent detali, obecnych
+od początku stygnięcia zobrazowano w~tabeli \ref{tab:blobpercent}.~
+Działanie zliczania przedstawiono przedstawiono w~niej dla każdej 
+rozpatrywanej klasy ziaren.
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	\diagbox{Próbka}{Minuta} & 0 & 1 & 2 & 3 & 4 \\ \hline
+	104\_E5R  & 1.0 & 0.52 & 0.29 & 0.23 & 0.20 \\ \hline
+	106\_E11R & 1.0 & 0.12 & 0.02 & 0.00 & 0.00 \\ \hline
+	107\_E6R  & 1.0 & 0.20 & 0.12 & 0.02 & 0.02 \\ \hline
+	111\_E1XP & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\ \hline
+	\end{tabular}
+\caption{Procent detali wykrytych w~kolejnych etapach stygnięcia, które
+         były obecne na jego początku}
+\label{tab:blobpercent}
+\end{table}
 
 \subsection{Wizualizacja zebranych cech i~ocena ich użyteczności}
+W~podsekcji \ref{subsec:blobtracking} przedstawiono opracowane algorytmy
+śledzenia ilości detali w~rozpatrywanych obrazach stygnięcia ziaren rud
+miedzi.
+Opracowane metody mają sens przy klasyfikacji, jeśli pozyskane cechy są
+charakterystyczne dla rozpatrywanych klas.
+Aby oszacować użyteczność pozyskanych cech należy przeprowadzić ich
+wizualizację.
+W~tym celu stworzono wykresy ilości wykrytych plam dla poszczególnych
+metod ich zliczania.
+
+Rysunek \ref{fig:blobchartall} przedstawia wykres procesu zanikania plam dla
+wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption{Ilość wykrytych detali na~każdym etapie stygnięcia, w~wariancie
+             zliczającym wszystkie plamy}
+    \label{fig:blobchartall}
+\end{figure}
+Wykreślone krzywe dla różnych klas materiałów przecinają się, w~wykreślonych
+wartościach trudno na pierwszy rzut oka dojrzeć jakiekolwiek zależności
+i~uporządkowanie.
+Ilość charakterystycznych detali może być cechą rud miedzi, ze względu na
+ich różny skład, jednak w~analizowanym przypadku nie jest to cecha dająca
+nadzieję na dobre wyniki klasyfikacji.
+Powodem takiej sytuacji jest duża losowość tego typu danych.
+Niezależnie od własności materiału, jego ułożenie podczas pomiaru jest
+przypadkowe co ma wpływ na bezwzględną liczbę zliczonych detali.
+Na ilość widocznych plam wpływa również sposób ustawienia ostrości kamery.
+Po przyjrzeniu się krzywym można jednak domniemywać, że pewną cechą
+charakterystyczną jest nachylenie krzywych.
+Wskazuje to, że bardziej widoczne mogą być względne cechy czasowe, a~nie
+bezwzględna liczba zliczonych detali.
+
+Drugi sposób zliczania ziaren przedstawiono na rysunku \ref{fig:blobchartrem}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption{Ilość wykrytych detali na~każdym etapie stygnięcia, w~wariancie
+             zliczającym wszystkie plamy}
+    \label{fig:blobchartrem}
+\end{figure}
+W~tym przypadku zliczano jedynie detale obecne na obrazie od początku
+stygnięcia.
+Ten wariant śledzenia ilości plam daje dużo lepsze perspektywy na klasyfikację
+ziaren.
+Dla różnych typów próbek widoczne są charakterystyczne przebiegi krzywych.
+Obserwacja dotycząca nachylenia krzywych staje się bardziej uzasadniona,
+pochodne poszczególnych klas wydają się zbliżone.
+Wyeliminowanie pojawiających się detali pomogła w~obserwacji procesu
+stygnięcia i~zmniejszyła czynniki losowe.
+Na podstawie analizy nagrań można domniemywać, że nowe ziarna pojawiały
+się w wyniku zaobserwowanych delikatnych ruchów materiału.
+Te mogły wynikać z~drgań stanowiska pomiarowego, istotnym czynnikiem może
+być także mała głębia ostrości obiektywu.
+W~późniejszych etapach stygnięcia na obrazach pojawia się także coraz więcej
+szumów, które mogą zostać wykryte przez algorytm.
+Śledzenie detali, które znajdują się na obrazie od początku eliminuje ten
+problem.
+
+Wyniki ostatniej metody polegającej na procentowym ustaleniu zaniku ilości
+detali została przedstawiona na rysunku \ref{fig:blobcharperc}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption{Ilość wykrytych detali, przy procentowym zliczaniu detali, które
+             występowały w~serii od początku stygnięcia}
+    \label{fig:blobcharperc}
+\end{figure}
+Widoczne jest odseparowanie różnych klas rud miedzi, różne typy próbek
+charakteryzują się odmiennymi postępami rozmycia detali w~czasie.
+Śledzenie ilości detali w~stosunku względnym dało najlepsze rezultaty
+oraz pozwoliło na pewną normalizację danych, która była trudna do realizacji
+przy bezwzględnym zliczaniu wszystkich plam na obrazie.
+Należy także zauważyć, że przedstawione krzywe przedstawione na rysunkach
+\ref{fig:blobchartrem} oraz \ref{fig:blobcharperc} mają kształt zbliżony
+do krzywych eksponencjalnych.
+Jest to obserwacja wskazująca, że pozyskane cechy dobrze oddają naturę procesu
+stygnięcia.
+Proces opadania temperatury ciał opisuje \emph{prawo stygnięcia Newtona},
+które ma postać równania różniczkowego, przedstawionego we wzorze
+% TODO: Cite
+\ref{eq:newtonlawdiff}, gdzie:
+\begin{itemize}
+	\item $ T \left( t \right) $ to funkcja temperatury ciała w~czasie,
+	\item $ T_R $ to temperatura otocznia,
+	\item k to współczynnik liczbowy, charakterystyczny dla danego ciała.
+\end{itemize}
+
+\begin{equation}
+	\frac{dT \left( t \right)}{dt}=-k\left( T \left( t \right) -T_{R} \right)
+\label{eq:newtonlawdiff}
+\end{equation}
+Rozwiązanie równania przedstawia wzór \ref{eq:newtonlaw}, jak widać ma ono
+charakter eksponencjalny, do którego zbliżone są wykresy na rysunkach
+\ref{fig:blobchartrem} oraz \ref{fig:blobcharperc}.
+\begin{equation}
+	T(t) - T_{R} = \Delta T (t) = \Delta T (0) \ e^ {-k t}
+\label{eq:newtonlaw}
+\end{equation}
+
+Analiza pozyskanych cech wskazuje że istnieje możliwość wykorzystania ich
+do klasyfikacji rud miedzi.
+Dalsza ocena wyników pracy będzie zależała od jakości działania sieci
+neuronowej stworzonej do rozpoznawania przygotowanych danych.
+
+
+
+
+
+
+
+
