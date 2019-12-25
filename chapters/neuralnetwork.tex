@@ -1,7 +1,419 @@
 \section{Budowa prototypu sieci neuronowej}
+Po zakończeniu procesu budowy i~eksploracji danych można przystąpić do
+budowy sieci neuronowej odpowiedzialnej za rozpoznawanie ziaren rud miedzi.
+Przedstawiony problem jest wymaga klasyfikacji wieloklasowej wielowymiarowych
+danych.
+Problemy tego typu można rozwiązywać zarówno za pomocą klasycznych algorytmów
+uczenia maszynowego jak i~uczenia głębokiego.
+Zdecydowano się na wybór sieci neuronowych do klasyfikacji ziaren.
+Jest to rozwiązanie najbardziej nowoczesne i~elastyczne.
+Zgodnie z~opisem narzędzi programistycznych w~podsekcji
+\ref{subsec:softnetwork}, proces budowania sieci oparto na interfejsie Keras,
+z~zapleczem TensorFlow.
 
-\subsection{Dobór struktury sieci}
+\subsection{Dobór struktury sieci} \label{subsec:nnbuild}
+Kluczowym czynnikiem decydującym o~architekturze sieci jest posiadany
+zbiór danych.
+Wejściowy zestaw cech klas jest pięciowymiarowy, do klasyfikacji takich
+danych wystarczająca powinna być standardowa sieć neuronowa.
+Nie ma potrzeby używania bardziej złożonych sieci rekurencyjnych, czy
+konwolucyjnych.
+
+Projektowanie sieci neuronowych wymaga podjęcia szeregu wyborów, wśród nich
+można wyróżnić następujące decyzje dotyczące:
+\begin{itemize}
+	\item ilości warstw sieci,
+	\item typu warstw w sieci,
+	\item ilości neuronów w~poszczególnych warstwach sieci,
+	\item rodzajów funkcji aktywacji w~neuronach poszczególnych warstw sieci.
+\end{itemize}
+Definiując model należy rozpatrzeć przedstawione cechy budowanej sieci.
+Nie istnieje jednoznaczny sposób bezpośredniego określenia najlepszego
+klasyfikatora dla danego problemu.
+Przy projektowaniu sieci należy kierować się przesłankami teoretycznymi,
+doświadczeniem oraz testując i~porównując różne rozwiązania.
+
+Konstrukcję klasyfikatora rozpoczęto od wyboru ilości warstw.
+W~standardowej konstrukcji każda sieć posiada warstwę wejściową oraz
+wyjściową, których parametry są związane odpowiednio z~wektorem cech
+oraz reprezentacją klas na wyjściu sieci.
+Ponadto do aproksymacji dowolnej funkcji nieliniowej wystarczająca jest sieć
+składająca się z~dwóch warstw.
+Nie oznacza to jednak, że w~praktyce dwie warstwy wystarczą by rozwiązać
+dowolny problem.
+Aby zwiększać efektywność sieci pomiędzy warstwą wejściową, wyjściową
+umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
+Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
+Mimo że jedna warstwa ukryta pozwala teoretycznie na rozwiązanie dowolnego
+problemu, w~praktyce opłacalne jest stosowanie większej ilości warstw,
+co poparte jest licznymi przykładami\cite{reed}.
+Biorąc pod uwagę złożoność rozpatrywanego problemu zdecydowano się na
+strukturę czterowarstwową.
+Jest to rozmiar często spotykany w~tego typu sieciach, późniejsze testy
+pokazały, że jest to ilość warstw dająca dobre rezultaty.
+Sprawdzono, że zastosowanie jednej warstwy ukrytej powodowało pogorszenie
+działania sieci.
+
+Kolejnym krokiem projektowania sieci jest decyzja o~ilości neuronów
+w~poszczególnych warstwach.
+W przypadku pierwszej i~ostatniej warstwy jest to wartość prosta do
+określenia.
+Zaleca się, aby wejście sieci miało liczbę neuronów równą wymiarowi
+używanego wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć.
+% TODO: cite
+Ostatnia warstwa powinna mieć tyle neuronów ile wynosi liczba rozpoznawanych
+klas, tak by każde wyjście sieci oznaczało prawdopodobieństwo przynależności
+próbki do odpowiedniej klasy.
+W~analizowanym zbiorze ziaren znajdują się cztery typy rud miedzi i~tyle
+neuronów powinno znajdować się w~warstwie wyjściowej sieci.
+W~warstwach ukrytych umieszczono większą liczbę neuronów, eksperymentalnie
+stwierdzono, że sieć osiąga dobre wyniki dla 256 neuronów w~pierwszej
+warstwie ukrytej i~128 w~drugiej.
+Zmniejszenie liczby neuronów o~połowę w~kolejnej warstwie ukrytej jest
+często spotykanym zabiegiem.
+% TODO: cite
+
+Następnie rozpatrzono dostępne funkcje aktywacji poszczególnych warstw.
+Dla warstwy wyjściowej należy wybrać funkcję o~wartościach od zera do jeden.
+Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
+przedstawiono na rysunku \ref{fig:softmax}.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
+                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
+       \addplot[blue, domain=-5:5, samples=51] 
+       {exp(x) / sumexp(x, -4, 0)};
+    \end{axis}
+\end{tikzpicture}
+\caption{Funkcja aktywacji softmax}
+\label{fig:softmax}
+\end{figure}
+W~przypadku pozostałych warstw wybór funkcji aktywacji jest mniej oczywisty.
+Rozpatrzono trzy rodziny funkcji:
+\begin{itemize}
+	\item funkcję sigmoid,
+	\item funkcje z~grupy jednostek liniowych (ang. \emph{linear unit}):
+		\begin{itemize}	
+        	\item ReLU (ang. \emph{Rectified Linear Unit}),
+        	\item ReLU z~wyciekiem (ang. \emph{Leaky Rectified Linear Unit)}
+        	\item ELU (ang. \emph{Exponential Linear Unit}),
+        \end{itemize}
+	\item funkcję tangens hiperboliczny.
+\end{itemize}
+Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[t]{0.3\textwidth}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[title={$ Sigmoid(z) $}, width=5cm, height=4cm,
+                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
+       \addplot[blue, domain=-5:5, samples=51] 
+       {1 / (1 + e^(-x)};
+    \end{axis}
+\end{tikzpicture}
+\caption{Funkcja aktywacji tangens hiperboliczny}
+\end{subfigure}
+\hspace{0.25cm}
+\begin{subfigure}[t]{0.3\textwidth}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[title={$ LU(z) $}, width=5cm, height=4cm,
+                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-3, xmax=3,
+                 legend style={at={(0.02, 0.98)}, anchor=north west}]
+       \addplot[red, domain=-3:3, samples=31] 
+       {max(0, x)};
+       \addplot[green, domain=-3:3, samples=31] 
+       {max(0.1*x, x)};
+       \addplot[blue, domain=-3:3, samples=31] 
+       {x < 0 ? 0.1*(e^x - 1) : x};
+    \legend{ReLU, LReLU, ELU}
+    \end{axis}
+\end{tikzpicture}
+\caption{Rodzina funkcji aktywacji jednostek liniowych}
+\end{subfigure}
+\hspace{0.25cm}
+\begin{subfigure}[t]{0.3\textwidth}
+\centering
+\begin{tikzpicture}
+    \begin{axis}[title={$ Tanh(z) $}, width=5cm, height=4cm,
+                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
+       \addplot[blue, domain=-5:5, samples=51] 
+       {tanh(x)};
+    \end{axis}
+\end{tikzpicture}
+\caption{Funkcja aktywacji tangens hiperboliczny}
+\end{subfigure}
+\caption{Dostępne funkcje aktywacji rozpatrywane do użycia w~warstwach
+         ukrytych}
+\label{fig:activation}
+\end{figure}
+Funkcja sigmoid jest często stosowaną, klasyczną funkcją aktywacji.
+Jej wadą jest jednak zanikanie wartości pochodnej.
+Obecnie częściej stosowane są funkcję z~rodziny jednostek liniowych,
+szczególnie z wyciekiem, czyli małymi wartościami dla ujemnych argumentów.
+Przetestowano również funkcję tangens hiperboliczny, która ma kształt
+podobny do funkcji sigmoid.
+Mimo, że obecnie funkcje jednostek liniowych są najbardziej popularne
+w~rozpatrywanym przypadku sieć osiągała najlepsze wyniki dla funkcji tangens.
+
+Opisany model sieci neuronowej należy zdefiniować za pomocą interfejsu
+Keras.
+Do inicjalizacji sieci o~standardowej liniowej strukturze służy funkcja
+\mintinline{python}{Sequential()}, która może przyjąć listę warstw w~sieci.
+Funkcja \mintinline{python}{Dense(units)} tworzy warstwę łącząca każdy neuron
+z~każdym wyjściem poprzedniej warstwy.
+Jej parametry definiuje ilość neuronów w~warstwie oraz ich funkcję aktywacji.
+Funkcję języka Python implementują opisywaną sieć, za pomocą przedstawionych
+elementów biblioteki Keras, przedstawiono na listingu \ref{lst:model}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def default_grain_classifier_model():
+    '''
+    Get default uncompiled model for grain classifcation,
+    based on 5 step cooling process using number of blobs.
+    '''
+    model = keras.Sequential([
+        keras.layers.Dense(5, activation='tanh'),
+        keras.layers.Dense(256, activation='tanh'),
+        keras.layers.Dense(128, activation='tanh'),
+        keras.layers.Dense(4, activation='softmax')
+    ])
+    return model
+\end{minted}
+\caption{Funkcja języka Python definiująca model sieci neuronowej}
+\label{lst:model}
+\end{listing}
 
 \subsection{Trening sieci neuronowej}
+\label{subsec:train}
+Kolejnym krokiem w~budowie klasyfikatora ziaren jest trening sieci neuronowej.
+Przed rozpoczęciem uczenia sieci należy podzielić dostępne dane na zbiór
+treningowy oraz~testowy.
+Aby ułatwić podział Biblioteka Scikit-learn udostępnia funkcję
+\mintinline{python}{train_test_split(*arrays, **options)}, która zwraca
+podane zbiory, podzielone na części treningowe i~testowe.
+Odpowiednie wykorzystanie funkcji wymaga użycia jej parametrów opcjonalnych.
+Argument \mintinline{python}{stratify} sprawia, że podzielone zbiory
+zawierają takie same proporcje klas.
+Taka metoda podziału nazywana jest \emph{losowaniem warstowym}.
+Uaktywnienie tej opcji jest szczególnie ważne, ze względu na mały rozmiar
+posiadanego zbioru danych.
+Gdyby dane dzielić w~pełni przypadkowe istniałoby ryzyko nadmiernej
+reprezentacji klasy w~danej grupie oraz jej braku w~innej.
+Kolejnym istotnym parametrem jest \mintinline{python}{test_size}, który
+decyduje o~rozmiarze zbioru testowego.
+Ponieważ w~zbiorze są trzy egzemplarze każdej klasy odpowiednie jest
+wydzielenie do testów jednej trzeciej próbek.
+Ostatni parametr \mintinline{python}{random_state}, to ziarno generatora
+losowego podziału zbiorów.
+Aby móc porównywać działanie sieci pomiędzy wielokrotnymi uruchomieniami
+programu należy wyeliminować z~niego czynniki przypadkowe i~podać
+funkcji stałe ziarno, co zapewni powtarzalny podział zbioru.
+Oczywiście wydzielenie w~narzucony sposób zbioru testowego, szczególnie
+w~przypadku tak małej ilości danych, nie daje obiektywnej oceny modelu.
+Jest on jednak wystarczający do budowy i~testowania pierwszego prototypu
+sieci.
+W~sekcji \ref{sec:validation} przedstawiono konstrukcję i~wyniki działania
+bardziej miarodajnego procesu walidacji.
 
-\section{Walidacja i~ocena działania sieci}
+Aby móc do niego przystąpić do treningu należy określić parametry uczenia
+sieci.
+Konfiguracja tego procesu odbywa się przez wywołanie metody
+\mintinline{python}{Compile()}.
+Metoda przyjmuje parametry algorytmu optymalizacji sieci, miary błędu oraz
+metryki.
+Argument \mintinline{python}{optimizer} przyjmuje  nazwę stosowanego
+algorytmu uczenia sieci.
+Rozważono dwa popularne metody treningu: sgd (ang. \emph{stochastic gradient
+descent)} oraz adam (ang. \emph{adaptive moment estimation}).
+Metoda sgd jest najbardziej popularnym i~podstawowym sposobem uczenia, jednak
+algorytm adam, jest roziązaniem nowszym, polecanym w~problemach klasyfikacji.
+%TODO: cite
+Zgodnie z~tymi przesłankami optymalizator adam okazał się dawać najlepsze
+rezultaty i~to on został wybrany do uczenia sieci.
+Parametr \mintinline{python}{loss} przyjmuje nazwę sposobu liczenia błędu
+w~sieci.
+Przykładem miary błędu używanej w~sieciach neuronowych jest popularny
+błąd średniokwadratowy.
+Dla problemów klasyfikacji lepszy jest jednak błąd obliczany metodą
+\emph{rzadkiej kategoryzacyjnej entropii krzyżowej} (ang. \textit{sparse
+categorical crossentropy}).
+Jest to złożona metoda wykorzystująca funkcję logarytmiczną.
+Metoda kategoryzacyjnej entropii okazała się najlepszą funkcją błędu
+dla analizowanego przypadku.
+Ostatni parametr metryki to wartość obliczana w~celu oszacowania poprawności
+działania sieci.
+Wybrano standardową metrykę dokładności sieci, czyli stosunku poprawnie
+zakwalifikowanych próbek do wszystkich analizowanych.
+Ostatnim uczenia etapem jest realizacja treningu sieci, dokonywana za pomocą
+metody \mintinline{python}{model.fit()}.
+Metoda przyjmuje argumenty zbioru treningowego wraz z~zestawem etykiet
+oraz liczbę epok treningu, zwraca obiekt zawierający przebieg treningu.
+Na rysunku \ref{fig:history} przedstawiono dokładność i~błąd w~kolejnych
+epokach treningu.
+Na ich podstawie określono liczbę że odpowiednia liczba epok wynosi 300.
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Przebieg treningu sieci dla metody zliczania wszystkich
+		         ziaren}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Przebieg treningu sieci dla metody zliczania śledzonych 
+		         ziaren}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{example-image}
+		\caption{Przebieg treningu sieci dla metody procentowego zliczania
+		         śledzonych ziaren}
+	\end{subfigure}
+	\caption{Przebieg treningu sieci dla różnych metod zliczania ziaren}
+	\label{fig:history}
+\end{figure}
+Opisany plan treningu sieci realizuje kod przedstawiony na listingu
+\ref{lst:train}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+    X_train, X_test, y_train, y_test = train_test_split(X, y,
+        stratify = y,
+        test_size = 0.33,
+        random_state = 1)
+
+    model = default_grain_classifier_model()
+
+    model.compile(optimizer='adam',
+                  loss='sparse_categorical_crossentropy',
+                  metrics=['accuracy'])
+    
+    history = model.fit(X_train, y_train, epochs=256)
+\end{minted}
+\caption{Kod treningu sieci neuronowej klasyfikującej ziarna miedzi}
+\label{lst:train}
+\end{listing}
+Działanie sieci można sprawdzić na zbiorze testowym.
+Należy mieć na uwadze, że przy małej ilości danych i~przedstawiony 
+podziale na zbiory treningowy oraz testowy nie będzie to test miarodajny.
+Jest on jednak akceptowalny przy pierwszych testach sieci podczas jej
+konstrukcji.
+Wyniki działania sieci przedstawia tabela \ref{tab:blobtest}.
+Przedstawione wartości błędu oraz dokładności potwierdzają przypuszczenia
+na temat użyteczności różnych metod zliczania ziaren, które przedstawiono
+w~podsekcji \ref{subsec:datavis}.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{c|c|c}
+	\toprule
+	\multirow{2}{*}{metoda zliczania ziaren} & \multicolumn{2}{c}{wskaźnik} \\ 
+                                         & błąd       & dokładność      \\ \midrule
+zliczanie wszystkich ziaren              & 1.45       & 0.25            \\
+zliczanie śledzonych ziaren              & 7.50       & 0.5             \\
+procentowe zliczanie śledzonych ziaren   & 0.63       & 0.75           \\   
+	\bottomrule
+	\end{tabular}
+\caption{Wskaźniki oceny działania sieci na zbiorze testowym}
+\label{tab:blobtest}
+\end{table}
+
+\section{Walidacja i~ocena działania sieci} \label{sec:validation}
+Po stworzeniu prototypu klasyfkiatora przedstawionego w~rozdziale
+\ref{subsec:nnbuild} należy przeprowadzić walidację zbudowanej sieci
+neuronowej.
+Najpopularniejszą metodą miarodajnego testu sieci jest 
+\emph{k-krotny sprawdzian krzyżowy} (ang. \textit{k-fold cross-validation}).
+Metoda ta polega na podziale dostępnych danych na k części, i~kolejnym
+wydzielaniu jednej z~części danych jako zbioru testowego.
+Walidacje powtarza się k-krotnie, tak by każda część była wykorzystana
+jako dane testowe.
+Na końcu testu wyniki są uśrednianie, przez co dają one dobry pogląd na
+ogólną zdolność sieci do generalizacji rozwiązywanego problemu.
+
+Biblioteka keras nie posiada wbudowanej funkcji realizującej sprawdzian
+krzyżowy, dlatego należy przygotować ją samodzielnie.
+W~tym celu użyto biblioteki Scikit-learn, która oferuje funkcje podziału
+zbiorów danych.
+Jedną z~nich jest funkcja zwracająca iterowalny zestaw k-krotnych
+podziałów zbioru danych.
+Jak przedstawiono w~sekcji \ref{subsec:train}, ze względu na mały rozmiar
+zbioru danych, przy podziale należy zastosować losowanie warstwowe.
+Na listingu \ref{lst:crossval} przedstawiono funkcję pozwalającą na walidację
+modelu klasyfikatora biblioteki keras z~użyciem sprawdzianu krzyżowego.
+Funkcja przyjmuje argumenty w~postaci skompilowanego modelu sieci oraz
+zbioru danych i~etykiet.
+Zwracana jest macierz, w~której rzędy oznaczają wyniki testów dla kolejnych
+podziałów zbioru danych.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def network_cross_validation(model, X, y):
+    '''Compute cross validation fold scores for given keras model.'''
+    eval_scores = []
+    for train_index, test_index in 
+        StratifiedKFold(n_splits = 3).split(X, y):
+        
+        x_train, x_test= X[train_index], X[test_index]
+        y_train, y_test= y[train_index], y[test_index]
+        
+        model.fit(x_train, y_train, epochs=300, verbose=0)
+        eval_scores.append(model.evaluate(x_test, y_test))
+    return eval_scores
+\end{minted}
+\caption{Funkcja języka Python definiująca model sieci neuronowej}
+\label{lst:crossval}
+\end{listing}
+Sposób wykorzystania zbudowanej funkcji walidacji modelu przedstawia
+listing \ref{lst:val}.
+Na końcu procesu oceny sieci wyniki kolejnych kroków sprawdziany krzyżowego
+należy uśrednić.
+
+\begin{listing}[htbp]
+\begin{minted}{python}
+X = np.array(X)
+y = np.array(y)
+
+model = default_grain_classifier_model()
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+eval = network_cross_validation(model, X, y)
+
+print('Folds scores: (loss, acc)\n', eval)
+eval = np.array(eval)
+print('Cross validation mean score (loss, acc):\n',
+      eval.mean(axis=0), '\n')
+\end{minted}
+\caption{Wykorzystanie funkcji sprawdzianu krzyżowego do oceny działania
+         sieci}
+\label{lst:val}
+\end{listing}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{c|c|c}
+	\toprule
+	\multirow{2}{*}{metoda zliczania ziaren} & \multicolumn{2}{c}{wskaźnik} \\ 
+                                         & błąd       & dokładność      \\ \midrule
+zliczanie wszystkich ziaren              & 6,59       & 0,41            \\
+zliczanie śledzonych ziaren              & 3,99       & 0,50             \\
+procentowe zliczanie śledzonych ziaren   & 1,37       & 0,91          \\   
+	\bottomrule
+	\end{tabular}
+\caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
+         krzyżowego}
+\label{tab:blobtest}
+\end{table}
+
+
+
+
+

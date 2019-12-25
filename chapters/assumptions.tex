@@ -216,6 +216,7 @@ Wybrana biblioteka charakteryzuje się również dobrą dokumentacją oraz
 zestawem przydatnych przykładów.
 
 \subsection{Interfejs sieci neuronowych Keras i~biblioteka TensorFlow}
+\label{subsec:softnetwork}
 Wybór bibliotek głębokiego uczenia w~języku Python jest bardzo szeroki.
 Do najpopularniejszych pakietów należą: Keras, TensorFlow oraz PyTorch.
 Zdecydowano się na wybór interfejsu biblioteki Keras.
@@ -225,3 +226,10 @@ neuronowych.
 Keras nie jest jednak pełnym rozwiązaniem, a~raczej abstrakcyjnym interfejsem.
 Używanie go wymaga wyboru wewnętrznego silnika biblioteki.
 Zdecydowano się na wybór domyślnej opcji i~użycie zaplecza pakietu TensorFlow.
+W~standardowy sposób interfejsu Keras używa się, po osobnym zainstalowaniu
+jego pakietu modułów i~wskazaniu mu silnika sieci neuronowych.
+Biblioteka TensorFlow udostępnia jednak wewnętrzny interfejs interfejsu Keras,
+co pozwala na zwiększenie wydajności obliczeniowej w~połączeniu dwóch
+bibliotek.
+Przy tworzeniu oprogramowania wzięto to pod uwagę i~użyto bardziej wydajnej
+metody importowania interfejsu Keras.

@@ -774,13 +774,14 @@ Działanie zliczania przedstawiono przedstawiono w~niej dla każdej
 rozpatrywanej klasy ziaren.
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{|c|c|c|c|c|c|}
-	\hline
-	\diagbox{Próbka}{Minuta} & 0 & 1 & 2 & 3 & 4 \\ \hline
-	104\_E5R  & 1.0 & 0.52 & 0.29 & 0.23 & 0.20 \\ \hline
-	106\_E11R & 1.0 & 0.12 & 0.02 & 0.00 & 0.00 \\ \hline
-	107\_E6R  & 1.0 & 0.20 & 0.12 & 0.02 & 0.02 \\ \hline
-	111\_E1XP & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\ \hline
+	\begin{tabular}{c|c|c|c|c|c}
+	\toprule
+	Próbka & Minuta 0 & Minuta 1 & Minuta 2 & Minuta 3 & Minuta 4 \\ \midrule
+	104\_E5R  & 1.0 & 0.52 & 0.29 & 0.23 & 0.20 \\
+	106\_E11R & 1.0 & 0.12 & 0.02 & 0.00 & 0.00 \\
+	107\_E6R  & 1.0 & 0.20 & 0.12 & 0.02 & 0.02 \\
+	111\_E1XP & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\
+	\bottomrule
 	\end{tabular}
 \caption{Procent detali wykrytych w~kolejnych etapach stygnięcia, które
          były obecne na jego początku}
@@ -788,6 +789,7 @@ rozpatrywanej klasy ziaren.
 \end{table}
 
 \subsection{Wizualizacja zebranych cech i~ocena ich użyteczności}
+\label{subsec:datavis}
 W~podsekcji \ref{subsec:blobtracking} przedstawiono opracowane algorytmy
 śledzenia ilości detali w~rozpatrywanych obrazach stygnięcia ziaren rud
 miedzi.

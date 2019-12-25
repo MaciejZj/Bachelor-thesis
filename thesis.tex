@@ -6,6 +6,12 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \graphicspath{ {graphics/} }
+\usepackage{pgfplots}
+\pgfplotsset{every axis/.append style={
+             tick label style={/pgf/number format/fixed},
+             font=\scriptsize,
+             ylabel near ticks,xlabel near ticks,
+             grid=major}}
 \usepackage{diagbox}
 \usepackage[justification=centering]{caption}
 \usepackage{subcaption}
@@ -18,10 +24,26 @@
 \usepackage{minted}
 \renewcommand\listoflistingscaption{Spis listingów}
 \usepackage[polish]{babel}
-
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{rotating}
 
 \fancyhead{}
 \fancyhead[RO,LE]{\chaptername: \rightmark}
+
+% This is necessary to plot softmax function
+\pgfmathdeclarefunction{sumexp}{3}{%
+\begingroup%
+\pgfkeys{/pgf/fpu,/pgf/fpu/output format=fixed}%
+\pgfmathsetmacro{\myx}{#1}%
+\pgfmathtruncatemacro{\myxmin}{#2}%
+\pgfmathtruncatemacro{\myxmax}{#3}%
+\pgfmathsetmacro{\mysum}{0}%
+\pgfplotsforeachungrouped\XX in {\myxmin,...,\myxmax}%
+{\pgfmathsetmacro{\mysum}{\mysum+exp(\XX)}}%
+\pgfmathparse{\mysum+exp(#1)}%
+\pgfmathsmuggle\pgfmathresult\endgroup%
+}%
 
 \begin{document}
 
