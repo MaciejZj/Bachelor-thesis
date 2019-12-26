@@ -7,6 +7,9 @@
 \usepackage{graphicx}
 \graphicspath{ {graphics/} }
 \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{dateplot}
 \pgfplotsset{every axis/.append style={
              tick label style={/pgf/number format/fixed},
              font=\scriptsize,
@@ -53,7 +56,19 @@
 
 % Introductory pages
 \begin{abstract}
-Tematem pracy jest...
+Tematem pracy jest klasyfikacja ziaren rud miedzi na podstawie nagrań metodą
+termowizji aktywnej.
+Zaproponowano sposób wykonania pomiarów oraz zbierania danych z~procesu
+stygnięcia badanych próbek miedzi.
+Zgromadzone materiały przeanalizowano pod kątem użyteczności w~zadaniu
+klasyfikacji.
+Przedstawiono metodę zliczania i~śledzenia elementów charakterystycznych
+rud miedzi, w~cyklu zdjęć.
+Zgromadzone dane i~zbudowane metody eksploracji danych wykorzystano
+do konstrukcji prototypu sieci neuronowej klasyfikującej ziarna rud miedzi.
+Przeprowadzono ocenę działania klasyfikatora oraz wytypowano najlepszy
+uzyskany sposób na detekcję typu ziaren miedzi.
+
 \end{abstract}
  
 \chapter*{Deklaracja}

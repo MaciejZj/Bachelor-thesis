@@ -136,10 +136,26 @@ wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szum�
 \end{figure}
 
 \subsection{Przetwarzanie danych wizyjnych}
+Wykorzystanie wizji komputerowej w~rozmaitych zadaniach często wymaga
+odpowiedniego przygotowania używanych obrazów.
+Do standardowych technik należą: wyrównywanie histogramu oraz odszumianie
+i~wyostrzanie zdjęć.
+Po analizie zebranych obrazów i~wypróbowaniu wymienionych technik zdecydowano
+się jednak nie modyfikować zgromadzonych mateirałów.
+Użyty podczczas pomiarów program FLIR Tools posiada wbudowaną funkcję
+doboru zakresu temperatur, co przekłada się na ekspozycję i~kontrast
+eksportowanych zdjęć.
+Próba wyrównywania histogramu oraz korekcji kontrastu sprawiłaby, że obraz
+rozkładu temperatur na zdjęciu stałby się przekłamany.
+Ze względu na niską, jak na standardy typowego przetwarzania zdjęć cyfrowych,
+rozdzielczość obrazów zdjęć także nie odszumianio.
+Wiele detali ziaren ma wielkość zaledwie paru pikseli, proces odszumiania
+mógłby spowodować ich zanik.
+Nie oznacza to, jednak że zdjęcia charatkeryzują się przypadkową ekspozycją.
+Alogrytmy automatycznego doboru zakresu tepmeratur kamery dbają o to, by
+obraz oddawał właściwowści cieplne obiektu.
 
-\subsection{Poprawa jakości obrazu}
-
-\subsection{Automatyczny odczyt zakresu pomiarowego temperatur z~obrazu}
+\subsection{Odczyt zakresu pomiarowego temperatur z~obrazu}
 Jak wspomniano w~sekcji \ref{subsec:camsoft} jednym z~kluczowych czynników
 decydujących o~wyglądzie obrazów pochodzących z~kamery jest zakres temperatur
 mapowany na kolory w~obrazie.
@@ -218,7 +234,7 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
 \label{lst:temp_bounds}
 \end{listing}
 
-\section{Poszukiwanie zależności użytecznych w~klasyfikacji}
+\section{Eksploracja danych}
 Aby móc klasyfikować dane należy zastanowić się nad cechami które je
 odróżniają.
 Na rysunku \ref{fig:samplecompare} przedstawiono porównanie stygnięcia

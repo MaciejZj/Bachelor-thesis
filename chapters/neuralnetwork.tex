@@ -96,7 +96,6 @@ Rozpatrzono trzy rodziny funkcji:
 	\item funkcje z~grupy jednostek liniowych (ang. \emph{linear unit}):
 		\begin{itemize}	
         	\item ReLU (ang. \emph{Rectified Linear Unit}),
-        	\item ReLU z~wyciekiem (ang. \emph{Leaky Rectified Linear Unit)}
         	\item ELU (ang. \emph{Exponential Linear Unit}),
         \end{itemize}
 	\item funkcję tangens hiperboliczny.
@@ -124,11 +123,9 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
                  legend style={at={(0.02, 0.98)}, anchor=north west}]
        \addplot[red, domain=-3:3, samples=31] 
        {max(0, x)};
-       \addplot[green, domain=-3:3, samples=31] 
-       {max(0.1*x, x)};
        \addplot[blue, domain=-3:3, samples=31] 
        {x < 0 ? 0.1*(e^x - 1) : x};
-    \legend{ReLU, LReLU, ELU}
+    \legend{ReLU, ELU}
     \end{axis}
 \end{tikzpicture}
 \caption{Rodzina funkcji aktywacji jednostek liniowych}
@@ -374,6 +371,26 @@ Sposób wykorzystania zbudowanej funkcji walidacji modelu przedstawia
 listing \ref{lst:val}.
 Na końcu procesu oceny sieci wyniki kolejnych kroków sprawdziany krzyżowego
 należy uśrednić.
+Wyniki walidacji dla trzech sposobów zliczania detali na obrazach przedstawia
+tabela \ref{tab:blobval}.
+
+Zgodnie z~wcześniejszymi przewidywaniami metoda procnetowego zliczania
+detali na obrazach okazała się dawać najlepsze rezultaty.
+Dokładność na poziomie 91\% jest wystarczająca do uznania sieci za
+dobry klasyfikator.
+Pozostałe metody ozliczania kzały sie okazały się mniej precyzyjne, co
+wskazuje że należy je odrzucić.
+
+Przedstawiony mechanizm walidacji wykorzystano do dostrojenia parametrów
+sieci opisywanych w~podeskcji \ref{subsec:nnbuild}.
+Uzasadnienie doboru przedstawionej w~toku pracy struktury sieci wynika z~prób
+maksymalizacji dokładności oblicznej przy pomocy sprawdzianu krzyżowego.
+W~czasie prototypowania sieci dokonano liczbych porównań, aby znaleźć
+najlepszą strukturę.
+Szczegółowe zestaweienie rozpatrywanych konfiguracji i~wartości paramwtrów
+załączono w~dodatku.
+% TODO: tabela
+
 
 \begin{listing}[htbp]
 \begin{minted}{python}
@@ -410,7 +427,7 @@ procentowe zliczanie śledzonych ziaren   & 1,37       & 0,91          \\
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
          krzyżowego}
-\label{tab:blobtest}
+\label{tab:blobval}
 \end{table}
 
 
