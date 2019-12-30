@@ -1,4 +1,46 @@
 \section{Analizowane ziarna rud miedzi} \label{sec:grains}
+Zestaw analizowanych ziaren pochodzi z~projektu \textsc{sysmel} (\emph{System
+sterowania procesem mielenia w~układzie z~młynem elektromagnetycznym}),
+którego współtwórcami są naukowcy z~Politechniki Śląskiej.
+Uzyskane próbki powstały w~procesie mielenia rud miedzi w~młynie
+elektromagnetycznym.
+Poszczególne klasy ziaren różnią się granulacją i~parametrami procesu
+ich przetwarzania w~młynie.
+Spośród próbek, pochodzących z~projektu \textsc{sysmel}, wybrano cztery typy
+ziaren, które będą przedmiotem zadania klasyfikacji.
+Zdjęcia rozpatrywanych materiałów przedstawiono na rysunku \ref{fig:grains}.
+\begin{figure}[htbp]
+    \centering
+    \hfill
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{E5R}
+		\caption{Ziarna rudy miedzi klasy E5R}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{E6R}
+		\caption{Ziarna rudy miedzi klasy E6R}
+	\end{subfigure}
+	\hfill
+	\\
+	\hfill
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{E11R}
+		\caption{Ziarna rudy miedzi klasy E11R}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{E1XP}
+		\caption{Ziarna rudy miedzi klasy E1XP}
+	\end{subfigure}
+	\hfill
+	\caption{Próbki rozpatrywanych ziaren rud miedzi}
+	\label{fig:grains}
+\end{figure}
 
 \section{Rodzaje termowizji i~idea pomiarów termowizyjnych}
 \label{sec:thermovision}
@@ -13,12 +55,12 @@ Można w~ten sposób obserwować przepływ ciepła w~urządzeniach technicznych,
 procesach przemysłowych oraz biologicznych.
 W~rozważanym w~pracy przypadku technika ta nie ma jednak zastosowania.
 W~warunkach pokojowych badany materiał ma w~całej swojej objętości podobną
-temperaturę co skutkuje obrazem równomiernego szumu w~rejestrowanym obrazie.
+temperaturę, co skutkuje obrazem równomiernego szumu w~rejestrowanym obrazie.
 
 Bardziej zaawansowaną techniką są pomiary z~wykorzystaniem termowizji
 aktywnej.
-W tym trybie pomiarów badane obiekty nagrzewa się w~początkowej fazie pomiaru,
-w~powtarzalnych warunkach, a~następnie rejestruje proces ich stygnięcia.
+W tym trybie pomiarów badane obiekty ogrzewa się w~powtarzalnych warunkach, 
+a~następnie rejestruje proces ich stygnięcia.
 Podczas dostarczania ciepła do obiektu oraz jego oddawania na obrazach
 termowizyjnych można zaobserwować strukturę badanego obiektu.
 Przedmioty o~niejednorodnej i~złożonej budowie nagrzewają się oraz stygną
@@ -26,7 +68,7 @@ nierównomiernie co jest rejestrowane przez kamery termowizyjne.
 W~ten sposób można dostrzec cechy obiektu niewidoczne gołym okiem, takie
 jak zmiany jego gęstości, składu oraz uszkodzenia struktury.
 Termowizję aktywną stosuje się szeroko w~badaniach naukowych oraz przemyśle.
-Przykładowe aplikacje tej techniki to wykrywanie defektów w~produktach
+Przykładowe aplikacje tej techniki to detekcja defektów w~produktach
 przemysłowych oraz wykrywanie części konstrukcji podatnych na zużycie.
 Termowizja aktywna jest techniką niedestruktywną oraz bezkontaktową,
 co stanowi jej zalety w~analizie materiałowej.
@@ -38,22 +80,24 @@ aby zmaksymalizować ilość danych zgromadzonych w~trakcie eksperymentu.
 % TODO: Może dać obrazek płytki z dziurami od dr Budzana
 
 \section{Kamera termowizyjna FLIR A320}
+\label{sec:camera}
 Przedmiotem projektu jest analiza obrazów pochodzących z~przemysłowej
 kamery termowizyjnej FLIR A320.
 Firma FLIR zajmuje się produkcją wysokiej jakości kamer i~detektorów do celów
 profesjonalnych i~przemysłowych.
-Używana kamera łączący wysoką jakość pomiaru z~nowoczesnymi funkcjami
+Używany aparat łączy wysoką jakość pomiaru z~nowoczesnymi funkcjami
 integracji z~oprogramowaniem komputerowym.
 Urządzenie komunikuje się z~komputerem za pomocą kabla ethernetowego,
-pozwalając na kontrolę z~poziomu oprogramowania oraz bibliotek
+pozwalając na kontrolę z~poziomu aplikacji oraz bibliotek
 programistycznych.
-Dodatkowo kamera posiada możliwość planowania automatycznych pomiarów,
-alarmów, oferuje funkcje analityczne oraz wbudowany serwer internetowy.
+Dodatkowo kamera posiada możliwość planowania automatycznych pomiarów
+i~alarmów, oferuje także funkcje analityczne oraz wbudowany serwer
+internetowy.
 
 \subsection{Opis sprzętowy wykorzystywanej kamery}
 Kamera ma postać podłużnego korpusu, do którego swobodnie można podłączać
 pasujące obiektywy.
-Na rysunku \ref{fig:camera} przedstawiono zdjęcie wykorzystywanego urządzenia.
+Na rysunku \ref{fig:camera}~przedstawiono zdjęcie wykorzystywanego urządzenia.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{flir_a320}
@@ -61,58 +105,59 @@ Na rysunku \ref{fig:camera} przedstawiono zdjęcie wykorzystywanego urządzenia.
     \label{fig:camera}
 \end{figure}
 Egzemplarz kamery znajdujący się w~laboratorium termowizji Politechniki
-Śląskiej został wyposażony w~obiektyw, pozwalający oglądać
-ziarna rud miedzi w~powiększeniu.
-% TODO: Datasheet bib ref or footnote
-Kamera cechuje się następującymi parametrami:
+Śląskiej został wyposażony w~obiektyw, pozwalający oglądać ziarna rud miedzi
+w~powiększeniu.
+Kamera cechuje się następującymi parametrami \cite{flir_camera_specs}:
 \begin{itemize}
 	\item typ detektora: niechłodzony mikrobolometr
-	\item rozdzielczość: \num{320} na \num{240} pikseli,
-	\item częstotliwość odświeżania: \num{9}\si{\hertz} do \num{30}\si{\hertz}
+	\item rozdzielczość: 320 na 240 pikseli,
+	\item częstotliwość odświeżania: \SI{9}{\hertz} do \SI{30}{\hertz}
 	\item szerokość otworu: \textit{f}\num{1,3},
 	\item autofokus z wbudowanym silnikiem,
 	\item zakres pomiarowy temperatur: 
 		\begin{enumerate}
-			\item od \num{-15}\si{\celsius} do \num{+50}\si{\celsius},
-			\item od \num{0}\si{\celsius} do \num{350}\si{\celsius},
+			\item od \SI{-15}{\celsius} do \SI{+50}{\celsius},
+			\item od \SI{0}{\celsius} do \SI{350}{\celsius},
 		\end{enumerate}
 	\item dokładność: \num{\pm2}\si{\celsius} lub \num{\pm2}\% odczytu,
-	\item zakres wykrywanego widma promieniowania: \num{7,5}\si{\micro\meter}
-          do \num{13}\si{\micro\meter}.
+	\item zakres wykrywanego widma promieniowania: \SI{7,5}{\micro\meter}
+          do \SI{13}{\micro\meter}.
 \end{itemize}
 
 Kamera wykrywa temperaturę przez detektor zwany \emph{bolometrem},
 który mierzy energię niesioną przez fale elektromagnetyczne w~spektrum
 podczerwieni.
-Kiedy fala pada na detektor kamery, temperatura komórek matrycy rośnie
+Kiedy fala pada na detektor aparatu, temperatura komórek matrycy rośnie
 i~zwiększa się ich rezystancja elektryczna, co wpływa na natężenie prądu
 przepływającego przez obwody w~czujniku.
 Wartości natężenia prądu są mierzone, a~na ich podstawie określana jest
-mierzona temperatura.
+temperatura.
 
 Zakres temperatur kamery jest odpowiedni do przeprowadzenia eksperymentów
 z~pomiarami metodą termowizji aktywnej.
 Próbki planuje się podgrzewać do temperatury maksymalnie około
-\num{80}\si{\celsius}, wartość ta mieści się w~zakresie pracy urządzenia.
+\SI{80}{\celsius},~wartość ta mieści się w~zakresie pracy urządzenia.
 Dokładność kamery jest zadowalająca, próbne materiały nagraniowe
 wskazały, że na zdjęciach widocznych jest wiele szczegółów i~detali
 badanego materiału.
 Przy klasyfikacji obrazów i~wzorców stygnięcia próbek jest to 
 bardziej istotne niż liczbowa dokładność pomiarowa przyrządu.
 
-W~porównaniu ze zwykłymi, współczesnymi aparatami rozdzielczość kamery
+W~porównaniu ze zwykłymi, współczesnymi aparatami, rozdzielczość kamery
 termowizyjnej może wydawać się bardzo mała.
 Należy sobie jednak uzmysłowić, że w~standardowych aparatach piksele mają
 rozkład Bayera, a~wartości składowych koloru są interpolowane.
-W~kamerze termowizyjnej każdy piksel dokonuje pełnego pomiaru wartości
-temperatury, dlatego bezpośrednie porównanie rozdzielczości używanego
+W~kamerze termowizyjnej każda komórka matrycy dokonuje pełnego pomiaru
+wartości temperatury.
+Z~tego powodu bezpośrednie porównanie rozdzielczości używanego
 przyrządu z~popularnymi aparatami może być mylące.
 Oczywiście większa rozdzielczość kamery byłaby pożądana, jednak jej obecne
-możliwości pozwalają na szczegółowe pomiary i~obserwacje wielu detali ziaren
+możliwości pozwalają na szczegółowe pomiary i~obserwację wielu detali ziaren
 rud miedzi.
 
-\subsection{Obiektyw kamery} \label{subsec:lens}
-Kamerę wyposażono w~obiektyw zbliżeniowy FLIR T19741, pozwalający obserwować
+\subsection{Obiektyw kamery}
+\label{subsec:lens}
+Kamerę wyposażono w~obiektyw zbliżeniowy FLIR~T197415, pozwalający obserwować
 ziarna rud miedzy.
 Jest to sprzęt zaprojektowany przez producentów używanej kamery i~dedykowany
 pracy z~urządzeniami termowizyjnymi.
@@ -125,35 +170,35 @@ Przyrząd przedstawiono na rysunku \ref{fig:lens}.
 \end{figure}
 Wybrany obiektyw jest przygotowany z~myślą o~obserwacji drobnych detali
 powierzchni w~dużym zbliżeniu.
-Używany model ma następujące parametry:
+Używany model ma następujące parametry \cite{flir_lens_specs}:
 \begin{itemize}
-	\item ogniskowa: \num{18,2}\si{\milli\meter},
-	% TODO: Powiększenie bez sensu
+	\item ogniskowa: \SI{18,2}{\milli\meter},
 	\item powiększenie: \num{1x1},
-	\item pole widzenia: \num{8}\si{\milli\meter} na \num{6}\si{\milli\meter},
-	\item odległość od płaszczyzny ostrzenia: \num{20}\si{\milli\meter},
-	\item głębia ostrości: \num{0,3}\si{\milli\meter},
+	\item pole widzenia: \SI{8}{\milli\meter} na \SI{6}{\milli\meter},
+	\item odległość od płaszczyzny ostrzenia: \SI{20}{\milli\meter},
+	\item głębia ostrości: \SI{0,3}{\milli\meter},
 	\item przysłona: bez regulacji, równa otworowi systemu montażu kamery,
 	\item budowa: trzy soczewki asferyczne.
 \end{itemize}
 
-% TODO: Datasheet bib ref or footnote
-Zgodnie ze specyfikacją producenta obiektyw ma powiększenie \num{1x1}, co może
-wydawać się niedużą wartością.
+Zgodnie ze specyfikacją producenta obiektyw ma powiększenie \num{1x1},~co
+może wydawać się niedużą wartością.
 Należy mieć jednak świadomość, że zwykłe obiektywy zmniejszają obraz
-padający na matrycę, powszechnie przyjmuje się jako granicę makrofotografii
-powiększenie \num{1x1}.
+padający na matrycę.
+Powszechnie  jako granicę makrofotografii przyjmuje się
+powiększenie \num{1x1}.~
 W~obserwacji ziaren i~detali powierzchni nie jest jednak istotne powiększenie,
 ale to że używany obiektyw jest \emph{zbliżeniowy}.
 Oznacza to, że ma on bardzo małą odległość ostrzenia, czyli można go przysunąć
 blisko obserwowanej powierzchni.
 Obiektyw zbliżeniowy pozwala na obserwację z~dystansu
-\num{20}\si{\milli\meter}, typowe obiektywy ostrzą z~odległości parudziesięciu
+\SI{20}{\milli\meter},~typowe obiektywy ostrzą z~odległości parudziesięciu
 centymetrów do ponad metra.
 Dzięki temu obiektyw zbliżeniowy pozwala na obserwację bardzo drobnych
 detali powierzchni.
 
-\subsection{Oprogramowanie do obsługi kamery} \label{subsec:camsoft}
+\subsection{Oprogramowanie do obsługi kamery}
+\label{subsec:camera_soft}
 Jedną z~najważniejszych cech kamery jest łatwość jej integracji
 z~oprogramowaniem komputerowym.
 Kamerę można obsługiwać za pomocą programu FLIR Tools.
@@ -162,14 +207,14 @@ Producent dostarcza również bibliotekę LabVIEW pozwalającą na zaawansowaną
 pracę z~kamerą.
 Do obsługi stanowiska został napisany program używający tych bibliotek,
 który pozwala na nagrywanie materiałów wideo przy pomocy kamery.
-Nagrane materiały mają własnościowy format firmy FLIR, jednak można je
-odtwarzać w~programie FLIR Tools.
-Program pozwala także na eksport stopklatek z~nagrania, w~postaci plików JPEG.
+Nagrania mają własnościowy format firmy FLIR, można je odtwarzać w~programie
+FLIR Tools.
+Program pozwala także na eksport stopklatek z~nagrania w~postaci plików JPEG.
 Przy obsłudze narzędzia ważne jest ustawianie zakresu temperatur na obrazie.
 Wybrany zakres decyduje w jaki sposób wartości temperatury są mapowane na
-kolory w obrazie zawarte w tablicy LUT.
-Program oferuje tablice w skali szarości, takie zostały użyte w~projekcie,
-możliwy jest także wybór tablic w postaci kolorowych gradientów.
+kolory na zdjęciu zawarte w tablicy LUT.
+Program oferuje tablice w~skali szarości, takie zostały użyte w~projekcie,
+możliwy jest także wybór tablic w~postaci kolorowych gradientów.
 Wybór zakresu wpływa na wygląd wyświetlanego obrazu oraz eksportowanych
 stopklatek.
 Jego nieodpowiedni dobór może skutkować zbyt ciemnym, jasnym, lub mało
@@ -185,26 +230,26 @@ Założenia projektu wymagają użycia języka programowania pozwalającego
 na zaawansowaną obróbkę obrazu oraz wydajne budowanie sieci neuronowych.
 W~obu tych dziedzinach wiodącym językiem jest Python, posiadający bogaty
 zestaw bibliotek.
-Język ten oferuje dużą wygodę programowania, co jest istotne przy
-prototypowaniu oraz pracy badawczej.
+Język ten oferuje dużą wygodę programowania, co jest istotne przy pracy 
+badawczej.
 Jednocześnie Python jest zaopatrzony w~wydajną bibliotekę obliczeń
 numerycznych NumPy.
 Oferuje ona klasy macierzy numerycznych oraz bogaty zestaw operacji
 matematycznych.
 Macierze biblioteki NumPy są mniej elastyczne niż zwykłe listy języka Python,
 jednak oferują dużo większą wydajność obliczeniową, między innymi dzięki
-wsparciu obliczeń wektorowych na różnych procesorach.
-Wiele innych bibliotek wykorzystuje pakiet NumPy, na przykład przy
+wsparciu obliczeń wektorowych na odpowiednich procesorach.
+Wiele innych bibliotek języka wykorzystuje pakiet NumPy, na przykład przy
 przetwarzaniu obrazów, co pozwala na wysoką wydajność obliczeń.
 Połączenie wygody programowania z~zadowalającą wydajnością bibliotek
-numerycznych, sprawia że język Python jest dobrym wyborem do realizacji
+numerycznych, sprawia że Python jest dobrym wyborem do realizacji
 założeń projektu.
 
 \subsection{Biblioteka przetwarzania obrazu Scikit-image}
 Język Python oferuje bogaty zestaw bibliotek przetwarzania obrazu.
 Najbardziej popularną z~nich jest biblioteka OpenCV napisana w~języku C++.
 Zdecydowano się jednak na wybór mniej znanego pakietu Scikit-image.
-Jest to biblioteka nastawiona bardziej na obliczenia naukowe i~badawcze
+Jest to biblioteka zorientowana na obliczenia naukowe i~badawcze
 oraz napisana bezpośrednio z~myślą o~języku Python.
 Scikit-image, w~porównaniu z OpenCV, oferuje bardziej spójny interfejs
 programisty oraz lepiej wykorzystuje charakterystykę języka Python.
@@ -215,8 +260,8 @@ z~pakietu Scikit jest niewątpliwie zaletą.
 Wybrana biblioteka charakteryzuje się również dobrą dokumentacją oraz
 zestawem przydatnych przykładów.
 
-\subsection{Interfejs sieci neuronowych Keras i~biblioteka TensorFlow}
-\label{subsec:softnetwork}
+\subsection{Interfejs sieci neuronowych Keras}
+\label{subsec:software_network}
 Wybór bibliotek głębokiego uczenia w~języku Python jest bardzo szeroki.
 Do najpopularniejszych pakietów należą: Keras, TensorFlow oraz PyTorch.
 Zdecydowano się na wybór interfejsu biblioteki Keras.
@@ -226,9 +271,9 @@ neuronowych.
 Keras nie jest jednak pełnym rozwiązaniem, a~raczej abstrakcyjnym interfejsem.
 Używanie go wymaga wyboru wewnętrznego silnika biblioteki.
 Zdecydowano się na wybór domyślnej opcji i~użycie zaplecza pakietu TensorFlow.
-W~standardowy sposób interfejsu Keras używa się, po osobnym zainstalowaniu
-jego pakietu modułów i~wskazaniu mu silnika sieci neuronowych.
-Biblioteka TensorFlow udostępnia jednak wewnętrzny interfejs interfejsu Keras,
+W~standardowy sposób interfejsu Keras używa się po osobnym zainstalowaniu
+jego modułów i~wskazaniu silnika sieci neuronowych.
+Biblioteka TensorFlow udostępnia jednak wewnętrzny interfejs Keras,
 co pozwala na zwiększenie wydajności obliczeniowej w~połączeniu dwóch
 bibliotek.
 Przy tworzeniu oprogramowania wzięto to pod uwagę i~użyto bardziej wydajnej

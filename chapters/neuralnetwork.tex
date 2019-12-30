@@ -8,8 +8,8 @@ uczenia maszynowego jak i~uczenia głębokiego.
 Zdecydowano się na wybór sieci neuronowych do klasyfikacji ziaren.
 Jest to rozwiązanie najbardziej nowoczesne i~elastyczne.
 Zgodnie z~opisem narzędzi programistycznych w~podsekcji
-\ref{subsec:softnetwork}, proces budowania sieci oparto na interfejsie Keras,
-z~zapleczem TensorFlow.
+\ref{subsec:software_network}, proces budowania sieci oparto na interfejsie
+Keras, z~zapleczem TensorFlow.
 
 \subsection{Dobór struktury sieci} \label{subsec:nnbuild}
 Kluczowym czynnikiem decydującym o~architekturze sieci jest posiadany
@@ -32,6 +32,10 @@ Nie istnieje jednoznaczny sposób bezpośredniego określenia najlepszego
 klasyfikatora dla danego problemu.
 Przy projektowaniu sieci należy kierować się przesłankami teoretycznymi,
 doświadczeniem oraz testując i~porównując różne rozwiązania.
+Przedstawiona konstrukcja oraz uzasadnienie jej wyboru bazuje na wynikach
+walidacji, której mechanizm przedstawiono w~sekcji \ref{sec:validation}.
+Szczegółowe dane, dotyczące porównań różnych konstrukcji i~parametrów
+sieci przedstawiono w~dodatku %TODO: dodatek.
 
 Konstrukcję klasyfikatora rozpoczęto od wyboru ilości warstw.
 W~standardowej konstrukcji każda sieć posiada warstwę wejściową oraz
@@ -41,15 +45,15 @@ Ponadto do aproksymacji dowolnej funkcji nieliniowej wystarczająca jest sieć
 składająca się z~dwóch warstw.
 Nie oznacza to jednak, że w~praktyce dwie warstwy wystarczą by rozwiązać
 dowolny problem.
-Aby zwiększać efektywność sieci pomiędzy warstwą wejściową, wyjściową
+Aby zwiększać efektywność sieci pomiędzy warstwą wejściową oraz wyjściową
 umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
 Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
 Mimo że jedna warstwa ukryta pozwala teoretycznie na rozwiązanie dowolnego
 problemu, w~praktyce opłacalne jest stosowanie większej ilości warstw,
-co poparte jest licznymi przykładami\cite{reed}.
+co poparte jest licznymi przykładami \cite{reed}.
 Biorąc pod uwagę złożoność rozpatrywanego problemu zdecydowano się na
 strukturę czterowarstwową.
-Jest to rozmiar często spotykany w~tego typu sieciach, późniejsze testy
+Jest to rozmiar często spotykany w~sieciach tego typu, późniejsze testy
 pokazały, że jest to ilość warstw dająca dobre rezultaty.
 Sprawdzono, że zastosowanie jednej warstwy ukrytej powodowało pogorszenie
 działania sieci.
@@ -75,11 +79,13 @@ często spotykanym zabiegiem.
 
 Następnie rozpatrzono dostępne funkcje aktywacji poszczególnych warstw.
 Dla warstwy wyjściowej należy wybrać funkcję o~wartościach od zera do jeden.
+Jest to uzasadnione faktem, że wyjścia powinny reprezentować
+prawdopodobieństwo zaliczenia próbki do danej klasy.
 Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
 przedstawiono na rysunku \ref{fig:softmax}.
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[trim axis left]
     \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
                  ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
        \addplot[blue, domain=-5:5, samples=51] 
@@ -105,7 +111,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
 \centering
 \begin{subfigure}[t]{0.3\textwidth}
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[trim axis left]
     \begin{axis}[title={$ Sigmoid(z) $}, width=5cm, height=4cm,
                  ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
        \addplot[blue, domain=-5:5, samples=51] 
@@ -117,7 +123,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
 \hspace{0.25cm}
 \begin{subfigure}[t]{0.3\textwidth}
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[trim axis left]
     \begin{axis}[title={$ LU(z) $}, width=5cm, height=4cm,
                  ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-3, xmax=3,
                  legend style={at={(0.02, 0.98)}, anchor=north west}]
@@ -133,7 +139,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
 \hspace{0.25cm}
 \begin{subfigure}[t]{0.3\textwidth}
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[trim axis left]
     \begin{axis}[title={$ Tanh(z) $}, width=5cm, height=4cm,
                  ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
        \addplot[blue, domain=-5:5, samples=51] 
@@ -159,7 +165,7 @@ Opisany model sieci neuronowej należy zdefiniować za pomocą interfejsu
 Keras.
 Do inicjalizacji sieci o~standardowej liniowej strukturze służy funkcja
 \mintinline{python}{Sequential()}, która może przyjąć listę warstw w~sieci.
-Funkcja \mintinline{python}{Dense(units)} tworzy warstwę łącząca każdy neuron
+Funkcja \mintinline{python}{Dense()} tworzy warstwę łącząca każdy neuron
 z~każdym wyjściem poprzedniej warstwy.
 Jej parametry definiuje ilość neuronów w~warstwie oraz ich funkcję aktywacji.
 Funkcję języka Python implementują opisywaną sieć, za pomocą przedstawionych
@@ -186,10 +192,24 @@ def default_grain_classifier_model():
 \subsection{Trening sieci neuronowej}
 \label{subsec:train}
 Kolejnym krokiem w~budowie klasyfikatora ziaren jest trening sieci neuronowej.
+Jest to proces w~którym wagi neuronów są dopasowywane do zbioru uczącego.
+Rozpatrywany jest problem typu uczenia nadzorowanego.
+Przygotowane dane mają znane etykiety klas, to znaczy są odgórnie przypisane
+do danego typu.
+Narzucone etykiety nazywane są \emph{wiedzą ekspercką}, ich prawdziwość jest
+pewna.
+Etykiety przypisane przez klasyfikator będą oceniane przez porównanie
+z~etykietami eksperckimi.
+Trening polega na zbliżaniu wyników działania sieci do etykiet zbioru
+uczącego.
+
 Przed rozpoczęciem uczenia sieci należy podzielić dostępne dane na zbiór
 treningowy oraz~testowy.
+W~skład zbioru testowego nie powinny wchodzić dane uczące.
+Ocena zdolności sieci do generalizacji problemu może bazować tylko
+na danych, które nie brały udziału w~jej treningu.
 Aby ułatwić podział Biblioteka Scikit-learn udostępnia funkcję
-\mintinline{python}{train_test_split(*arrays, **options)}, która zwraca
+\mintinline{python}{train_test_split()}, która zwraca
 podane zbiory, podzielone na części treningowe i~testowe.
 Odpowiednie wykorzystanie funkcji wymaga użycia jej parametrów opcjonalnych.
 Argument \mintinline{python}{stratify} sprawia, że podzielone zbiory
@@ -218,7 +238,7 @@ bardziej miarodajnego procesu walidacji.
 Aby móc do niego przystąpić do treningu należy określić parametry uczenia
 sieci.
 Konfiguracja tego procesu odbywa się przez wywołanie metody
-\mintinline{python}{Compile()}.
+kompilacji.
 Metoda przyjmuje parametry algorytmu optymalizacji sieci, miary błędu oraz
 metryki.
 Argument \mintinline{python}{optimizer} przyjmuje  nazwę stosowanego
@@ -244,6 +264,7 @@ Ostatni parametr metryki to wartość obliczana w~celu oszacowania poprawności
 działania sieci.
 Wybrano standardową metrykę dokładności sieci, czyli stosunku poprawnie
 zakwalifikowanych próbek do wszystkich analizowanych.
+
 Ostatnim uczenia etapem jest realizacja treningu sieci, dokonywana za pomocą
 metody \mintinline{python}{model.fit()}.
 Metoda przyjmuje argumenty zbioru treningowego wraz z~zestawem etykiet
@@ -255,22 +276,21 @@ Na ich podstawie określono liczbę że odpowiednia liczba epok wynosi 300.
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{example-image}
+		\input{figures/neural_network_trainig_all}
 		\caption{Przebieg treningu sieci dla metody zliczania wszystkich
 		         ziaren}
 	\end{subfigure}
-	\hspace{0.25cm}
-	\centering
+	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{example-image}
+		\input{figures/neural_network_trainig_remaining}
 		\caption{Przebieg treningu sieci dla metody zliczania śledzonych 
 		         ziaren}
 	\end{subfigure}
-	\hspace{0.25cm}
+	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{example-image}
+		\input{figures/neural_network_trainig_percent}
 		\caption{Przebieg treningu sieci dla metody procentowego zliczania
 		         śledzonych ziaren}
 	\end{subfigure}
@@ -297,6 +317,7 @@ Opisany plan treningu sieci realizuje kod przedstawiony na listingu
 \caption{Kod treningu sieci neuronowej klasyfikującej ziarna miedzi}
 \label{lst:train}
 \end{listing}
+
 Działanie sieci można sprawdzić na zbiorze testowym.
 Należy mieć na uwadze, że przy małej ilości danych i~przedstawiony 
 podziale na zbiory treningowy oraz testowy nie będzie to test miarodajny.
@@ -305,17 +326,17 @@ konstrukcji.
 Wyniki działania sieci przedstawia tabela \ref{tab:blobtest}.
 Przedstawione wartości błędu oraz dokładności potwierdzają przypuszczenia
 na temat użyteczności różnych metod zliczania ziaren, które przedstawiono
-w~podsekcji \ref{subsec:datavis}.
+w~podsekcji~\ref{subsec:datavis}.
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{c|c|c}
+	\begin{tabular}{c|C{2cm}|C{2cm}}
 	\toprule
-	\multirow{2}{*}{metoda zliczania ziaren} & \multicolumn{2}{c}{wskaźnik} \\ 
+	\multirow{2}{*}{metoda zliczania detali} & \multicolumn{2}{c}{wskaźnik} \\ 
                                          & błąd       & dokładność      \\ \midrule
-zliczanie wszystkich ziaren              & 1.45       & 0.25            \\
-zliczanie śledzonych ziaren              & 7.50       & 0.5             \\
-procentowe zliczanie śledzonych ziaren   & 0.63       & 0.75           \\   
+wszystkie detale              & 1,45       & 0,25            \\
+śledzone detale              & 7,50       & 0,5             \\
+procent śledzonych detali   & 0,63       & 0,75           \\   
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci na zbiorze testowym}
@@ -326,17 +347,25 @@ procentowe zliczanie śledzonych ziaren   & 0.63       & 0.75           \\
 Po stworzeniu prototypu klasyfkiatora przedstawionego w~rozdziale
 \ref{subsec:nnbuild} należy przeprowadzić walidację zbudowanej sieci
 neuronowej.
-Najpopularniejszą metodą miarodajnego testu sieci jest 
+Najpopularniejszą metodą miarodajnej walidacji sieci jest 
 \emph{k-krotny sprawdzian krzyżowy} (ang. \textit{k-fold cross-validation}).
 Metoda ta polega na podziale dostępnych danych na k części, i~kolejnym
 wydzielaniu jednej z~części danych jako zbioru testowego.
 Walidacje powtarza się k-krotnie, tak by każda część była wykorzystana
 jako dane testowe.
-Na końcu testu wyniki są uśrednianie, przez co dają one dobry pogląd na
-ogólną zdolność sieci do generalizacji rozwiązywanego problemu.
+Na końcu testu wyniki są uśrednianie. 
+Dzięki temu wyniki dają dobry pogląd na ogólną zdolność sieci do
+generalizacji rozwiązywanego problemu.
 
-Biblioteka keras nie posiada wbudowanej funkcji realizującej sprawdzian
-krzyżowy, dlatego należy przygotować ją samodzielnie.
+Często po procesie walidacji dokonuje się testu sieci przy użyciu osobnego
+zestawu danych.
+Niestety posiadany zbiór danych jest zbyt mały, aby wydzielić z niego
+osobny zestaw testowy.
+Z~tego powodu zdecydowano się oceniać sieć jedynie na podstawie metody
+sprawdzianu krzyżowego.
+
+Biblioteka keras nie posiada wbudowanych funkcji zaawansowanych technik
+walidacji, dlatego należy przygotować je samodzielnie.
 W~tym celu użyto biblioteki Scikit-learn, która oferuje funkcje podziału
 zbiorów danych.
 Jedną z~nich jest funkcja zwracająca iterowalny zestaw k-krotnych
@@ -374,11 +403,11 @@ należy uśrednić.
 Wyniki walidacji dla trzech sposobów zliczania detali na obrazach przedstawia
 tabela \ref{tab:blobval}.
 
-Zgodnie z~wcześniejszymi przewidywaniami metoda procnetowego zliczania
+Zgodnie z~wcześniejszymi przewidywaniami metoda procentowego zliczania
 detali na obrazach okazała się dawać najlepsze rezultaty.
 Dokładność na poziomie 91\% jest wystarczająca do uznania sieci za
 dobry klasyfikator.
-Pozostałe metody ozliczania kzały sie okazały się mniej precyzyjne, co
+Pozostałe metody zliczania okazały się okazały się mniej precyzyjne, co
 wskazuje że należy je odrzucić.
 
 Przedstawiony mechanizm walidacji wykorzystano do dostrojenia parametrów
@@ -387,7 +416,7 @@ Uzasadnienie doboru przedstawionej w~toku pracy struktury sieci wynika z~prób
 maksymalizacji dokładności oblicznej przy pomocy sprawdzianu krzyżowego.
 W~czasie prototypowania sieci dokonano liczbych porównań, aby znaleźć
 najlepszą strukturę.
-Szczegółowe zestaweienie rozpatrywanych konfiguracji i~wartości paramwtrów
+Szczegółowe zestaweienie rozpatrywanych konfiguracji i~wartości parametrów
 załączono w~dodatku.
 % TODO: tabela
 
@@ -416,13 +445,13 @@ print('Cross validation mean score (loss, acc):\n',
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{c|c|c}
+	\begin{tabular}{c|C{2cm}|C{2cm}}
 	\toprule
-	\multirow{2}{*}{metoda zliczania ziaren} & \multicolumn{2}{c}{wskaźnik} \\ 
+	\multirow{2}{*}{metoda zliczania detali} & \multicolumn{2}{c}{wskaźnik} \\ 
                                          & błąd       & dokładność      \\ \midrule
-zliczanie wszystkich ziaren              & 6,59       & 0,41            \\
-zliczanie śledzonych ziaren              & 3,99       & 0,50             \\
-procentowe zliczanie śledzonych ziaren   & 1,37       & 0,91          \\   
+wszystkie detale             & 6,59       & 0,41            \\
+śledzone detale              & 3,99       & 0,50             \\
+procent śledzonych detali   & 1,37       & 0,91          \\   
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
@@ -430,7 +459,74 @@ procentowe zliczanie śledzonych ziaren   & 1,37       & 0,91          \\
 \label{tab:blobval}
 \end{table}
 
+Dodatkowo dla opracowano kod generujący \emph{macierz pomyłek}
+(ang. \textit{confusion matrix}).
+Jest to tablica porównująca wiedzę eksperta z~wynikami klasyfikacji na zbiorze
+testowym.
+Wiersze macierzy oznaczają poprawną klasyfikację kolejnych próbek, zgodnie
+z~etykietami eksperckimi.
+Kolumny tabeli to typy klasyfikatora.
+Przekątna tabeli zawiera informacje o~elementach poprawnie sklasyfikowanych,
+etykiety klasyfikatora są zgodne z~danymi eksperckimi.
+Komórki spoza przekątnej oznaczają błędną klasyfikację.
+Obserwacja macierzy pozwala zaobserwować, które typy ziaren są ze sobą mylone
+w~trakcie klasyfikacji.
 
+Ze względu na małą ilość posiadanych danych macierz pomyłek opracowano
+na podstawie mechanizmu sprawdzianu krzyżowego.
+Na każdym jego etapie budowano macierz pomyłek, a~ostatecznie tablicę
+uśredniono.
+Wartości w~tabeli przedstawiono w~stosunku procentowym.
+Funkcję generującą uśrednioną macierz pomyłek przedstawia listing
+\ref{lst:mean_confusion_matrix}.
+\begin{listing}[htbp]
+\begin{minted}{python}
+def mean_confusion_matrix(model, X, y, n_splits):
+    '''
+    Compute mean confusion matrix using cross
+    validation with n splits.
+    '''
+    conf_matrix = np.zeros((4, 4))
 
+    folds = StratifiedKFold(n_splits = 3).split(X, y)
+    for train_index, test_index in folds:
+        x_train, x_test= X[train_index], X[test_index]
+        y_train, y_test= y[train_index], y[test_index]
+        
+        model.fit(x_train, y_train, epochs=300, verbose=0)
+        y_pred = model.predict_classes(x_test)
 
+        for test, pred in zip(y_test, y_pred):
+            conf_matrix[test][pred] = conf_matrix[test][pred] + 1
+    
+    return conf_matrix / n_splits
+\end{minted}
+\caption{Funkcja języka Python generująca uśrednioną macierz pomyłek}
+\label{lst:mean_confusion_matrix}
+\end{listing}
 
+Zdecydowano się wygenerować macierz pomyłek dla najlepszego sposobu
+klasyfikacji, bazującego na procentowym śledzeniu detali.
+Wyniki zestawiono w~tabeli \ref{tab:confusion_matrix}.
+Zgodnie z~wynikami sprawdzianu krzyżowego, większość elementów tablicy znajduje
+się na jej przekątnej.
+To znaczy, że wszystkie próbki klas E5R, E11R oraz E1XP są poprawnie
+klasyfikowane.
+Widoczna jest pomyłka sieci polegająca na niewłaściwej klasyfikacji próbki
+klasy E6R jako E1XP.
+
+\begin{table}[]
+\centering
+\begin{tabular}{cccccc}
+                                 &                            & \multicolumn{4}{c}{Wiedza klasyfikatora} \\ \cmidrule[1pt]{2-6}
+                                 & \multicolumn{1}{c|}{klasa} & E5R      & E6R      & E11R     & E1XP    \\ \cmidrule{2-6}
+\multirow{4}{*}{\rotatebox[origin=c]{90}{\parbox{2cm}
+{\centering Wiedza eksperta}}} & \multicolumn{1}{c|}{E5R}   & 1,00     & 0,00     & 0,00     & 0,00    \\
+                                 & \multicolumn{1}{c|}{E6R}   & 0,00     & 0,67     & 0,00     & 0,33    \\
+                                 & \multicolumn{1}{c|}{E11R}  & 0,00     & 0,00     & 1,00     & 0,00    \\
+                                 & \multicolumn{1}{c|}{E1XP}  & 0,00     & 0,00     & 0,00     & 1,00 \\
+                                 \cmidrule[1pt]{2-6}
+\end{tabular}
+\caption{Tabela pomyłek najlepszego klasyfikatora}
+\label{tab:confusion_matrix}
+\end{table}

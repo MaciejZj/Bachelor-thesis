@@ -1,0 +1,28 @@
+% This file was created by tikzplotlib v0.8.7.
+\noindent\begin{tikzpicture}[trim axis left]
+
+\begin{axis}[
+hide x axis,
+hide y axis,
+tick align=outside,
+tick pos=both,
+title={Liczba wykrytych detali: 6},
+width=174.15, height=130.95,
+x grid style={white!69.01960784313725!black},
+xmin=-0.5, xmax=257.5,
+xtick style={color=black},
+y dir=reverse,
+y grid style={white!69.01960784313725!black},
+ymin=-0.5, ymax=193.5,
+ytick style={color=black}
+]
+\addplot graphics [includegraphics cmd=\pgfimage,xmin=-0.5, xmax=257.5, ymin=193.5, ymax=-0.5] {figures/blob_detection_compare_DoH-000.png};
+\draw[draw=red,fill opacity=0] (axis cs:256,191) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:102,151) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:64,125) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:108,30) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:111,25) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:178,18) circle (2.82842712474619);
+\end{axis}
+
+\end{tikzpicture}

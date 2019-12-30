@@ -6,53 +6,54 @@ Aby zrealizować pomiary uprzednio przygotowano stanowisko laboratoryjne.
 Kamera termowizyjna została umieszczona na statywie, a~do ogrzewania próbek
 zdecydowano się wykorzystać lampę halogenową.
 
-W~procesie termowizji aktywnej istotna jest charakter procesu nagrzewania
+W~procesie termowizji aktywnej istotny jest charakter procesu nagrzewania
 materiału.
-Przy przygotowaniu pomiarów należało zdecydować przy jakim warunku zakończyć
+Przy przygotowaniu pomiarów należy zdecydować przy jakim warunku zakończyć
 przekazywanie ciepła do próbki.
 Rozważono dwie możliwości:
 \begin{enumerate}[a)]
 	\item ogrzewanie próbek do osiągnięcia ustalonej temperatury,
-	\item \label{it:heatmethod} ogrzewanie próbek przez określony, stały czas.
+	\item \label{it:heat_method}
+	      ogrzewanie próbek przez ustalony czas.
 \end{enumerate}
-Zdecydowano się na metodę \ref{it:heatmethod}, ze względu na wygodę jej
+Zdecydowano się na metodę \ref{it:heat_method},~ze względu na wygodę jej
 realizacji.
-Doprowadzenie każdej próbki do tej samej temperatury wymagałoby pomiarów
-w~czasie nagrzewania, co jest bardziej wymagające do realizacji.
-Zgodnie ze wstępnymi obserwacjami nagrzewanie materiału przez określony
-czas pozwala na obserwację jego cech unikalnych i~wzorców zachowania podczas
-stygnięcia.
-Następnie należy wybrać czas nagrywania materiałów wideo kamerą.
-Na podstawie wstępnych obserwacji i~próbnych nagrań zdecydowano się na
-ogrzewanie próbek przez jedną minutę oraz rejestrację ich stygnięcia przez
-cztery minuty.
-Taka konfiguracja daje przy badanych pyłach rud miedzi ostry i~szczegółowy
+Doprowadzenie każdej próbki do tej samej temperatury wymaga pomiarów
+w~czasie nagrzewania, co jest bardziej wymagające w~realizacji.
+Wstępne obserwacje nagrań wskazują, że nagrzewanie materiału przez ustalony
+czas, pozwala na obserwacje unikalnych wzorców stygnięcia ziaren.
+
+Następnie należy wybrać czas nagrywania materiałów wideo.
+Na podstawie próbnych nagrań zdecydowano się na ogrzewanie próbek przez jedną
+minutę oraz rejestrację ich stygnięcia przez cztery minuty.
+Taka konfiguracja daje, przy badanych pyłach rud miedzi, ostry i~szczegółowy
 obraz w~początkowej fazie nagrywania oraz widocznie rozmazany i~mniej
 kontrastowy materiał pod koniec stygnięcia próbek.
 Charakter procesu przejścia między tymi stanami pozwoli na klasyfikację
-badanych próbek.
+badanych ziaren rud miedzi.
+
 Ostatnia decyzja kształtująca charakter pomiarów dotyczy chwili
 przechwytywania stopklatek z~pozyskanych materiałów wideo.
-Na podstawie obserwacji zdecydowano się eksportować 5 klatek na początku
+Na podstawie obserwacji zdecydowano się eksportować 5~klatek na początku
 każdej minuty nagrania.
+
 Po ustaleniu planu eksperymentu pomiarowego przystąpiono do jego wykonania.
-Zgodnie z~opisem badanych materiałów w~sekcji \ref{sec:grains}, zgromadzono
-materiały wideo dla czterech klas ziaren rudy miedzi.
+Zgodnie z~opisem badanych materiałów w~sekcji \ref{sec:grains},~zgromadzono
+nagrania wideo dla czterech klas ziaren rudy miedzi.
 Ze względu na czasochłonność pomiarów dla każdej klasy materiału nagrano trzy
-materiały wideo.
-Przy nagrywaniu stygnięcia tej samej klasy materiały pomiędzy pomiarami
+filmy.
+Przy nagrywaniu stygnięcia tej samej klasy materiału pomiędzy pomiarami
 próbkę poddawano przemieszaniu, aby uniknąć powtarzania struktur
-ułożenia ziaren dla tej samej klasy rud miedzi.
-Z~pozyskanych nagrań wyeksportowano stopklatki używając programu FLIR Tools,
-pamiętając o~używaniu algorytmu automatycznego doboru zakresu temperatur
-zgodnie z~opisem w~podsekcji \ref{subsec:camsoft}.
+ułożenia ziaren.
+Zgodnie z~opisem w~podsekcji \ref{subsec:camera_soft}, podczas zapisu
+zdjęć, używano opcji automatycznego doboru zakresu temperatur.
 
 Proces pomiarowy w~protypowych warunkach był obarczony brakiem dużej precyzji
 i~powtarzalności.
 Obserwacja uzyskanych nagrań pokazała, że obrazy tej samej klasy ziaren
 niekoniecznie osiągały tę samą temperaturę po ogrzewaniu przez ustalony czas.
 Problemem okazało się również dostosowanie ostrości obrazu z~kamery.
-Jak wytłumaczono w~podsekcji \ref{subsec:lens} wykorzystywany aparat cechuje
+Jak wytłumaczono w~podsekcji \ref{subsec:lens}~wykorzystywany aparat cechuje
 się bardzo małą głębią ostrości, co powoduje że drobne ruchy kamery
 mogą spowodować utratę czytelności obrazu.
 Z~kolei proces pomiarowy wymagał ciągłego przenoszenia próbki między
@@ -62,22 +63,19 @@ ostrości postępowało stygnięcie ziaren, co sprzyjało brakowi powtarzalnośc
 pomiarów.
 Ze względu na przypadkowe utraty ostrości przy nagrywaniu oraz zbyt długi czas
 przenoszenia i~przygotowania próbki do nagrywania, eksperyment wymagał czasem
-powtórnego nagrania próbki.
-Ocenę jakości procesu pomiarowego przestawiono na podstawie jego użyteczności
-w~klasyfikacji ziaren, pod koniec pracy.
-Wnioski na temat stosowności i~rozmiaru zbioru danych przedstawiono
-w~rozdziale \ref{ch:conclusions}.
+powtarzania.
+Ostatecznie jakość procesu pomiarowego oceniono na podstawie jego wyników
+w~klasyfikacji ziaren, po skonstruowaniu sieci neuronowej.
 
 \section{Analiza zebranych obrazów termowizyjnych}
-Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:meas} z~każdego
+Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:meas}~z~każdego
 nagrania wybrano pięć stopklatek.
 Podczas eksperymentu uzyskano łącznie dwanaście pomiarów, zawierających
-sumarycznie 60 zdjęć.
+sumarycznie 60~zdjęć.
 W~ramach uczenia maszynowego jest to bardzo mały zbiór danych, biorąc jednak
 pod uwagę wstępno-badawczy charakter pracy oraz czasochłonność procesu 
 pomiarowego zdecydowano, że jest to rozmiar zadawalający do pierwszych
 prób klasyfikacji.
-% TODO: może przenieść do glosariusza
 Zebrane materiały mają format JPEG, do oznaczania zdjęć przyjęto schemat
 nazw jak w~przykładzie: 115\_E11R\_1, gdzie człony nazwy oznaczają kolejno:
 \begin{itemize}
@@ -89,47 +87,58 @@ nazw jak w~przykładzie: 115\_E11R\_1, gdzie człony nazwy oznaczają kolejno:
 \subsection{Prezentacja przykładowej serii pomiarowej}
 Jak opisano w rozdziale \ref{sec:meas} jedna próbka w~zbiorze danych 
 składa się z~serii pięciu zdjęć o~malejącym kontraście i~szczegółowości.
-Na rysunku \ref{fig:sample} przedstawiono przykładową próbkę 104 klasy E5R.
-Widoczny jest proces stygnięcia materiału.
-Skala po prawej stronie obrazów ma malejące na kolejnych obrazach wartości
-co pokazuje że następuje zmniejszenie temperatury na całym obrazie.
+Na rysunku \ref{fig:sample}~przedstawiono proces stygnięcia przykładowej
+próbki 104~klasy E5R.
+Wartości na skali, po prawej stronie obrazów maleją.
+Wskazuje to na stopniowy spadek sumarycznej temperatury obserwowanego
+materiału.
 Dodatkowo obraz staje się coraz mniej wyraźny i~kontrastowy.
-Ze względu na budowę materiału nagrzana próbka emituje ciepłoze swoich
-zróżnicowanych struktur w~niejednorodny sposób.
-Wraz z~ochłodzeniem próbki jej temperatura się wyrównuje i~kamera termowizyjna
-rejestruje coraz mniej szczegółów.
-Detale i~elementy charakterystyczne obrazu zlewają się na kolejnych zdjęciach,
-wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szumów.
+Nagrzana próbka emituje ciepło ze swoich zróżnicowanych struktur
+w~niejednorodny sposób.
+Wraz z~ochłodzeniem ziaren temperatura na obrazie wyrównuje się i~kamera
+termowizyjna rejestruje coraz mniej szczegółów.
+Detale i~elementy charakterystyczne obrazu zlewają się na kolejnych zdjęciach.
+Wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szumów.
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_0}
-		\caption{Obraz z~próbki 104\_E5R\_0}
+		\caption{Minuta: 0 \\
+		         Zakres temperatur: \SI{48.0}{\celsius} do
+		         \SI{53.0}{\celsius}}
 	\end{subfigure}
 	\hspace{0.75cm}
 	\vspace{0.5cm}
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_1}
-		\caption{Obraz z~próbki 104\_E5R\_1}
+		\caption{Minuta: 1 \\
+		         Zakres temperatur: \SI{43.1}{\celsius} do
+		         \SI{39.5}{\celsius}}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_2}
-		\caption{Obraz z~próbki 104\_E5R\_2}
+		\caption{Minuta: 2 \\
+		         Zakres temperatur: \SI{36.8}{\celsius} do
+		         \SI{39.5}{\celsius}}
 	\end{subfigure}
 	\hspace{0.75cm}
 	\vspace{0.5cm}
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_3}
-		\caption{Obraz z~próbki 104\_E5R\_3}
+		\caption{Minuta: 3 \\
+		         Zakres temperatur: \SI{35.1}{\celsius} do
+		         \SI{37.5}{\celsius}}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_4}
-		\caption{Obraz z~próbki 104\_E5R\_4}
+		\caption{Minuta: 4 \\
+		         Zakres temperatur: \SI{33.8}{\celsius} do
+		         \SI{36.8}{\celsius}}
 	\end{subfigure}
 	\caption{Zdjęcia procesu stygnięcia w~przykładowej próbce 104 klasy E5R}
 	\label{fig:sample}
@@ -138,52 +147,49 @@ wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szum�
 \subsection{Przetwarzanie danych wizyjnych}
 Wykorzystanie wizji komputerowej w~rozmaitych zadaniach często wymaga
 odpowiedniego przygotowania używanych obrazów.
-Do standardowych technik należą: wyrównywanie histogramu oraz odszumianie
+Do standardowych technik należą: wyrównywanie histogramu oraz redukcja szumów
 i~wyostrzanie zdjęć.
 Po analizie zebranych obrazów i~wypróbowaniu wymienionych technik zdecydowano
-się jednak nie modyfikować zgromadzonych mateirałów.
-Użyty podczczas pomiarów program FLIR Tools posiada wbudowaną funkcję
+się jednak nie modyfikować zgromadzonych nagrań.
+Użyty podczas pomiarów program FLIR Tools posiada wbudowaną funkcję
 doboru zakresu temperatur, co przekłada się na ekspozycję i~kontrast
 eksportowanych zdjęć.
 Próba wyrównywania histogramu oraz korekcji kontrastu sprawiłaby, że obraz
 rozkładu temperatur na zdjęciu stałby się przekłamany.
 Ze względu na niską, jak na standardy typowego przetwarzania zdjęć cyfrowych,
-rozdzielczość obrazów zdjęć także nie odszumianio.
-Wiele detali ziaren ma wielkość zaledwie paru pikseli, proces odszumiania
+rozdzielczość obrazów zrezygnowano także z~redukcji szumów.
+Wiele detali ziaren ma wielkość zaledwie paru pikseli, proces usuwania szumu
 mógłby spowodować ich zanik.
-Nie oznacza to, jednak że zdjęcia charatkeryzują się przypadkową ekspozycją.
-Alogrytmy automatycznego doboru zakresu tepmeratur kamery dbają o to, by
-obraz oddawał właściwowści cieplne obiektu.
+Nie oznacza to jednak, że zdjęcia charakteryzują się przypadkową ekspozycją.
+Algorytmy automatycznego doboru zakresu temperatur kamery dbają o~to, by
+obraz oddawał właściwości cieplne obiektu.
 
 \subsection{Odczyt zakresu pomiarowego temperatur z~obrazu}
-Jak wspomniano w~sekcji \ref{subsec:camsoft} jednym z~kluczowych czynników
+Jak wspomniano w~sekcji \ref{subsec:camera_soft} jednym z~kluczowych czynników
 decydujących o~wyglądzie obrazów pochodzących z~kamery jest zakres temperatur
 mapowany na kolory w~obrazie.
 Niestety aplikacja FLIR Tools nie pozwala na eksport zakresu temperatur wraz
-ze zdjęciami w~formie liczbowej.
+ze zdjęciami w~formacie liczbowym.
 W~czasie zapisu zdjęć oprogramowanie dodaje na nich interfejs z~aktywną skalą
 pomiarową, jednak jest on graficznie naniesiony na obraz.
-Aby ułatwić w przyszłości pracę z~materiałami z~kamery opracowano dodatkowo
+Aby ułatwić w~przyszłości pracę z~materiałami z~kamery opracowano dodatkowo
 mechanizm ekstrakcji zakresu temperatur z~zdjęć pochodzących z kamery.
 
-W~celu konstrukcji funkcji odczytu wartości liczbowych z~obrazu posłużono
-się gotową siecią neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
+W~celu odczytu wartości liczbowych z~obrazu posłużono się gotową siecią
+neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
 Zdecydowano się na użycie popularnej biblioteki \emph{Pytesseract}.
-Aby poprawnie odczytać wartości z~obrazu najpierw przycięto je tak by w~kadrze
-znajdowała się tylko odczytywana liczba.
-Ponieważ przy eksporcie zdjęć program FLIR Tools nakłada interfejs na zdjęcia
-w~identyczny sposób, kadrowanie obrazu jest takie same dla każdej próbki
-pomiarowej.
+Analizowane zdjęcia są kadrowane, by wyizolować odczytywane liczby.
 Wycięte kadry są bardzo małej rozdzielczości, aby ułatwić sieci rozpoznawanie
 liczb zdecydowano się przeskalować je w~górę.
 W~czasie skalowania włączono mechanizm anty aliasingu aby wyrównać krawędzie
 cyfr.
 Ponieważ używana sieć uznaje za tło kolor biały oraz poszukuje liczb w~kolorze
-czarnym barwy na zdjęciu odwrócono.
+czarnym, barwy na zdjęciu odwrócono.
 Następnie obraz poddano binaryzacji metodą \emph{otsu}.
 Jest to popularna i~wydajna metoda binaryzacji, jej efektywność jest
-maksymalna kiedy ilość pikseli tła oraz pierwszego planu jest zbliżona,
-dlatego poprawne kadrowanie liczb sprzyja jakości ich binaryzacji\cite{sezgin}.
+maksymalna kiedy ilość pikseli tła oraz pierwszego planu jest
+zbliżona~\cite{sezgin}.
+Z~tego powodu poprawne kadrowanie liczb sprzyja jakości ich binaryzacji.
 Na rysunku \ref{fig:temp_bounds} przedstawiono kolejne etapy przygotowania
 obrazu do rozpoznania liczb.
 Implementację opisanego mechanizmu odczytywania zakresu temperatur ze zdjęć
@@ -240,9 +246,10 @@ odróżniają.
 Na rysunku \ref{fig:samplecompare} przedstawiono porównanie stygnięcia
 dwóch rodzajów próbek: E5R oraz E6R.
 W~klasyfikacji użyteczne będą dane które są unikalne dla danej klasy.
-Ponieważ dane stanowią serię obrazów postępującego studzenia materiału, aby
-wykorzystać pełnię możliwości zebranych zdjęć warto szukać cech
-charakterystycznych dla przebiegu procesu chłodzenia.
+Posiadane dane stanowią serie obrazów postępującego procesu studzenia
+materiału.
+Aby dobrze wykorzystać zebrane zdjęcia należy szukać cech charakterystycznych
+w~całym procesie stygnięcia.
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}{0.3\textwidth}
@@ -310,14 +317,15 @@ charakterystycznych dla przebiegu procesu chłodzenia.
 
 \subsection{Wybór cech obrazu użytecznych w~klasyfikacji}
 \label{subsec:featureextr}
-Po przyjrzeniu się rysunkowi \ref{fig:samplecompare} widoczne  jest, że
+Po przyjrzeniu się rysunkowi \ref{fig:samplecompare} widoczne jest, że
 w~próbce E6R temperatura ziaren zaczęła wyrównywać się szybciej.
-Na podstawie obserwacji zebranych danych rozpatrzono następujące możliwości
-obserwacji cech charakterystycznych materiałów:
+Zdjęcia tej próbki szybciej stają się szare i~tracą kontrast.
+Na podstawie analizy nagrań rozpatrzono następujące możliwości ekstrakcji
+ich cech charakterystycznych:
 \begin{enumerate}[a)]
 	\item \label{it:imgcnn} 
-	      klasyfikacja zdjęć w~całości jako macierzy danych przez złożoną sieć
-	      konwolucyjną,
+	      klasyfikacja całych zdjęć z~użyciem zaawansowanych sieci
+	      konwolucyjnych,
 	\item \label{it:fft} 
 	      analiza częstotliwościowa obrazów w~celu śledzenia tempa rozmycia
 	      kolejnych zdjęć,
@@ -332,39 +340,50 @@ obserwacji cech charakterystycznych materiałów:
 
 Wszystkie przedstawione opcje mają uzasadnienie i~mogą sprawdzić się dobrze
 jako podstawa klasyfikacji.
-Należy jednak ocenić której z~nich użyć w~pierwszej próbie konstrukcji
-klasyfikatora. Metoda \ref{it:imgcnn}, z~użyciem sieci konwolucyjnych może
-wykorzystywać najnowsze rozwiązania w~dziecinie uczenia maszynowego,
-jednak przy jej użyciu na przeszkodzie może stać bardzo mały rozmiar zbioru
-uczącego.
-Na niewielu zgromadzonych obrazach znajduje się wiele informacji i~szumów,
-a~złożoność jednego zdjęcia jest na tę chwilę nieproporcjonalna do wielkości
+Należy rozpatrzeć, którą technikę wykorzystać do budowy prototypu
+klasyfikatora.
+Metoda \ref{it:imgcnn}, z~użyciem sieci konwolucyjnych może
+wykorzystywać najnowsze rozwiązania w~dziecinie uczenia maszynowego.
+Utrudnieniem w~użyciu tej metody jest bardzo mały rozmiar posiadanego 
 zbioru danych.
-Pomysł ten można spróbować zrealizować po rozszerzeniu pomiarów.
-Kolejna opcja \ref{it:fft} z~użyciem analizy częstotliwościowej wymaga
-złożonych operacji matematycznych i~może być wrażliwa na szumu na obrazie.
+Na zgromadzonych obrazach znajduje się wiele informacji i~szumów,
+a~złożoność jednego zdjęcia jest na tę chwilę nieproporcjonalna do wielkości
+zestawu danych.
+Pomysł ten można wypróbować po rozszerzeniu zbioru nagrań.
+
+Technika \ref{it:fft}, polega na analizie częstotliwościowej obrazów.
+Takie podejście wymaga złożonych operacji matematycznych i~może być wrażliwe
+na szumy pomiarowe.
+Dodatkowo wynik analizy widmowej może być nieoczywisty w~interpretacji.
+Realizacja tej metody może wymagać konstrukcji złożonych sieci neuronowych.
 Po analizie innych opcji zdecydowano, że istnieją bardziej obiecujące
 alternatywy.
-Macierz glcm (\textit{Gray-Level Co-Occurrence Matrix}), na której może
+
+Macierz GLCM (ang. \textit{Gray-Level Co-Occurrence Matrix}), na której może
 bazować opcja \ref{it:glcm}, to tablica zawierająca informacje o~relacjach
 wszystkich par pikseli na obrazie.
 Pozwala ona na analizę takich wartości jak: kontrast, korelacja, energia
 oraz homogeniczność.
 Jest to opcja dająca możliwość analizy dużej ilości informacji, z~pewnością
 warta rozpatrzenia, jednak dosyć skomplikowana.
+Zdecydowano się na wybór bardziej wydajnej i~mniej złożonej metody.
+
 Na obrazie można także wykrywać kształty ziaren za pomocą filtrów detekcji
 krawędzi.
 Opcję tę testowano przy pomocy filtra \emph{Canny}.
-Krawędzie ziaren okazały się jedank trudne do wykrycia kształtów i~dalszej
-segmentacji ze względu na małą rodzielczość oraz duże upakowanie ziaren.
+Uzyskane krawędzie nie tworzą pozwalają jednak na łatwą detekcję kształtów.
+Tradycyjna segmentacja ziaren jest trudna ze względu na małą rodzielczość
+oraz duże upakowanie ziaren.
 Operacje morfologiczne domykania kształtów powodowały bardzo duże zmiany
 w~obrazie i~zlewały ziarna.
 Rozwój takiego podejścia przy analizowanych obrazach wymaga zaawansowanej
 i~ostrożnej obróbki zdjęć.
+
 Ostatnia opcja \ref{it:blob} wynika z~obserwacji detali na obrazach.
 Na przedstawionych zdjęciach próbek można zauważyć drobne ciemne punkty,
 które są obszarami o~wolniejszej wymianie ciepła z~otoczeniem niż reszta
 powierzchni ziaren.
+Jest to spowodowane ich niską emisyjnością cieplną.
 Na rysunku \ref{fig:blobdetail} przedstawiono zbliżenie na grupę takich
 detali, w~czterech częściach procesu stygnięcia.
 \begin{figure}[htbp]
@@ -390,7 +409,8 @@ detali, w~czterech częściach procesu stygnięcia.
 	\caption{Zbliżenie na charakterystyczne grupy detali materiału}
 	\label{fig:blobdetail}
 \end{figure}
-Analizując próbki można zauważyć, że wraz ze stygnięciem ciemne punkty
+
+Analizując próbki można zauważyć, że wraz ze stygnięciem, ciemne punkty
 w~grupach zlewają się, a~następnie zanikają.
 Dodatkowo ich liczba na poszczególnych klasach materiałów jest różna.
 Zdecydowano się na wybór metody polegającej na śledzeniu liczby tych punktów
@@ -407,11 +427,12 @@ do zanika i~rozmywania plam, którą omówiono.
 Fakt pojawiania się nowych detali wzięto pod uwagę przy późniejszym procesie
 projektowania algorytmów ich śledzenia.
 
-\subsection{Wybór algorytmu detekcji ziaren} \label{subsec:blobdetect}
+\subsection{Wybór algorytmu detekcji ziaren}
+\label{subsec:blobdetect}
 Zgodnie z~rozważaniami przedstawionymi w~podsekcji \ref{subsec:featureextr}
-w celu klasyfikacji ziaren zdecydowano się na obserwację ilości ciemnych,
-drobnych detali na obrazach.
-Należy więc wybrać metodę detekcji charakterystycznych punktów.
+w~celu klasyfikacji ziaren zdecydowano się na obserwację ilości puntów
+o~małej emisyjności
+Należy więc wybrać metodę detekcji charakterystycznych elementów.
 W~wykrywaniu omawianych detali użyteczne są algorytmy wykrywania plam na
 podstawie analizy pochodnych wartości na obrazie.
 Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
@@ -421,8 +442,8 @@ Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
 	\item wyznacznik Hesjanu.
 \end{enumerate}
 Algorytmy te pozwalają na wykrycie na obrazie plam o~kształcie zbliżonym
-do kolistego, oraz oszacowanie ich promienia.
-Stosuje się je na przykład w~analizie obrazów astronomicznych do detekcji
+do kolistego, oraz oszacowanie ich promieni.
+Stosuje się je w~analizie obrazów astronomicznych, do detekcji
 i~zliczania ciał niebieskich na zdjęciach wykonanych z~użyciem teleskopów.
 % TODO: cite
 Badane detale, przedstawione na rysunku \ref{ch:conclusions},
@@ -435,10 +456,10 @@ Metoda bazująca na laplasjanie funkcji Gaussa jest najdokładniejsza, ale
 także najwolniejsza.
 Funkcja Gaussa, której wykres ma charakterystyczny kształt krzywej dzwonowej
 jest dana wzorem \ref{eq:gaussian}, gdzie:
-\begin{itemize}
-	\item $ \sigma $ to odchylenie standardowe,
-	\item $ \mu $ to wartość średnia.
-\end{itemize}
+\begin{description}
+	\item[$ \sigma $] to odchylenie standardowe,
+	\item[$ \mu $] to wartość średnia.
+\end{description}
 \begin{equation}
 	P(x) = \frac{1}{{\sigma \sqrt {2\pi } }}
 	e^{{{ - \left( {x - \mu } \right)^2 }
@@ -487,40 +508,39 @@ elementy mogą nie zostać przez nią wykryte.
 
 Porównanie działania wymienionych metod przedstawiono na grafice
 \ref{fig:blobcompare}.
-Jak można było spodziewać się po opisie funkcji najlepsza okazała się metoda
+Zgodnie z~teoretycznym opisem funkcji najlepsza okazała się metoda
 Laplasjanu funkcji Gaussa.
 Funkcję korzystającą z~wyznacznika Hesjanu należy odrzucić, ponieważ
 w~rozważanym przypadku istotne jest wykrywanie małych plam.
-Z~tego samego powodu korzystne jest użycie najbardziej dokładnej funkcji.
-Ponieważ program nie powinien wykrywać dużych elementów nie ma ryzyka zbyt
+Z~tego samego powodu korzystne jest użycie najdokładniejszej funkcji.
+Ponieważ program nie powinien wykrywać dużych elementów, nie ma ryzyka zbyt
 powolnych obliczeń na obszernych plamach.
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{example-image}
+		\input{figures/blob_detection_compare_LoG}
 		\caption{Laplasjan funkcji Gaussa}
 	\end{subfigure}
-	\hspace{0.25cm}
-	\centering
+	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{example-image}
+		\input{figures/blob_detection_compare_DoG}
 		\caption{Różnica funkcji Gaussa}
 	\end{subfigure}
-	\hspace{0.25cm}
+	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{example-image}
+		\input{figures/blob_detection_compare_DoH}
 		\caption{Wyznacznik Hesjanu}
 	\end{subfigure}
 	\caption{Porównanie bibliotecznych algorytmów wykrywania plam w~obrazie}
 	\label{fig:blobcompare}
 \end{figure}
 
-Aby wybrana funkcja laplasjanu funkcji Gaussa wykrywała, zgodnie
-zamierzeniami tylko małe plamy należy podać jej odpowiednie parametry,
-co uczyniono już na etapie porównania metod detekcji.
+Aby wybrana funkcja laplasjanu funkcji Gaussa wykrywała tylko małe plamy
+należy podać jej odpowiednie parametry.
+Uczyniono to już na etapie porównania metod detekcji.
 Wywołanie omawianej funkcji ma postać przedstawioną na listingu
 \ref{lst:find_blobs}.
 Funkcji podano dwa dodatkowe argumenty, które są istotne dla pożądanego
@@ -530,7 +550,7 @@ obliczanych funkcji Gaussa, przez co wykrywane są tylko małe elementy.
 Drugi argument \mintinline{python}{threshold=0.1} decyduje o~poziomie
 powyżej jakiego punkt jest uznany za maksimum w~sześcianie laplasjanów.
 Domyślna wartość tego argumentu \mintinline{python}{threshold=2.0} okazała 
-się za duża, zmniejszono jej wartość aby wykrywać bardziej subtelne detale.
+się zbyt duża, zmniejszono jej wartość aby wykrywać bardziej subtelne detale.
 Na podstawie opisanego wywołania metody Laplasjanu funkcji Gaussa
 opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
 \begin{listing}[htbp]
@@ -554,15 +574,15 @@ def find_blobs(img):
 \label{subsec:blobtracking}
 Użycie funkcji bibliotecznych opisanych w~podsekcji \ref{subsec:blobdetect}
 pozwala na detekcję detali na pojedynczym zdjęciu.
-Aby wykorzystać detekcję plam w~serii pięciu zdjęć które reprezentują
+Aby wykorzystać detekcję plam w~serii pięciu zdjęć, które reprezentują
 stygnięcie jednej próbki należy opracować zestaw funkcji śledzący zmiany 
 na obrazie.
 Na tym etapie prac niejednoznaczne jest jaki sposób obserwacji i~zliczania
 detali będzie najlepszy do późniejszego prototypowania sieci neuronowej
-klasyfikującej klasę ziaren.
-Dlatego zdecydowano się na napisanie funkcji zliczania plam w~serii, tak by
+klasyfikującej ziarna rud miedzi.
+Dlatego zdecydowano się na napisanie funkcji zliczania plam, tak by
 możliwe były trzy warianty pracy algorytmu:
-\begin{enumerate}[I.]
+\begin{enumerate}[1.]
 	\item \label{it:allblob}
 	      zliczanie wszystkich detali na każdym etapie stygnięcia,
 	\item \label{it:remainingblob}
@@ -576,9 +596,9 @@ możliwe były trzy warianty pracy algorytmu:
 W~celu realizacji planu śledzenia detali utworzono funkcję języka Python.
 Jej kod przedstawiono na listingu \ref{lst:find_blob_series}.
 Aby umożliwić wariantowość algorytmu funkcja posiada opcjonalny parametr,
-który pozwala włączyć lub wyłączyć śledzenie jedynie ziaren, które
+który pozwala włączyć lub wyłączyć śledzenie jedynie tych ziaren, które
 były obecne od początku stygnięcia.
-Przedstawiony kod wykorzystuje funkcję wykrywania detali w zdjęciu
+Przedstawiony kod wykorzystuje funkcję wykrywania detali na zdjęciu
 przedstawioną na listingu \ref{lst:find_blobs}.
 \begin{listing}[htbp]
 \begin{minted}{python}
@@ -600,9 +620,9 @@ def find_blob_series(imgs, only_remaining=True):
 \caption{Funkcja języka Python do śledzenia detali w~serii zdjęć}
 \label{lst:find_blob_series}
 \end{listing}
-Jeżeli opcja detekcji jedynie ziaren obecnych od początku jest aktywna
-zostaje wykorzystana utworzona funkcja porównania ziaren wykrytych
-na obecnym etapie z~ziarnami obecnymi poprzednio.
+Wybór opcji detekcji ziaren obecnych jedynie od początku stygnięcia,
+powoduje wywołanie funkcji porównania wykrytych detali, z~punktami
+na poprzednim zdjęciu.
 Po analizie każdego zdjęcia nowy zestaw ziaren staje się zbiorem poprzednim
 w~kolejnej iteracji.
 Dzieje się tak, by uwzględnić fakt że podczas zlewania się ziaren środki
@@ -633,9 +653,9 @@ def find_remaining_blobs(new_blobs, old_blobs):
 \label{lst:find_remaining_blobs}
 \end{listing}
 Przyjmuje ona listy plam wykrytych w~dwóch kolejnych etapach iteracji.
-Następnie następuje porównanie każdego ziarna z~nowej i~starej próbki.
+Potem następuje porównanie każdego ziarna z~nowej i~starej próbki.
 Jeżeli nowy punkt znajduje się w~odległości do dwóch promieni od środka
-starej plamy to zostaje on uznany za powtarzający się.
+starej plamy, to zostaje on uznany za powtarzający się.
 Powtarzające się punkty są dołączane do zwracanej listy.
 Aby zrealizować ten zamysł zaimplementowano funkcję przedstawioną na listingu
 \ref{lst:inside_circle}.
@@ -652,21 +672,10 @@ def inside_circle(x, y, a, b, r):
          podanego okręgu}
 \label{lst:inside_circle}
 \end{listing}
-Kod tej funkcji wynika wprost z~równania matematycznego okręgu, punkty
-znajdują się w~jego wnętrzu jeśli spełniają nierówność przedstawioną we
-wzorze, gdzie:
-\begin{itemize}
-	\item $ \left( x, y \right) $ to współrzędne danego punktu,
-	\item $ \left( a, b \right) $ to współrzędne środka okręgu,
-	\item $ r $ to promień okręgu.
-\end{itemize}
-\begin{equation}
-\left( x - a \right) ^2 + \left( y - b \right )^2 < r^2
-\label{eq:circle}	
-\end{equation}
+Kod tej funkcji wynika wprost z~równania matematycznego okręgu.
 Ponieważ wiele punktów może znajdować się blisko siebie istnieje ryzyko,
 że zostaną one zliczone wiele razy.
-Z~tego powodu z~listy przed jej zwróceniem z~funkcji należy usunąć duplikaty.
+Z~tego powodu przed zwróceniem listy należy usunąć z~niej duplikaty.
 W~tym celu utworzono funkcje pomocniczą widoczną na listingu \ref{lst:unique}.
 \begin{listing}[htbp]
 \begin{minted}{python}
@@ -684,13 +693,12 @@ Aby zwrócić z~funkcji listę należy z~powrotem skonwertować zbiór na typ
 listowy.
 W~naszym przypadku argument funkcji jest listą, której elementy są listami
 zawierającymi współrzędne oraz promień każdej plamy.
-Lista list jest nie podlega konwersji do zbioru ponieważ typ jej elementów
-nie jest hashowalny.
-Dlatego każdy punkt na liście zamieniono przed konwersją w~zbiór na typ
-krotki.
+Lista list nie podlega konwersji do zbioru, ponieważ typ jej elementów
+nie posiada funkcji hashowania.
+Dlatego każdy punkt na liście zamieniono uprzednio w~typ krotki.
 W~ten sposób wszystkie konieczne przekształcenia są możliwe.
 Aby zrealizować pomysł zliczania procentu plam pozostałych w~kolejnych etapach
-stygnięcia zaimplementowano funkcje przedstawioną na listingu.
+stygnięcia zaimplementowano funkcję przedstawioną na listingu.
 \ref{lst:percent}.
 \begin{listing}[htbp]
 \begin{minted}{python}
@@ -714,16 +722,16 @@ dynamicznego typowania pozwoliły na szybkie i~eleganckie zaimplementowanie
 potrzebnych funkcji.
 Wykorzystano bardzo zwięzły i~ekspresyjny element języka nazywany
 \emph{wyrażeniami listowymi}.
-Pozwala on na efektywne stosowanie jednolinijkowych pętli do przeglądania
+Pozwala on na efektywne stosowanie jedno-linijkowych pętli do przeglądania
 i modyfikowania obiektów iterowalnych.
 Użyteczność tego mechanizmu można zaobserwować w~przedstawionych listingach.
-Podczas budowania funkcji dbano i~ich zwięzłość, dobry podział realizowanych
+Podczas budowania funkcji dbano o~ich zwięzłość, dobry podział realizowanych
 zadań oraz ograniczenie długości bloków kodu.
 Dzięki temu program zachowuje zasady dobrego programowania.
 Każdą funkcję opatrzono w~specjalny komentarz \emph{docstring} będący
 standardem w~świecie języka Python.
 Funkcje umieszczono w~odpowiednich plikach, które zawierają także
-przykłady ich użycia i~obrazują działania oraz porównują efekty.
+przykłady ich użycia i~obrazują działanie oraz porównują efekty.
 Kod przykładów posłużył do generowania wykresów i~obrazów zawartych
 w~pracy.
 % TODO: forma załączników
@@ -738,38 +746,63 @@ Zaznaczono na nim wykryte detale, oraz wyróżniono wśród nich te które
 są śledzone od początku etapu stygnięcia.
 \begin{figure}[htbp]
 	\centering
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{example-image}
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+	    \centering
+	    \caption*{\scriptsize
+	        Minuta: 0, \\
+	        Liczba: wszystkich detali: 56, śledzonych detali: 56}
+		\includegraphics[width=0.8\textwidth]{blob_tracker_min_0}
 		\caption{Obraz z~próbki 104\_E5R\_0}
 	\end{subfigure}
-	\hspace{0.75cm}
-	\vspace{0.5cm}
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{example-image}
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+    	\centering
+	    \caption*{\scriptsize
+	        Minuta: 0, \\
+	        Liczba: wszystkich detali: 36, śledzonych detali: 29}
+		\includegraphics[width=0.8\textwidth]{blob_tracker_min_1}
 		\caption{Obraz z~próbki 104\_E5R\_1}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{example-image}
+	\hfill
+	\vfill
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+        \centering
+	    \caption*{\scriptsize
+	        Minuta: 0, \\
+	        Liczba: wszystkich detali: 22, śledzonych detali: 16}
+		\includegraphics[width=0.8\textwidth]{blob_tracker_min_2}
 		\caption{Obraz z~próbki 104\_E5R\_2}
 	\end{subfigure}
-	\hspace{0.75cm}
-	\vspace{0.5cm}
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{example-image}
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+    	\centering
+	    \caption*{\scriptsize
+	        Minuta: 0, \\
+	        Liczba: wszystkich detali: 19, śledzonych detali: 13}
+		\includegraphics[width=0.8\textwidth]{blob_tracker_min_3}
 		\caption{Obraz z~próbki 104\_E5R\_3}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{example-image}
+	\hfill
+	\vfill
+	\begin{subfigure}[t]{0.45\textwidth}
+    	\centering
+	    \caption*{\scriptsize
+	        Minuta: 0, \\
+	        Liczba: wszystkich detali: 15, śledzonych detali: 11}
+		\includegraphics[width=0.8\textwidth]{blob_tracker_min_4}
 		\caption{Obraz z~próbki 104\_E5R\_4}
 	\end{subfigure}
+		\begin{description} \footnotesize
+	    \centering
+        \item[Kolor czerwony] detale śledzone od początku stygnięcia
+        \item[Kolor niebieski] nowe wykryte detale
+	\end{description}
 	\caption{Zliczanie śledzonych detali w~próbce dwoma sposobami}
 	\label{fig:blobcount}
 \end{figure}
+
 Dodatkowo metodę śledzenia plam i~ich zanikania przedstawiono na rysunku
 \ref{fig:blobremain}.
 Pokazuje on położenie plam wykrytych w~kolejnych etapach stygnięcia.
@@ -779,15 +812,19 @@ Pozawala to zaobserwować przemieszczanie się środków ciężkości i~promieni
 plam podczas stygnięcia i zlewania się.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{example-image}
+    \caption*{\scriptsize Detekcja metodą laplasjanu funkcji Gaussa}
+    \includegraphics[width=0.5\textwidth]{blob_tracker}
+    \vspace{0.3cm}
+    \caption*{\scriptsize
+        Kolorem niebieskim zaznaczono detale wykryte na początku stygnięcia.
+        Wraz z~upływem czasu kolor oznaczenia detali przechodzi w~czerwień}
     \caption{Wykryte detale, śledzone od początku stygnięcia, zaznaczone na
              pierwszym obrazie w~serii pomiarowej}
     \label{fig:blobremain}
 \end{figure}
 Działanie metody \ref{it:percentblob}, zliczającej procent detali, obecnych
 od początku stygnięcia zobrazowano w~tabeli \ref{tab:blobpercent}.~
-Działanie zliczania przedstawiono przedstawiono w~niej dla każdej 
-rozpatrywanej klasy ziaren.
+Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{c|c|c|c|c|c}
@@ -820,7 +857,7 @@ Rysunek \ref{fig:blobchartall} przedstawia wykres procesu zanikania plam dla
 wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{example-image}
+    \input{figures/blob_analysis_all}
     \caption{Ilość wykrytych detali na~każdym etapie stygnięcia, w~wariancie
              zliczającym wszystkie plamy}
     \label{fig:blobchartall}
@@ -833,7 +870,7 @@ ich różny skład, jednak w~analizowanym przypadku nie jest to cecha dająca
 nadzieję na dobre wyniki klasyfikacji.
 Powodem takiej sytuacji jest duża losowość tego typu danych.
 Niezależnie od własności materiału, jego ułożenie podczas pomiaru jest
-przypadkowe co ma wpływ na bezwzględną liczbę zliczonych detali.
+przypadkowe, co ma wpływ na bezwzględną liczbę zliczonych detali.
 Na ilość widocznych plam wpływa również sposób ustawienia ostrości kamery.
 Po przyjrzeniu się krzywym można jednak domniemywać, że pewną cechą
 charakterystyczną jest nachylenie krzywych.
@@ -843,9 +880,9 @@ bezwzględna liczba zliczonych detali.
 Drugi sposób zliczania ziaren przedstawiono na rysunku \ref{fig:blobchartrem}.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{example-image}
-    \caption{Ilość wykrytych detali na~każdym etapie stygnięcia, w~wariancie
-             zliczającym wszystkie plamy}
+    \input{figures/blob_analysis_remaining}
+    \caption{Ilość detali wykrytych na zdjęciach, w~wariancie zliczającym
+             plamy śledzone od początku procesu stygnięcia}
     \label{fig:blobchartrem}
 \end{figure}
 W~tym przypadku zliczano jedynie detale obecne na obrazie od początku
@@ -855,10 +892,10 @@ ziaren.
 Dla różnych typów próbek widoczne są charakterystyczne przebiegi krzywych.
 Obserwacja dotycząca nachylenia krzywych staje się bardziej uzasadniona,
 pochodne poszczególnych klas wydają się zbliżone.
-Wyeliminowanie pojawiających się detali pomogła w~obserwacji procesu
-stygnięcia i~zmniejszyła czynniki losowe.
+Wyeliminowanie pojawiających się detali pomogło w~obserwacji procesu
+stygnięcia i~zmniejszyło czynniki losowe.
 Na podstawie analizy nagrań można domniemywać, że nowe ziarna pojawiały
-się w wyniku zaobserwowanych delikatnych ruchów materiału.
+się w~wyniku zaobserwowanych delikatnych ruchów materiału.
 Te mogły wynikać z~drgań stanowiska pomiarowego, istotnym czynnikiem może
 być także mała głębia ostrości obiektywu.
 W~późniejszych etapach stygnięcia na obrazach pojawia się także coraz więcej
@@ -866,19 +903,19 @@ szumów, które mogą zostać wykryte przez algorytm.
 Śledzenie detali, które znajdują się na obrazie od początku eliminuje ten
 problem.
 
-Wyniki ostatniej metody polegającej na procentowym ustaleniu zaniku ilości
-detali została przedstawiona na rysunku \ref{fig:blobcharperc}.
+Wyniki ostatniej metody, polegającej na procentowym ustaleniu zaniku ilości
+detali, został przedstawiona na rysunku \ref{fig:blobcharperc}.
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{example-image}
+    \input{figures/blob_analysis_percent}
     \caption{Ilość wykrytych detali, przy procentowym zliczaniu detali, które
              występowały w~serii od początku stygnięcia}
     \label{fig:blobcharperc}
 \end{figure}
 Widoczne jest odseparowanie różnych klas rud miedzi, różne typy próbek
 charakteryzują się odmiennymi postępami rozmycia detali w~czasie.
-Śledzenie ilości detali w~stosunku względnym dało najlepsze rezultaty
-oraz pozwoliło na pewną normalizację danych, która była trudna do realizacji
+Śledzenie ilości detali w~stosunku względnym dało najlepsze rezultaty.
+Nastąpiła także pewna normalizacja danych, która była trudna do realizacji
 przy bezwzględnym zliczaniu wszystkich plam na obrazie.
 Należy także zauważyć, że przedstawione krzywe przedstawione na rysunkach
 \ref{fig:blobchartrem} oraz \ref{fig:blobcharperc} mają kształt zbliżony
@@ -889,11 +926,11 @@ Proces opadania temperatury ciał opisuje \emph{prawo stygnięcia Newtona},
 które ma postać równania różniczkowego, przedstawionego we wzorze
 % TODO: Cite
 \ref{eq:newtonlawdiff}, gdzie:
-\begin{itemize}
+\begin{description}
 	\item $ T \left( t \right) $ to funkcja temperatury ciała w~czasie,
 	\item $ T_R $ to temperatura otocznia,
-	\item k to współczynnik liczbowy, charakterystyczny dla danego ciała.
-\end{itemize}
+	\item $ k $ to współczynnik liczbowy, charakterystyczny dla danego ciała.
+\end{description}
 
 \begin{equation}
 	\frac{dT \left( t \right)}{dt}=-k\left( T \left( t \right) -T_{R} \right)
@@ -907,15 +944,7 @@ charakter eksponencjalny, do którego zbliżone są wykresy na rysunkach
 \label{eq:newtonlaw}
 \end{equation}
 
-Analiza pozyskanych cech wskazuje że istnieje możliwość wykorzystania ich
-do klasyfikacji rud miedzi.
+Analiza pozyskanych cech wskazuje, że istnieje możliwość wykorzystania ich
+w~klasyfikacji rud miedzi.
 Dalsza ocena wyników pracy będzie zależała od jakości działania sieci
 neuronowej stworzonej do rozpoznawania przygotowanych danych.
-
-
-
-
-
-
-
-

@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt]{report}
 \usepackage{geometry}
 \usepackage{polski}
+\usepackage{icomma}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -19,21 +20,34 @@
 \usepackage[justification=centering]{caption}
 \usepackage{subcaption}
 \usepackage{setspace}
+\usepackage{array}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \usepackage[hidelinks]{hyperref}
 \usepackage[shortlabels]{enumitem}
 \usepackage{siunitx}
+\sisetup{locale = FR}
+
 \usepackage{minted}
 \renewcommand\listoflistingscaption{Spis listingów}
 \usepackage[polish]{babel}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{rotating}
+\pgfplotsset{compat=1.8}
+\usepackage[toc,page]{appendix}
+\renewcommand{\appendixtocname}{Dodatki}
+\renewcommand{\appendixpagename}{Dodatki}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 
 \fancyhead{}
 \fancyhead[RO,LE]{\chaptername: \rightmark}
 
+% Forbid to split given words
+\hyphenation{LabVIEW}
+
+\pgfplotsset{grid style={dashed}}
 % This is necessary to plot softmax function
 \pgfmathdeclarefunction{sumexp}{3}{%
 \begingroup%
@@ -87,12 +101,6 @@ wdrożenia opracowanej technologii w~przemyśle.
 
 \end{abstract}
  
-\chapter*{Deklaracja}
-Deklaruję że...
- 
-\chapter*{Podziękowania}
-Pragnę podziękować...
- 
 \tableofcontents
 
 \newpage
@@ -111,8 +119,14 @@ Pragnę podziękować...
 \chapter{Prototypowanie sieci neuronowej klasyfikującej ziarna miedzi}
 \input{chapters/neuralnetwork}
 
-\chapter{Podsumowanie} \label{ch:conclusions}
+\chapter{Podsumowanie} \label{ch:summary}
 \input{chapters/summary}
+
+\begin{appendices}
+\input{chapters/appendices}
+\end{appendices}
+
+\newpage
 
 % Lists of objects
 \listoffigures

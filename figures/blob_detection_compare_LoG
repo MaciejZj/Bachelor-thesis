@@ -1,0 +1,111 @@
+% This file was created by tikzplotlib v0.8.7.
+\noindent\begin{tikzpicture}[trim axis left]
+
+\begin{axis}[
+hide x axis,
+hide y axis,
+tick align=outside,
+tick pos=both,
+title={Liczba wykrytych detali: 89},
+width=174.15, height=130.95,
+x grid style={white!69.01960784313725!black},
+xmin=-0.5, xmax=257.5,
+xtick style={color=black},
+y dir=reverse,
+y grid style={white!69.01960784313725!black},
+ymin=-0.5, ymax=193.5,
+ytick style={color=black}
+]
+\addplot graphics [includegraphics cmd=\pgfimage,xmin=-0.5, xmax=257.5, ymin=193.5, ymax=-0.5] {figures/blob_detection_compare_LoG-000.png};
+\draw[draw=red,fill opacity=0] (axis cs:190,189) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:43,189) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:243,188) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:161,188) circle (2.67129228448251);
+\draw[draw=red,fill opacity=0] (axis cs:257,187) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:186,186) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:56,184) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:185,182) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:207,179) circle (2.19988776369148);
+\draw[draw=red,fill opacity=0] (axis cs:159,179) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:68,179) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:201,177) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:193,176) circle (2.51415744421884);
+\draw[draw=red,fill opacity=0] (axis cs:187,176) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:161,176) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:68,174) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:65,174) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:79,173) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:197,171) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:198,166) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:95,159) circle (1.4142135623731);
+\draw[draw=red,fill opacity=0] (axis cs:177,158) circle (1.72848324290045);
+\draw[draw=red,fill opacity=0] (axis cs:134,158) circle (2.51415744421884);
+\draw[draw=red,fill opacity=0] (axis cs:98,156) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:248,153) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:257,152) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:101,151) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:115,142) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:87,140) circle (1.4142135623731);
+\draw[draw=red,fill opacity=0] (axis cs:87,129) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:243,126) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:144,126) circle (1.72848324290045);
+\draw[draw=red,fill opacity=0] (axis cs:64,125) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:41,124) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:44,122) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:61,121) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:147,118) circle (2.19988776369148);
+\draw[draw=red,fill opacity=0] (axis cs:92,118) circle (2.67129228448251);
+\draw[draw=red,fill opacity=0] (axis cs:104,116) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:207,115) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:199,111) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:103,106) circle (2.35702260395516);
+\draw[draw=red,fill opacity=0] (axis cs:133,94) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:110,93) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:18,85) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:27,84) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:22,83) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:12,82) circle (2.19988776369148);
+\draw[draw=red,fill opacity=0] (axis cs:115,80) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:126,78) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:35,77) circle (2.19988776369148);
+\draw[draw=red,fill opacity=0] (axis cs:24,76) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:3,76) circle (1.4142135623731);
+\draw[draw=red,fill opacity=0] (axis cs:213,74) circle (2.19988776369148);
+\draw[draw=red,fill opacity=0] (axis cs:12,73) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:83,72) circle (2.67129228448251);
+\draw[draw=red,fill opacity=0] (axis cs:0,71) circle (2.19988776369148);
+\draw[draw=red,fill opacity=0] (axis cs:16,70) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:6,69) circle (1.72848324290045);
+\draw[draw=red,fill opacity=0] (axis cs:13,68) circle (1.4142135623731);
+\draw[draw=red,fill opacity=0] (axis cs:133,66) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:114,65) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:95,58) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:101,56) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:90,56) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:92,52) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:83,52) circle (1.4142135623731);
+\draw[draw=red,fill opacity=0] (axis cs:162,49) circle (1.4142135623731);
+\draw[draw=red,fill opacity=0] (axis cs:86,47) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:106,45) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:85,45) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:97,44) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:89,41) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:90,32) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:109,30) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:112,26) circle (1.57134840263677);
+\draw[draw=red,fill opacity=0] (axis cs:90,25) circle (1.72848324290045);
+\draw[draw=red,fill opacity=0] (axis cs:107,24) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:97,22) circle (2.51415744421884);
+\draw[draw=red,fill opacity=0] (axis cs:63,21) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:164,20) circle (1.72848324290045);
+\draw[draw=red,fill opacity=0] (axis cs:147,19) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:179,18) circle (1.88561808316413);
+\draw[draw=red,fill opacity=0] (axis cs:83,18) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:75,17) circle (2.0427529234278);
+\draw[draw=red,fill opacity=0] (axis cs:175,13) circle (2.51415744421884);
+\draw[draw=red,fill opacity=0] (axis cs:94,11) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:151,6) circle (2.82842712474619);
+\draw[draw=red,fill opacity=0] (axis cs:167,2) circle (2.19988776369148);
+\end{axis}
+
+\end{tikzpicture}

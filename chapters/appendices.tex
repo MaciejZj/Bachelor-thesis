@@ -1,0 +1,27 @@
+\chapter{Porównanie konfiguracji i~parametrów modelu sieci}
+\label{ch:nn_comparison_table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c}
+\toprule
+Parametr                                              & Wartość   & Błąd & Dokładność \\
+\midrule
+\multirow{4}{*}{Funkcja aktywacji}                    & sigmoid   & 1,28 & 0,58       \\
+                                                      & relu      & 1,71 & 0,83       \\
+                                                      & elu       & 2,04 & 0,92       \\
+                                                      & tanh      & 1,44 & 0,92       \\
+\midrule
+\multirow{2}{*}{Liczba warstw ukrytych}               & 1         & 1,71 & 0,67       \\
+                                                      & 2         & 1,22 & 0,92       \\
+\midrule                                                     
+\multirow{3}{*}{\parbox{5cm}
+{\centering Liczba neuronów w~warstwach ukrytych}}     & 128 i 64  & 1,47 & 0,83       \\
+                                                      & 256 i 128 & 1,42 & 0,92       \\
+                                                      & 512 i 126 & 0,97 & 0,92       \\
+\midrule
+\multirow{2}{*}{Algorytm uczenia}                     & sgd       & 1,37 & 0,92       \\
+                                                      & adam      & 0,0  & 1,0        \\
+\bottomrule
+\end{tabular}
+\end{table}
