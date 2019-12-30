@@ -2,13 +2,13 @@
 Zgodnie z~opisem technik termowizyjnych przedstawionym w~sekcji
 \ref{sec:thermovision} zdecydowano się na przeprowadzenie pomiarów za pomocą
 termowizji aktywnej.
-Aby zrealizować pomiary uprzednio przygotowano stanowisko laboratoryjne.
+Aby zrealizować pomiary przygotowano stanowisko laboratoryjne.
 Kamera termowizyjna została umieszczona na statywie, a~do ogrzewania próbek
 zdecydowano się wykorzystać lampę halogenową.
 
 W~procesie termowizji aktywnej istotny jest charakter procesu nagrzewania
 materiału.
-Przy przygotowaniu pomiarów należy zdecydować przy jakim warunku zakończyć
+Przy przygotowaniu pomiarów należy zdecydować pod jakim warunkiem zakończyć
 przekazywanie ciepła do próbki.
 Rozważono dwie możliwości:
 \begin{enumerate}[a)]
@@ -23,19 +23,19 @@ w~czasie nagrzewania, co jest bardziej wymagające w~realizacji.
 Wstępne obserwacje nagrań wskazują, że nagrzewanie materiału przez ustalony
 czas, pozwala na obserwacje unikalnych wzorców stygnięcia ziaren.
 
-Następnie należy wybrać czas nagrywania materiałów wideo.
+Następnie wybrano czas nagrywania materiałów wideo.
 Na podstawie próbnych nagrań zdecydowano się na ogrzewanie próbek przez jedną
 minutę oraz rejestrację ich stygnięcia przez cztery minuty.
 Taka konfiguracja daje, przy badanych pyłach rud miedzi, ostry i~szczegółowy
 obraz w~początkowej fazie nagrywania oraz widocznie rozmazany i~mniej
-kontrastowy materiał pod koniec stygnięcia próbek.
+kontrastowy materiał pod koniec stygnięcia.
 Charakter procesu przejścia między tymi stanami pozwoli na klasyfikację
 badanych ziaren rud miedzi.
 
 Ostatnia decyzja kształtująca charakter pomiarów dotyczy chwili
 przechwytywania stopklatek z~pozyskanych materiałów wideo.
-Na podstawie obserwacji zdecydowano się eksportować 5~klatek na początku
-każdej minuty nagrania.
+Na podstawie obserwacji zdecydowano się eksportować pięć klatek, jedną
+na początku każdej minuty nagrania.
 
 Po ustaleniu planu eksperymentu pomiarowego przystąpiono do jego wykonania.
 Zgodnie z~opisem badanych materiałów w~sekcji \ref{sec:grains},~zgromadzono
@@ -51,7 +51,7 @@ zdjęć, używano opcji automatycznego doboru zakresu temperatur.
 Proces pomiarowy w~protypowych warunkach był obarczony brakiem dużej precyzji
 i~powtarzalności.
 Obserwacja uzyskanych nagrań pokazała, że obrazy tej samej klasy ziaren
-niekoniecznie osiągały tę samą temperaturę po ogrzewaniu przez ustalony czas.
+niekoniecznie osiągały równą temperaturę po ogrzewaniu przez ustalony czas.
 Problemem okazało się również dostosowanie ostrości obrazu z~kamery.
 Jak wytłumaczono w~podsekcji \ref{subsec:lens}~wykorzystywany aparat cechuje
 się bardzo małą głębią ostrości, co powoduje że drobne ruchy kamery
@@ -89,7 +89,7 @@ Jak opisano w rozdziale \ref{sec:meas} jedna próbka w~zbiorze danych
 składa się z~serii pięciu zdjęć o~malejącym kontraście i~szczegółowości.
 Na rysunku \ref{fig:sample}~przedstawiono proces stygnięcia przykładowej
 próbki 104~klasy E5R.
-Wartości na skali, po prawej stronie obrazów maleją.
+Wartości zakresu temperatur na zdjęciach maleją.
 Wskazuje to na stopniowy spadek sumarycznej temperatury obserwowanego
 materiału.
 Dodatkowo obraz staje się coraz mniej wyraźny i~kontrastowy.
@@ -170,24 +170,24 @@ decydujących o~wyglądzie obrazów pochodzących z~kamery jest zakres temperatu
 mapowany na kolory w~obrazie.
 Niestety aplikacja FLIR Tools nie pozwala na eksport zakresu temperatur wraz
 ze zdjęciami w~formacie liczbowym.
-W~czasie zapisu zdjęć oprogramowanie dodaje na nich interfejs z~aktywną skalą
+W~czasie zapisu zdjęć oprogramowanie dodaje do nich interfejs z~aktywną skalą
 pomiarową, jednak jest on graficznie naniesiony na obraz.
-Aby ułatwić w~przyszłości pracę z~materiałami z~kamery opracowano dodatkowo
-mechanizm ekstrakcji zakresu temperatur z~zdjęć pochodzących z kamery.
+Aby ułatwić w~przyszłości pracę z~materiałami z~kamery opracowano mechanizm
+ekstrakcji zakresu temperatur z~zdjęć pochodzących z kamery.
 
 W~celu odczytu wartości liczbowych z~obrazu posłużono się gotową siecią
 neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
 Zdecydowano się na użycie popularnej biblioteki \emph{Pytesseract}.
 Analizowane zdjęcia są kadrowane, by wyizolować odczytywane liczby.
-Wycięte kadry są bardzo małej rozdzielczości, aby ułatwić sieci rozpoznawanie
-liczb zdecydowano się przeskalować je w~górę.
+Wycięte fragmenty mają bardzo małą rozdzielczość, aby ułatwić sieci
+rozpoznawanie liczb, zdecydowano się przeskalować obrazy w~górę.
 W~czasie skalowania włączono mechanizm anty aliasingu aby wyrównać krawędzie
 cyfr.
 Ponieważ używana sieć uznaje za tło kolor biały oraz poszukuje liczb w~kolorze
 czarnym, barwy na zdjęciu odwrócono.
 Następnie obraz poddano binaryzacji metodą \emph{otsu}.
 Jest to popularna i~wydajna metoda binaryzacji, jej efektywność jest
-maksymalna kiedy ilość pikseli tła oraz pierwszego planu jest
+maksymalna kiedy liczba pikseli tła oraz pierwszego planu jest
 zbliżona~\cite{sezgin}.
 Z~tego powodu poprawne kadrowanie liczb sprzyja jakości ich binaryzacji.
 Na rysunku \ref{fig:temp_bounds} przedstawiono kolejne etapy przygotowania
@@ -241,8 +241,8 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
 \end{listing}
 
 \section{Eksploracja danych}
-Aby móc klasyfikować dane należy zastanowić się nad cechami które je
-odróżniają.
+Aby móc klasyfikować dane należy zastanowić się nad cechami, którymi się
+różnią.
 Na rysunku \ref{fig:samplecompare} przedstawiono porównanie stygnięcia
 dwóch rodzajów próbek: E5R oraz E6R.
 W~klasyfikacji użyteczne będą dane które są unikalne dla danej klasy.
@@ -319,7 +319,7 @@ w~całym procesie stygnięcia.
 \label{subsec:featureextr}
 Po przyjrzeniu się rysunkowi \ref{fig:samplecompare} widoczne jest, że
 w~próbce E6R temperatura ziaren zaczęła wyrównywać się szybciej.
-Zdjęcia tej próbki szybciej stają się szare i~tracą kontrast.
+Zdjęcia tej próbki wcześniej stają się szare i~tracą kontrast.
 Na podstawie analizy nagrań rozpatrzono następujące możliwości ekstrakcji
 ich cech charakterystycznych:
 \begin{enumerate}[a)]
@@ -327,21 +327,23 @@ ich cech charakterystycznych:
 	      klasyfikacja całych zdjęć z~użyciem zaawansowanych sieci
 	      konwolucyjnych,
 	\item \label{it:fft} 
-	      analiza częstotliwościowa obrazów w~celu śledzenia tempa rozmycia
-	      kolejnych zdjęć,
+	      analiza częstotliwościowa obrazów,
 	\item \label{it:glcm} 
-	      użycie macierzy GLCM jako wejścia sieci neuronowych,
+	      użycie macierzy GLCM,
 	\item \label{it:edge}
 	      wykrywanie krawędzi ziaren i~wyznaczanie reprezentacji liczbowej
 	      ich kształtów oraz powierzchni,
 	\item \label{it:blob}
 	      śledzenie zlewania się i~zanikania małych detali na obrazie.
 \end{enumerate}
-
 Wszystkie przedstawione opcje mają uzasadnienie i~mogą sprawdzić się dobrze
 jako podstawa klasyfikacji.
+Metody \ref{it:fft}, \ref{it:glcm} oraz \ref{it:edge} były już w~różnym
+stopniu badane w~ramach działaności Politechniki Śląskiej.
+% TODO: cite
 Należy rozpatrzeć, którą technikę wykorzystać do budowy prototypu
 klasyfikatora.
+
 Metoda \ref{it:imgcnn}, z~użyciem sieci konwolucyjnych może
 wykorzystywać najnowsze rozwiązania w~dziecinie uczenia maszynowego.
 Utrudnieniem w~użyciu tej metody jest bardzo mały rozmiar posiadanego 
@@ -352,12 +354,10 @@ zestawu danych.
 Pomysł ten można wypróbować po rozszerzeniu zbioru nagrań.
 
 Technika \ref{it:fft}, polega na analizie częstotliwościowej obrazów.
-Takie podejście wymaga złożonych operacji matematycznych i~może być wrażliwe
-na szumy pomiarowe.
+Takie podejście wymaga złożonych operacji matematycznych.
 Dodatkowo wynik analizy widmowej może być nieoczywisty w~interpretacji.
 Realizacja tej metody może wymagać konstrukcji złożonych sieci neuronowych.
-Po analizie innych opcji zdecydowano, że istnieją bardziej obiecujące
-alternatywy.
+Analizę widmową ziaren przeprowadzono w~pracach naukowców Politechniki Śląskiej.
 
 Macierz GLCM (ang. \textit{Gray-Level Co-Occurrence Matrix}), na której może
 bazować opcja \ref{it:glcm}, to tablica zawierająca informacje o~relacjach
@@ -371,7 +371,7 @@ Zdecydowano się na wybór bardziej wydajnej i~mniej złożonej metody.
 Na obrazie można także wykrywać kształty ziaren za pomocą filtrów detekcji
 krawędzi.
 Opcję tę testowano przy pomocy filtra \emph{Canny}.
-Uzyskane krawędzie nie tworzą pozwalają jednak na łatwą detekcję kształtów.
+Uzyskane krawędzie nie pozwalają jednak na łatwą detekcję kształtów.
 Tradycyjna segmentacja ziaren jest trudna ze względu na małą rodzielczość
 oraz duże upakowanie ziaren.
 Operacje morfologiczne domykania kształtów powodowały bardzo duże zmiany
@@ -386,7 +386,7 @@ powierzchni ziaren.
 Jest to spowodowane ich niską emisyjnością cieplną.
 Na rysunku \ref{fig:blobdetail} przedstawiono zbliżenie na grupę takich
 detali, w~czterech częściach procesu stygnięcia.
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 	\begin{subfigure}{0.3\textwidth}
 		\centering
@@ -412,14 +412,14 @@ detali, w~czterech częściach procesu stygnięcia.
 
 Analizując próbki można zauważyć, że wraz ze stygnięciem, ciemne punkty
 w~grupach zlewają się, a~następnie zanikają.
-Dodatkowo ich liczba na poszczególnych klasach materiałów jest różna.
+Dodatkowo ich liczba dla poszczególnych klas materiałów jest różna.
 Zdecydowano się na wybór metody polegającej na śledzeniu liczby tych punktów
 i~ich zaniku.
 Taka analiza wiąże się z~przetwarzaniem obrazów i~utworzeniem algorytmów
 śledzenia detali.
-Opcja ta wydaje się jednak obiecująca, ponieważ nawet podczas wstępnej
-obserwacji próbek można dopatrywać się zależności miedzy klasami a~obecnością
-omawianych detali.
+Opcja ta jest obiecująca, ponieważ nawet podczas wstępnej obserwacji próbek
+można dopatrywać się zależności miedzy klasami, a~obecnością omawianych
+detali.
 Można również zaobserwować, że w~czasie stygnięcia na kolejnych zdjęciach
 pojawiają się sporadycznie także nowe detale.
 Zjawisko ich powstawania jest jednak pomijalne przy zdecydowanej tendencji
@@ -434,7 +434,7 @@ w~celu klasyfikacji ziaren zdecydowano się na obserwację ilości puntów
 o~małej emisyjności
 Należy więc wybrać metodę detekcji charakterystycznych elementów.
 W~wykrywaniu omawianych detali użyteczne są algorytmy wykrywania plam na
-podstawie analizy pochodnych wartości na obrazie.
+podstawie analizy pochodnych wartości w~obrazie.
 Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
 \begin{enumerate}[a)]
 	\item laplasjan funkcji Gaussa,
@@ -475,7 +475,7 @@ Wadą tego rozwiązania jest bardzo wolne wykrywanie dużych plam z~powodu
 złożoności obliczeniowej.
 
 Różnica funkcji Gaussa jest metodą podobną do poprzedniej.
-Ponownie rozmywa ona obrazu z~narastającymi odchyleniami standardowymi
+Ponownie rozmywa ona obrazy z~narastającymi odchyleniami standardowymi
 z~użyciem funkcji Gaussa.
 Następnie różnice rozmytych obrazów są układane w~sześcianie, gdzie
 maksima to plamy.
@@ -483,7 +483,7 @@ Metoda ta jest szybsza i~mniej dokładna od algorytmu bazującego na laplasjanie
 funkcji Gaussa, ale podobnie jak ona jest wolna w wykrywaniu dużych elementów.
 
 Ostatnia metoda jest najszybsza, ale najmniej dokładna.
-Polega ona na wyszukiwaniu maksimów w~macierzy Hesjanu, jest to macierz
+Polega na wyszukiwaniu maksimów w~macierzy Hesjanu, jest to macierz
 drugich pochodnych cząstkowych.
 Postać takiej macierzy w~n-wymiarowej przestrzeni zmiennych $ x $ przedstawia
 wzór \ref{eq:hessian}.
@@ -515,7 +515,7 @@ w~rozważanym przypadku istotne jest wykrywanie małych plam.
 Z~tego samego powodu korzystne jest użycie najdokładniejszej funkcji.
 Ponieważ program nie powinien wykrywać dużych elementów, nie ma ryzyka zbyt
 powolnych obliczeń na obszernych plamach.
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
@@ -547,13 +547,13 @@ Funkcji podano dwa dodatkowe argumenty, które są istotne dla pożądanego
 działania.
 Argument \mintinline{python}{max_sigma=2} ogranicza odchylenie standardowe
 obliczanych funkcji Gaussa, przez co wykrywane są tylko małe elementy.
-Drugi argument \mintinline{python}{threshold=0.1} decyduje o~poziomie
-powyżej jakiego punkt jest uznany za maksimum w~sześcianie laplasjanów.
+Drugi argument \mintinline{python}{threshold=0.1} decyduje o~poziomie,
+powyżej którego punkt jest uznany za maksimum w~sześcianie laplasjanów.
 Domyślna wartość tego argumentu \mintinline{python}{threshold=2.0} okazała 
 się zbyt duża, zmniejszono jej wartość aby wykrywać bardziej subtelne detale.
-Na podstawie opisanego wywołania metody Laplasjanu funkcji Gaussa
+Na podstawie opisanego wywołania metody laplasjanu funkcji Gaussa
 opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def find_blobs(img):
     '''
@@ -577,12 +577,12 @@ pozwala na detekcję detali na pojedynczym zdjęciu.
 Aby wykorzystać detekcję plam w~serii pięciu zdjęć, które reprezentują
 stygnięcie jednej próbki należy opracować zestaw funkcji śledzący zmiany 
 na obrazie.
-Na tym etapie prac niejednoznaczne jest jaki sposób obserwacji i~zliczania
+Na tym etapie prac nie jest jednoznaczne jaki sposób obserwacji i~zliczania
 detali będzie najlepszy do późniejszego prototypowania sieci neuronowej
 klasyfikującej ziarna rud miedzi.
 Dlatego zdecydowano się na napisanie funkcji zliczania plam, tak by
 możliwe były trzy warianty pracy algorytmu:
-\begin{enumerate}[1.]
+\begin{enumerate}[a)]
 	\item \label{it:allblob}
 	      zliczanie wszystkich detali na każdym etapie stygnięcia,
 	\item \label{it:remainingblob}
@@ -600,7 +600,7 @@ który pozwala włączyć lub wyłączyć śledzenie jedynie tych ziaren, które
 były obecne od początku stygnięcia.
 Przedstawiony kod wykorzystuje funkcję wykrywania detali na zdjęciu
 przedstawioną na listingu \ref{lst:find_blobs}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def find_blob_series(imgs, only_remaining=True):
     '''
@@ -632,7 +632,7 @@ serii, a~z~zestawem z poprzedniego analizowanego zdjęcia.
 
 Na listingu \ref{lst:find_remaining_blobs} przedstawiono funkcję testującą
 które z~detali znajdują się na kolejnych etapach stygnięcia.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def find_remaining_blobs(new_blobs, old_blobs):
     '''
@@ -659,7 +659,7 @@ starej plamy, to zostaje on uznany za powtarzający się.
 Powtarzające się punkty są dołączane do zwracanej listy.
 Aby zrealizować ten zamysł zaimplementowano funkcję przedstawioną na listingu
 \ref{lst:inside_circle}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def inside_circle(x, y, a, b, r):
     '''
@@ -677,7 +677,7 @@ Ponieważ wiele punktów może znajdować się blisko siebie istnieje ryzyko,
 że zostaną one zliczone wiele razy.
 Z~tego powodu przed zwróceniem listy należy usunąć z~niej duplikaty.
 W~tym celu utworzono funkcje pomocniczą widoczną na listingu \ref{lst:unique}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def unique(multilist):
     '''Get list without repeating values.'''
@@ -686,7 +686,7 @@ def unique(multilist):
 \caption{Funkcja języka Python usuwająca duplikaty z~listy}
 \label{lst:unique}
 \end{listing}
-Najprostszym sposobem eliminacji powtarzających się wartości w~języki Python
+Najprostszym sposobem eliminacji powtarzających się wartości w~języku Python
 jest konwersja listy na zbiór, który jest agregatem unikalnych 
 nieuszeregowanych wartości.
 Aby zwrócić z~funkcji listę należy z~powrotem skonwertować zbiór na typ
@@ -698,9 +698,9 @@ nie posiada funkcji hashowania.
 Dlatego każdy punkt na liście zamieniono uprzednio w~typ krotki.
 W~ten sposób wszystkie konieczne przekształcenia są możliwe.
 Aby zrealizować pomysł zliczania procentu plam pozostałych w~kolejnych etapach
-stygnięcia zaimplementowano funkcję przedstawioną na listingu.
+stygnięcia zaimplementowano funkcję przedstawioną na listingu
 \ref{lst:percent}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def percent_of_remaining_blobs_in_stages(stages):
     '''
@@ -724,7 +724,7 @@ Wykorzystano bardzo zwięzły i~ekspresyjny element języka nazywany
 \emph{wyrażeniami listowymi}.
 Pozwala on na efektywne stosowanie jedno-linijkowych pętli do przeglądania
 i modyfikowania obiektów iterowalnych.
-Użyteczność tego mechanizmu można zaobserwować w~przedstawionych listingach.
+Użyteczność tego mechanizmu można zaobserwować na przedstawionych listingach.
 Podczas budowania funkcji dbano o~ich zwięzłość, dobry podział realizowanych
 zadań oraz ograniczenie długości bloków kodu.
 Dzięki temu program zachowuje zasady dobrego programowania.
@@ -737,13 +737,13 @@ w~pracy.
 % TODO: forma załączników
 Pełen listing programów znajduje się w~załącznikach.
 
-Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam
-w~serii zdjęć na trzy sposoby.
+Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam ,w~serii
+zdjęć, na trzy sposoby.
 Efekty działania utworzonego kodu przetestowano na obrazach pomiarowych.
 Działanie sposobów zliczania ziaren \ref{it:allblob}~oraz
 \ref{it:remainingblob} przedstawiono na rysunku \ref{fig:blobcount}.
-Zaznaczono na nim wykryte detale, oraz wyróżniono wśród nich te które
-są śledzone od początku etapu stygnięcia.
+Zaznaczono na nim wykryte detale oraz wyróżniono wśród nich, te które
+są śledzone od początku stygnięcia.
 \begin{figure}[htbp]
 	\centering
 	\hfill
@@ -810,7 +810,7 @@ Wykryte punkty zaznaczono na obrazie z~początku tego procesu.
 Zmieniające się kolory obrazują detale wykryte w~kolejnych chwilach.
 Pozawala to zaobserwować przemieszczanie się środków ciężkości i~promieni
 plam podczas stygnięcia i zlewania się.
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \centering
     \caption*{\scriptsize Detekcja metodą laplasjanu funkcji Gaussa}
     \includegraphics[width=0.5\textwidth]{blob_tracker}
@@ -825,7 +825,7 @@ plam podczas stygnięcia i zlewania się.
 Działanie metody \ref{it:percentblob}, zliczającej procent detali, obecnych
 od początku stygnięcia zobrazowano w~tabeli \ref{tab:blobpercent}.~
 Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
-\begin{table}[htbp]
+\begin{table}[htb]
 	\centering
 	\begin{tabular}{c|c|c|c|c|c}
 	\toprule
@@ -855,33 +855,33 @@ metod ich zliczania.
 
 Rysunek \ref{fig:blobchartall} przedstawia wykres procesu zanikania plam dla
 wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \centering
     \input{figures/blob_analysis_all}
-    \caption{Ilość wykrytych detali na~każdym etapie stygnięcia, w~wariancie
+    \caption{Liczba wykrytych detali na~każdym etapie stygnięcia, w~wariancie
              zliczającym wszystkie plamy}
     \label{fig:blobchartall}
 \end{figure}
-Wykreślone krzywe dla różnych klas materiałów przecinają się, w~wykreślonych
-wartościach trudno na pierwszy rzut oka dojrzeć jakiekolwiek zależności
-i~uporządkowanie.
-Ilość charakterystycznych detali może być cechą rud miedzi, ze względu na
+Wykreślone krzywe dla różnych klas materiałów przecinają się, na wykresach
+nie widać uporządkowania, ani jasnych zależności. 
+Liczba charakterystycznych detali może być cechą rud miedzi, ze względu na
 ich różny skład, jednak w~analizowanym przypadku nie jest to cecha dająca
 nadzieję na dobre wyniki klasyfikacji.
 Powodem takiej sytuacji jest duża losowość tego typu danych.
 Niezależnie od własności materiału, jego ułożenie podczas pomiaru jest
 przypadkowe, co ma wpływ na bezwzględną liczbę zliczonych detali.
-Na ilość widocznych plam wpływa również sposób ustawienia ostrości kamery.
-Po przyjrzeniu się krzywym można jednak domniemywać, że pewną cechą
+Na liczbę widocznych plam wpływa również sposób ustawienia ostrości kamery.
+Po przyjrzeniu się wykresom można jednak domniemywać, że pewną cechą
 charakterystyczną jest nachylenie krzywych.
 Wskazuje to, że bardziej widoczne mogą być względne cechy czasowe, a~nie
 bezwzględna liczba zliczonych detali.
 
-Drugi sposób zliczania ziaren przedstawiono na rysunku \ref{fig:blobchartrem}.
-\begin{figure}[htbp]
+Efekty drugiego sposób zliczania punktów przedstawiono na rysunku
+\ref{fig:blobchartrem}.
+\begin{figure}[htb]
     \centering
     \input{figures/blob_analysis_remaining}
-    \caption{Ilość detali wykrytych na zdjęciach, w~wariancie zliczającym
+    \caption{Liczba detali wykrytych na zdjęciach, w~wariancie zliczającym
              plamy śledzone od początku procesu stygnięcia}
     \label{fig:blobchartrem}
 \end{figure}
@@ -903,12 +903,12 @@ szumów, które mogą zostać wykryte przez algorytm.
 Śledzenie detali, które znajdują się na obrazie od początku eliminuje ten
 problem.
 
-Wyniki ostatniej metody, polegającej na procentowym ustaleniu zaniku ilości
+Wyniki ostatniej metody, polegającej na procentowym ustaleniu zaniku liczby
 detali, został przedstawiona na rysunku \ref{fig:blobcharperc}.
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \centering
     \input{figures/blob_analysis_percent}
-    \caption{Ilość wykrytych detali, przy procentowym zliczaniu detali, które
+    \caption{Liczba wykrytych detali, przy procentowym zliczaniu detali, które
              występowały w~serii od początku stygnięcia}
     \label{fig:blobcharperc}
 \end{figure}
@@ -944,7 +944,7 @@ charakter eksponencjalny, do którego zbliżone są wykresy na rysunkach
 \label{eq:newtonlaw}
 \end{equation}
 
-Analiza pozyskanych cech wskazuje, że istnieje możliwość wykorzystania ich
+Analiza pozyskanych cech wskazuje, że istnieje możliwość ich wykorzystania
 w~klasyfikacji rud miedzi.
 Dalsza ocena wyników pracy będzie zależała od jakości działania sieci
 neuronowej stworzonej do rozpoznawania przygotowanych danych.

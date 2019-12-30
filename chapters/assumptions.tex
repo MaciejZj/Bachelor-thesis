@@ -9,35 +9,31 @@ ich przetwarzania w~młynie.
 Spośród próbek, pochodzących z~projektu \textsc{sysmel}, wybrano cztery typy
 ziaren, które będą przedmiotem zadania klasyfikacji.
 Zdjęcia rozpatrywanych materiałów przedstawiono na rysunku \ref{fig:grains}.
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \centering
-    \hfill
-	\begin{subfigure}{0.3\textwidth}
+	\begin{subfigure}[t]{0.35\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{E5R}
 		\caption{Ziarna rudy miedzi klasy E5R}
 	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.3\textwidth}
+	\quad\quad
+	\begin{subfigure}[t]{0.35\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{E6R}
 		\caption{Ziarna rudy miedzi klasy E6R}
 	\end{subfigure}
-	\hfill
-	\\
-	\hfill
-	\begin{subfigure}{0.3\textwidth}
+	\vskip\baselineskip
+	\begin{subfigure}[t]{0.35\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{E11R}
 		\caption{Ziarna rudy miedzi klasy E11R}
 	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.3\textwidth}
+	\quad\quad
+	\begin{subfigure}[t]{0.35\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{E1XP}
 		\caption{Ziarna rudy miedzi klasy E1XP}
 	\end{subfigure}
-	\hfill
 	\caption{Próbki rozpatrywanych ziaren rud miedzi}
 	\label{fig:grains}
 \end{figure}
@@ -64,20 +60,19 @@ a~następnie rejestruje proces ich stygnięcia.
 Podczas dostarczania ciepła do obiektu oraz jego oddawania na obrazach
 termowizyjnych można zaobserwować strukturę badanego obiektu.
 Przedmioty o~niejednorodnej i~złożonej budowie nagrzewają się oraz stygną
-nierównomiernie co jest rejestrowane przez kamery termowizyjne.
+nierównomiernie, co jest rejestrowane przez kamery termowizyjne.
 W~ten sposób można dostrzec cechy obiektu niewidoczne gołym okiem, takie
 jak zmiany jego gęstości, składu oraz uszkodzenia struktury.
 Termowizję aktywną stosuje się szeroko w~badaniach naukowych oraz przemyśle.
 Przykładowe aplikacje tej techniki to detekcja defektów w~produktach
 przemysłowych oraz wykrywanie części konstrukcji podatnych na zużycie.
-Termowizja aktywna jest techniką niedestruktywną oraz bezkontaktową,
+Termowizja aktywna ma charakter niedestruktywny oraz bezkontaktowy,
 co stanowi jej zalety w~analizie materiałowej.
 Technika ta wymaga jednak etapowego procesu pomiarowego, potrzebne jest 
 przygotowanie instalacji grzewczej, a~nagrzewanie i~stygnięcie materiału
 może być czasochłonne.
 Przebieg zmian temperatury najlepiej rejestrować na materiałach wideo,
 aby zmaksymalizować ilość danych zgromadzonych w~trakcie eksperymentu.
-% TODO: Może dać obrazek płytki z dziurami od dr Budzana
 
 \section{Kamera termowizyjna FLIR A320}
 \label{sec:camera}
@@ -87,7 +82,7 @@ Firma FLIR zajmuje się produkcją wysokiej jakości kamer i~detektorów do cel�
 profesjonalnych i~przemysłowych.
 Używany aparat łączy wysoką jakość pomiaru z~nowoczesnymi funkcjami
 integracji z~oprogramowaniem komputerowym.
-Urządzenie komunikuje się z~komputerem za pomocą kabla ethernetowego,
+Urządzenie komunikuje się z~komputerem za pomocą sieci internetowej,
 pozwalając na kontrolę z~poziomu aplikacji oraz bibliotek
 programistycznych.
 Dodatkowo kamera posiada możliwość planowania automatycznych pomiarów
@@ -96,9 +91,9 @@ internetowy.
 
 \subsection{Opis sprzętowy wykorzystywanej kamery}
 Kamera ma postać podłużnego korpusu, do którego swobodnie można podłączać
-pasujące obiektywy.
+obiektywy.
 Na rysunku \ref{fig:camera}~przedstawiono zdjęcie wykorzystywanego urządzenia.
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{flir_a320}
     \caption{Kamera termowizyjna FLIR A320}
@@ -129,7 +124,7 @@ który mierzy energię niesioną przez fale elektromagnetyczne w~spektrum
 podczerwieni.
 Kiedy fala pada na detektor aparatu, temperatura komórek matrycy rośnie
 i~zwiększa się ich rezystancja elektryczna, co wpływa na natężenie prądu
-przepływającego przez obwody w~czujniku.
+płynącego przez obwody w~czujniku.
 Wartości natężenia prądu są mierzone, a~na ich podstawie określana jest
 temperatura.
 
@@ -144,7 +139,7 @@ Przy klasyfikacji obrazów i~wzorców stygnięcia próbek jest to
 bardziej istotne niż liczbowa dokładność pomiarowa przyrządu.
 
 W~porównaniu ze zwykłymi, współczesnymi aparatami, rozdzielczość kamery
-termowizyjnej może wydawać się bardzo mała.
+termowizyjnej może wydawać się mała.
 Należy sobie jednak uzmysłowić, że w~standardowych aparatach piksele mają
 rozkład Bayera, a~wartości składowych koloru są interpolowane.
 W~kamerze termowizyjnej każda komórka matrycy dokonuje pełnego pomiaru
@@ -162,7 +157,7 @@ ziarna rud miedzy.
 Jest to sprzęt zaprojektowany przez producentów używanej kamery i~dedykowany
 pracy z~urządzeniami termowizyjnymi.
 Przyrząd przedstawiono na rysunku \ref{fig:lens}.
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{flir_lens}
     \caption{Obiektyw FLIR T197415}
@@ -211,8 +206,8 @@ Nagrania mają własnościowy format firmy FLIR, można je odtwarzać w~programi
 FLIR Tools.
 Program pozwala także na eksport stopklatek z~nagrania w~postaci plików JPEG.
 Przy obsłudze narzędzia ważne jest ustawianie zakresu temperatur na obrazie.
-Wybrany zakres decyduje w jaki sposób wartości temperatury są mapowane na
-kolory na zdjęciu zawarte w tablicy LUT.
+Wybrany zakres określa w~jaki sposób wartości temperatury są mapowane na
+kolory na zdjęciu, zawarte w~tablicy LUT.
 Program oferuje tablice w~skali szarości, takie zostały użyte w~projekcie,
 możliwy jest także wybór tablic w~postaci kolorowych gradientów.
 Wybór zakresu wpływa na wygląd wyświetlanego obrazu oraz eksportowanych
@@ -236,7 +231,7 @@ Jednocześnie Python jest zaopatrzony w~wydajną bibliotekę obliczeń
 numerycznych NumPy.
 Oferuje ona klasy macierzy numerycznych oraz bogaty zestaw operacji
 matematycznych.
-Macierze biblioteki NumPy są mniej elastyczne niż zwykłe listy języka Python,
+Macierze biblioteki NumPy są mniej elastyczne od zwykłych list języka Python,
 jednak oferują dużo większą wydajność obliczeniową, między innymi dzięki
 wsparciu obliczeń wektorowych na odpowiednich procesorach.
 Wiele innych bibliotek języka wykorzystuje pakiet NumPy, na przykład przy
@@ -258,7 +253,7 @@ którego wchodzi pakiet Scikit-learn służący do uczenia maszynowego.
 Może on być przydatny przy tworzeniu sieci neuronowej, a~spójność bibliotek
 z~pakietu Scikit jest niewątpliwie zaletą.
 Wybrana biblioteka charakteryzuje się również dobrą dokumentacją oraz
-zestawem przydatnych przykładów.
+zestawem przykładów.
 
 \subsection{Interfejs sieci neuronowych Keras}
 \label{subsec:software_network}
@@ -270,7 +265,7 @@ oferuje wysokopoziomową, matematyczną warstwę abstrakcji opisu sieci
 neuronowych.
 Keras nie jest jednak pełnym rozwiązaniem, a~raczej abstrakcyjnym interfejsem.
 Używanie go wymaga wyboru wewnętrznego silnika biblioteki.
-Zdecydowano się na wybór domyślnej opcji i~użycie zaplecza pakietu TensorFlow.
+Zdecydowano się na domyślną opcję użycia zaplecza pakietu TensorFlow.
 W~standardowy sposób interfejsu Keras używa się po osobnym zainstalowaniu
 jego modułów i~wskazaniu silnika sieci neuronowych.
 Biblioteka TensorFlow udostępnia jednak wewnętrzny interfejs Keras,

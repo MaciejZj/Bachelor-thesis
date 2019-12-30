@@ -1,6 +1,7 @@
-\section{Budowa prototypu sieci neuronowej}
-Po zakończeniu procesu budowy i~eksploracji danych można przystąpić do
-budowy sieci neuronowej odpowiedzialnej za rozpoznawanie ziaren rud miedzi.
+\section{Konstrukcja prototypu sieci neuronowej}
+Po zakończeniu procesu eksploracji danych można przystąpić do
+konstrukcji sieci neuronowej odpowiedzialnej za rozpoznawanie ziaren rud
+miedzi.
 Przedstawiony problem jest wymaga klasyfikacji wieloklasowej wielowymiarowych
 danych.
 Problemy tego typu można rozwiązywać zarówno za pomocą klasycznych algorytmów
@@ -35,7 +36,7 @@ doświadczeniem oraz testując i~porównując różne rozwiązania.
 Przedstawiona konstrukcja oraz uzasadnienie jej wyboru bazuje na wynikach
 walidacji, której mechanizm przedstawiono w~sekcji \ref{sec:validation}.
 Szczegółowe dane, dotyczące porównań różnych konstrukcji i~parametrów
-sieci przedstawiono w~dodatku %TODO: dodatek.
+sieci przedstawiono w~dodatku \ref{ch:nn_comparison_table}.
 
 Konstrukcję klasyfikatora rozpoczęto od wyboru ilości warstw.
 W~standardowej konstrukcji każda sieć posiada warstwę wejściową oraz
@@ -54,7 +55,7 @@ co poparte jest licznymi przykładami \cite{reed}.
 Biorąc pod uwagę złożoność rozpatrywanego problemu zdecydowano się na
 strukturę czterowarstwową.
 Jest to rozmiar często spotykany w~sieciach tego typu, późniejsze testy
-pokazały, że jest to ilość warstw dająca dobre rezultaty.
+pokazały, że wybrana liczba warstw daje dobre rezultaty.
 Sprawdzono, że zastosowanie jednej warstwy ukrytej powodowało pogorszenie
 działania sieci.
 
@@ -62,7 +63,7 @@ Kolejnym krokiem projektowania sieci jest decyzja o~ilości neuronów
 w~poszczególnych warstwach.
 W przypadku pierwszej i~ostatniej warstwy jest to wartość prosta do
 określenia.
-Zaleca się, aby wejście sieci miało liczbę neuronów równą wymiarowi
+Zaleca się, aby wejście sieci miało liczbę neuronów równą liczbie elementów
 używanego wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć.
 % TODO: cite
 Ostatnia warstwa powinna mieć tyle neuronów ile wynosi liczba rozpoznawanych
@@ -83,7 +84,7 @@ Jest to uzasadnione faktem, że wyjścia powinny reprezentować
 prawdopodobieństwo zaliczenia próbki do danej klasy.
 Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
 przedstawiono na rysunku \ref{fig:softmax}.
-\begin{figure}[htbp]
+\begin{figure}[htb]
 \centering
 \begin{tikzpicture}[trim axis left]
     \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
@@ -107,7 +108,7 @@ Rozpatrzono trzy rodziny funkcji:
 	\item funkcję tangens hiperboliczny.
 \end{itemize}
 Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
-\begin{figure}[htbp]
+\begin{figure}[htb]
 \centering
 \begin{subfigure}[t]{0.3\textwidth}
 \centering
@@ -167,10 +168,10 @@ Do inicjalizacji sieci o~standardowej liniowej strukturze służy funkcja
 \mintinline{python}{Sequential()}, która może przyjąć listę warstw w~sieci.
 Funkcja \mintinline{python}{Dense()} tworzy warstwę łącząca każdy neuron
 z~każdym wyjściem poprzedniej warstwy.
-Jej parametry definiuje ilość neuronów w~warstwie oraz ich funkcję aktywacji.
+Jej parametry definiują liczbę neuronów w~warstwie oraz ich funkcję aktywacji.
 Funkcję języka Python implementują opisywaną sieć, za pomocą przedstawionych
 elementów biblioteki Keras, przedstawiono na listingu \ref{lst:model}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def default_grain_classifier_model():
     '''
@@ -193,7 +194,7 @@ def default_grain_classifier_model():
 \label{subsec:train}
 Kolejnym krokiem w~budowie klasyfikatora ziaren jest trening sieci neuronowej.
 Jest to proces w~którym wagi neuronów są dopasowywane do zbioru uczącego.
-Rozpatrywany jest problem typu uczenia nadzorowanego.
+Rozpatrywany problem jest typu uczenia nadzorowanego.
 Przygotowane dane mają znane etykiety klas, to znaczy są odgórnie przypisane
 do danego typu.
 Narzucone etykiety nazywane są \emph{wiedzą ekspercką}, ich prawdziwość jest
@@ -217,16 +218,16 @@ zawierają takie same proporcje klas.
 Taka metoda podziału nazywana jest \emph{losowaniem warstowym}.
 Uaktywnienie tej opcji jest szczególnie ważne, ze względu na mały rozmiar
 posiadanego zbioru danych.
-Gdyby dane dzielić w~pełni przypadkowe istniałoby ryzyko nadmiernej
+Gdyby dane dzielić w~pełni przypadkowo istniałoby ryzyko nadmiernej
 reprezentacji klasy w~danej grupie oraz jej braku w~innej.
 Kolejnym istotnym parametrem jest \mintinline{python}{test_size}, który
 decyduje o~rozmiarze zbioru testowego.
-Ponieważ w~zbiorze są trzy egzemplarze każdej klasy odpowiednie jest
+Ponieważ w~zbiorze są trzy egzemplarze każdej klasy, odpowiednie jest
 wydzielenie do testów jednej trzeciej próbek.
 Ostatni parametr \mintinline{python}{random_state}, to ziarno generatora
 losowego podziału zbiorów.
-Aby móc porównywać działanie sieci pomiędzy wielokrotnymi uruchomieniami
-programu należy wyeliminować z~niego czynniki przypadkowe i~podać
+Aby móc porównywać działanie sieci, pomiędzy wielokrotnymi uruchomieniami
+programu, należy wyeliminować z~niego czynniki przypadkowe i~podać
 funkcji stałe ziarno, co zapewni powtarzalny podział zbioru.
 Oczywiście wydzielenie w~narzucony sposób zbioru testowego, szczególnie
 w~przypadku tak małej ilości danych, nie daje obiektywnej oceny modelu.
@@ -235,7 +236,7 @@ sieci.
 W~sekcji \ref{sec:validation} przedstawiono konstrukcję i~wyniki działania
 bardziej miarodajnego procesu walidacji.
 
-Aby móc do niego przystąpić do treningu należy określić parametry uczenia
+Aby móc przystąpić do treningu należy określić parametry uczenia
 sieci.
 Konfiguracja tego procesu odbywa się przez wywołanie metody
 kompilacji.
@@ -265,14 +266,14 @@ działania sieci.
 Wybrano standardową metrykę dokładności sieci, czyli stosunku poprawnie
 zakwalifikowanych próbek do wszystkich analizowanych.
 
-Ostatnim uczenia etapem jest realizacja treningu sieci, dokonywana za pomocą
+Ostatnim etapem uczenia jest realizacja treningu sieci, dokonywana za pomocą
 metody \mintinline{python}{model.fit()}.
 Metoda przyjmuje argumenty zbioru treningowego wraz z~zestawem etykiet
-oraz liczbę epok treningu, zwraca obiekt zawierający przebieg treningu.
+oraz liczbę epok treningu, zwraca obiekt zawierający przebieg uczenia sieci.
 Na rysunku \ref{fig:history} przedstawiono dokładność i~błąd w~kolejnych
 epokach treningu.
 Na ich podstawie określono liczbę że odpowiednia liczba epok wynosi 300.
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
@@ -299,7 +300,7 @@ Na ich podstawie określono liczbę że odpowiednia liczba epok wynosi 300.
 \end{figure}
 Opisany plan treningu sieci realizuje kod przedstawiony na listingu
 \ref{lst:train}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
     X_train, X_test, y_train, y_test = train_test_split(X, y,
         stratify = y,
@@ -319,16 +320,16 @@ Opisany plan treningu sieci realizuje kod przedstawiony na listingu
 \end{listing}
 
 Działanie sieci można sprawdzić na zbiorze testowym.
-Należy mieć na uwadze, że przy małej ilości danych i~przedstawiony 
+Należy mieć na uwadze, że przy małej ilości danych i~przedstawionym
 podziale na zbiory treningowy oraz testowy nie będzie to test miarodajny.
 Jest on jednak akceptowalny przy pierwszych testach sieci podczas jej
 konstrukcji.
 Wyniki działania sieci przedstawia tabela \ref{tab:blobtest}.
 Przedstawione wartości błędu oraz dokładności potwierdzają przypuszczenia
-na temat użyteczności różnych metod zliczania ziaren, które przedstawiono
+na temat użyteczności różnych metod zliczania detali, które przedstawiono
 w~podsekcji~\ref{subsec:datavis}.
 
-\begin{table}[htbp]
+\begin{table}[htb]
 	\centering
 	\begin{tabular}{c|C{2cm}|C{2cm}}
 	\toprule
@@ -354,17 +355,17 @@ wydzielaniu jednej z~części danych jako zbioru testowego.
 Walidacje powtarza się k-krotnie, tak by każda część była wykorzystana
 jako dane testowe.
 Na końcu testu wyniki są uśrednianie. 
-Dzięki temu wyniki dają dobry pogląd na ogólną zdolność sieci do
+Dzięki temu sprawdzian krzyżowy daje dobry pogląd na ogólną zdolność sieci do
 generalizacji rozwiązywanego problemu.
 
 Często po procesie walidacji dokonuje się testu sieci przy użyciu osobnego
 zestawu danych.
-Niestety posiadany zbiór danych jest zbyt mały, aby wydzielić z niego
-osobny zestaw testowy.
+Niestety posiadany zbiór jest zbyt mały, aby wydzielić z niego osobny zestaw
+testowy.
 Z~tego powodu zdecydowano się oceniać sieć jedynie na podstawie metody
 sprawdzianu krzyżowego.
 
-Biblioteka keras nie posiada wbudowanych funkcji zaawansowanych technik
+Biblioteka Keras nie posiada wbudowanych funkcji zaawansowanych technik
 walidacji, dlatego należy przygotować je samodzielnie.
 W~tym celu użyto biblioteki Scikit-learn, która oferuje funkcje podziału
 zbiorów danych.
@@ -373,15 +374,15 @@ podziałów zbioru danych.
 Jak przedstawiono w~sekcji \ref{subsec:train}, ze względu na mały rozmiar
 zbioru danych, przy podziale należy zastosować losowanie warstwowe.
 Na listingu \ref{lst:crossval} przedstawiono funkcję pozwalającą na walidację
-modelu klasyfikatora biblioteki keras z~użyciem sprawdzianu krzyżowego.
+modelu klasyfikatora biblioteki Keras z~użyciem sprawdzianu krzyżowego.
 Funkcja przyjmuje argumenty w~postaci skompilowanego modelu sieci oraz
 zbioru danych i~etykiet.
 Zwracana jest macierz, w~której rzędy oznaczają wyniki testów dla kolejnych
 podziałów zbioru danych.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def network_cross_validation(model, X, y):
-    '''Compute cross validation fold scores for given keras model.'''
+    '''Compute cross validation fold scores for given Keras model.'''
     eval_scores = []
     for train_index, test_index in 
         StratifiedKFold(n_splits = 3).split(X, y):
@@ -398,17 +399,17 @@ def network_cross_validation(model, X, y):
 \end{listing}
 Sposób wykorzystania zbudowanej funkcji walidacji modelu przedstawia
 listing \ref{lst:val}.
-Na końcu procesu oceny sieci wyniki kolejnych kroków sprawdziany krzyżowego
+Na końcu procesu oceny sieci wyniki kolejnych kroków sprawdzianu krzyżowego
 należy uśrednić.
-Wyniki walidacji dla trzech sposobów zliczania detali na obrazach przedstawia
+Efekty walidacji dla trzech sposobów zliczania detali na obrazach przedstawia
 tabela \ref{tab:blobval}.
 
 Zgodnie z~wcześniejszymi przewidywaniami metoda procentowego zliczania
 detali na obrazach okazała się dawać najlepsze rezultaty.
-Dokładność na poziomie 91\% jest wystarczająca do uznania sieci za
-dobry klasyfikator.
-Pozostałe metody zliczania okazały się okazały się mniej precyzyjne, co
-wskazuje że należy je odrzucić.
+Dokładność na poziomie 91\% jest wystarczająca do uznania sieci za dobry
+klasyfikator.
+Pozostałe metody zliczania okazały się mniej precyzyjne, co wskazuje że należy
+je odrzucić.
 
 Przedstawiony mechanizm walidacji wykorzystano do dostrojenia parametrów
 sieci opisywanych w~podeskcji \ref{subsec:nnbuild}.
@@ -417,11 +418,9 @@ maksymalizacji dokładności oblicznej przy pomocy sprawdzianu krzyżowego.
 W~czasie prototypowania sieci dokonano liczbych porównań, aby znaleźć
 najlepszą strukturę.
 Szczegółowe zestaweienie rozpatrywanych konfiguracji i~wartości parametrów
-załączono w~dodatku.
-% TODO: tabela
+załączono w~dodatku \ref{ch:nn_comparison_table}.
 
-
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 X = np.array(X)
 y = np.array(y)
@@ -443,7 +442,7 @@ print('Cross validation mean score (loss, acc):\n',
 \label{lst:val}
 \end{listing}
 
-\begin{table}[htbp]
+\begin{table}[htb]
 	\centering
 	\begin{tabular}{c|C{2cm}|C{2cm}}
 	\toprule
@@ -459,8 +458,8 @@ procent śledzonych detali   & 1,37       & 0,91          \\
 \label{tab:blobval}
 \end{table}
 
-Dodatkowo dla opracowano kod generujący \emph{macierz pomyłek}
-(ang. \textit{confusion matrix}).
+Dodatkowo opracowano kod generujący \emph{macierz pomyłek} (ang.
+\textit{confusion matrix}).
 Jest to tablica porównująca wiedzę eksperta z~wynikami klasyfikacji na zbiorze
 testowym.
 Wiersze macierzy oznaczają poprawną klasyfikację kolejnych próbek, zgodnie
@@ -479,7 +478,7 @@ uśredniono.
 Wartości w~tabeli przedstawiono w~stosunku procentowym.
 Funkcję generującą uśrednioną macierz pomyłek przedstawia listing
 \ref{lst:mean_confusion_matrix}.
-\begin{listing}[htbp]
+\begin{listing}[htb]
 \begin{minted}{python}
 def mean_confusion_matrix(model, X, y, n_splits):
     '''
@@ -515,7 +514,7 @@ klasyfikowane.
 Widoczna jest pomyłka sieci polegająca na niewłaściwej klasyfikacji próbki
 klasy E6R jako E1XP.
 
-\begin{table}[]
+\begin{table}[htb]
 \centering
 \begin{tabular}{cccccc}
                                  &                            & \multicolumn{4}{c}{Wiedza klasyfikatora} \\ \cmidrule[1pt]{2-6}

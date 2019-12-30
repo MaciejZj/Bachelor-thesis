@@ -14,15 +14,16 @@ z~przemysłowych młynów surowców.
 Politechnika Śląska jest także w~posiadaniu laboratorium termowizji, które
 wyposażono w~kamery pracujące w~spektrum podczerwieni.
 W~ramach projektu inżynierskiego zdecydowano się na realizację zadania
-detekcji i~klasyfikacji ziaren rud miedzi z~użyciem termowizji.
+detekcji i~klasyfikacji ziaren rud miedzi z~użyciem termowizji oraz sieci
+neuronowych.
 Ze względu na nieinwazyjny charakter pomiarów, techniki termowizyjne są
-korzystnym rozwiązaniem w~realizacjach przemysłowych.
+popularnym rozwiązaniem w~realizacjach przemysłowych.
 Sieci neuronowe stanowią obecnie jedną z~najszybciej rozwijających się
 i~obiecujących technik uczenia maszynowego.
 Połączenie pomiarów termowizyjnych oraz sztucznych sieci neuronowych
 stanowi interesujący temat pracy.
 Realizacja zadania klasyfikacji ziaren rud miedzi, z~użyciem przedstawionych
-technik stanowi próbę alternatywnego rozwiązania problemów rozpatrywanych
+technik, stanowi próbę alternatywnego rozwiązania problemów rozpatrywanych
 we wcześniejszych pracach Politechniki Śląskiej.
 
 \section{Cel pracy}
@@ -35,15 +36,15 @@ dla rudy miedzi o~nieznanej klasie, będzie w~stanie określić jej typ.
 W~rozpatrywanym zbiorze znajdują się cztery rodzaje rud miedzi, czyli
 należy zbudować klasyfikator \emph{wieloklasowy}.
 
-Rudy miedzi zdecydowano się klasyfikować według ich charakterystycznych
+Zdecydowano się klasyfikować rudy miedzi według ich charakterystycznych
 wzorców stygnięcia, do rejestrowania których służy kamera termowizyjna.
 Na podstawie nagrań z~kamery należy utworzyć zbiór danych, który będzie
 podstawą do treningu oraz oceny sieci neuronowej.
 Ponieważ próbki przeznaczone do treningu sieci mają znane klasy, 
 to zadanie należy do grupy problemów \emph{nadzorowanego uczenia maszynowego}.
-Oznacza to, że sieć będzie uczona poprzez podanie jej danych wejściowych
-oraz klasy jaka jest oczekiwana na jej wyjściu.
-Trening sieci będzie polegał na jej dopasowaniu do etykiet (klas) danych
+Oznacza to, że sieć będzie uczona poprzez podanie danych wejściowych
+oraz klasy jaka jest oczekiwana na wyjściu.
+Trening sieci będzie polegał na dopasowaniu jej do etykiet (klas) danych
 zbioru uczącego.
 
 Zadania uczenia maszynowego wykonuje się w~kilku etapach, które odpowiadają
@@ -60,10 +61,10 @@ Kolejne kroki rozwiązania problemu klasyfikacji są następujące:
     \item dostrojenie modelu na podstawie systemu walidacji,
     \item prezentacja rozwiązania.
 \end{enumerate}
-Przedstawione kroki rozwiązania zadania klasyfikacji wymagają rozwiązania
+Przedstawione kroki zadania klasyfikacji wymagają rozwiązania
 szeregu problemów związanych z~rozpatrywanym przypadkiem.
-Prace należy zacząć od zapoznania się z~dostępny sprzętem termowizyjnym oraz 
-oceną jego zdatności w~pomiarach ziaren rud miedzi.
+Prace należy zacząć od zapoznania się z~dostępnym sprzętem termowizyjnym oraz 
+oceną jego użyteczności w~pomiarach ziaren rud miedzi.
 Następnie należy zaplanować i~przeprowadzić eksperyment pomiarowy, którego
 wynikiem będą nagrania ziaren.
 Materiały wideo oraz zdjęcia zawierają wiele danych, należy je przeanalizować
