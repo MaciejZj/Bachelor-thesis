@@ -336,7 +336,7 @@ ich cech charakterystycznych:
 	\item \label{it:blob}
 	      śledzenie zlewania się i~zanikania małych detali na obrazie.
 \end{enumerate}
-Wszystkie przedstawione opcje mają uzasadnienie i~mogą sprawdzić się dobrze
+Wszystkie przedstawione opcje mają uzasadnienie i~mogą się dobrze sprawdzić
 jako podstawa klasyfikacji.
 Metody \ref{it:fft}, \ref{it:glcm} oraz \ref{it:edge} były już w~różnym
 stopniu badane w~ramach działaności Politechniki Śląskiej.
@@ -550,7 +550,7 @@ obliczanych funkcji Gaussa, przez co wykrywane są tylko małe elementy.
 Drugi argument \mintinline{python}{threshold=0.1} decyduje o~poziomie,
 powyżej którego punkt jest uznany za maksimum w~sześcianie laplasjanów.
 Domyślna wartość tego argumentu \mintinline{python}{threshold=2.0} okazała 
-się zbyt duża, zmniejszono jej wartość aby wykrywać bardziej subtelne detale.
+się zbyt duża, zmniejszono ją aby wykrywać bardziej subtelne detale.
 Na podstawie opisanego wywołania metody laplasjanu funkcji Gaussa
 opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
 \begin{listing}[htb]
@@ -630,7 +630,7 @@ ciężkości i~promienie detali ulegają zmianie.
 Dlatego kolejne grupy plam nie są zawsze porównywane z~grupą z~początku
 serii, a~z~zestawem z poprzedniego analizowanego zdjęcia.
 
-Na listingu \ref{lst:find_remaining_blobs} przedstawiono funkcję testującą
+Na listingu \ref{lst:find_remaining_blobs} przedstawiono funkcję testującą,
 które z~detali znajdują się na kolejnych etapach stygnięcia.
 \begin{listing}[htb]
 \begin{minted}{python}
@@ -737,7 +737,7 @@ w~pracy.
 % TODO: forma załączników
 Pełen listing programów znajduje się w~załącznikach.
 
-Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam ,w~serii
+Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam, w~serii
 zdjęć, na trzy sposoby.
 Efekty działania utworzonego kodu przetestowano na obrazach pomiarowych.
 Działanie sposobów zliczania ziaren \ref{it:allblob}~oraz
@@ -863,10 +863,10 @@ wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
     \label{fig:blobchartall}
 \end{figure}
 Wykreślone krzywe dla różnych klas materiałów przecinają się, na wykresach
-nie widać uporządkowania, ani jasnych zależności. 
-Liczba charakterystycznych detali może być cechą rud miedzi, ze względu na
-ich różny skład, jednak w~analizowanym przypadku nie jest to cecha dająca
-nadzieję na dobre wyniki klasyfikacji.
+nie widać uporządkowania, ani wyraźnych zależności. 
+Liczba charakterystycznych detali może być cechą ziaren rud miedzi, ze
+względu na ich różną budowę, jednak w~analizowanym przypadku nie jest to
+cecha dająca nadzieję na dobre wyniki klasyfikacji.
 Powodem takiej sytuacji jest duża losowość tego typu danych.
 Niezależnie od własności materiału, jego ułożenie podczas pomiaru jest
 przypadkowe, co ma wpływ na bezwzględną liczbę zliczonych detali.

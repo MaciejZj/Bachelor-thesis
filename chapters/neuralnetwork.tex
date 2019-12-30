@@ -2,7 +2,7 @@
 Po zakończeniu procesu eksploracji danych można przystąpić do
 konstrukcji sieci neuronowej odpowiedzialnej za rozpoznawanie ziaren rud
 miedzi.
-Przedstawiony problem jest wymaga klasyfikacji wieloklasowej wielowymiarowych
+Przedstawiony problem wymaga klasyfikacji wieloklasowej wielowymiarowych
 danych.
 Problemy tego typu można rozwiązywać zarówno za pomocą klasycznych algorytmów
 uczenia maszynowego jak i~uczenia głębokiego.
@@ -64,7 +64,7 @@ w~poszczególnych warstwach.
 W przypadku pierwszej i~ostatniej warstwy jest to wartość prosta do
 określenia.
 Zaleca się, aby wejście sieci miało liczbę neuronów równą liczbie elementów
-używanego wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć.
+wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć.
 % TODO: cite
 Ostatnia warstwa powinna mieć tyle neuronów ile wynosi liczba rozpoznawanych
 klas, tak by każde wyjście sieci oznaczało prawdopodobieństwo przynależności
@@ -193,7 +193,7 @@ def default_grain_classifier_model():
 \subsection{Trening sieci neuronowej}
 \label{subsec:train}
 Kolejnym krokiem w~budowie klasyfikatora ziaren jest trening sieci neuronowej.
-Jest to proces w~którym wagi neuronów są dopasowywane do zbioru uczącego.
+Jest to proces. w~którym wagi neuronów są dopasowywane do zbioru uczącego.
 Rozpatrywany problem jest typu uczenia nadzorowanego.
 Przygotowane dane mają znane etykiety klas, to znaczy są odgórnie przypisane
 do danego typu.
@@ -222,7 +222,7 @@ Gdyby dane dzielić w~pełni przypadkowo istniałoby ryzyko nadmiernej
 reprezentacji klasy w~danej grupie oraz jej braku w~innej.
 Kolejnym istotnym parametrem jest \mintinline{python}{test_size}, który
 decyduje o~rozmiarze zbioru testowego.
-Ponieważ w~zbiorze są trzy egzemplarze każdej klasy, odpowiednie jest
+Ponieważ w~zbiorze są trzy egzemplarze każdej klasy odpowiednie jest
 wydzielenie do testów jednej trzeciej próbek.
 Ostatni parametr \mintinline{python}{random_state}, to ziarno generatora
 losowego podziału zbiorów.
@@ -247,7 +247,7 @@ algorytmu uczenia sieci.
 Rozważono dwa popularne metody treningu: sgd (ang. \emph{stochastic gradient
 descent)} oraz adam (ang. \emph{adaptive moment estimation}).
 Metoda sgd jest najbardziej popularnym i~podstawowym sposobem uczenia, jednak
-algorytm adam, jest roziązaniem nowszym, polecanym w~problemach klasyfikacji.
+algorytm adam, jest rozwiązaniem nowszym, polecanym w~problemach klasyfikacji.
 %TODO: cite
 Zgodnie z~tymi przesłankami optymalizator adam okazał się dawać najlepsze
 rezultaty i~to on został wybrany do uczenia sieci.
@@ -266,13 +266,13 @@ działania sieci.
 Wybrano standardową metrykę dokładności sieci, czyli stosunku poprawnie
 zakwalifikowanych próbek do wszystkich analizowanych.
 
-Ostatnim etapem uczenia jest realizacja treningu sieci, dokonywana za pomocą
-metody \mintinline{python}{model.fit()}.
+Ostatnim etapem uczenia jest realizacja treningu sieci, dokonywana za
+pomocą metody \mintinline{python}{model.fit()}.
 Metoda przyjmuje argumenty zbioru treningowego wraz z~zestawem etykiet
 oraz liczbę epok treningu, zwraca obiekt zawierający przebieg uczenia sieci.
 Na rysunku \ref{fig:history} przedstawiono dokładność i~błąd w~kolejnych
 epokach treningu.
-Na ich podstawie określono liczbę że odpowiednia liczba epok wynosi 300.
+Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 \begin{figure}[htb]
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
