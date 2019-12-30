@@ -509,21 +509,21 @@ klasyfikacji, bazującego na procentowym śledzeniu detali.
 Wyniki zestawiono w~tabeli \ref{tab:confusion_matrix}.
 Zgodnie z~wynikami sprawdzianu krzyżowego, większość elementów tablicy znajduje
 się na jej przekątnej.
-To znaczy, że wszystkie próbki klas E5R, E11R oraz E1XP są poprawnie
+To znaczy, że wszystkie próbki klas E5R, E11R oraz E16R są poprawnie
 klasyfikowane.
 Widoczna jest pomyłka sieci polegająca na niewłaściwej klasyfikacji próbki
-klasy E6R jako E1XP.
+klasy E6R jako E16R.
 
 \begin{table}[htb]
 \centering
 \begin{tabular}{cccccc}
                                  &                            & \multicolumn{4}{c}{Wiedza klasyfikatora} \\ \cmidrule[1pt]{2-6}
-                                 & \multicolumn{1}{c|}{klasa} & E5R      & E6R      & E11R     & E1XP    \\ \cmidrule{2-6}
+                                 & \multicolumn{1}{c|}{klasa} & E5R      & E6R      & E11R     & E16R    \\ \cmidrule{2-6}
 \multirow{4}{*}{\rotatebox[origin=c]{90}{\parbox{2cm}
 {\centering Wiedza eksperta}}} & \multicolumn{1}{c|}{E5R}   & 1,00     & 0,00     & 0,00     & 0,00    \\
                                  & \multicolumn{1}{c|}{E6R}   & 0,00     & 0,67     & 0,00     & 0,33    \\
                                  & \multicolumn{1}{c|}{E11R}  & 0,00     & 0,00     & 1,00     & 0,00    \\
-                                 & \multicolumn{1}{c|}{E1XP}  & 0,00     & 0,00     & 0,00     & 1,00 \\
+                                 & \multicolumn{1}{c|}{E16R}  & 0,00     & 0,00     & 0,00     & 1,00 \\
                                  \cmidrule[1pt]{2-6}
 \end{tabular}
 \caption{Tabela pomyłek najlepszego klasyfikatora}

@@ -95,7 +95,7 @@ table {%
 3 6
 4 5
 };
-\addlegendentry{Klasa E1XP}
+\addlegendentry{Klasa E16R}
 \addplot [line width=0.48pt, color0, forget plot]
 table {%
 0 134

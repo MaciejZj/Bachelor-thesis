@@ -95,7 +95,7 @@ table {%
 3 0.00980392156862745
 4 0.00980392156862745
 };
-\addlegendentry{Klasa E1XP}
+\addlegendentry{Klasa E16R}
 \addplot [line width=0.48pt, color0, forget plot]
 table {%
 0 1
