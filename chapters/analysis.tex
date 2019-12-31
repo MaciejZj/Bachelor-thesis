@@ -581,31 +581,34 @@ def find_blobs(img):
 Użycie funkcji bibliotecznych opisanych w~podsekcji \ref{subsec:blobdetect}
 pozwala na detekcję detali na pojedynczym zdjęciu.
 Aby wykorzystać detekcję plam w~serii pięciu zdjęć, które reprezentują
-stygnięcie jednej próbki należy opracować zestaw funkcji śledzący zmiany 
+stygnięcie jednej próbki, należy opracować zestaw funkcji śledzący zmiany 
 na obrazie.
 Na tym etapie prac nie jest jednoznaczne jaki sposób obserwacji i~zliczania
 detali będzie najlepszy do późniejszego prototypowania sieci neuronowej
 klasyfikującej ziarna rud miedzi.
-Dlatego zdecydowano się na napisanie funkcji zliczania plam, tak by
-możliwe były trzy warianty pracy algorytmu:
+Dlatego zdecydowano się na napisanie funkcji zliczania plam, tak by umożliwić
+trzy warianty pracy algorytmu:
 \begin{enumerate}[a)]
 	\item \label{it:allblob}
 	      zliczanie wszystkich detali na każdym etapie stygnięcia,
 	\item \label{it:remainingblob}
-	      zliczanie w kolejnych etapach stygnięcia jedynie tych detali,
-	      które były obecne od początku stygnięcia,
-	\item \label{it:percentblob}
-	      zliczanie na kolejnych etapach pozostałego procentu ziaren, które
-	      były obecne od początku stygnięcia.
+	      zliczanie detali śledzonych od początku stygnięcia,
+	\item \label{it:ratioblob}
+	      zliczanie stosunku śledzonych detali do ich ilości na początku
+	      stygięcia.
 \end{enumerate}
+Przez śledzenie detali rozumiane jest zliczanie jedynie tych plam, które
+były wykryte na początku stygnięcia.
+Oznacza to, że metody \ref{it:remainingblob} oraz \ref{it:ratioblob}
+ignorują detale pojawiające się w~późniejszych etapach studzenia ziaren.
 
 W~celu realizacji planu śledzenia detali utworzono funkcję języka Python.
 Jej kod przedstawiono na listingu \ref{lst:find_blob_series}.
 Aby umożliwić wariantowość algorytmu funkcja posiada opcjonalny parametr,
-który pozwala włączyć lub wyłączyć śledzenie jedynie tych ziaren, które
-były obecne od początku stygnięcia.
-Przedstawiony kod wykorzystuje funkcję wykrywania detali na zdjęciu
-przedstawioną na listingu \ref{lst:find_blobs}.
+który pozwala aktywować śledzenie wyłącznie tych ziaren, które były obecne od
+początku stygnięcia.
+Omawiany kod wykorzystuje funkcję wykrywania detali na zdjęciu przedstawioną
+na listingu \ref{lst:find_blobs}.
 \begin{listing}[htb]
 \begin{minted}{python}
 def find_blob_series(imgs, only_remaining=True):
@@ -703,22 +706,21 @@ Lista list nie podlega konwersji do zbioru, ponieważ typ jej elementów
 nie posiada funkcji hashowania.
 Dlatego każdy punkt na liście zamieniono uprzednio w~typ krotki.
 W~ten sposób wszystkie konieczne przekształcenia są możliwe.
-Aby zrealizować pomysł zliczania procentu plam pozostałych w~kolejnych etapach
+Aby zrealizować pomysł liczenia stosunku plam pozostałych w~kolejnych etapach
 stygnięcia zaimplementowano funkcję przedstawioną na listingu
-\ref{lst:percent}.
+\ref{lst:ratio}.
 \begin{listing}[htb]
 \begin{minted}{python}
-def percent_of_remaining_blobs_in_stages(stages):
+def ratio_of_remaining_blobs_in_stages(stages):
     '''
-    In each stage calculate the percentage of blobs that are
-    present in the first stage and remain at given stage.
+    In each stage calculate ratio of remaining blobs to their initial number.
     '''
     num_of_blobs = [len(stage) for stage in stages]
     return [remaining / num_of_blobs[0] for remaining in num_of_blobs]
 \end{minted}
-\caption{Funkcja języka Python obliczająca ile procent ziaren z~początku
-         stygnięcia pozostało w~jego kolejnych etapach}
-\label{lst:percent}
+\caption{Funkcja języka Python obliczająca jaka część ziaren z~początku
+         stygnięcia pozostała w~jego kolejnych etapach}
+\label{lst:ratio}
 \end{listing}
 
 Przyglądając się zaimplementowanym funkcjom można docenić wybór języka
@@ -828,8 +830,8 @@ plam podczas stygnięcia i zlewania się.
              pierwszym obrazie w~serii pomiarowej}
     \label{fig:blobremain}
 \end{figure}
-Działanie metody \ref{it:percentblob}, zliczającej procent detali, obecnych
-od początku stygnięcia zobrazowano w~tabeli \ref{tab:blobpercent}.~
+Działanie metody \ref{it:ratioblob}, zliczającej stosunek śledzonych detali 
+do ich pierwotnej liczby zobrazowano w~tabeli \ref{tab:blobratio}.
 Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 \begin{table}[htb]
 	\centering
@@ -842,9 +844,9 @@ Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 	111\_E16R & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\
 	\bottomrule
 	\end{tabular}
-\caption{Procent detali wykrytych w~kolejnych etapach stygnięcia, które
-         były obecne na jego początku}
-\label{tab:blobpercent}
+\caption{Stosunek liczby detali śledzonych w~kolejnych etapach stygnięcia, do
+         ich liczby na początku pomiaru}
+\label{tab:blobratio}
 \end{table}
 
 \subsection{Wizualizacja zebranych cech i~ocena ich użyteczności}
@@ -909,13 +911,14 @@ szumów, które mogą zostać wykryte przez algorytm.
 Śledzenie detali, które znajdują się na obrazie od początku eliminuje ten
 problem.
 
-Wyniki ostatniej metody, polegającej na procentowym ustaleniu zaniku liczby
-detali, został przedstawiona na rysunku \ref{fig:blobcharperc}.
+Wyniki ostatniej metody, polegającej na ustaleniu stosunku śledzonych detali
+do ich pierwotnej liczby, został przedstawiona na rysunku
+\ref{fig:blobcharperc}.
 \begin{figure}[htb]
     \centering
-    \input{figures/blob_analysis_percent}
-    \caption{Liczba wykrytych detali, przy procentowym zliczaniu detali, które
-             występowały w~serii od początku stygnięcia}
+    \input{figures/blob_analysis_ratio}
+    \caption{Stosunek śledzonych detali do ich liczby na początku procesu
+             stygniecia}
     \label{fig:blobcharperc}
 \end{figure}
 Widoczne jest odseparowanie różnych klas rud miedzi, różne typy próbek

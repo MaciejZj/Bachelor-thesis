@@ -291,8 +291,8 @@ Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
-		\input{figures/neural_network_trainig_percent}
-		\caption{Przebieg treningu sieci dla metody procentowego zliczania
+		\input{figures/neural_network_trainig_ratio}
+		\caption{Przebieg treningu sieci dla metody zliczania stosunku
 		         śledzonych ziaren}
 	\end{subfigure}
 	\caption{Przebieg treningu sieci dla różnych metod zliczania ziaren}
@@ -337,7 +337,7 @@ w~podsekcji~\ref{subsec:datavis}.
                                          & błąd       & dokładność      \\ \midrule
 wszystkie detale              & 1,45       & 0,25            \\
 śledzone detale              & 7,50       & 0,5             \\
-procent śledzonych detali   & 0,63       & 0,75           \\   
+stosunek śledzonych detali   & 0,63       & 0,75           \\   
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci na zbiorze testowym}
@@ -404,8 +404,8 @@ należy uśrednić.
 Efekty walidacji dla trzech sposobów zliczania detali na obrazach przedstawia
 tabela \ref{tab:blobval}.
 
-Zgodnie z~wcześniejszymi przewidywaniami metoda procentowego zliczania
-detali na obrazach okazała się dawać najlepsze rezultaty.
+Zgodnie z~wcześniejszymi przewidywaniami, metoda zliczania stosunku śledzonych
+detali do ich pierwotnej liczby okazała się dawać najlepsze rezultaty.
 Dokładność na poziomie 91\% jest wystarczająca do uznania sieci za dobry
 klasyfikator.
 Pozostałe metody zliczania okazały się mniej precyzyjne, co wskazuje że należy
@@ -450,7 +450,7 @@ print('Cross validation mean score (loss, acc):\n',
                                          & błąd       & dokładność      \\ \midrule
 wszystkie detale             & 6,59       & 0,41            \\
 śledzone detale              & 3,99       & 0,50             \\
-procent śledzonych detali   & 1,37       & 0,91          \\   
+stosunek śledzonych detali   & 1,37       & 0,91          \\   
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
@@ -475,7 +475,8 @@ Ze względu na małą ilość posiadanych danych macierz pomyłek opracowano
 na podstawie mechanizmu sprawdzianu krzyżowego.
 Na każdym jego etapie budowano macierz pomyłek, a~ostatecznie tablicę
 uśredniono.
-Wartości w~tabeli przedstawiono w~stosunku procentowym.
+Ułamki dziesiętne w~tabeli reprezentują jaka część próbek danej klasy
+została sklasyfikowana w~dany sposób.
 Funkcję generującą uśrednioną macierz pomyłek przedstawia listing
 \ref{lst:mean_confusion_matrix}.
 \begin{listing}[htb]
@@ -505,7 +506,8 @@ def mean_confusion_matrix(model, X, y, n_splits):
 \end{listing}
 
 Zdecydowano się wygenerować macierz pomyłek dla najlepszego sposobu
-klasyfikacji, bazującego na procentowym śledzeniu detali.
+klasyfikacji, bazującego na określaniu stosunku pozostałych detali
+do ich liczby na początku procesu stygnięcia.
 Wyniki zestawiono w~tabeli \ref{tab:confusion_matrix}.
 Zgodnie z~wynikami sprawdzianu krzyżowego, większość elementów tablicy znajduje
 się na jej przekątnej.

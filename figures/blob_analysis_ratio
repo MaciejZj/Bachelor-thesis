@@ -5,7 +5,7 @@
 
 \begin{axis}[
 legend cell align={left},
-title={Pozostały procent śledzonych detali},
+title={Stosunek śledzonych detali},
 width=12cm, height=8cm,
 xlabel={Minuty},
 xmin=0, xmax=4,
