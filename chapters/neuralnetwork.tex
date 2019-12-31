@@ -381,17 +381,17 @@ Zwracana jest macierz, w~której rzędy oznaczają wyniki testów dla kolejnych
 podziałów zbioru danych.
 \begin{listing}[htb]
 \begin{minted}{python}
-def network_cross_validation(model, X, y):
-    '''Compute cross validation fold scores for given Keras model.'''
+def network_cross_validation(model, X, y, n_splits):
+    '''Compute cross validation fold scores for given keras model.'''
     eval_scores = []
-    for train_index, test_index in 
-        StratifiedKFold(n_splits = 3).split(X, y):
-        
+    
+    folds = StratifiedKFold(n_splits=n_splits).split(X, y)
+    for train_index, test_index in folds:
         x_train, x_test= X[train_index], X[test_index]
         y_train, y_test= y[train_index], y[test_index]
         
         model.fit(x_train, y_train, epochs=300, verbose=0)
-        eval_scores.append(model.evaluate(x_test, y_test))
+        eval_scores.append(model.evaluate(x_test, y_test, verbose=0))
     return eval_scores
 \end{minted}
 \caption{Funkcja języka Python definiująca model sieci neuronowej}
@@ -430,12 +430,12 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-eval = network_cross_validation(model, X, y)
+score = network_cross_validation(model, X, y, 3)
 
-print('Folds scores: (loss, acc)\n', eval)
-eval = np.array(eval)
+print('Folds scores: (loss, acc)\n', score)
+score = np.array(score)
 print('Cross validation mean score (loss, acc):\n',
-      eval.mean(axis=0), '\n')
+      score.mean(axis=0), '\n')
 \end{minted}
 \caption{Wykorzystanie funkcji sprawdzianu krzyżowego do oceny działania
          sieci}
