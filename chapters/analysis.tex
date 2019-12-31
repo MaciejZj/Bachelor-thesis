@@ -331,8 +331,8 @@ ich cech charakterystycznych:
 	\item \label{it:glcm} 
 	      użycie macierzy GLCM,
 	\item \label{it:edge}
-	      wykrywanie krawędzi ziaren i~wyznaczanie reprezentacji liczbowej
-	      ich kształtów oraz powierzchni,
+	      detekcja krawędzi ziaren i~wyznaczanie reprezentacji liczbowej
+	      ich kształtów,
 	\item \label{it:blob}
 	      śledzenie zlewania się i~zanikania małych detali na obrazie.
 \end{enumerate}
@@ -344,8 +344,8 @@ stopniu badane w~ramach działaności Politechniki Śląskiej.
 Należy rozpatrzeć, którą technikę wykorzystać do budowy prototypu
 klasyfikatora.
 
-Metoda \ref{it:imgcnn}, z~użyciem sieci konwolucyjnych może
-wykorzystywać najnowsze rozwiązania w~dziecinie uczenia maszynowego.
+Metoda bazująca na sieciach konwolucyjnych może wykorzystywać najnowsze
+rozwiązania w~dziecinie uczenia maszynowego.
 Utrudnieniem w~użyciu tej metody jest bardzo mały rozmiar posiadanego 
 zbioru danych.
 Na zgromadzonych obrazach znajduje się wiele informacji i~szumów,
@@ -353,11 +353,17 @@ a~złożoność jednego zdjęcia jest na tę chwilę nieproporcjonalna do wielko
 zestawu danych.
 Pomysł ten można wypróbować po rozszerzeniu zbioru nagrań.
 
-Technika \ref{it:fft}, polega na analizie częstotliwościowej obrazów.
-Takie podejście wymaga złożonych operacji matematycznych.
-Dodatkowo wynik analizy widmowej może być nieoczywisty w~interpretacji.
-Realizacja tej metody może wymagać konstrukcji złożonych sieci neuronowych.
-Analizę widmową ziaren przeprowadzono w~pracach naukowców Politechniki Śląskiej.
+Technika polegająca na analizie częstotliwościowej obrazów wymaga zastosowania
+transformacji Fouriera.
+Takie podejście charakteryzuje się złożonością obliczeniową.
+Dodatkowo efekt analizy widmowej może być nieoczywisty w~interpretacji.
+Wynikiem zastosowania transformacji Fouriera na obrazach są dwuwymiarowe
+macierze.
+Użycie takich danych wejściowych może wymagać konstrukcji złożonych sieci
+neuronowych.
+Analizę widmową ziaren przeprowadzono w~pracach naukowców Politechniki
+Śląskiej, w~rozpatrywanym przypadku zdecydowano się na poszukiwanie
+innego rozwiązania.
 
 Macierz GLCM (ang. \textit{Gray-Level Co-Occurrence Matrix}), na której może
 bazować opcja \ref{it:glcm}, to tablica zawierająca informacje o~relacjach
@@ -366,7 +372,7 @@ Pozwala ona na analizę takich wartości jak: kontrast, korelacja, energia
 oraz homogeniczność.
 Jest to opcja dająca możliwość analizy dużej ilości informacji, z~pewnością
 warta rozpatrzenia, jednak dosyć skomplikowana.
-Zdecydowano się na wybór bardziej wydajnej i~mniej złożonej metody.
+Zdecydowano się na wybór mniej złożonej metody.
 
 Na obrazie można także wykrywać kształty ziaren za pomocą filtrów detekcji
 krawędzi.
