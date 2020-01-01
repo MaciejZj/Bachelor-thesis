@@ -42,18 +42,19 @@ Konstrukcję klasyfikatora rozpoczęto od wyboru ilości warstw.
 W~standardowej konstrukcji każda sieć posiada warstwę wejściową oraz
 wyjściową, których parametry są związane odpowiednio z~wektorem cech
 oraz reprezentacją klas na wyjściu sieci.
-Ponadto do aproksymacji dowolnej funkcji nieliniowej wystarczająca jest sieć
-składająca się z~dwóch warstw.
-Nie oznacza to jednak, że w~praktyce dwie warstwy wystarczą by rozwiązać
-dowolny problem.
 Aby zwiększać efektywność sieci pomiędzy warstwą wejściową oraz wyjściową
 umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
 Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
-Mimo że jedna warstwa ukryta pozwala teoretycznie na rozwiązanie dowolnego
-problemu, w~praktyce opłacalne jest stosowanie większej ilości warstw,
-co poparte jest licznymi przykładami \cite{reed}.
+Matematycznie dowiedziono, że jedna warstwa ukryta \footnote{Przy
+pewnych obostrzeniach co do doboru funkcji aktywacji.} wystarcza do
+aproksymacji dowolnej funkcji nieliniowej \cite{cybenko_approximations}.
+Nie oznacza to jednak, że w~praktyce tak mała sieć wystarczy, aby rozwiązać
+dowolny problem uczenia maszynowego.
+Dodanie większej ilości warstw ukrytych jest jednym z~najlepszych sposobów na
+poprawę działania sieci w~realnych warunkach \cite[str. 273]{geron_ml}.
 Biorąc pod uwagę złożoność rozpatrywanego problemu zdecydowano się na
-strukturę czterowarstwową.
+strukturę czterowarstwową (warstwa wejściowa, wyjściowa i~dwie warstwy
+ukryte).
 Jest to rozmiar często spotykany w~sieciach tego typu, późniejsze testy
 pokazały, że wybrana liczba warstw daje dobre rezultaty.
 Sprawdzono, że zastosowanie jednej warstwy ukrytej powodowało pogorszenie
@@ -64,8 +65,8 @@ w~poszczególnych warstwach.
 W przypadku pierwszej i~ostatniej warstwy jest to wartość prosta do
 określenia.
 Zaleca się, aby wejście sieci miało liczbę neuronów równą liczbie elementów
-wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć.
-% TODO: cite
+wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć 
+\cite[str. 272]{geron_ml}.
 Ostatnia warstwa powinna mieć tyle neuronów ile wynosi liczba rozpoznawanych
 klas, tak by każde wyjście sieci oznaczało prawdopodobieństwo przynależności
 próbki do odpowiedniej klasy.
@@ -76,7 +77,6 @@ stwierdzono, że sieć osiąga dobre wyniki dla 256 neuronów w~pierwszej
 warstwie ukrytej i~128 w~drugiej.
 Zmniejszenie liczby neuronów o~połowę w~kolejnej warstwie ukrytej jest
 często spotykanym zabiegiem.
-% TODO: cite
 
 Następnie rozpatrzono dostępne funkcje aktywacji poszczególnych warstw.
 Dla warstwy wyjściowej należy wybrać funkcję o~wartościach od zera do jeden.
@@ -247,10 +247,13 @@ algorytmu uczenia sieci.
 Rozważono dwa popularne metody treningu: sgd (ang. \emph{stochastic gradient
 descent)} oraz adam (ang. \emph{adaptive moment estimation}).
 Metoda sgd jest najbardziej popularnym i~podstawowym sposobem uczenia, jednak
-algorytm adam, jest rozwiązaniem nowszym, polecanym w~problemach klasyfikacji.
-%TODO: cite
-Zgodnie z~tymi przesłankami optymalizator adam okazał się dawać najlepsze
-rezultaty i~to on został wybrany do uczenia sieci.
+algorytm adam, jest rozwiązaniem nowszym, i~bardziej wydajnym.
+Jedną z~zalet drugiego algorytmu jest adaptacyjne obliczanie współczynnika
+uczenia, przez co strojenie tego parametru nie jest konieczne.
+Wadą nowszego rozwiązania jest spadek jakości wyników dla szczególnych
+zbiorów danych \cite[str. 299]{geron_ml}.
+Porównanie algorytmów w~rozpatrywanym przypadku wskazało, że algorytm
+adam daje lepsze rezultaty i~to na jego użycie się zdecydowano.
 Parametr \mintinline{python}{loss} przyjmuje nazwę sposobu liczenia błędu
 w~sieci.
 Przykładem miary błędu używanej w~sieciach neuronowych jest popularny

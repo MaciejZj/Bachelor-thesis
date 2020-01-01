@@ -25,3 +25,38 @@ Parametr                                              & Wartość   & Błąd & D
 \bottomrule
 \end{tabular}
 \end{table}
+
+\chapter{Organizacja projektu}
+\section{Struktura plików projektu}
+Podczas budowania funkcji dbano o~ich zwięzłość, dobry podział realizowanych
+zadań oraz ograniczenie długości bloków kodu.
+Dzięki temu program zachowuje zasady dobrego programowania \cite{martin_code}.
+Każdą funkcję opatrzono w~specjalny komentarz \emph{docstring} będący
+standardem w~świecie języka Python.
+Funkcje umieszczono w~odpowiednich plikach, które zawierają także
+przykłady ich użycia i~obrazują działanie oraz porównują efekty.
+Struktura plików w~projekcie jest następująca:
+\begin{description}
+    \item[img\_processing.py]
+          funkcje przetwarzania obrazu i~wczytywania danych,
+    \item[blob\_finder.py]
+          funkcja wykrywania detali na zdjęciach termowizyjnych,
+    \item[blob\_series\_tracker.py]
+          funkcje śledzenia i~zliczania detali w~serii zdjęć,
+    \item[neural\_network.py]
+          funkcje dostępu do modelu sieci i~metod walidacji,
+    \item[pliki demo.py]
+          pliki demonstrujące działanie utworzonego oprogramowania,
+    \item[thesis\_generator.py]
+          funkcje generujące obrazy, wykresy oraz tabele znajdujące się
+          w~treści tego dokumentu.
+\end{description}
+
+\section{Narzędzia pomocnicze}
+W~czasie programowania oraz pisania pracy korzystano z~systemu wersjonowania
+Git.
+Korzystanie z~systemu kontroli wersji zapewnia porządek w~rozwoju projektu
+oraz chroni przed przypadkową utratą postępów.
+Dokument opisujący projekt inżynierski napisano z~użyciem zestawu makr
+LaTex oraz systemu bibliografii BibTex.
+

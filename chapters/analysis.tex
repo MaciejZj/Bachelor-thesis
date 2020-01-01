@@ -177,7 +177,9 @@ ekstrakcji zakresu temperatur z~zdjęć pochodzących z kamery.
 
 W~celu odczytu wartości liczbowych z~obrazu posłużono się gotową siecią
 neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
-Zdecydowano się na użycie popularnej biblioteki \emph{Pytesseract}.
+Zdecydowano się na użycie popularnej biblioteki \emph{Pytesseract}
+\footnote{Repozytorium projektu w~serwisie GitHub:
+\url{https://github.com/madmaze/pytesseract}}.
 Analizowane zdjęcia są kadrowane, by wyizolować odczytywane liczby.
 Wycięte fragmenty mają bardzo małą rozdzielczość, aby ułatwić sieci
 rozpoznawanie liczb, zdecydowano się przeskalować obrazy w~górę.
@@ -188,7 +190,7 @@ czarnym, barwy na zdjęciu odwrócono.
 Następnie obraz poddano binaryzacji metodą \emph{otsu}.
 Jest to popularna i~wydajna metoda binaryzacji, jej efektywność jest
 maksymalna kiedy liczba pikseli tła oraz pierwszego planu jest
-zbliżona~\cite{sezgin}.
+zbliżona~\cite{sezgin_thresholding}.
 Z~tego powodu poprawne kadrowanie liczb sprzyja jakości ich binaryzacji.
 Na rysunku \ref{fig:temp_bounds} przedstawiono kolejne etapy przygotowania
 obrazu do rozpoznania liczb.
@@ -339,8 +341,7 @@ ich cech charakterystycznych:
 Wszystkie przedstawione opcje mają uzasadnienie i~mogą się dobrze sprawdzić
 jako podstawa klasyfikacji.
 Metody \ref{it:fft}, \ref{it:glcm} oraz \ref{it:edge} były już w~różnym
-stopniu badane w~ramach działaności Politechniki Śląskiej.
-% TODO: cite
+stopniu badane w~ramach działaności Politechniki Śląskiej \cite{budzan_grains}.
 Należy rozpatrzeć, którą technikę wykorzystać do budowy prototypu
 klasyfikatora.
 
@@ -447,11 +448,8 @@ Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
 	\item różnicę funkcji Gaussa,
 	\item wyznacznik Hesjanu.
 \end{enumerate}
-Algorytmy te pozwalają na wykrycie na obrazie plam o~kształcie zbliżonym
-do kolistego, oraz oszacowanie ich promieni.
-Stosuje się je w~analizie obrazów astronomicznych, do detekcji
-i~zliczania ciał niebieskich na zdjęciach wykonanych z~użyciem teleskopów.
-% TODO: cite
+Przedstawione algorytmy pozwalają na wykrycie na obrazie plam o~kształcie
+zbliżonym do kolistego oraz oszacowanie ich promieni.
 Badane detale, przedstawione na rysunku \ref{ch:conclusions},
 mają kształt zbliżony do kolistego, więc próba użycia rozpatrywanych
 algorytmów jest uzasadniona.
@@ -494,7 +492,7 @@ drugich pochodnych cząstkowych.
 Postać takiej macierzy w~n-wymiarowej przestrzeni zmiennych $ x $ przedstawia
 wzór \ref{eq:hessian}.
 Prędkość tej metody nie zależy od wielkości wykrywanych plam, ale małe
-elementy mogą nie zostać przez nią wykryte.
+elementy mogą nie zostać przez nią wykryte \cite{scikit_reference}.
 \begin{equation}
 	H = \begin{bmatrix}
 	\dfrac{\partial^2 f}{\partial x_1^2} & 
@@ -551,11 +549,11 @@ Wywołanie omawianej funkcji ma postać przedstawioną na listingu
 \ref{lst:find_blobs}.
 Funkcji podano dwa dodatkowe argumenty, które są istotne dla pożądanego
 działania.
-Argument \mintinline{python}{max_sigma=2} ogranicza odchylenie standardowe
+Argument \mintinline{python}{max_sigma} ogranicza odchylenie standardowe
 obliczanych funkcji Gaussa, przez co wykrywane są tylko małe elementy.
-Drugi argument \mintinline{python}{threshold=0.1} decyduje o~poziomie,
+Drugi argument \mintinline{python}{threshold} decyduje o~poziomie,
 powyżej którego punkt jest uznany za maksimum w~sześcianie laplasjanów.
-Domyślna wartość tego argumentu \mintinline{python}{threshold=2.0} okazała 
+Domyślna wartość tego argumentu \mintinline{python}{threshold} okazała 
 się zbyt duża, zmniejszono ją aby wykrywać bardziej subtelne detale.
 Na podstawie opisanego wywołania metody laplasjanu funkcji Gaussa
 opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
@@ -733,17 +731,6 @@ Wykorzystano bardzo zwięzły i~ekspresyjny element języka nazywany
 Pozwala on na efektywne stosowanie jedno-linijkowych pętli do przeglądania
 i modyfikowania obiektów iterowalnych.
 Użyteczność tego mechanizmu można zaobserwować na przedstawionych listingach.
-Podczas budowania funkcji dbano o~ich zwięzłość, dobry podział realizowanych
-zadań oraz ograniczenie długości bloków kodu.
-Dzięki temu program zachowuje zasady dobrego programowania.
-Każdą funkcję opatrzono w~specjalny komentarz \emph{docstring} będący
-standardem w~świecie języka Python.
-Funkcje umieszczono w~odpowiednich plikach, które zawierają także
-przykłady ich użycia i~obrazują działanie oraz porównują efekty.
-Kod przykładów posłużył do generowania wykresów i~obrazów zawartych
-w~pracy.
-% TODO: forma załączników
-Pełen listing programów znajduje się w~załącznikach.
 
 Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam, w~serii
 zdjęć, na trzy sposoby.
@@ -811,7 +798,7 @@ są śledzone od początku stygnięcia.
 	\label{fig:blobcount}
 \end{figure}
 
-Dodatkowo metodę śledzenia plam i~ich zanikania przedstawiono na rysunku
+Metodę śledzenia plam i~ich zanikania przedstawiono na rysunku
 \ref{fig:blobremain}.
 Pokazuje on położenie plam wykrytych w~kolejnych etapach stygnięcia.
 Wykryte punkty zaznaczono na obrazie z~początku tego procesu.
@@ -933,8 +920,7 @@ Jest to obserwacja wskazująca, że pozyskane cechy dobrze oddają naturę proce
 stygnięcia.
 Proces opadania temperatury ciał opisuje \emph{prawo stygnięcia Newtona},
 które ma postać równania różniczkowego, przedstawionego we wzorze
-% TODO: Cite
-\ref{eq:newtonlawdiff}, gdzie:
+\ref{eq:newtonlawdiff} \cite{lienhard_heat}, gdzie:
 \begin{description}
 	\item $ T \left( t \right) $ to funkcja temperatury ciała w~czasie,
 	\item $ T_R $ to temperatura otocznia,

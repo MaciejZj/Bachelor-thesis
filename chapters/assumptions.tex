@@ -1,6 +1,10 @@
 \section{Analizowane ziarna rud miedzi} \label{sec:grains}
 Zestaw analizowanych ziaren pochodzi z~projektu \textsc{sysmel} (\emph{System
-sterowania procesem mielenia w~układzie z~młynem elektromagnetycznym}),
+sterowania procesem mielenia w~układzie z~młynem elektromagnetycznym})
+\footnote{Pełen tytuł projektu naukowego: \emph{Układ mielenia surowców
+mineralnych w~młynie elektromagnetycznym wraz z~systemem sterowania jego
+pracą, zapewniający wysoką efektywność technologiczną i~niską energochłonność
+w~zastosowaniach mikro i~makro-przemysłowych.}},
 którego współtwórcami są naukowcy z~Politechniki Śląskiej.
 Uzyskane próbki powstały w~procesie mielenia rud miedzi w~młynie
 elektromagnetycznym.
@@ -67,7 +71,7 @@ Termowizję aktywną stosuje się szeroko w~badaniach naukowych oraz przemyśle.
 Przykładowe aplikacje tej techniki to detekcja defektów w~produktach
 przemysłowych oraz wykrywanie części konstrukcji podatnych na zużycie.
 Termowizja aktywna ma charakter niedestruktywny oraz bezkontaktowy,
-co stanowi jej zalety w~analizie materiałowej.
+co stanowi jej zalety w~analizie materiałowej \cite{ciampa_thermography}.
 Technika ta wymaga jednak etapowego procesu pomiarowego, potrzebne jest 
 przygotowanie instalacji grzewczej, a~nagrzewanie i~stygnięcie materiału
 może być czasochłonne.
@@ -82,13 +86,12 @@ Firma FLIR zajmuje się produkcją wysokiej jakości kamer i~detektorów do cel�
 profesjonalnych i~przemysłowych.
 Używany aparat łączy wysoką jakość pomiaru z~nowoczesnymi funkcjami
 integracji z~oprogramowaniem komputerowym.
-% TODO: kabel/sieć
 Urządzenie komunikuje się z~komputerem za pomocą sieci internetowej,
 pozwalając na kontrolę z~poziomu aplikacji oraz bibliotek
 programistycznych.
 Dodatkowo kamera posiada możliwość planowania automatycznych pomiarów
 i~alarmów, oferuje także funkcje analityczne oraz wbudowany serwer
-internetowy.
+internetowy \cite{flir_a32x_manual}.
 
 \subsection{Opis sprzętowy wykorzystywanej kamery}
 Kamera ma postać podłużnego korpusu, do którego swobodnie można podłączać
@@ -97,7 +100,7 @@ Na rysunku \ref{fig:camera}~przedstawiono zdjęcie wykorzystywanego urządzenia.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{flir_a320}
-    \caption{Kamera termowizyjna FLIR A320}
+    \caption{Kamera termowizyjna FLIR A320 \cite{flir_camera_specs}}
     \label{fig:camera}
 \end{figure}
 Egzemplarz kamery znajdujący się w~laboratorium termowizji Politechniki
@@ -124,10 +127,9 @@ Kamera wykrywa temperaturę przez detektor zwany \emph{bolometrem},
 który mierzy energię niesioną przez fale elektromagnetyczne w~spektrum
 podczerwieni.
 Kiedy fala pada na detektor aparatu, temperatura komórek matrycy rośnie
-i~zwiększa się ich rezystancja elektryczna, co wpływa na natężenie prądu
-płynącego przez obwody w~czujniku.
-Wartości natężenia prądu są mierzone, a~na ich podstawie określana jest
-temperatura.
+i~zwiększa się ich rezystancja elektryczna.
+Wartości rezystancji są mierzone, a~na ich podstawie określana jest
+temperatura \cite{vanhoof_infrared}.
 
 Zakres temperatur kamery jest odpowiedni do przeprowadzenia eksperymentów
 z~pomiarami ziaren rud miedzi metodą termowizji aktywnej.
@@ -161,7 +163,7 @@ Przyrząd przedstawiono na rysunku \ref{fig:lens}.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{flir_lens}
-    \caption{Obiektyw FLIR T197415}
+    \caption{Obiektyw FLIR T197415 \cite{flir_lens_specs}}
     \label{fig:lens}
 \end{figure}
 Wybrany obiektyw jest przygotowany z~myślą o~obserwacji drobnych detali
@@ -197,7 +199,8 @@ detali powierzchni.
 \label{subsec:camera_soft}
 Jedną z~najważniejszych cech kamery jest łatwość integracji
 z~oprogramowaniem komputerowym.
-Kamerę można obsługiwać za pomocą programu FLIR Tools.
+Kamerę można obsługiwać za pomocą programu FLIR Tools\footnote{Strona produktu
+programu FLIR Tools: \url{https://www.flir.com/products/flir-tools/}}.
 Pozwala on na podgląd obrazu oraz wykonywanie zdjęć termowizyjnych.
 Producent dostarcza również bibliotekę LabVIEW pozwalającą na zaawansowaną
 pracę z~kamerą.
@@ -247,15 +250,15 @@ Najbardziej popularną z~nich jest biblioteka OpenCV napisana w~języku
 C\texttt{++}.
 Zdecydowano się jednak na wybór mniej znanego pakietu Scikit-image.
 Jest to biblioteka zorientowana na obliczenia naukowe i~badawcze
-oraz napisana bezpośrednio z~myślą o~języku Python.
+oraz napisana bezpośrednio z~myślą o~języku Python \cite{scikit-image}.
 Scikit-image, w~porównaniu z OpenCV, oferuje bardziej spójny interfejs
 programisty oraz lepiej wykorzystuje charakterystykę języka Python.
 Dodatkowo wybrana biblioteka jest częścią zestawu Scikit, w~skład
 którego wchodzi pakiet Scikit-learn służący do uczenia maszynowego.
 Może on być przydatny przy tworzeniu sieci neuronowej, a~spójność bibliotek
 z~pakietu Scikit jest niewątpliwie zaletą.
-Wybrana biblioteka charakteryzuje się również dobrą dokumentacją oraz
-zestawem przykładów.
+Wybrana biblioteka charakteryzuje się również dobrą dokumentacją
+\cite{scikit_reference} oraz zestawem przykładów.
 
 \subsection{Interfejs sieci neuronowych Keras}
 \label{subsec:software_network}
@@ -264,7 +267,9 @@ Do najpopularniejszych pakietów należą: Keras, TensorFlow oraz PyTorch.
 Zdecydowano się na wybór interfejsu biblioteki Keras.
 Jest to pakiet nastawiony na elastyczność i~możliwość eksperymentowania,
 oferuje wysokopoziomową, matematyczną warstwę abstrakcji opisu sieci
-neuronowych.
+neuronowych \cite{chollet_keras}.
+Moduł Keras oferuje także rozbudowaną dokumentację oraz zestaw poradników
+\cite{keras_docs}.
 Keras nie jest jednak pełnym rozwiązaniem, a~raczej abstrakcyjnym interfejsem.
 Używanie go wymaga wyboru wewnętrznego silnika biblioteki.
 Zdecydowano się na domyślną opcję użycia zaplecza pakietu TensorFlow.
