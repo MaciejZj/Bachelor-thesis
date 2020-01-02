@@ -75,8 +75,15 @@ neuronów powinno znajdować się w~warstwie wyjściowej sieci.
 W~warstwach ukrytych umieszczono większą liczbę neuronów, eksperymentalnie
 stwierdzono, że sieć osiąga dobre wyniki dla 256 neuronów w~pierwszej
 warstwie ukrytej i~128 w~drugiej.
-Zmniejszenie liczby neuronów o~połowę w~kolejnej warstwie ukrytej jest
+Zmniejszenie liczby neuronów w~kolejnej warstwie ukrytej jest
 często spotykanym zabiegiem.
+Obecnie w~skomplikowanych sieciach coraz częściej stosuje się tę samą
+liczbę neuronów w~warstwach ukrytych w~celu łatwiejszej parametryzacji
+modelu \cite[str. 272]{geron_ml} .
+Ponieważ w~rozpatrywanym przypadku liczba warstw jest niewielka, zrezygnowano
+z~tej praktyki i~zdecydowano się na podejście polegające na zmniejszeniu
+liczby neuronów w~drugiej warstwie ukrytej.
+
 
 Następnie rozpatrzono dostępne funkcje aktywacji poszczególnych warstw.
 Dla warstwy wyjściowej należy wybrać funkcję o~wartościach od zera do jeden.
@@ -149,7 +156,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
 \end{tikzpicture}
 \caption{Funkcja aktywacji tangens hiperboliczny}
 \end{subfigure}
-\caption{Dostępne funkcje aktywacji rozpatrywane do użycia w~warstwach
+\caption{Funkcje aktywacji rozpatrywane do użycia w~warstwach
          ukrytych}
 \label{fig:activation}
 \end{figure}

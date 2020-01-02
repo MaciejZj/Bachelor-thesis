@@ -67,7 +67,7 @@ powtarzania.
 Ostatecznie jakość procesu pomiarowego oceniono na podstawie jego wyników
 w~klasyfikacji ziaren, po skonstruowaniu sieci neuronowej.
 
-\section{Analiza zebranych obrazów termowizyjnych}
+\section{Analiza obrazów termowizyjnych}
 Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:meas}~z~każdego
 nagrania wybrano pięć stopklatek.
 Podczas eksperymentu uzyskano łącznie dwanaście pomiarów, zawierających
@@ -140,7 +140,7 @@ Wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szum�
 		         Zakres temperatur: \SI{33.8}{\celsius} do
 		         \SI{36.8}{\celsius}}
 	\end{subfigure}
-	\caption{Zdjęcia procesu stygnięcia w~przykładowej próbce 104 klasy E5R}
+	\caption{Zdjęcia procesu stygnięcia przykładowej próbki 104 klasy E5R}
 	\label{fig:sample}
 \end{figure}
 
@@ -236,8 +236,7 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
         temp_txt.append(temp)
     return temp_txt
 \end{minted}
-\caption{Funkcja języka Python do odczytywania zakresu temperatur ze zdjęć
-         z~kamery}
+\caption{Funkcja języka Python odczytująca zakres temperatur ze zdjęć}
 \label{lst:temp_bounds}
 \end{listing}
 
@@ -537,7 +536,7 @@ powolnych obliczeń na obszernych plamach.
 		\input{figures/blob_detection_compare_DoH}
 		\caption{Wyznacznik Hesjanu}
 	\end{subfigure}
-	\caption{Porównanie bibliotecznych algorytmów wykrywania plam w~obrazie}
+	\caption{Porównanie bibliotecznych algorytmów wykrywania plam na obrazie}
 	\label{fig:blobcompare}
 \end{figure}
 
@@ -569,7 +568,7 @@ def find_blobs(img):
     blobs[:, 2] = blobs[:, 2] * sqrt(2)
     return blobs
 \end{minted}
-\caption{Funkcja języka Python do wykrywania detali w obrazie}
+\caption{Funkcja języka Python wykrywająca detale na obrazie}
 \label{lst:find_blobs}
 \end{listing}
 
@@ -623,7 +622,7 @@ def find_blob_series(imgs, only_remaining=True):
         stages.append(remaining)
     return stages
 \end{minted}
-\caption{Funkcja języka Python do śledzenia detali w~serii zdjęć}
+\caption{Funkcja języka Python śledząca detale w~serii zdjęć}
 \label{lst:find_blob_series}
 \end{listing}
 Wybór opcji detekcji ziaren obecnych jedynie od początku stygnięcia,
@@ -654,7 +653,7 @@ def find_remaining_blobs(new_blobs, old_blobs):
                 remaining.append(new_blob)
     return unique(remaining)
 \end{minted}
-\caption{Funkcja języka Python do wykrywania tych samych detali w~kolejnych
+\caption{Funkcja języka Python wykrywające te same detale w~kolejnych
          obrazach}
 \label{lst:find_remaining_blobs}
 \end{listing}
@@ -831,7 +830,7 @@ Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 	111\_E16R & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\
 	\bottomrule
 	\end{tabular}
-\caption{Stosunek liczby detali śledzonych w~kolejnych etapach stygnięcia, do
+\caption{Stosunek liczby detali śledzonych w~kolejnych etapach stygnięcia do
          ich liczby na początku pomiaru}
 \label{tab:blobratio}
 \end{table}
@@ -905,7 +904,7 @@ do ich pierwotnej liczby, został przedstawiona na rysunku
     \centering
     \input{figures/blob_analysis_ratio}
     \caption{Stosunek śledzonych detali do ich liczby na początku procesu
-             stygniecia}
+             stygnięcia}
     \label{fig:blobcharperc}
 \end{figure}
 Widoczne jest odseparowanie różnych klas rud miedzi, różne typy próbek
