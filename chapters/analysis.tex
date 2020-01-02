@@ -15,7 +15,10 @@ Rozważono dwie możliwości:
 \begin{enumerate}[a)]
     \item ogrzewanie próbek do osiągnięcia ustalonej temperatury,
     \item \label{it:heat_method}
-          ogrzewanie próbek przez ustalony czas.
+          ogrzewanie próbek przez ustalony czas%
+          \footnote{%
+              Przy założeniu stałej masy nagrywanych próbek.
+          }.
 \end{enumerate}
 Zdecydowano się na metodę \ref{it:heat_method},~ze względu na wygodę jej
 realizacji.
@@ -68,7 +71,7 @@ Ostatecznie jakość procesu pomiarowego oceniono na podstawie jego wyników
 w~klasyfikacji ziaren, po skonstruowaniu sieci neuronowej.
 
 \section{Analiza obrazów termowizyjnych}
-Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:measure}~z~każdego
+Zgodnie z~planem pomiarów, przedstawionym w~sekcji \ref{sec:measure},~z~każdego
 nagrania wybrano pięć stopklatek.
 Podczas eksperymentu uzyskano łącznie dwanaście pomiarów, zawierających
 sumarycznie 60~zdjęć.
@@ -177,7 +180,7 @@ zdjęciami w~formacie liczbowym.
 W~czasie zapisu zdjęć oprogramowanie dodaje do nich interfejs z~aktywną skalą
 pomiarową, jednak jest on graficznie naniesiony na obraz.
 Aby ułatwić w~przyszłości pracę z~materiałami z~kamery opracowano mechanizm
-ekstrakcji zakresu temperatur z~zdjęć pochodzących z kamery.
+ekstrakcji zakresu temperatur ze zdjęć pochodzących z~kamery.
 
 W~celu odczytu wartości liczbowych z~obrazu posłużono się gotową siecią
 neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
@@ -250,7 +253,7 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
 Aby móc klasyfikować dane należy zastanowić się nad cechami, którymi się różnią.
 Na rysunku \ref{fig:sample_compare}~przedstawiono porównanie stygnięcia dwóch
 rodzajów próbek: E5R oraz E6R.
-W~klasyfikacji użyteczne będą dane które są unikalne dla danej klasy.
+W~klasyfikacji użyteczne będą dane, które są unikalne dla danej klasy.
 Posiadane dane stanowią serie obrazów postępującego procesu studzenia materiału.
 Aby dobrze wykorzystać zebrane zdjęcia należy szukać cech charakterystycznych
 w~całym procesie stygnięcia.
