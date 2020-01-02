@@ -5,45 +5,43 @@ Badanie stopnia rozdrobnienia, składu oraz kształtów ziaren są kluczowe dla
 zapewnienia odpowiedniej jakości przetwarzania surowców.
 W~ramach działalności Politechniki Śląskiej w~Gliwicach powstało wiele prac
 naukowych oraz projektów związanych z~procesem mielenia materiałów.
-Podczas badań opracowano, między innymi, systemy: sterowania
-procesem mielenia, wizji komputerowej oraz klasyfikacji i~obróbki
-danych związanych z~ziarnami rud miedzi.
+Podczas badań opracowano, między innymi, systemy: sterowania procesem mielenia,
+wizji komputerowej oraz klasyfikacji i~obróbki danych związanych z~ziarnami rud
+miedzi.
 W~czasie trwania projektów zebrano wiele próbek materiałów pochodzących
 z~przemysłowych młynów surowców \cite{budzan_grains, krauze_milling}.
 
 Politechnika Śląska jest także w~posiadaniu laboratorium termowizji, które
 wyposażono w~kamery pracujące w~spektrum podczerwieni.
-W~ramach projektu inżynierskiego zdecydowano się na realizację zadania
-detekcji i~klasyfikacji ziaren rud miedzi z~użyciem termowizji oraz sieci
-neuronowych.
+W~ramach projektu inżynierskiego zdecydowano się na realizację zadania detekcji
+i~klasyfikacji ziaren rud miedzi z~użyciem termowizji oraz sieci neuronowych.
 Ze względu na nieinwazyjny charakter pomiarów, techniki termowizyjne są
 popularnym rozwiązaniem w~realizacjach przemysłowych.
 Sieci neuronowe stanowią obecnie jedną z~najszybciej rozwijających się
 i~obiecujących technik uczenia maszynowego.
-Połączenie pomiarów termowizyjnych oraz sztucznych sieci neuronowych
-jest interesującym tematem pracy.
-Realizacja zadania klasyfikacji ziaren rud miedzi, z~użycie
-przedstawionych technik, stanowi próbę alternatywnego rozwiązania problemów
-rozpatrywanych we wcześniejszych pracach Politechniki Śląskiej.
+Połączenie pomiarów termowizyjnych oraz sztucznych sieci neuronowych jest
+interesującym tematem pracy.
+Realizacja zadania klasyfikacji ziaren rud miedzi, z~użycie przedstawionych
+technik, stanowi próbę alternatywnego rozwiązania problemów rozpatrywanych we
+wcześniejszych pracach Politechniki Śląskiej.
 
 \section{Cel pracy}
-Celem pracy jest stworzenie systemu detekcji ziaren oraz klasyfikacji ich
-typu.
+Celem pracy jest stworzenie systemu detekcji ziaren oraz klasyfikacji ich typu.
 Punktem wyjścia projektu są próbki rud miedzi, które posiadają odgórnie
 przypisany typ (klasę).
-Budowa klasyfikatora polega na stworzeniu programu, który
-dla rudy miedzi o~nieznanej klasie, będzie w~stanie określić jej typ.
-W~rozpatrywanym zbiorze znajdują się cztery rodzaje rud miedzi, czyli
-należy zbudować klasyfikator \emph{wieloklasowy}.
+Budowa klasyfikatora polega na stworzeniu programu, który dla rudy miedzi
+o~nieznanej klasie, będzie w~stanie określić jej typ.
+W~rozpatrywanym zbiorze znajdują się cztery rodzaje rud miedzi, czyli należy
+zbudować klasyfikator \emph{wieloklasowy}.
 
-Zdecydowano się klasyfikować rudy miedzi według ich charakterystycznych
-wzorców stygnięcia, do rejestrowania których służy kamera termowizyjna.
-Na podstawie nagrań z~kamery należy utworzyć zbiór danych, który będzie
-podstawą do treningu oraz oceny sieci neuronowej.
-Ponieważ próbki przeznaczone do treningu sieci mają znane klasy,
-to zadanie należy do grupy problemów \emph{nadzorowanego uczenia maszynowego}.
-Oznacza to, że sieć będzie uczona poprzez podanie danych wejściowych
-oraz klasy jaka jest oczekiwana na wyjściu.
+Zdecydowano się klasyfikować rudy miedzi według ich charakterystycznych wzorców
+stygnięcia, do rejestrowania których służy kamera termowizyjna.
+Na podstawie nagrań z~kamery należy utworzyć zbiór danych, który będzie podstawą
+do treningu oraz oceny sieci neuronowej.
+Ponieważ próbki przeznaczone do treningu sieci mają znane klasy, to zadanie
+należy do grupy problemów \emph{nadzorowanego uczenia maszynowego}.
+Oznacza to, że sieć będzie uczona poprzez podanie danych wejściowych oraz klasy
+jaka jest oczekiwana na wyjściu.
 Trening sieci będzie polegał na dopasowaniu jej do etykiet (klas) zbioru
 uczącego.
 
@@ -51,27 +49,26 @@ Zadania uczenia maszynowego wykonuje się w~kilku etapach, które odpowiadają
 rozdziałom pracy.
 Kolejne kroki rozwiązania problemu klasyfikacji są następujące:
 \begin{enumerate}
-	\item analiza problemu oraz posiadanych materiałów,
-	\item planowanie oraz przeprowadzenie eksperymentu uzyskania danych
-	      potrzebnych do nauki algorytmu klasyfikacji,
-	\item analiza i~wizualizacja zebranych danych,
-	\item przygotowanie danych i~ekstrakcja cech kluczowych dla
-	      algorytmów uczenia maszynowego,
-	\item budowa modelu oraz jego nauka,
-	\item dostrojenie modelu na podstawie systemu walidacji,
-	\item prezentacja rozwiązania.
+    \item analiza problemu oraz posiadanych materiałów,
+    \item planowanie oraz przeprowadzenie eksperymentu uzyskania danych
+          potrzebnych do nauki algorytmu klasyfikacji,
+    \item analiza i~wizualizacja zebranych danych,
+    \item przygotowanie danych i~ekstrakcja cech kluczowych dla
+          algorytmów uczenia maszynowego,
+    \item budowa modelu oraz jego nauka,
+    \item dostrojenie modelu na podstawie systemu walidacji,
+    \item prezentacja rozwiązania.
 \end{enumerate}
-Przedstawione kroki zadania klasyfikacji wymagają rozwiązania
-szeregu problemów związanych z~rozpatrywanym przypadkiem.
+Przedstawione kroki zadania klasyfikacji wymagają rozwiązania szeregu problemów
+związanych z~rozpatrywanym przypadkiem.
 Prace należy zacząć od zapoznania się z~dostępnym sprzętem termowizyjnym oraz
 oceną jego użyteczności w~pomiarach ziaren rud miedzi.
 Następnie należy zaplanować i~przeprowadzić eksperyment pomiarowy, którego
 wynikiem będą nagrania ziaren.
 Materiały wideo oraz zdjęcia zawierają wiele danych, należy je przeanalizować
 oraz poddać obróbce.
-Wynikiem eksploracji danych powinien być wektor liczb,
-które reprezentują numerycznie cechy charakterystyczne rozpatrywanych klas
-rud miedzi.
+Wynikiem eksploracji danych powinien być wektor liczb, które reprezentują
+numerycznie cechy charakterystyczne rozpatrywanych klas rud miedzi.
 Kolejnym krokiem jest konstrukcja sieci neuronowej w~postaci programu
 komputerowego.
 Sieć należy zaprojektować uwzględniając cechy zbudowanego zbioru danych.
