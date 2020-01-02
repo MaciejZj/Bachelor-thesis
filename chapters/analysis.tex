@@ -215,11 +215,10 @@ przedstawiono na listingu \ref{lst:temp_bounds}.
 	\label{fig:temp_bounds}
 \end{figure}
 
-% TODO: This code might be not ready
 \begin{listing}[htbp]
 \begin{minted}{python}
 def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
-                                       ((219, 236), (283, 318)))):
+                                        ((219, 236), (283, 318)))):
     '''Extract temperature values from FLIR UI on image.'''
     img = invert(img)
     temp_txt = []
@@ -229,9 +228,9 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
         thr = threshold_otsu(bound_img)
         img_txt = bound_img > thr
         img_txt = Image.fromarray(img_txt)
-        temp = pytesseract.image_to_string(img_txt)
-        if temp is not '': 
-            temp = float(temp)
+        temp = pytesseract.image_to_string(img_txt, config='digits')
+        if temp != '':
+            temp = float(temp) / 10
         else:
             temp = 0
         temp_txt.append(temp)
@@ -561,8 +560,8 @@ opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
 \begin{minted}{python}
 def find_blobs(img):
     '''
-    Find blobs in given image and get list of their positions and 
-    radiuses.
+    Find blobs in given image and get list of their positions
+    and radiuses.
     '''
     # Detect blobs with Difference of Gaussian
     blobs = blob_dog(img, max_sigma=2, threshold=0.1)
@@ -644,11 +643,11 @@ które z~detali znajdują się na kolejnych etapach stygnięcia.
 def find_remaining_blobs(new_blobs, old_blobs):
     '''
     Return list of blobs present in both lists, where blob
-    is considerd same if is in proximity of 2 times it's radius.
+    is considered same if is in proximity of 2 times it's radius.
     '''
     remaining = []
     for new_blob in new_blobs:
-        yn, xn, rn = new_blob
+        yn, xn, _ = new_blob
         for old_blob in old_blobs:
             yo, xo, ro = old_blob
             if inside_circle(xn, yn, xo, yo, 2 * ro):
@@ -711,7 +710,8 @@ stygnięcia zaimplementowano funkcję przedstawioną na listingu
 \begin{minted}{python}
 def ratio_of_remaining_blobs_in_stages(stages):
     '''
-    In each stage calculate ratio of remaining blobs to their initial number.
+    In each stage calculate ratio of remaining blobs
+    to their initial number.
     '''
     num_of_blobs = [len(stage) for stage in stages]
     return [remaining / num_of_blobs[0] for remaining in num_of_blobs]
@@ -826,8 +826,8 @@ Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 	\toprule
 	Próbka & Minuta 0 & Minuta 1 & Minuta 2 & Minuta 3 & Minuta 4 \\ \midrule
 	104\_E5R  & 1.0 & 0.52 & 0.29 & 0.23 & 0.20 \\
-	106\_E11R & 1.0 & 0.12 & 0.02 & 0.00 & 0.00 \\
 	107\_E6R  & 1.0 & 0.20 & 0.12 & 0.02 & 0.02 \\
+	106\_E11R & 1.0 & 0.12 & 0.02 & 0.00 & 0.00 \\
 	111\_E16R & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\
 	\bottomrule
 	\end{tabular}

@@ -305,18 +305,23 @@ Opisany plan treningu sieci realizuje kod przedstawiony na listingu
 \ref{lst:train}.
 \begin{listing}[htb]
 \begin{minted}{python}
-    X_train, X_test, y_train, y_test = train_test_split(X, y,
-        stratify = y,
-        test_size = 0.33,
-        random_state = 1)
+def classification_demo(X, y):
+    '''
+    Demo grain classification on given data.
+    Train and test default model.
+    '''
+    X = np.array(X)
+    y = np.array(y)
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, stratify=y, test_size=0.33, random_state=1)
 
     model = default_grain_classifier_model()
-
-    model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy',
-                  metrics=['accuracy'])
-    
-    history = model.fit(X_train, y_train, epochs=256)
+    model.compile(
+        optimizer='adam',
+        loss='sparse_categorical_crossentropy',
+        metrics=['accuracy'])
+    history = model.fit(X_train, y_train, epochs=300, verbose=0)
 \end{minted}
 \caption{Kod treningu sieci neuronowej klasyfikującej ziarna miedzi}
 \label{lst:train}
@@ -336,11 +341,11 @@ w~podsekcji~\ref{subsec:datavis}.
 	\centering
 	\begin{tabular}{c|C{2cm}|C{2cm}}
 	\toprule
-	\multirow{2}{*}{metoda zliczania detali} & \multicolumn{2}{c}{wskaźnik} \\ 
-                                         & błąd       & dokładność      \\ \midrule
-wszystkie detale              & 1,45       & 0,25            \\
-śledzone detale              & 7,50       & 0,5             \\
-stosunek śledzonych detali   & 0,63       & 0,75           \\   
+	\multirow{2}{*}{Metoda zliczania detali} & \multicolumn{2}{c}{Wskaźnik} \\ 
+                                         & Błąd       & Dokładność      \\ \midrule
+Wszystkie detale              & 1,45       & 0,25            \\
+Śledzone detale              & 7,50       & 0,5             \\
+Stosunek śledzonych detali   & 0,63       & 0,75           \\   
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci na zbiorze testowym}
@@ -387,12 +392,12 @@ podziałów zbioru danych.
 def network_cross_validation(model, X, y, n_splits):
     '''Compute cross validation fold scores for given keras model.'''
     eval_scores = []
-    
+
     folds = StratifiedKFold(n_splits=n_splits).split(X, y)
     for train_index, test_index in folds:
-        x_train, x_test= X[train_index], X[test_index]
-        y_train, y_test= y[train_index], y[test_index]
-        
+        x_train, x_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]
+
         model.fit(x_train, y_train, epochs=300, verbose=0)
         eval_scores.append(model.evaluate(x_test, y_test, verbose=0))
     return eval_scores
@@ -425,20 +430,26 @@ załączono w~dodatku \ref{ch:nn_comparison_table}.
 
 \begin{listing}[htb]
 \begin{minted}{python}
-X = np.array(X)
-y = np.array(y)
+def cross_val_demo(X, y):
+    '''
+    Demo cross validation of default grain classifier
+    on given data.
+    '''
+    X = np.array(X)
+    y = np.array(y)
 
-model = default_grain_classifier_model()
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+    model = default_grain_classifier_model()
+    model.compile(
+        optimizer='adam',
+        loss='sparse_categorical_crossentropy',
+        metrics=['accuracy'])
 
-score = network_cross_validation(model, X, y, 3)
+    score = network_cross_validation(model, X, y, 3)
 
-print('Folds scores: (loss, acc)\n', score)
-score = np.array(score)
-print('Cross validation mean score (loss, acc):\n',
-      score.mean(axis=0), '\n')
+    print('Folds scores: (loss, acc)\n', score)
+    score = np.array(score)
+    print('Cross validation mean score (loss, acc):\n',
+          score.mean(axis=0), '\n')
 \end{minted}
 \caption{Wykorzystanie funkcji sprawdzianu krzyżowego do oceny działania
          sieci}
@@ -449,11 +460,11 @@ print('Cross validation mean score (loss, acc):\n',
 	\centering
 	\begin{tabular}{c|C{2cm}|C{2cm}}
 	\toprule
-	\multirow{2}{*}{metoda zliczania detali} & \multicolumn{2}{c}{wskaźnik} \\ 
-                                         & błąd       & dokładność      \\ \midrule
-wszystkie detale             & 6,59       & 0,41            \\
-śledzone detale              & 3,99       & 0,50             \\
-stosunek śledzonych detali   & 1,37       & 0,91          \\   
+	\multirow{2}{*}{Metoda zliczania detali} & \multicolumn{2}{c}{Wskaźnik} \\ 
+                                         & Błąd       & Dokładność      \\ \midrule
+Wszystkie detale             & 6,59       & 0,41            \\
+Śledzone detale              & 3,99       & 0,50             \\
+Stosunek śledzonych detali   & 1,37       & 0,91          \\   
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
@@ -486,22 +497,22 @@ Funkcję generującą uśrednioną macierz pomyłek przedstawia listing
 \begin{minted}{python}
 def mean_confusion_matrix(model, X, y, n_splits):
     '''
-    Compute mean confusion matrix using cross
-    validation with n splits.
+    Compute mean confusion matrix using
+    cross validation with n splits.
     '''
     conf_matrix = np.zeros((4, 4))
 
-    folds = StratifiedKFold(n_splits = 3).split(X, y)
+    folds = StratifiedKFold(n_splits=n_splits).split(X, y)
     for train_index, test_index in folds:
-        x_train, x_test= X[train_index], X[test_index]
-        y_train, y_test= y[train_index], y[test_index]
-        
+        x_train, x_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]
+
         model.fit(x_train, y_train, epochs=300, verbose=0)
         y_pred = model.predict_classes(x_test)
 
         for test, pred in zip(y_test, y_pred):
             conf_matrix[test][pred] = conf_matrix[test][pred] + 1
-    
+
     return conf_matrix / n_splits
 \end{minted}
 \caption{Funkcja języka Python generująca uśrednioną macierz pomyłek}
