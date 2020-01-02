@@ -1,6 +1,6 @@
 \section{Analizowane ziarna rud miedzi} \label{sec:grains}
 Zestaw analizowanych ziaren pochodzi z~projektu \textsc{sysmel} (\emph{System
-sterowania procesem mielenia w~układzie z~młynem elektromagnetycznym})
+sterowania procesem mielenia w~układzie z~młynem elektromagnetycznym})%
 \footnote{Pełen tytuł projektu naukowego: \emph{Układ mielenia surowców
     mineralnych w~młynie elektromagnetycznym wraz z~systemem sterowania jego
     pracą, zapewniający wysoką efektywność technologiczną i~niską
@@ -14,30 +14,33 @@ Spośród próbek, pochodzących z~projektu \textsc{sysmel}, wybrano cztery typy
 ziaren, które będą przedmiotem zadania klasyfikacji.
 Zdjęcia rozpatrywanych materiałów przedstawiono na rysunku \ref{fig:grains}.
 \begin{figure}[htb]
-    \centering
+    \hspace*{\fill}
     \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{E5R}
         \caption{Ziarna rudy miedzi klasy E5R}
     \end{subfigure}
-    \quad\quad
+    \hfill
     \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{E6R}
         \caption{Ziarna rudy miedzi klasy E6R}
     \end{subfigure}
+    \hspace*{\fill}
     \vskip\baselineskip
+    \hspace*{\fill}
     \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{E11R}
         \caption{Ziarna rudy miedzi klasy E11R}
     \end{subfigure}
-    \quad\quad
+    \hfill
     \begin{subfigure}[t]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{E16R}
         \caption{Ziarna rudy miedzi klasy E16R}
     \end{subfigure}
+    \hspace*{\fill}
     \caption{Próbki rozpatrywanych ziaren rud miedzi}
     \label{fig:grains}
 \end{figure}
@@ -194,7 +197,7 @@ powierzchni.
 \label{subsec:camera_soft}
 Jedną z~najważniejszych cech kamery jest łatwość integracji z~oprogramowaniem
 komputerowym.
-Kamerę można obsługiwać za pomocą programu FLIR Tools
+Kamerę można obsługiwać za pomocą programu FLIR Tools%
 \footnote{%
     Strona produktu programu FLIR Tools:
     \url{https://www.flir.com/   products/flir-tools/}}.
@@ -223,7 +226,13 @@ jaki jest wbudowany w~program FLIR Tools.
 \subsection{Język programowania Python}
 Założenia projektu wymagają użycia języka programowania pozwalającego na
 zaawansowaną obróbkę obrazu oraz wydajne budowanie sieci neuronowych.
-W~obu tych dziedzinach wiodącym językiem jest Python, posiadający bogaty zestaw
+W~obu tych dziedzinach wiodącym językiem jest Python%
+\footnote{%
+    W~projekcie użyto języka Python 3,~który jest aktualnym standardem.
+    Nie należy go mylić z~niekompatybilną i~przestarzałą wersją Python 2,~która
+    traci wsparcie w~2020 roku.
+}
+, posiadający bogaty zestaw
 bibliotek.
 Język ten oferuje dużą wygodę programowania, co jest istotne przy pracy
 badawczej.

@@ -44,7 +44,7 @@ klas na wyjściu sieci.
 Aby zwiększać efektywność sieci pomiędzy warstwą wejściową oraz wyjściową
 umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
 Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
-Matematycznie dowiedziono, że jedna warstwa ukryta
+Matematycznie dowiedziono, że jedna warstwa ukryta%
 \footnote{%
     Przy pewnych obostrzeniach co do doboru funkcji aktywacji.}
 wystarcza do aproksymacji dowolnej funkcji nieliniowej
@@ -114,7 +114,7 @@ Rozpatrzono trzy rodziny funkcji:
 \end{itemize}
 Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.~%
 \begin{figure}[htb]
-    \centering
+    \hspace*{\fill}
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
         \begin{tikzpicture}[trim axis left]
@@ -126,7 +126,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.~%
         \end{tikzpicture}
         \caption{Funkcja aktywacji tangens hiperboliczny}
     \end{subfigure}
-    \hspace{0.25cm}
+    \hfill
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
         \begin{tikzpicture}[trim axis left]
@@ -142,7 +142,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.~%
         \end{tikzpicture}
         \caption{Rodzina funkcji aktywacji jednostek liniowych}
     \end{subfigure}
-    \hspace{0.25cm}
+    \hfill
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
         \begin{tikzpicture}[trim axis left]
@@ -154,6 +154,7 @@ Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.~%
         \end{tikzpicture}
         \caption{Funkcja aktywacji tangens hiperboliczny}
     \end{subfigure}
+    \hspace*{\fill}
     \caption{Funkcje aktywacji rozpatrywane do użycia w~warstwach
         ukrytych}
     \label{fig:activation}
@@ -277,7 +278,7 @@ Na rysunku \ref{fig:training_history}~przedstawiono dokładność i~błąd
 w~kolejnych epokach treningu.
 Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 \begin{figure}[htb]
-    \centering
+    \hspace*{\fill}
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
         \input{figures/neural_network_trainig_all}
@@ -298,6 +299,7 @@ Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
         \caption{Przebieg treningu sieci dla metody zliczania stosunku
             śledzonych ziaren}
     \end{subfigure}
+    \hspace*{\fill}
     \caption{Przebieg treningu sieci dla różnych metod zliczania ziaren}
     \label{fig:training_history}
 \end{figure}
@@ -343,7 +345,8 @@ w~podsekcji~\ref{subsec:data_vis}.
         \toprule
         \multirow{2}{*}{Metoda zliczania detali} &
         \multicolumn{2}{c}{Wskaźnik} \\
-                                   & Błąd & Dokładność \\ \midrule
+                                   & Błąd & Dokładność \\
+        \midrule
         Wszystkie detale           & 1,45 & 0,25       \\
         Śledzone detale            & 7,50 & 0,5        \\
         Stosunek śledzonych detali & 0,63 & 0,75       \\
@@ -433,7 +436,10 @@ załączono w~dodatku \ref{ch:nn_comparison_table}.
 \begin{listing}[htb]
 \begin{minted}{python}
 def cross_val_demo(X, y):
-    '''Demo cross validation of default grain classifier on given data.'''
+    '''
+    Demo cross validation of default grain classifier
+    on given data.
+    '''
     X = np.array(X)
     y = np.array(y)
 
@@ -496,7 +502,10 @@ Funkcję generującą uśrednioną macierz pomyłek przedstawia listing
 \begin{listing}[htb]
 \begin{minted}{python}
 def mean_confusion_matrix(model, X, y, n_splits):
-    '''Compute mean confusion matrix using cross validation with n splits.'''
+    '''
+    Compute mean confusion matrix using cross validation
+    with n splits.
+    '''
     conf_matrix = np.zeros((4, 4))
 
     folds = StratifiedKFold(n_splits=n_splits).split(X, y)
