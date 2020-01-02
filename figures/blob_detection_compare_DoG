@@ -4,17 +4,11 @@
 \begin{axis}[
 hide x axis,
 hide y axis,
-tick align=outside,
-tick pos=both,
 title={Liczba wykrytych detali: 56},
 width=174.15, height=130.95,
-x grid style={white!69.01960784313725!black},
 xmin=-0.5, xmax=257.5,
-xtick style={color=black},
 y dir=reverse,
-y grid style={white!69.01960784313725!black},
 ymin=-0.5, ymax=193.5,
-ytick style={color=black}
 ]
 \addplot graphics [includegraphics cmd=\pgfimage,xmin=-0.5, xmax=257.5, ymin=193.5, ymax=-0.5] {figures/blob_detection_compare_DoG-000.png};
 \draw[draw=red,fill opacity=0] (axis cs:243,188) circle (2.26274169979695);

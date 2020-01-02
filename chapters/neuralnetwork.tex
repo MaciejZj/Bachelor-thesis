@@ -12,7 +12,7 @@ Zgodnie z~opisem narzędzi programistycznych w~podsekcji
 \ref{subsec:software_network}, proces budowania sieci oparto na interfejsie
 Keras, z~zapleczem TensorFlow.
 
-\subsection{Dobór struktury sieci} \label{subsec:nnbuild}
+\subsection{Dobór struktury sieci} \label{subsec:nn_build}
 Kluczowym czynnikiem decydującym o~architekturze sieci jest posiadany
 zbiór danych.
 Wejściowy zestaw cech klas jest pięciowymiarowy, do klasyfikacji takich
@@ -34,7 +34,7 @@ klasyfikatora dla danego problemu.
 Przy projektowaniu sieci należy kierować się przesłankami teoretycznymi,
 doświadczeniem oraz testując i~porównując różne rozwiązania.
 Przedstawiona konstrukcja oraz uzasadnienie jej wyboru bazuje na wynikach
-walidacji, której mechanizm przedstawiono w~sekcji \ref{sec:validation}.
+walidacji, której mechanizm przedstawiono w~sekcji \ref{sec:nn_validation}.
 Szczegółowe dane, dotyczące porównań różnych konstrukcji i~parametrów
 sieci przedstawiono w~dodatku \ref{ch:nn_comparison_table}.
 
@@ -93,7 +93,7 @@ Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
 przedstawiono na rysunku \ref{fig:softmax}.
 \begin{figure}[htb]
 \centering
-\begin{tikzpicture}[trim axis left]
+\begin{tikzpicture}
     \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
                  ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
        \addplot[blue, domain=-5:5, samples=51] 
@@ -198,7 +198,7 @@ def default_grain_classifier_model():
 \end{listing}
 
 \subsection{Trening sieci neuronowej}
-\label{subsec:train}
+\label{subsec:nn_train}
 Kolejnym krokiem w~budowie klasyfikatora ziaren jest trening sieci neuronowej.
 Jest to proces. w~którym wagi neuronów są dopasowywane do zbioru uczącego.
 Rozpatrywany problem jest typu uczenia nadzorowanego.
@@ -240,7 +240,7 @@ Oczywiście wydzielenie w~narzucony sposób zbioru testowego, szczególnie
 w~przypadku tak małej ilości danych, nie daje obiektywnej oceny modelu.
 Jest on jednak wystarczający do budowy i~testowania pierwszego prototypu
 sieci.
-W~sekcji \ref{sec:validation} przedstawiono konstrukcję i~wyniki działania
+W~sekcji \ref{sec:nn_validation} przedstawiono konstrukcję i~wyniki działania
 bardziej miarodajnego procesu walidacji.
 
 Aby móc przystąpić do treningu należy określić parametry uczenia
@@ -280,8 +280,8 @@ Ostatnim etapem uczenia jest realizacja treningu sieci, dokonywana za
 pomocą metody \mintinline{python}{model.fit()}.
 Metoda przyjmuje argumenty zbioru treningowego wraz z~zestawem etykiet
 oraz liczbę epok treningu, zwraca obiekt zawierający przebieg uczenia sieci.
-Na rysunku \ref{fig:history} przedstawiono dokładność i~błąd w~kolejnych
-epokach treningu.
+Na rysunku \ref{fig:training_history} przedstawiono dokładność i~błąd
+w~kolejnych epokach treningu.
 Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 \begin{figure}[htb]
 	\centering
@@ -306,10 +306,10 @@ Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 		         śledzonych ziaren}
 	\end{subfigure}
 	\caption{Przebieg treningu sieci dla różnych metod zliczania ziaren}
-	\label{fig:history}
+	\label{fig:training_history}
 \end{figure}
 Opisany plan treningu sieci realizuje kod przedstawiony na listingu
-\ref{lst:train}.
+\ref{lst:nn_training}.
 \begin{listing}[htb]
 \begin{minted}{python}
 def classification_demo(X, y):
@@ -331,7 +331,7 @@ def classification_demo(X, y):
     history = model.fit(X_train, y_train, epochs=300, verbose=0)
 \end{minted}
 \caption{Kod treningu sieci neuronowej klasyfikującej ziarna miedzi}
-\label{lst:train}
+\label{lst:nn_training}
 \end{listing}
 
 Działanie sieci można sprawdzić na zbiorze testowym.
@@ -339,10 +339,10 @@ Należy mieć na uwadze, że przy małej ilości danych i~przedstawionym
 podziale na zbiory treningowy oraz testowy nie będzie to test miarodajny.
 Jest on jednak akceptowalny przy pierwszych testach sieci podczas jej
 konstrukcji.
-Wyniki działania sieci przedstawia tabela \ref{tab:blobtest}.
+Wyniki działania sieci przedstawia tabela \ref{tab:nn_test}.
 Przedstawione wartości błędu oraz dokładności potwierdzają przypuszczenia
 na temat użyteczności różnych metod zliczania detali, które przedstawiono
-w~podsekcji~\ref{subsec:datavis}.
+w~podsekcji~\ref{subsec:data_vis}.
 
 \begin{table}[htb]
 	\centering
@@ -356,12 +356,12 @@ Stosunek śledzonych detali   & 0,63       & 0,75           \\
 	\bottomrule
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci na zbiorze testowym}
-\label{tab:blobtest}
+\label{tab:nn_test}
 \end{table}
 
-\section{Walidacja i~ocena działania sieci} \label{sec:validation}
+\section{Walidacja i~ocena działania sieci} \label{sec:nn_validation}
 Po stworzeniu prototypu klasyfkiatora przedstawionego w~rozdziale
-\ref{subsec:nnbuild} należy przeprowadzić walidację zbudowanej sieci
+\ref{subsec:nn_build} należy przeprowadzić walidację zbudowanej sieci
 neuronowej.
 Najpopularniejszą metodą miarodajnej walidacji sieci jest 
 \emph{k-krotny sprawdzian krzyżowy} (ang. \textit{k-fold cross-validation}).
@@ -386,10 +386,11 @@ W~tym celu użyto biblioteki Scikit-learn, która oferuje funkcje podziału
 zbiorów danych.
 Jedną z~nich jest funkcja zwracająca iterowalny zestaw k-krotnych
 podziałów zbioru danych.
-Jak przedstawiono w~sekcji \ref{subsec:train}, ze względu na mały rozmiar
+Jak przedstawiono w~sekcji \ref{subsec:nn_train}, ze względu na mały rozmiar
 zbioru danych, przy podziale należy zastosować losowanie warstwowe.
-Na listingu \ref{lst:crossval} przedstawiono funkcję pozwalającą na walidację
-modelu klasyfikatora biblioteki Keras z~użyciem sprawdzianu krzyżowego.
+Na listingu \ref{lst:nn_crossval} przedstawiono funkcję pozwalającą na
+walidację modelu klasyfikatora biblioteki Keras z~użyciem sprawdzianu
+krzyżowego.
 Funkcja przyjmuje argumenty w~postaci skompilowanego modelu sieci oraz
 zbioru danych i~etykiet.
 Zwracana jest macierz, w~której rzędy oznaczają wyniki testów dla kolejnych
@@ -410,14 +411,14 @@ def network_cross_validation(model, X, y, n_splits):
     return eval_scores
 \end{minted}
 \caption{Funkcja języka Python definiująca model sieci neuronowej}
-\label{lst:crossval}
+\label{lst:nn_crossval}
 \end{listing}
 Sposób wykorzystania zbudowanej funkcji walidacji modelu przedstawia
-listing \ref{lst:val}.
+listing \ref{lst:nn_validation}.
 Na końcu procesu oceny sieci wyniki kolejnych kroków sprawdzianu krzyżowego
 należy uśrednić.
 Efekty walidacji dla trzech sposobów zliczania detali na obrazach przedstawia
-tabela \ref{tab:blobval}.
+tabela \ref{tab:nn_crossval}.
 
 Zgodnie z~wcześniejszymi przewidywaniami, metoda zliczania stosunku śledzonych
 detali do ich pierwotnej liczby okazała się dawać najlepsze rezultaty.
@@ -427,7 +428,7 @@ Pozostałe metody zliczania okazały się mniej precyzyjne, co wskazuje że nale
 je odrzucić.
 
 Przedstawiony mechanizm walidacji wykorzystano do dostrojenia parametrów
-sieci opisywanych w~podeskcji \ref{subsec:nnbuild}.
+sieci opisywanych w~podeskcji \ref{subsec:nn_build}.
 Uzasadnienie doboru przedstawionej w~toku pracy struktury sieci wynika z~prób
 maksymalizacji dokładności oblicznej przy pomocy sprawdzianu krzyżowego.
 W~czasie prototypowania sieci dokonano liczbych porównań, aby znaleźć
@@ -460,7 +461,7 @@ def cross_val_demo(X, y):
 \end{minted}
 \caption{Wykorzystanie funkcji sprawdzianu krzyżowego do oceny działania
          sieci}
-\label{lst:val}
+\label{lst:nn_validation}
 \end{listing}
 
 \begin{table}[htb]
@@ -476,7 +477,7 @@ Stosunek śledzonych detali   & 1,37       & 0,91          \\
 	\end{tabular}
 \caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
          krzyżowego}
-\label{tab:blobval}
+\label{tab:nn_crossval}
 \end{table}
 
 Dodatkowo opracowano kod generujący \emph{macierz pomyłek} (ang.

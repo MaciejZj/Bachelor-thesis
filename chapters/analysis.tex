@@ -1,4 +1,5 @@
-\section{Proces pomiarowy i~budowa zbioru danych} \label{sec:meas}
+\section{Proces pomiarowy i~budowa zbioru danych}
+\label{sec:measure}
 Zgodnie z~opisem technik termowizyjnych przedstawionym w~sekcji
 \ref{sec:thermovision} zdecydowano się na przeprowadzenie pomiarów za pomocą
 termowizji aktywnej.
@@ -68,8 +69,8 @@ Ostatecznie jakość procesu pomiarowego oceniono na podstawie jego wyników
 w~klasyfikacji ziaren, po skonstruowaniu sieci neuronowej.
 
 \section{Analiza obrazów termowizyjnych}
-Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:meas}~z~każdego
-nagrania wybrano pięć stopklatek.
+Zgodnie z~zamysłem pomiarów przedstawionym w~sekcji \ref{sec:measure}
+z~każdego nagrania wybrano pięć stopklatek.
 Podczas eksperymentu uzyskano łącznie dwanaście pomiarów, zawierających
 sumarycznie 60~zdjęć.
 W~ramach uczenia maszynowego jest to bardzo mały zbiór danych, biorąc jednak
@@ -85,7 +86,7 @@ nazw jak w~przykładzie: 115\_E11R\_1, gdzie człony nazwy oznaczają kolejno:
 \end{itemize}
 
 \subsection{Prezentacja przykładowej serii pomiarowej}
-Jak opisano w rozdziale \ref{sec:meas} jedna próbka w~zbiorze danych 
+Jak opisano w rozdziale \ref{sec:measure} jedna próbka w~zbiorze danych 
 składa się z~serii pięciu zdjęć o~malejącym kontraście i~szczegółowości.
 Na rysunku \ref{fig:sample}~przedstawiono proces stygnięcia przykładowej
 próbki 104~klasy E5R.
@@ -243,7 +244,7 @@ def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
 \section{Eksploracja danych}
 Aby móc klasyfikować dane należy zastanowić się nad cechami, którymi się
 różnią.
-Na rysunku \ref{fig:samplecompare} przedstawiono porównanie stygnięcia
+Na rysunku \ref{fig:sample_compare} przedstawiono porównanie stygnięcia
 dwóch rodzajów próbek: E5R oraz E6R.
 W~klasyfikacji użyteczne będą dane które są unikalne dla danej klasy.
 Posiadane dane stanowią serie obrazów postępującego procesu studzenia
@@ -312,18 +313,18 @@ w~całym procesie stygnięcia.
 		\caption{Próbka 117\_E6R\_4}
 	\end{subfigure}
 	\caption{Porównanie procesu stygnięcia próbek klasy E5R oraz E6R}
-	\label{fig:samplecompare}
+	\label{fig:sample_compare}
 \end{figure}
 
 \subsection{Wybór cech obrazu użytecznych w~klasyfikacji}
-\label{subsec:featureextr}
-Po przyjrzeniu się rysunkowi \ref{fig:samplecompare} widoczne jest, że
+\label{subsec:feature_extraction}
+Po przyjrzeniu się rysunkowi \ref{fig:sample_compare} widoczne jest, że
 w~próbce E6R temperatura ziaren zaczęła wyrównywać się szybciej.
 Zdjęcia tej próbki wcześniej stają się szare i~tracą kontrast.
 Na podstawie analizy nagrań rozpatrzono następujące możliwości ekstrakcji
 ich cech charakterystycznych:
 \begin{enumerate}[a)]
-	\item \label{it:imgcnn} 
+	\item \label{it:cnn} 
 	      klasyfikacja całych zdjęć z~użyciem zaawansowanych sieci
 	      konwolucyjnych,
 	\item \label{it:fft} 
@@ -389,7 +390,7 @@ Na przedstawionych zdjęciach próbek można zauważyć drobne ciemne punkty,
 które są obszarami o~wolniejszej wymianie ciepła z~otoczeniem niż reszta
 powierzchni ziaren.
 Jest to spowodowane ich niską emisyjnością cieplną.
-Na rysunku \ref{fig:blobdetail} przedstawiono zbliżenie na grupę takich
+Na rysunku \ref{fig:blob_detail} przedstawiono zbliżenie na grupę takich
 detali, w~czterech częściach procesu stygnięcia.
 \begin{figure}[htb]
 	\centering
@@ -412,7 +413,7 @@ detali, w~czterech częściach procesu stygnięcia.
 		\caption{Grupa detali w~próbce 119\_E5R\_2}
 	\end{subfigure}
 	\caption{Zbliżenie na charakterystyczne grupy detali materiału}
-	\label{fig:blobdetail}
+	\label{fig:blob_detail}
 \end{figure}
 
 Analizując próbki można zauważyć, że wraz ze stygnięciem, ciemne punkty
@@ -433,8 +434,9 @@ Fakt pojawiania się nowych detali wzięto pod uwagę przy późniejszym procesi
 projektowania algorytmów ich śledzenia.
 
 \subsection{Wybór algorytmu detekcji ziaren}
-\label{subsec:blobdetect}
-Zgodnie z~rozważaniami przedstawionymi w~podsekcji \ref{subsec:featureextr}
+\label{subsec:blob_detect}
+Zgodnie z~rozważaniami przedstawionymi w~podsekcji
+\ref{subsec:feature_extraction}
 w~celu klasyfikacji ziaren zdecydowano się na obserwację ilości puntów
 o~małej emisyjności
 Należy więc wybrać metodę detekcji charakterystycznych elementów.
@@ -448,7 +450,7 @@ Biblioteka Scikit-image udostępnia trzy algorytmy tego typu wykorzystujące:
 \end{enumerate}
 Przedstawione algorytmy pozwalają na wykrycie na obrazie plam o~kształcie
 zbliżonym do kolistego oraz oszacowanie ich promieni.
-Badane detale, przedstawione na rysunku \ref{ch:conclusions},
+Badane detale, przedstawione na rysunku \ref{fig:blob_detail},
 mają kształt zbliżony do kolistego, więc próba użycia rozpatrywanych
 algorytmów jest uzasadniona.
 Należy porównać dostępne warianty detekcji i~wybrać algorytm, który
@@ -509,7 +511,7 @@ elementy mogą nie zostać przez nią wykryte \cite{scikit_reference}.
 \end{equation}
 
 Porównanie działania wymienionych metod przedstawiono na grafice
-\ref{fig:blobcompare}.
+\ref{fig:blob_compare}.
 Zgodnie z~teoretycznym opisem funkcji najlepsza okazała się metoda
 Laplasjanu funkcji Gaussa.
 Funkcję korzystającą z~wyznacznika Hesjanu należy odrzucić, ponieważ
@@ -537,7 +539,7 @@ powolnych obliczeń na obszernych plamach.
 		\caption{Wyznacznik Hesjanu}
 	\end{subfigure}
 	\caption{Porównanie bibliotecznych algorytmów wykrywania plam na obrazie}
-	\label{fig:blobcompare}
+	\label{fig:blob_compare}
 \end{figure}
 
 Aby wybrana funkcja laplasjanu funkcji Gaussa wykrywała tylko małe plamy
@@ -573,8 +575,8 @@ def find_blobs(img):
 \end{listing}
 
 \subsection{Algorytm śledzenia ziaren w~serii zdjęć}
-\label{subsec:blobtracking}
-Użycie funkcji bibliotecznych opisanych w~podsekcji \ref{subsec:blobdetect}
+\label{subsec:blob_tracking}
+Użycie funkcji bibliotecznych opisanych w~podsekcji \ref{subsec:blob_detect}
 pozwala na detekcję detali na pojedynczym zdjęciu.
 Aby wykorzystać detekcję plam w~serii pięciu zdjęć, które reprezentują
 stygnięcie jednej próbki, należy opracować zestaw funkcji śledzący zmiany 
@@ -585,17 +587,17 @@ klasyfikującej ziarna rud miedzi.
 Dlatego zdecydowano się na napisanie funkcji zliczania plam, tak by umożliwić
 trzy warianty pracy algorytmu:
 \begin{enumerate}[a)]
-	\item \label{it:allblob}
+	\item \label{it:all_blob}
 	      zliczanie wszystkich detali na każdym etapie stygnięcia,
-	\item \label{it:remainingblob}
+	\item \label{it:remaining_blob}
 	      zliczanie detali śledzonych od początku stygnięcia,
-	\item \label{it:ratioblob}
+	\item \label{it:ratio_blob}
 	      zliczanie stosunku śledzonych detali do ich ilości na początku
 	      stygięcia.
 \end{enumerate}
 Przez śledzenie detali rozumiane jest zliczanie jedynie tych plam, które
 były wykryte na początku stygnięcia.
-Oznacza to, że metody \ref{it:remainingblob} oraz \ref{it:ratioblob}
+Oznacza to, że metody \ref{it:remaining_blob} oraz \ref{it:ratio_blob}
 ignorują detale pojawiające się w~późniejszych etapach studzenia ziaren.
 
 W~celu realizacji planu śledzenia detali utworzono funkcję języka Python.
@@ -734,8 +736,8 @@ Użyteczność tego mechanizmu można zaobserwować na przedstawionych listingac
 Przedstawiony zestaw funkcji daje możliwość ekstrakcji liczby plam, w~serii
 zdjęć, na trzy sposoby.
 Efekty działania utworzonego kodu przetestowano na obrazach pomiarowych.
-Działanie sposobów zliczania ziaren \ref{it:allblob}~oraz
-\ref{it:remainingblob} przedstawiono na rysunku \ref{fig:blobcount}.
+Działanie sposobów zliczania ziaren \ref{it:all_blob}~oraz
+\ref{it:remaining_blob} przedstawiono na rysunku \ref{fig:blob_count}.
 Zaznaczono na nim wykryte detale oraz wyróżniono wśród nich, te które
 są śledzone od początku stygnięcia.
 \begin{figure}[htbp]
@@ -794,11 +796,11 @@ są śledzone od początku stygnięcia.
         \item[Kolor niebieski] nowe wykryte detale
 	\end{description}
 	\caption{Zliczanie śledzonych detali w~próbce dwoma sposobami}
-	\label{fig:blobcount}
+	\label{fig:blob_count}
 \end{figure}
 
 Metodę śledzenia plam i~ich zanikania przedstawiono na rysunku
-\ref{fig:blobremain}.
+\ref{fig:blob_remain}.
 Pokazuje on położenie plam wykrytych w~kolejnych etapach stygnięcia.
 Wykryte punkty zaznaczono na obrazie z~początku tego procesu.
 Zmieniające się kolory obrazują detale wykryte w~kolejnych chwilach.
@@ -814,10 +816,10 @@ plam podczas stygnięcia i zlewania się.
         Wraz z~upływem czasu kolor oznaczenia detali przechodzi w~czerwień}
     \caption{Wykryte detale, śledzone od początku stygnięcia, zaznaczone na
              pierwszym obrazie w~serii pomiarowej}
-    \label{fig:blobremain}
+    \label{fig:blob_remain}
 \end{figure}
-Działanie metody \ref{it:ratioblob}, zliczającej stosunek śledzonych detali 
-do ich pierwotnej liczby zobrazowano w~tabeli \ref{tab:blobratio}.
+Działanie metody \ref{it:ratio_blob}, zliczającej stosunek śledzonych detali 
+do ich pierwotnej liczby zobrazowano w~tabeli \ref{tab:blob_ratio}.
 Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 \begin{table}[htb]
 	\centering
@@ -832,12 +834,12 @@ Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 	\end{tabular}
 \caption{Stosunek liczby detali śledzonych w~kolejnych etapach stygnięcia do
          ich liczby na początku pomiaru}
-\label{tab:blobratio}
+\label{tab:blob_ratio}
 \end{table}
 
 \subsection{Wizualizacja zebranych cech i~ocena ich użyteczności}
-\label{subsec:datavis}
-W~podsekcji \ref{subsec:blobtracking} przedstawiono opracowane algorytmy
+\label{subsec:data_vis}
+W~podsekcji \ref{subsec:blob_tracking} przedstawiono opracowane algorytmy
 śledzenia ilości detali w~rozpatrywanych obrazach stygnięcia ziaren rud
 miedzi.
 Opracowane metody mają sens przy klasyfikacji, jeśli pozyskane cechy są
@@ -847,14 +849,14 @@ wizualizację.
 W~tym celu stworzono wykresy ilości wykrytych plam dla poszczególnych
 metod ich zliczania.
 
-Rysunek \ref{fig:blobchartall} przedstawia wykres procesu zanikania plam dla
+Rysunek \ref{fig:blob_chart_all} przedstawia wykres procesu zanikania plam dla
 wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
 \begin{figure}[htb]
     \centering
     \input{figures/blob_analysis_all}
     \caption{Liczba wykrytych detali na~każdym etapie stygnięcia, w~wariancie
              zliczającym wszystkie plamy}
-    \label{fig:blobchartall}
+    \label{fig:blob_chart_all}
 \end{figure}
 Wykreślone krzywe dla różnych klas materiałów przecinają się, na wykresach
 nie widać uporządkowania, ani wyraźnych zależności. 
@@ -871,13 +873,13 @@ Wskazuje to, że bardziej widoczne mogą być względne cechy czasowe, a~nie
 bezwzględna liczba zliczonych detali.
 
 Efekty drugiego sposób zliczania punktów przedstawiono na rysunku
-\ref{fig:blobchartrem}.
+\ref{fig:blob_chart_rem}.
 \begin{figure}[htb]
     \centering
     \input{figures/blob_analysis_remaining}
     \caption{Liczba detali wykrytych na zdjęciach, w~wariancie zliczającym
              plamy śledzone od początku procesu stygnięcia}
-    \label{fig:blobchartrem}
+    \label{fig:blob_chart_rem}
 \end{figure}
 W~tym przypadku zliczano jedynie detale obecne na obrazie od początku
 stygnięcia.
@@ -899,13 +901,13 @@ problem.
 
 Wyniki ostatniej metody, polegającej na ustaleniu stosunku śledzonych detali
 do ich pierwotnej liczby, został przedstawiona na rysunku
-\ref{fig:blobcharperc}.
+\ref{fig:blob_chart_ratio}.
 \begin{figure}[htb]
     \centering
     \input{figures/blob_analysis_ratio}
     \caption{Stosunek śledzonych detali do ich liczby na początku procesu
              stygnięcia}
-    \label{fig:blobcharperc}
+    \label{fig:blob_chart_ratio}
 \end{figure}
 Widoczne jest odseparowanie różnych klas rud miedzi, różne typy próbek
 charakteryzują się odmiennymi postępami rozmycia detali w~czasie.
@@ -913,13 +915,13 @@ charakteryzują się odmiennymi postępami rozmycia detali w~czasie.
 Nastąpiła także pewna normalizacja danych, która była trudna do realizacji
 przy bezwzględnym zliczaniu wszystkich plam na obrazie.
 Należy także zauważyć, że przedstawione krzywe przedstawione na rysunkach
-\ref{fig:blobchartrem} oraz \ref{fig:blobcharperc} mają kształt zbliżony
+\ref{fig:blob_chart_rem} oraz \ref{fig:blob_chart_ratio} mają kształt zbliżony
 do krzywych eksponencjalnych.
 Jest to obserwacja wskazująca, że pozyskane cechy dobrze oddają naturę procesu
 stygnięcia.
 Proces opadania temperatury ciał opisuje \emph{prawo stygnięcia Newtona},
 które ma postać równania różniczkowego, przedstawionego we wzorze
-\ref{eq:newtonlawdiff} \cite{lienhard_heat}, gdzie:
+\ref{eq:newton_law_diff} \cite{lienhard_heat}, gdzie:
 \begin{description}
 	\item $ T \left( t \right) $ to funkcja temperatury ciała w~czasie,
 	\item $ T_R $ to temperatura otocznia,
@@ -928,14 +930,14 @@ które ma postać równania różniczkowego, przedstawionego we wzorze
 
 \begin{equation}
 	\frac{dT \left( t \right)}{dt}=-k\left( T \left( t \right) -T_{R} \right)
-\label{eq:newtonlawdiff}
+\label{eq:newton_law_diff}
 \end{equation}
-Rozwiązanie równania przedstawia wzór \ref{eq:newtonlaw}, jak widać ma ono
+Rozwiązanie równania przedstawia wzór \ref{eq:newton_law}, jak widać ma ono
 charakter eksponencjalny, do którego zbliżone są wykresy na rysunkach
-\ref{fig:blobchartrem} oraz \ref{fig:blobcharperc}.
+\ref{fig:blob_chart_rem} oraz \ref{fig:blob_chart_ratio}.
 \begin{equation}
 	T(t) - T_{R} = \Delta T (t) = \Delta T (0) \ e^ {-k t}
-\label{eq:newtonlaw}
+\label{eq:newton_law}
 \end{equation}
 
 Analiza pozyskanych cech wskazuje, że istnieje możliwość ich wykorzystania
