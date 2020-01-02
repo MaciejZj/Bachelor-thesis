@@ -1,60 +1,70 @@
+% Paper, encoding and fonts settings
 \documentclass[a4paper, 12pt]{report}
 \usepackage{geometry}
-\usepackage{polski}
-\usepackage{icomma}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath}
+\usepackage{polski}
+\usepackage[polish]{babel}
+
+% Document structure and layout
+\usepackage[toc,page]{appendix}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage[absolute]{textpos}
+
+% Graphics and plotting
 \usepackage{graphicx}
 \graphicspath{ {graphics/} }
+\usepackage{rotating}
 \usepackage{pgfplots}
-\usepackage{cite}
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{groupplots}
 \usepgfplotslibrary{dateplot}
+
+% Math, physics and numbers
+\usepackage{amsmath}
+\usepackage{siunitx}
+% Proper decimal separation
+\usepackage{icomma}
+
+% Extra features and enhancements
+\usepackage{cite}
+% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+% Captions
+\usepackage[justification=centering]{caption}
+\usepackage{subcaption}
+% Lists
+\usepackage[shortlabels]{enumitem}
+% Listings
+\usepackage{minted}
+% Make sure that hyperref is last loaded package
+\usepackage[hidelinks]{hyperref} 
+
+
+% Renew some commands to ensure Polish names
+\renewcommand\listoflistingscaption{Spis listingów}
+\renewcommand{\appendixtocname}{Dodatki}
+\renewcommand{\appendixpagename}{Dodatki}
+% There is no Polish locale for units, French is the closest one
+\sisetup{locale = FR}
+% Define centered column type with fixed width
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+% Define header style
+\fancyhead{}
+\fancyhead[RO,LE]{\chaptername: \rightmark}
+% Forbid to split given words
+\hyphenation{LabVIEW}
+% Settings and packages configuration
 \pgfplotsset{every axis/.append style={
              tick label style={/pgf/number format/fixed},
              font=\scriptsize,
              ylabel near ticks,xlabel near ticks,
              grid=major}}
-\usepackage{diagbox}
-\usepackage[justification=centering]{caption}
-\usepackage{subcaption}
-\usepackage{setspace}
-\usepackage{array}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\usepackage[hidelinks]{hyperref} 
-\usepackage[shortlabels]{enumitem}
-\usepackage{siunitx}
-\usepackage[absolute]{textpos}
-\sisetup{locale = FR}
-
-\usepackage{minted}
-\renewcommand\listoflistingscaption{Spis listingów}
-\usepackage[polish]{babel}
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{rotating}
-\usepackage{texlogos}
-\pgfplotsset{compat=1.8}
-\usepackage[toc,page]{appendix}
-\renewcommand{\appendixtocname}{Dodatki}
-\renewcommand{\appendixpagename}{Dodatki}
-
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
-
-
-
-\fancyhead{}
-\fancyhead[RO,LE]{\chaptername: \rightmark}
-
-% Forbid to split given words
-\hyphenation{LabVIEW}
-
 \pgfplotsset{grid style={dashed}}
-% This is necessary to plot softmax function
+% This is function is necessary to plot softmax
 \pgfmathdeclarefunction{sumexp}{3}{%
 \begingroup%
 \pgfkeys{/pgf/fpu,/pgf/fpu/output format=fixed}%
@@ -104,7 +114,6 @@ Stworzone oprogramowanie będzie stanowić ułatwienie i~bazę dla dalszych
 badań ziaren rud miedzi metodą termowizyjną.
 Efekty pracy mogą stanowić punkt wyjścia dla kolejnych projektów oraz prób
 wdrożenia opracowanej technologii w~przemyśle.
-
 \end{abstract}
  
 \tableofcontents
