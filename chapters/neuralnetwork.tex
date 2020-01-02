@@ -46,7 +46,7 @@ Aby zwiększać efektywność sieci pomiędzy warstwą wejściową oraz wyjścio
 umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
 Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
 Matematycznie dowiedziono, że jedna warstwa ukryta \footnote{Przy
-pewnych obostrzeniach co do doboru funkcji aktywacji.} wystarcza do
+	pewnych obostrzeniach co do doboru funkcji aktywacji.} wystarcza do
 aproksymacji dowolnej funkcji nieliniowej \cite{cybenko_approximations}.
 Nie oznacza to jednak, że w~praktyce tak mała sieć wystarczy, aby rozwiązać
 dowolny problem uczenia maszynowego.
@@ -65,7 +65,7 @@ w~poszczególnych warstwach.
 W przypadku pierwszej i~ostatniej warstwy jest to wartość prosta do
 określenia.
 Zaleca się, aby wejście sieci miało liczbę neuronów równą liczbie elementów
-wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć 
+wektora cech, który w~rozpatrywanym przypadku ma długość równą pięć
 \cite[str. 272]{geron_ml}.
 Ostatnia warstwa powinna mieć tyle neuronów ile wynosi liczba rozpoznawanych
 klas, tak by każde wyjście sieci oznaczało prawdopodobieństwo przynależności
@@ -92,73 +92,73 @@ prawdopodobieństwo zaliczenia próbki do danej klasy.
 Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
 przedstawiono na rysunku \ref{fig:softmax}.
 \begin{figure}[htb]
-\centering
-\begin{tikzpicture}
-    \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
-                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
-       \addplot[blue, domain=-5:5, samples=51] 
-       {exp(x) / sumexp(x, -4, 0)};
-    \end{axis}
-\end{tikzpicture}
-\caption{Funkcja aktywacji softmax}
-\label{fig:softmax}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
+				ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
+			\addplot[blue, domain=-5:5, samples=51]
+			{exp(x) / sumexp(x, -4, 0)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Funkcja aktywacji softmax}
+	\label{fig:softmax}
 \end{figure}
 W~przypadku pozostałych warstw wybór funkcji aktywacji jest mniej oczywisty.
 Rozpatrzono trzy rodziny funkcji:
 \begin{itemize}
 	\item funkcję sigmoid,
 	\item funkcje z~grupy jednostek liniowych (ang. \emph{linear unit}):
-		\begin{itemize}	
-        	\item ReLU (ang. \emph{Rectified Linear Unit}),
-        	\item ELU (ang. \emph{Exponential Linear Unit}),
-        \end{itemize}
+	      \begin{itemize}
+		      \item ReLU (ang. \emph{Rectified Linear Unit}),
+		      \item ELU (ang. \emph{Exponential Linear Unit}),
+	      \end{itemize}
 	\item funkcję tangens hiperboliczny.
 \end{itemize}
 Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.
 \begin{figure}[htb]
-\centering
-\begin{subfigure}[t]{0.3\textwidth}
-\centering
-\begin{tikzpicture}[trim axis left]
-    \begin{axis}[title={$ Sigmoid(z) $}, width=5cm, height=4cm,
-                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
-       \addplot[blue, domain=-5:5, samples=51] 
-       {1 / (1 + e^(-x)};
-    \end{axis}
-\end{tikzpicture}
-\caption{Funkcja aktywacji tangens hiperboliczny}
-\end{subfigure}
-\hspace{0.25cm}
-\begin{subfigure}[t]{0.3\textwidth}
-\centering
-\begin{tikzpicture}[trim axis left]
-    \begin{axis}[title={$ LU(z) $}, width=5cm, height=4cm,
-                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-3, xmax=3,
-                 legend style={at={(0.02, 0.98)}, anchor=north west}]
-       \addplot[red, domain=-3:3, samples=31] 
-       {max(0, x)};
-       \addplot[blue, domain=-3:3, samples=31] 
-       {x < 0 ? 0.1*(e^x - 1) : x};
-    \legend{ReLU, ELU}
-    \end{axis}
-\end{tikzpicture}
-\caption{Rodzina funkcji aktywacji jednostek liniowych}
-\end{subfigure}
-\hspace{0.25cm}
-\begin{subfigure}[t]{0.3\textwidth}
-\centering
-\begin{tikzpicture}[trim axis left]
-    \begin{axis}[title={$ Tanh(z) $}, width=5cm, height=4cm,
-                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
-       \addplot[blue, domain=-5:5, samples=51] 
-       {tanh(x)};
-    \end{axis}
-\end{tikzpicture}
-\caption{Funkcja aktywacji tangens hiperboliczny}
-\end{subfigure}
-\caption{Funkcje aktywacji rozpatrywane do użycia w~warstwach
-         ukrytych}
-\label{fig:activation}
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[trim axis left]
+			\begin{axis}[title={$ Sigmoid(z) $}, width=5cm, height=4cm,
+					ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
+				\addplot[blue, domain=-5:5, samples=51]
+				{1 / (1 + e^(-x)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Funkcja aktywacji tangens hiperboliczny}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[trim axis left]
+			\begin{axis}[title={$ LU(z) $}, width=5cm, height=4cm,
+					ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-3, xmax=3,
+					legend style={at={(0.02, 0.98)}, anchor=north west}]
+				\addplot[red, domain=-3:3, samples=31]
+				{max(0, x)};
+				\addplot[blue, domain=-3:3, samples=31]
+				{x < 0 ? 0.1*(e^x - 1) : x};
+				\legend{ReLU, ELU}
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Rodzina funkcji aktywacji jednostek liniowych}
+	\end{subfigure}
+	\hspace{0.25cm}
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\begin{tikzpicture}[trim axis left]
+			\begin{axis}[title={$ Tanh(z) $}, width=5cm, height=4cm,
+					ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
+				\addplot[blue, domain=-5:5, samples=51]
+				{tanh(x)};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Funkcja aktywacji tangens hiperboliczny}
+	\end{subfigure}
+	\caption{Funkcje aktywacji rozpatrywane do użycia w~warstwach
+		ukrytych}
+	\label{fig:activation}
 \end{figure}
 Funkcja sigmoid jest często stosowaną, klasyczną funkcją aktywacji.
 Jej wadą jest jednak zanikanie wartości pochodnej.
@@ -179,22 +179,22 @@ Jej parametry definiują liczbę neuronów w~warstwie oraz ich funkcję aktywacj
 Funkcję języka Python implementują opisywaną sieć, za pomocą przedstawionych
 elementów biblioteki Keras, przedstawiono na listingu \ref{lst:model}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def default_grain_classifier_model():
-    '''
-    Get default uncompiled model for grain classifcation,
-    based on 5 step cooling process using number of blobs.
-    '''
-    model = keras.Sequential([
-        keras.layers.Dense(5, activation='tanh'),
-        keras.layers.Dense(256, activation='tanh'),
-        keras.layers.Dense(128, activation='tanh'),
-        keras.layers.Dense(4, activation='softmax')
-    ])
-    return model
-\end{minted}
-\caption{Funkcja języka Python definiująca model sieci neuronowej}
-\label{lst:model}
+	\begin{minted}{python}
+		def default_grain_classifier_model():
+		'''
+		Get default uncompiled model for grain classifcation,
+		based on 5 step cooling process using number of blobs.
+		'''
+		model = keras.Sequential([
+				keras.layers.Dense(5, activation='tanh'),
+				keras.layers.Dense(256, activation='tanh'),
+				keras.layers.Dense(128, activation='tanh'),
+				keras.layers.Dense(4, activation='softmax')
+			])
+		return model
+	\end{minted}
+	\caption{Funkcja języka Python definiująca model sieci neuronowej}
+	\label{lst:model}
 \end{listing}
 
 \subsection{Trening sieci neuronowej}
@@ -252,7 +252,7 @@ metryki.
 Argument \mintinline{python}{optimizer} przyjmuje  nazwę stosowanego
 algorytmu uczenia sieci.
 Rozważono dwa popularne metody treningu: sgd (ang. \emph{stochastic gradient
-descent)} oraz adam (ang. \emph{adaptive moment estimation}).
+	descent)} oraz adam (ang. \emph{adaptive moment estimation}).
 Metoda sgd jest najbardziej popularnym i~podstawowym sposobem uczenia, jednak
 algorytm adam, jest rozwiązaniem nowszym, i~bardziej wydajnym.
 Jedną z~zalet drugiego algorytmu jest adaptacyjne obliczanie współczynnika
@@ -267,7 +267,7 @@ Przykładem miary błędu używanej w~sieciach neuronowych jest popularny
 błąd średniokwadratowy.
 Dla problemów klasyfikacji lepszy jest jednak błąd obliczany metodą
 \emph{rzadkiej kategoryzacyjnej entropii krzyżowej} (ang. \textit{sparse
-categorical crossentropy}).
+	categorical crossentropy}).
 Jest to złożona metoda wykorzystująca funkcję logarytmiczną.
 Metoda kategoryzacyjnej entropii okazała się najlepszą funkcją błędu
 dla analizowanego przypadku.
@@ -289,21 +289,21 @@ Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 		\centering
 		\input{figures/neural_network_trainig_all}
 		\caption{Przebieg treningu sieci dla metody zliczania wszystkich
-		         ziaren}
+			ziaren}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
 		\input{figures/neural_network_trainig_remaining}
-		\caption{Przebieg treningu sieci dla metody zliczania śledzonych 
-		         ziaren}
+		\caption{Przebieg treningu sieci dla metody zliczania śledzonych
+			ziaren}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
 		\input{figures/neural_network_trainig_ratio}
 		\caption{Przebieg treningu sieci dla metody zliczania stosunku
-		         śledzonych ziaren}
+			śledzonych ziaren}
 	\end{subfigure}
 	\caption{Przebieg treningu sieci dla różnych metod zliczania ziaren}
 	\label{fig:training_history}
@@ -311,27 +311,27 @@ Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
 Opisany plan treningu sieci realizuje kod przedstawiony na listingu
 \ref{lst:nn_training}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def classification_demo(X, y):
-    '''
-    Demo grain classification on given data.
-    Train and test default model.
-    '''
-    X = np.array(X)
-    y = np.array(y)
+	\begin{minted}{python}
+		def classification_demo(X, y):
+		'''
+		Demo grain classification on given data.
+		Train and test default model.
+		'''
+		X = np.array(X)
+		y = np.array(y)
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, stratify=y, test_size=0.33, random_state=1)
+		X_train, X_test, y_train, y_test = train_test_split(
+		X, y, stratify=y, test_size=0.33, random_state=1)
 
-    model = default_grain_classifier_model()
-    model.compile(
-        optimizer='adam',
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy'])
-    history = model.fit(X_train, y_train, epochs=300, verbose=0)
-\end{minted}
-\caption{Kod treningu sieci neuronowej klasyfikującej ziarna miedzi}
-\label{lst:nn_training}
+		model = default_grain_classifier_model()
+		model.compile(
+		optimizer='adam',
+		loss='sparse_categorical_crossentropy',
+		metrics=['accuracy'])
+		history = model.fit(X_train, y_train, epochs=300, verbose=0)
+	\end{minted}
+	\caption{Kod treningu sieci neuronowej klasyfikującej ziarna miedzi}
+	\label{lst:nn_training}
 \end{listing}
 
 Działanie sieci można sprawdzić na zbiorze testowym.
@@ -347,29 +347,29 @@ w~podsekcji~\ref{subsec:data_vis}.
 \begin{table}[htb]
 	\centering
 	\begin{tabular}{c|C{2cm}|C{2cm}}
-	\toprule
-	\multirow{2}{*}{Metoda zliczania detali} & \multicolumn{2}{c}{Wskaźnik} \\ 
-                                         & Błąd       & Dokładność      \\ \midrule
-Wszystkie detale              & 1,45       & 0,25            \\
-Śledzone detale              & 7,50       & 0,5             \\
-Stosunek śledzonych detali   & 0,63       & 0,75           \\   
-	\bottomrule
+		\toprule
+		\multirow{2}{*}{Metoda zliczania detali} & \multicolumn{2}{c}{Wskaźnik} \\
+		                           & Błąd & Dokładność \\ \midrule
+		Wszystkie detale           & 1,45 & 0,25       \\
+		Śledzone detale            & 7,50 & 0,5        \\
+		Stosunek śledzonych detali & 0,63 & 0,75       \\
+		\bottomrule
 	\end{tabular}
-\caption{Wskaźniki oceny działania sieci na zbiorze testowym}
-\label{tab:nn_test}
+	\caption{Wskaźniki oceny działania sieci na zbiorze testowym}
+	\label{tab:nn_test}
 \end{table}
 
 \section{Walidacja i~ocena działania sieci} \label{sec:nn_validation}
 Po stworzeniu prototypu klasyfkiatora przedstawionego w~rozdziale
 \ref{subsec:nn_build} należy przeprowadzić walidację zbudowanej sieci
 neuronowej.
-Najpopularniejszą metodą miarodajnej walidacji sieci jest 
+Najpopularniejszą metodą miarodajnej walidacji sieci jest
 \emph{k-krotny sprawdzian krzyżowy} (ang. \textit{k-fold cross-validation}).
 Metoda ta polega na podziale dostępnych danych na k części, i~kolejnym
 wydzielaniu jednej z~części danych jako zbioru testowego.
 Walidacje powtarza się k-krotnie, tak by każda część była wykorzystana
 jako dane testowe.
-Na końcu testu wyniki są uśrednianie. 
+Na końcu testu wyniki są uśrednianie.
 Dzięki temu sprawdzian krzyżowy daje dobry pogląd na ogólną zdolność sieci do
 generalizacji rozwiązywanego problemu.
 
@@ -396,22 +396,22 @@ zbioru danych i~etykiet.
 Zwracana jest macierz, w~której rzędy oznaczają wyniki testów dla kolejnych
 podziałów zbioru danych.
 \begin{listing}[htb]
-\begin{minted}{python}
-def network_cross_validation(model, X, y, n_splits):
-    '''Compute cross validation fold scores for given keras model.'''
-    eval_scores = []
+	\begin{minted}{python}
+		def network_cross_validation(model, X, y, n_splits):
+		'''Compute cross validation fold scores for given keras model.'''
+		eval_scores = []
 
-    folds = StratifiedKFold(n_splits=n_splits).split(X, y)
-    for train_index, test_index in folds:
-        x_train, x_test = X[train_index], X[test_index]
-        y_train, y_test = y[train_index], y[test_index]
+		folds = StratifiedKFold(n_splits=n_splits).split(X, y)
+		for train_index, test_index in folds:
+		x_train, x_test = X[train_index], X[test_index]
+		y_train, y_test = y[train_index], y[test_index]
 
-        model.fit(x_train, y_train, epochs=300, verbose=0)
-        eval_scores.append(model.evaluate(x_test, y_test, verbose=0))
-    return eval_scores
-\end{minted}
-\caption{Funkcja języka Python definiująca model sieci neuronowej}
-\label{lst:nn_crossval}
+		model.fit(x_train, y_train, epochs=300, verbose=0)
+		eval_scores.append(model.evaluate(x_test, y_test, verbose=0))
+		return eval_scores
+	\end{minted}
+	\caption{Funkcja języka Python definiująca model sieci neuronowej}
+	\label{lst:nn_crossval}
 \end{listing}
 Sposób wykorzystania zbudowanej funkcji walidacji modelu przedstawia
 listing \ref{lst:nn_validation}.
@@ -437,47 +437,47 @@ Szczegółowe zestaweienie rozpatrywanych konfiguracji i~wartości parametrów
 załączono w~dodatku \ref{ch:nn_comparison_table}.
 
 \begin{listing}[htb]
-\begin{minted}{python}
-def cross_val_demo(X, y):
-    '''
-    Demo cross validation of default grain classifier
-    on given data.
-    '''
-    X = np.array(X)
-    y = np.array(y)
+	\begin{minted}{python}
+		def cross_val_demo(X, y):
+		'''
+		Demo cross validation of default grain classifier
+		on given data.
+		'''
+		X = np.array(X)
+		y = np.array(y)
 
-    model = default_grain_classifier_model()
-    model.compile(
-        optimizer='adam',
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy'])
+		model = default_grain_classifier_model()
+		model.compile(
+		optimizer='adam',
+		loss='sparse_categorical_crossentropy',
+		metrics=['accuracy'])
 
-    score = network_cross_validation(model, X, y, 3)
+		score = network_cross_validation(model, X, y, 3)
 
-    print('Folds scores: (loss, acc)\n', score)
-    score = np.array(score)
-    print('Cross validation mean score (loss, acc):\n',
-          score.mean(axis=0), '\n')
-\end{minted}
-\caption{Wykorzystanie funkcji sprawdzianu krzyżowego do oceny działania
-         sieci}
-\label{lst:nn_validation}
+		print('Folds scores: (loss, acc)\n', score)
+		score = np.array(score)
+		print('Cross validation mean score (loss, acc):\n',
+		score.mean(axis=0), '\n')
+	\end{minted}
+	\caption{Wykorzystanie funkcji sprawdzianu krzyżowego do oceny działania
+		sieci}
+	\label{lst:nn_validation}
 \end{listing}
 
 \begin{table}[htb]
 	\centering
 	\begin{tabular}{c|C{2cm}|C{2cm}}
-	\toprule
-	\multirow{2}{*}{Metoda zliczania detali} & \multicolumn{2}{c}{Wskaźnik} \\ 
-                                         & Błąd       & Dokładność      \\ \midrule
-Wszystkie detale             & 6,59       & 0,41            \\
-Śledzone detale              & 3,99       & 0,50             \\
-Stosunek śledzonych detali   & 1,37       & 0,91          \\   
-	\bottomrule
+		\toprule
+		\multirow{2}{*}{Metoda zliczania detali} & \multicolumn{2}{c}{Wskaźnik} \\
+		                           & Błąd & Dokładność \\ \midrule
+		Wszystkie detale           & 6,59 & 0,41       \\
+		Śledzone detale            & 3,99 & 0,50       \\
+		Stosunek śledzonych detali & 1,37 & 0,91       \\
+		\bottomrule
 	\end{tabular}
-\caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
-         krzyżowego}
-\label{tab:nn_crossval}
+	\caption{Wskaźniki oceny działania sieci uzyskane metodą sprawdzianu
+		krzyżowego}
+	\label{tab:nn_crossval}
 \end{table}
 
 Dodatkowo opracowano kod generujący \emph{macierz pomyłek} (ang.
@@ -502,29 +502,29 @@ została sklasyfikowana w~dany sposób.
 Funkcję generującą uśrednioną macierz pomyłek przedstawia listing
 \ref{lst:mean_confusion_matrix}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def mean_confusion_matrix(model, X, y, n_splits):
-    '''
-    Compute mean confusion matrix using
-    cross validation with n splits.
-    '''
-    conf_matrix = np.zeros((4, 4))
+	\begin{minted}{python}
+		def mean_confusion_matrix(model, X, y, n_splits):
+		'''
+		Compute mean confusion matrix using
+		cross validation with n splits.
+		'''
+		conf_matrix = np.zeros((4, 4))
 
-    folds = StratifiedKFold(n_splits=n_splits).split(X, y)
-    for train_index, test_index in folds:
-        x_train, x_test = X[train_index], X[test_index]
-        y_train, y_test = y[train_index], y[test_index]
+		folds = StratifiedKFold(n_splits=n_splits).split(X, y)
+		for train_index, test_index in folds:
+		x_train, x_test = X[train_index], X[test_index]
+		y_train, y_test = y[train_index], y[test_index]
 
-        model.fit(x_train, y_train, epochs=300, verbose=0)
-        y_pred = model.predict_classes(x_test)
+		model.fit(x_train, y_train, epochs=300, verbose=0)
+		y_pred = model.predict_classes(x_test)
 
-        for test, pred in zip(y_test, y_pred):
-            conf_matrix[test][pred] = conf_matrix[test][pred] + 1
+		for test, pred in zip(y_test, y_pred):
+		conf_matrix[test][pred] = conf_matrix[test][pred] + 1
 
-    return conf_matrix / n_splits
-\end{minted}
-\caption{Funkcja języka Python generująca uśrednioną macierz pomyłek}
-\label{lst:mean_confusion_matrix}
+		return conf_matrix / n_splits
+	\end{minted}
+	\caption{Funkcja języka Python generująca uśrednioną macierz pomyłek}
+	\label{lst:mean_confusion_matrix}
 \end{listing}
 
 Zdecydowano się wygenerować macierz pomyłek dla najlepszego sposobu
@@ -539,17 +539,17 @@ Widoczna jest pomyłka sieci polegająca na niewłaściwej klasyfikacji próbki
 klasy E6R jako E16R.
 
 \begin{table}[htb]
-\centering
-\begin{tabular}{cccccc}
-                                 &                            & \multicolumn{4}{c}{Wiedza klasyfikatora} \\ \cmidrule[1pt]{2-6}
-                                 & \multicolumn{1}{c|}{klasa} & E5R      & E6R      & E11R     & E16R    \\ \cmidrule{2-6}
-\multirow{4}{*}{\rotatebox[origin=c]{90}{\parbox{2cm}
-{\centering Wiedza eksperta}}} & \multicolumn{1}{c|}{E5R}   & 1,00     & 0,00     & 0,00     & 0,00    \\
-                                 & \multicolumn{1}{c|}{E6R}   & 0,00     & 0,67     & 0,00     & 0,33    \\
-                                 & \multicolumn{1}{c|}{E11R}  & 0,00     & 0,00     & 1,00     & 0,00    \\
-                                 & \multicolumn{1}{c|}{E16R}  & 0,00     & 0,00     & 0,00     & 1,00 \\
-                                 \cmidrule[1pt]{2-6}
-\end{tabular}
-\caption{Tabela pomyłek najlepszego klasyfikatora}
-\label{tab:confusion_matrix}
+	\centering
+	\begin{tabular}{cccccc}
+		&                            & \multicolumn{4}{c}{Wiedza klasyfikatora} \\ \cmidrule[1pt]{2-6}
+		                               & \multicolumn{1}{c|}{klasa} & E5R  & E6R  & E11R & E16R \\ \cmidrule{2-6}
+		\multirow{4}{*}{\rotatebox[origin=c]{90}{\parbox{2cm}
+		{\centering Wiedza eksperta}}} & \multicolumn{1}{c|}{E5R}   & 1,00 & 0,00 & 0,00 & 0,00 \\
+		                               & \multicolumn{1}{c|}{E6R}   & 0,00 & 0,67 & 0,00 & 0,33 \\
+		                               & \multicolumn{1}{c|}{E11R}  & 0,00 & 0,00 & 1,00 & 0,00 \\
+		                               & \multicolumn{1}{c|}{E16R}  & 0,00 & 0,00 & 0,00 & 1,00 \\
+		\cmidrule[1pt]{2-6}
+	\end{tabular}
+	\caption{Tabela pomyłek najlepszego klasyfikatora}
+	\label{tab:confusion_matrix}
 \end{table}

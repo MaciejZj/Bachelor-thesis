@@ -74,7 +74,7 @@ z~każdego nagrania wybrano pięć stopklatek.
 Podczas eksperymentu uzyskano łącznie dwanaście pomiarów, zawierających
 sumarycznie 60~zdjęć.
 W~ramach uczenia maszynowego jest to bardzo mały zbiór danych, biorąc jednak
-pod uwagę wstępno-badawczy charakter pracy oraz czasochłonność procesu 
+pod uwagę wstępno-badawczy charakter pracy oraz czasochłonność procesu
 pomiarowego zdecydowano, że jest to rozmiar zadawalający do pierwszych
 prób klasyfikacji.
 Zebrane materiały mają format JPEG, do oznaczania zdjęć przyjęto schemat
@@ -86,7 +86,7 @@ nazw jak w~przykładzie: 115\_E11R\_1, gdzie człony nazwy oznaczają kolejno:
 \end{itemize}
 
 \subsection{Prezentacja przykładowej serii pomiarowej}
-Jak opisano w rozdziale \ref{sec:measure} jedna próbka w~zbiorze danych 
+Jak opisano w rozdziale \ref{sec:measure} jedna próbka w~zbiorze danych
 składa się z~serii pięciu zdjęć o~malejącym kontraście i~szczegółowości.
 Na rysunku \ref{fig:sample}~przedstawiono proces stygnięcia przykładowej
 próbki 104~klasy E5R.
@@ -106,8 +106,8 @@ Wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szum�
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_0}
 		\caption{Minuta: 0 \\
-		         Zakres temperatur: \SI{48.0}{\celsius} do
-		         \SI{53.0}{\celsius}}
+			Zakres temperatur: \SI{48.0}{\celsius} do
+			\SI{53.0}{\celsius}}
 	\end{subfigure}
 	\hspace{0.75cm}
 	\vspace{0.5cm}
@@ -115,15 +115,15 @@ Wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szum�
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_1}
 		\caption{Minuta: 1 \\
-		         Zakres temperatur: \SI{43.1}{\celsius} do
-		         \SI{39.5}{\celsius}}
+			Zakres temperatur: \SI{43.1}{\celsius} do
+			\SI{39.5}{\celsius}}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_2}
 		\caption{Minuta: 2 \\
-		         Zakres temperatur: \SI{36.8}{\celsius} do
-		         \SI{39.5}{\celsius}}
+			Zakres temperatur: \SI{36.8}{\celsius} do
+			\SI{39.5}{\celsius}}
 	\end{subfigure}
 	\hspace{0.75cm}
 	\vspace{0.5cm}
@@ -131,15 +131,15 @@ Wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szum�
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_3}
 		\caption{Minuta: 3 \\
-		         Zakres temperatur: \SI{35.1}{\celsius} do
-		         \SI{37.5}{\celsius}}
+			Zakres temperatur: \SI{35.1}{\celsius} do
+			\SI{37.5}{\celsius}}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{sample/104_E5R_4}
 		\caption{Minuta: 4 \\
-		         Zakres temperatur: \SI{33.8}{\celsius} do
-		         \SI{36.8}{\celsius}}
+			Zakres temperatur: \SI{33.8}{\celsius} do
+			\SI{36.8}{\celsius}}
 	\end{subfigure}
 	\caption{Zdjęcia procesu stygnięcia przykładowej próbki 104 klasy E5R}
 	\label{fig:sample}
@@ -180,7 +180,7 @@ W~celu odczytu wartości liczbowych z~obrazu posłużono się gotową siecią
 neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
 Zdecydowano się na użycie popularnej biblioteki \emph{Pytesseract}
 \footnote{Repozytorium projektu w~serwisie GitHub:
-\url{https://github.com/madmaze/pytesseract}}.
+	\url{https://github.com/madmaze/pytesseract}}.
 Analizowane zdjęcia są kadrowane, by wyizolować odczytywane liczby.
 Wycięte fragmenty mają bardzo małą rozdzielczość, aby ułatwić sieci
 rozpoznawanie liczb, zdecydowano się przeskalować obrazy w~górę.
@@ -217,28 +217,28 @@ przedstawiono na listingu \ref{lst:temp_bounds}.
 \end{figure}
 
 \begin{listing}[htbp]
-\begin{minted}{python}
-def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
-                                        ((219, 236), (283, 318)))):
-    '''Extract temperature values from FLIR UI on image.'''
-    img = invert(img)
-    temp_txt = []
-    for bound in bounds:
-        bound_img = img[slice(*bound[0]), slice(*bound[1])]
-        bound_img = rescale(bound_img, 4, anti_aliasing=True)
-        thr = threshold_otsu(bound_img)
-        img_txt = bound_img > thr
-        img_txt = Image.fromarray(img_txt)
-        temp = pytesseract.image_to_string(img_txt, config='digits')
-        if temp != '':
-            temp = float(temp) / 10
-        else:
-            temp = 0
-        temp_txt.append(temp)
-    return temp_txt
-\end{minted}
-\caption{Funkcja języka Python odczytująca zakres temperatur ze zdjęć}
-\label{lst:temp_bounds}
+	\begin{minted}{python}
+		def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
+		((219, 236), (283, 318)))):
+		'''Extract temperature values from FLIR UI on image.'''
+		img = invert(img)
+		temp_txt = []
+		for bound in bounds:
+		bound_img = img[slice(*bound[0]), slice(*bound[1])]
+		bound_img = rescale(bound_img, 4, anti_aliasing=True)
+		thr = threshold_otsu(bound_img)
+		img_txt = bound_img > thr
+		img_txt = Image.fromarray(img_txt)
+		temp = pytesseract.image_to_string(img_txt, config='digits')
+		if temp != '':
+		temp = float(temp) / 10
+		else:
+		temp = 0
+		temp_txt.append(temp)
+		return temp_txt
+	\end{minted}
+	\caption{Funkcja języka Python odczytująca zakres temperatur ze zdjęć}
+	\label{lst:temp_bounds}
 \end{listing}
 
 \section{Eksploracja danych}
@@ -324,12 +324,12 @@ Zdjęcia tej próbki wcześniej stają się szare i~tracą kontrast.
 Na podstawie analizy nagrań rozpatrzono następujące możliwości ekstrakcji
 ich cech charakterystycznych:
 \begin{enumerate}[a)]
-	\item \label{it:cnn} 
+	\item \label{it:cnn}
 	      klasyfikacja całych zdjęć z~użyciem zaawansowanych sieci
 	      konwolucyjnych,
-	\item \label{it:fft} 
+	\item \label{it:fft}
 	      analiza częstotliwościowa obrazów,
-	\item \label{it:glcm} 
+	\item \label{it:glcm}
 	      użycie macierzy GLCM,
 	\item \label{it:edge}
 	      detekcja krawędzi ziaren i~wyznaczanie reprezentacji liczbowej
@@ -346,7 +346,7 @@ klasyfikatora.
 
 Metoda bazująca na sieciach konwolucyjnych może wykorzystywać najnowsze
 rozwiązania w~dziecinie uczenia maszynowego.
-Utrudnieniem w~użyciu tej metody jest bardzo mały rozmiar posiadanego 
+Utrudnieniem w~użyciu tej metody jest bardzo mały rozmiar posiadanego
 zbioru danych.
 Na zgromadzonych obrazach znajduje się wiele informacji i~szumów,
 a~złożoność jednego zdjęcia jest na tę chwilę nieproporcjonalna do wielkości
@@ -468,8 +468,8 @@ jest dana wzorem \ref{eq:gaussian}, gdzie:
 	P(x) = \frac{1}{{\sigma \sqrt {2\pi } }}
 	e^{{{ - \left( {x - \mu } \right)^2 }
 	\mathord{\left/ {\vphantom {{ - \left( {x - \mu } \right)^2 }
-	{2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}}
-\label{eq:gaussian}
+			{2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}}
+	\label{eq:gaussian}
 \end{equation}
 Laplasjan to operator różniczkowy drugiego rzędu.
 Omawiany algorytm oblicza wartości funkcji Gaussa dla coraz większego
@@ -495,19 +495,19 @@ Prędkość tej metody nie zależy od wielkości wykrywanych plam, ale małe
 elementy mogą nie zostać przez nią wykryte \cite{scikit_reference}.
 \begin{equation}
 	H = \begin{bmatrix}
-	\dfrac{\partial^2 f}{\partial x_1^2} & 
-	\dfrac{\partial^2 f}{\partial x_1\,\partial x_2} & 
-	\cdots & \dfrac{\partial^2 f}{\partial x_1\,\partial x_n} \\[2.2ex]
-	\dfrac{\partial^2 f}{\partial x_2\,\partial x_1} &
-	\dfrac{\partial^2 f}{\partial x_2^2} &
-	\cdots & \dfrac{\partial^2 f}{\partial x_2\,\partial x_n} \\[2.2ex]
-	\vdots & \vdots & \ddots & \vdots \\[2.2ex]
-	\dfrac{\partial^2 f}{\partial x_n\,\partial x_1} &
-	\dfrac{\partial^2 f}{\partial x_n\,\partial x_2} &
-	\cdots &
-	\dfrac{\partial^2 f}{\partial x_n^2}
+		\dfrac{\partial^2 f}{\partial x_1^2} &
+		\dfrac{\partial^2 f}{\partial x_1\,\partial x_2} &
+		\cdots & \dfrac{\partial^2 f}{\partial x_1\,\partial x_n} \\[2.2ex]
+		\dfrac{\partial^2 f}{\partial x_2\,\partial x_1} &
+		\dfrac{\partial^2 f}{\partial x_2^2} &
+		\cdots & \dfrac{\partial^2 f}{\partial x_2\,\partial x_n} \\[2.2ex]
+		\vdots & \vdots & \ddots & \vdots \\[2.2ex]
+		\dfrac{\partial^2 f}{\partial x_n\,\partial x_1} &
+		\dfrac{\partial^2 f}{\partial x_n\,\partial x_2} &
+		\cdots &
+		\dfrac{\partial^2 f}{\partial x_n^2}
 	\end{bmatrix}
-\label{eq:hessian}
+	\label{eq:hessian}
 \end{equation}
 
 Porównanie działania wymienionych metod przedstawiono na grafice
@@ -553,25 +553,25 @@ Argument \mintinline{python}{max_sigma} ogranicza odchylenie standardowe
 obliczanych funkcji Gaussa, przez co wykrywane są tylko małe elementy.
 Drugi argument \mintinline{python}{threshold} decyduje o~poziomie,
 powyżej którego punkt jest uznany za maksimum w~sześcianie laplasjanów.
-Domyślna wartość tego argumentu \mintinline{python}{threshold} okazała 
+Domyślna wartość tego argumentu \mintinline{python}{threshold} okazała
 się zbyt duża, zmniejszono ją aby wykrywać bardziej subtelne detale.
 Na podstawie opisanego wywołania metody laplasjanu funkcji Gaussa
 opracowano funkcję zwracającą położenie i~promienie wykrytych plam.
 \begin{listing}[htb]
-\begin{minted}{python}
-def find_blobs(img):
-    '''
-    Find blobs in given image and get list of their positions
-    and radiuses.
-    '''
-    # Detect blobs with Difference of Gaussian
-    blobs = blob_dog(img, max_sigma=2, threshold=0.1)
-    # Get blobs radiuses from each kernel sigma
-    blobs[:, 2] = blobs[:, 2] * sqrt(2)
-    return blobs
-\end{minted}
-\caption{Funkcja języka Python wykrywająca detale na obrazie}
-\label{lst:find_blobs}
+	\begin{minted}{python}
+		def find_blobs(img):
+		'''
+		Find blobs in given image and get list of their positions
+		and radiuses.
+		'''
+		# Detect blobs with Difference of Gaussian
+		blobs = blob_dog(img, max_sigma=2, threshold=0.1)
+		# Get blobs radiuses from each kernel sigma
+		blobs[:, 2] = blobs[:, 2] * sqrt(2)
+		return blobs
+	\end{minted}
+	\caption{Funkcja języka Python wykrywająca detale na obrazie}
+	\label{lst:find_blobs}
 \end{listing}
 
 \subsection{Algorytm śledzenia ziaren w~serii zdjęć}
@@ -579,7 +579,7 @@ def find_blobs(img):
 Użycie funkcji bibliotecznych opisanych w~podsekcji \ref{subsec:blob_detect}
 pozwala na detekcję detali na pojedynczym zdjęciu.
 Aby wykorzystać detekcję plam w~serii pięciu zdjęć, które reprezentują
-stygnięcie jednej próbki, należy opracować zestaw funkcji śledzący zmiany 
+stygnięcie jednej próbki, należy opracować zestaw funkcji śledzący zmiany
 na obrazie.
 Na tym etapie prac nie jest jednoznaczne jaki sposób obserwacji i~zliczania
 detali będzie najlepszy do późniejszego prototypowania sieci neuronowej
@@ -608,24 +608,24 @@ początku stygnięcia.
 Omawiany kod wykorzystuje funkcję wykrywania detali na zdjęciu przedstawioną
 na listingu \ref{lst:find_blobs}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def find_blob_series(imgs, only_remaining=True):
-    '''
-    Return list of list of blobs found in each of given images.
-    '''
-    stages = []
-    remaining = None
-    for img in imgs:
-        new_blobs = find_blobs(img)
-        if remaining is not None and only_remaining:
-            remaining = find_remaining_blobs(new_blobs, remaining)
-        else:
-            remaining = new_blobs
-        stages.append(remaining)
-    return stages
-\end{minted}
-\caption{Funkcja języka Python śledząca detale w~serii zdjęć}
-\label{lst:find_blob_series}
+	\begin{minted}{python}
+		def find_blob_series(imgs, only_remaining=True):
+		'''
+		Return list of list of blobs found in each of given images.
+		'''
+		stages = []
+		remaining = None
+		for img in imgs:
+		new_blobs = find_blobs(img)
+		if remaining is not None and only_remaining:
+		remaining = find_remaining_blobs(new_blobs, remaining)
+		else:
+		remaining = new_blobs
+		stages.append(remaining)
+		return stages
+	\end{minted}
+	\caption{Funkcja języka Python śledząca detale w~serii zdjęć}
+	\label{lst:find_blob_series}
 \end{listing}
 Wybór opcji detekcji ziaren obecnych jedynie od początku stygnięcia,
 powoduje wywołanie funkcji porównania wykrytych detali, z~punktami
@@ -640,24 +640,24 @@ serii, a~z~zestawem z poprzedniego analizowanego zdjęcia.
 Na listingu \ref{lst:find_remaining_blobs} przedstawiono funkcję testującą,
 które z~detali znajdują się na kolejnych etapach stygnięcia.
 \begin{listing}[htb]
-\begin{minted}{python}
-def find_remaining_blobs(new_blobs, old_blobs):
-    '''
-    Return list of blobs present in both lists, where blob
-    is considered same if is in proximity of 2 times it's radius.
-    '''
-    remaining = []
-    for new_blob in new_blobs:
-        yn, xn, _ = new_blob
-        for old_blob in old_blobs:
-            yo, xo, ro = old_blob
-            if inside_circle(xn, yn, xo, yo, 2 * ro):
-                remaining.append(new_blob)
-    return unique(remaining)
-\end{minted}
-\caption{Funkcja języka Python wykrywające te same detale w~kolejnych
-         obrazach}
-\label{lst:find_remaining_blobs}
+	\begin{minted}{python}
+		def find_remaining_blobs(new_blobs, old_blobs):
+		'''
+		Return list of blobs present in both lists, where blob
+		is considered same if is in proximity of 2 times it's radius.
+		'''
+		remaining = []
+		for new_blob in new_blobs:
+		yn, xn, _ = new_blob
+		for old_blob in old_blobs:
+		yo, xo, ro = old_blob
+		if inside_circle(xn, yn, xo, yo, 2 * ro):
+		remaining.append(new_blob)
+		return unique(remaining)
+	\end{minted}
+	\caption{Funkcja języka Python wykrywające te same detale w~kolejnych
+		obrazach}
+	\label{lst:find_remaining_blobs}
 \end{listing}
 Przyjmuje ona listy plam wykrytych w~dwóch kolejnych etapach iteracji.
 Potem następuje porównanie każdego ziarna z~nowej i~starej próbki.
@@ -667,17 +667,17 @@ Powtarzające się punkty są dołączane do zwracanej listy.
 Aby zrealizować ten zamysł zaimplementowano funkcję przedstawioną na listingu
 \ref{lst:inside_circle}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def inside_circle(x, y, a, b, r):
-    '''
-    Return True if point (x, y) lies inside circle 
-    with center of (a, b) and radius r.
-    '''
-    return (x - a) * (x - a) + (y - b) * (y - b) < r * r
-\end{minted}
-\caption{Funkcja języka Python sprawdzająca czy dany punkt leży wewnątrz
-         podanego okręgu}
-\label{lst:inside_circle}
+	\begin{minted}{python}
+		def inside_circle(x, y, a, b, r):
+		'''
+		Return True if point (x, y) lies inside circle
+		with center of (a, b) and radius r.
+		'''
+		return (x - a) * (x - a) + (y - b) * (y - b) < r * r
+	\end{minted}
+	\caption{Funkcja języka Python sprawdzająca czy dany punkt leży wewnątrz
+		podanego okręgu}
+	\label{lst:inside_circle}
 \end{listing}
 Kod tej funkcji wynika wprost z~równania matematycznego okręgu.
 Ponieważ wiele punktów może znajdować się blisko siebie istnieje ryzyko,
@@ -685,16 +685,16 @@ Ponieważ wiele punktów może znajdować się blisko siebie istnieje ryzyko,
 Z~tego powodu przed zwróceniem listy należy usunąć z~niej duplikaty.
 W~tym celu utworzono funkcje pomocniczą widoczną na listingu \ref{lst:unique}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def unique(multilist):
-    '''Get list without repeating values.'''
-    return list(set(tuple(i) for i in multilist))
-\end{minted}
-\caption{Funkcja języka Python usuwająca duplikaty z~listy}
-\label{lst:unique}
+	\begin{minted}{python}
+		def unique(multilist):
+		'''Get list without repeating values.'''
+		return list(set(tuple(i) for i in multilist))
+	\end{minted}
+	\caption{Funkcja języka Python usuwająca duplikaty z~listy}
+	\label{lst:unique}
 \end{listing}
 Najprostszym sposobem eliminacji powtarzających się wartości w~języku Python
-jest konwersja listy na zbiór, który jest agregatem unikalnych 
+jest konwersja listy na zbiór, który jest agregatem unikalnych
 nieuszeregowanych wartości.
 Aby zwrócić z~funkcji listę należy z~powrotem skonwertować zbiór na typ
 listowy.
@@ -708,18 +708,18 @@ Aby zrealizować pomysł liczenia stosunku plam pozostałych w~kolejnych etapach
 stygnięcia zaimplementowano funkcję przedstawioną na listingu
 \ref{lst:ratio}.
 \begin{listing}[htb]
-\begin{minted}{python}
-def ratio_of_remaining_blobs_in_stages(stages):
-    '''
-    In each stage calculate ratio of remaining blobs
-    to their initial number.
-    '''
-    num_of_blobs = [len(stage) for stage in stages]
-    return [remaining / num_of_blobs[0] for remaining in num_of_blobs]
-\end{minted}
-\caption{Funkcja języka Python obliczająca jaka część ziaren z~początku
-         stygnięcia pozostała w~jego kolejnych etapach}
-\label{lst:ratio}
+	\begin{minted}{python}
+		def ratio_of_remaining_blobs_in_stages(stages):
+		'''
+		In each stage calculate ratio of remaining blobs
+		to their initial number.
+		'''
+		num_of_blobs = [len(stage) for stage in stages]
+		return [remaining / num_of_blobs[0] for remaining in num_of_blobs]
+	\end{minted}
+	\caption{Funkcja języka Python obliczająca jaka część ziaren z~początku
+		stygnięcia pozostała w~jego kolejnych etapach}
+	\label{lst:ratio}
 \end{listing}
 
 Przyglądając się zaimplementowanym funkcjom można docenić wybór języka
@@ -744,19 +744,19 @@ są śledzone od początku stygnięcia.
 	\centering
 	\hfill
 	\begin{subfigure}[t]{0.45\textwidth}
-	    \centering
-	    \caption*{\scriptsize
-	        Minuta: 0, \\
-	        Liczba: wszystkich detali: 56, śledzonych detali: 56}
+		\centering
+		\caption*{\scriptsize
+			Minuta: 0, \\
+			Liczba: wszystkich detali: 56, śledzonych detali: 56}
 		\includegraphics[width=0.8\textwidth]{blob_tracker_min_0}
 		\caption{Obraz z~próbki 104\_E5R\_0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.45\textwidth}
-    	\centering
-	    \caption*{\scriptsize
-	        Minuta: 0, \\
-	        Liczba: wszystkich detali: 36, śledzonych detali: 29}
+		\centering
+		\caption*{\scriptsize
+			Minuta: 0, \\
+			Liczba: wszystkich detali: 36, śledzonych detali: 29}
 		\includegraphics[width=0.8\textwidth]{blob_tracker_min_1}
 		\caption{Obraz z~próbki 104\_E5R\_1}
 	\end{subfigure}
@@ -764,36 +764,36 @@ są śledzone od początku stygnięcia.
 	\vfill
 	\hfill
 	\begin{subfigure}[t]{0.45\textwidth}
-        \centering
-	    \caption*{\scriptsize
-	        Minuta: 0, \\
-	        Liczba: wszystkich detali: 22, śledzonych detali: 16}
+		\centering
+		\caption*{\scriptsize
+			Minuta: 0, \\
+			Liczba: wszystkich detali: 22, śledzonych detali: 16}
 		\includegraphics[width=0.8\textwidth]{blob_tracker_min_2}
 		\caption{Obraz z~próbki 104\_E5R\_2}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.45\textwidth}
-    	\centering
-	    \caption*{\scriptsize
-	        Minuta: 0, \\
-	        Liczba: wszystkich detali: 19, śledzonych detali: 13}
+		\centering
+		\caption*{\scriptsize
+			Minuta: 0, \\
+			Liczba: wszystkich detali: 19, śledzonych detali: 13}
 		\includegraphics[width=0.8\textwidth]{blob_tracker_min_3}
 		\caption{Obraz z~próbki 104\_E5R\_3}
 	\end{subfigure}
 	\hfill
 	\vfill
 	\begin{subfigure}[t]{0.45\textwidth}
-    	\centering
-	    \caption*{\scriptsize
-	        Minuta: 0, \\
-	        Liczba: wszystkich detali: 15, śledzonych detali: 11}
+		\centering
+		\caption*{\scriptsize
+			Minuta: 0, \\
+			Liczba: wszystkich detali: 15, śledzonych detali: 11}
 		\includegraphics[width=0.8\textwidth]{blob_tracker_min_4}
 		\caption{Obraz z~próbki 104\_E5R\_4}
 	\end{subfigure}
-		\begin{description} \footnotesize
-	    \centering
-        \item[Kolor czerwony] detale śledzone od początku stygnięcia
-        \item[Kolor niebieski] nowe wykryte detale
+	\begin{description} \footnotesize
+		\centering
+		\item[Kolor czerwony] detale śledzone od początku stygnięcia
+		\item[Kolor niebieski] nowe wykryte detale
 	\end{description}
 	\caption{Zliczanie śledzonych detali w~próbce dwoma sposobami}
 	\label{fig:blob_count}
@@ -807,34 +807,34 @@ Zmieniające się kolory obrazują detale wykryte w~kolejnych chwilach.
 Pozawala to zaobserwować przemieszczanie się środków ciężkości i~promieni
 plam podczas stygnięcia i zlewania się.
 \begin{figure}[htb]
-    \centering
-    \caption*{\scriptsize Detekcja metodą laplasjanu funkcji Gaussa}
-    \includegraphics[width=0.5\textwidth]{blob_tracker}
-    \vspace{0.3cm}
-    \caption*{\scriptsize
-        Kolorem niebieskim zaznaczono detale wykryte na początku stygnięcia.
-        Wraz z~upływem czasu kolor oznaczenia detali przechodzi w~czerwień}
-    \caption{Wykryte detale, śledzone od początku stygnięcia, zaznaczone na
-             pierwszym obrazie w~serii pomiarowej}
-    \label{fig:blob_remain}
+	\centering
+	\caption*{\scriptsize Detekcja metodą laplasjanu funkcji Gaussa}
+	\includegraphics[width=0.5\textwidth]{blob_tracker}
+	\vspace{0.3cm}
+	\caption*{\scriptsize
+		Kolorem niebieskim zaznaczono detale wykryte na początku stygnięcia.
+		Wraz z~upływem czasu kolor oznaczenia detali przechodzi w~czerwień}
+	\caption{Wykryte detale, śledzone od początku stygnięcia, zaznaczone na
+		pierwszym obrazie w~serii pomiarowej}
+	\label{fig:blob_remain}
 \end{figure}
-Działanie metody \ref{it:ratio_blob}, zliczającej stosunek śledzonych detali 
+Działanie metody \ref{it:ratio_blob}, zliczającej stosunek śledzonych detali
 do ich pierwotnej liczby zobrazowano w~tabeli \ref{tab:blob_ratio}.
 Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
 \begin{table}[htb]
 	\centering
 	\begin{tabular}{c|c|c|c|c|c}
-	\toprule
-	Próbka & Minuta 0 & Minuta 1 & Minuta 2 & Minuta 3 & Minuta 4 \\ \midrule
-	104\_E5R  & 1.0 & 0.52 & 0.29 & 0.23 & 0.20 \\
-	107\_E6R  & 1.0 & 0.20 & 0.12 & 0.02 & 0.02 \\
-	106\_E11R & 1.0 & 0.12 & 0.02 & 0.00 & 0.00 \\
-	111\_E16R & 1.0 & 0.05 & 0.01 & 0.01 & 0.01 \\
-	\bottomrule
+		\toprule
+		Próbka    & Minuta 0 & Minuta 1 & Minuta 2 & Minuta 3 & Minuta 4 \\ \midrule
+		104\_E5R  & 1.0      & 0.52     & 0.29     & 0.23     & 0.20     \\
+		107\_E6R  & 1.0      & 0.20     & 0.12     & 0.02     & 0.02     \\
+		106\_E11R & 1.0      & 0.12     & 0.02     & 0.00     & 0.00     \\
+		111\_E16R & 1.0      & 0.05     & 0.01     & 0.01     & 0.01     \\
+		\bottomrule
 	\end{tabular}
-\caption{Stosunek liczby detali śledzonych w~kolejnych etapach stygnięcia do
-         ich liczby na początku pomiaru}
-\label{tab:blob_ratio}
+	\caption{Stosunek liczby detali śledzonych w~kolejnych etapach stygnięcia do
+		ich liczby na początku pomiaru}
+	\label{tab:blob_ratio}
 \end{table}
 
 \subsection{Wizualizacja zebranych cech i~ocena ich użyteczności}
@@ -852,14 +852,14 @@ metod ich zliczania.
 Rysunek \ref{fig:blob_chart_all} przedstawia wykres procesu zanikania plam dla
 wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
 \begin{figure}[htb]
-    \centering
-    \input{figures/blob_analysis_all}
-    \caption{Liczba wykrytych detali na~każdym etapie stygnięcia, w~wariancie
-             zliczającym wszystkie plamy}
-    \label{fig:blob_chart_all}
+	\centering
+	\input{figures/blob_analysis_all}
+	\caption{Liczba wykrytych detali na~każdym etapie stygnięcia, w~wariancie
+		zliczającym wszystkie plamy}
+	\label{fig:blob_chart_all}
 \end{figure}
 Wykreślone krzywe dla różnych klas materiałów przecinają się, na wykresach
-nie widać uporządkowania, ani wyraźnych zależności. 
+nie widać uporządkowania, ani wyraźnych zależności.
 Liczba charakterystycznych detali może być cechą ziaren rud miedzi, ze
 względu na ich różną budowę, jednak w~analizowanym przypadku nie jest to
 cecha dająca nadzieję na dobre wyniki klasyfikacji.
@@ -875,11 +875,11 @@ bezwzględna liczba zliczonych detali.
 Efekty drugiego sposób zliczania punktów przedstawiono na rysunku
 \ref{fig:blob_chart_rem}.
 \begin{figure}[htb]
-    \centering
-    \input{figures/blob_analysis_remaining}
-    \caption{Liczba detali wykrytych na zdjęciach, w~wariancie zliczającym
-             plamy śledzone od początku procesu stygnięcia}
-    \label{fig:blob_chart_rem}
+	\centering
+	\input{figures/blob_analysis_remaining}
+	\caption{Liczba detali wykrytych na zdjęciach, w~wariancie zliczającym
+		plamy śledzone od początku procesu stygnięcia}
+	\label{fig:blob_chart_rem}
 \end{figure}
 W~tym przypadku zliczano jedynie detale obecne na obrazie od początku
 stygnięcia.
@@ -903,11 +903,11 @@ Wyniki ostatniej metody, polegającej na ustaleniu stosunku śledzonych detali
 do ich pierwotnej liczby, został przedstawiona na rysunku
 \ref{fig:blob_chart_ratio}.
 \begin{figure}[htb]
-    \centering
-    \input{figures/blob_analysis_ratio}
-    \caption{Stosunek śledzonych detali do ich liczby na początku procesu
-             stygnięcia}
-    \label{fig:blob_chart_ratio}
+	\centering
+	\input{figures/blob_analysis_ratio}
+	\caption{Stosunek śledzonych detali do ich liczby na początku procesu
+		stygnięcia}
+	\label{fig:blob_chart_ratio}
 \end{figure}
 Widoczne jest odseparowanie różnych klas rud miedzi, różne typy próbek
 charakteryzują się odmiennymi postępami rozmycia detali w~czasie.
@@ -930,14 +930,14 @@ które ma postać równania różniczkowego, przedstawionego we wzorze
 
 \begin{equation}
 	\frac{dT \left( t \right)}{dt}=-k\left( T \left( t \right) -T_{R} \right)
-\label{eq:newton_law_diff}
+	\label{eq:newton_law_diff}
 \end{equation}
 Rozwiązanie równania przedstawia wzór \ref{eq:newton_law}, jak widać ma ono
 charakter eksponencjalny, do którego zbliżone są wykresy na rysunkach
 \ref{fig:blob_chart_rem} oraz \ref{fig:blob_chart_ratio}.
 \begin{equation}
 	T(t) - T_{R} = \Delta T (t) = \Delta T (0) \ e^ {-k t}
-\label{eq:newton_law}
+	\label{eq:newton_law}
 \end{equation}
 
 Analiza pozyskanych cech wskazuje, że istnieje możliwość ich wykorzystania
