@@ -79,13 +79,10 @@ W~ramach uczenia maszynowego jest to bardzo mały zbiór danych, biorąc jednak
 pod uwagę wstępno-badawczy charakter pracy oraz czasochłonność procesu
 pomiarowego zdecydowano, że jest to rozmiar zadawalający do pierwszych prób
 klasyfikacji.
-Zebrane materiały mają format JPEG, do oznaczania zdjęć przyjęto schemat nazw
-jak w~przykładzie: 115\_E11R\_1, gdzie człony nazwy oznaczają kolejno:
-\begin{itemize}
-    \item automatyczny numer nagrania w~programie FLIR Tools,
-    \item klasę próbki,
-    \item minutę nagrania.
-\end{itemize}
+Zebrane materiały mają format JPEG.
+Do oznaczania zdjęć przyjęto schemat nazw jak w~przykładzie: 115\_E11R\_1, gdzie
+człony nazwy oznaczają kolejno: automatyczny numer nagrania w~programie FLIR
+Tools, klasę próbki oraz minutę nagrania.
 
 \subsection{Prezentacja przykładowej serii pomiarowej}
 Jak opisano w rozdziale \ref{sec:measure}~jedna próbka w~zbiorze danych składa
@@ -94,14 +91,14 @@ Na rysunku \ref{fig:sample}~przedstawiono proces stygnięcia przykładowej
 próbki 104~klasy E5R.
 Wartości zakresu temperatur na zdjęciach maleją.
 Wskazuje to na stopniowy spadek sumarycznej temperatury obserwowanego materiału.
-Dodatkowo obraz staje się coraz mniej wyraźny i~kontrastowy.
+Wraz z~upływem czasu obraz staje się także coraz mniej wyraźny i~kontrastowy.
 Nagrzana próbka emituje ciepło ze swoich zróżnicowanych struktur w~niejednorodny
 sposób.
 Wraz z~ochłodzeniem ziaren temperatura na obrazie wyrównuje się i~kamera
 termowizyjna rejestruje coraz mniej szczegółów.
 Detale i~elementy charakterystyczne obrazu zlewają się na kolejnych zdjęciach.
 Wraz z~opadaniem temperatury na zdjęciu pojawia się także coraz więcej szumów.
-\begin{figure}[htbp]
+\begin{figure}[p]
     \hspace*{\fill}
     \begin{subfigure}{0.45\textwidth}
         \centering
@@ -187,7 +184,8 @@ neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
 Zdecydowano się na użycie popularnej biblioteki \emph{Pytesseract}%
 \footnote{%
     Repozytorium projektu w~serwisie GitHub:
-    \url{https://github.com/madmaze/pytesseract}}.
+    \url{https://github.com/madmaze/pytesseract}
+}.
 Analizowane zdjęcia są kadrowane, by wyizolować odczytywane liczby.
 Wycięte fragmenty mają bardzo małą rozdzielczość, aby ułatwić sieci
 rozpoznawanie liczb, zdecydowano się przeskalować obrazy w~górę.
@@ -223,7 +221,6 @@ przedstawiono na listingu \ref{lst:temp_bounds}.
     \caption{Przygotowanie zakresu temperatur do odczytu przez sieć neuronową}
     \label{fig:temp_bounds}
 \end{figure}
-
 \begin{listing}[htbp]
 \begin{minted}{python}
 def get_temperature_bounds(img, bounds=(((6, 24), (283, 318)),
@@ -402,7 +399,7 @@ ziaren.
 Jest to spowodowane ich niską emisyjnością cieplną.
 Na rysunku \ref{fig:blob_detail}~przedstawiono zbliżenie na grupę takich detali,
 w~czterech częściach procesu stygnięcia.
-\begin{figure}[htb]
+\begin{figure}[h]
     \hspace*{\fill}
     \begin{subfigure}{0.3\textwidth}
         \centering
@@ -468,8 +465,7 @@ najskuteczniej na zgromadzonych próbkach.
 
 Metoda bazująca na laplasjanie funkcji Gaussa jest najdokładniejsza, ale także
 najwolniejsza.
-Funkcja Gaussa, której wykres ma charakterystyczny kształt krzywej dzwonowej
-jest dana wzorem \ref{eq:gaussian},~gdzie:
+Funkcja Gaussa, jest dana wzorem \ref{eq:gaussian},~gdzie:
 \begin{description}
     \item[$ \sigma $] to odchylenie standardowe,
     \item[$ \mu $] to wartość średnia.
@@ -529,7 +525,7 @@ w~rozważanym przypadku istotne jest wykrywanie małych plam.
 Z~tego samego powodu korzystne jest użycie najdokładniejszej funkcji.
 Ponieważ program nie powinien wykrywać dużych elementów, nie ma ryzyka zbyt
 powolnych obliczeń na obszernych plamach.
-\begin{figure}[htb]
+\begin{figure}[h]
     \hspace*{\fill}
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
@@ -746,7 +742,7 @@ Działanie sposobów zliczania ziaren \ref{it:all_blob}~oraz
 \ref{it:remaining_blob}~przedstawiono na rysunku \ref{fig:blob_count}.~%
 Zaznaczono na nim wykryte detale oraz wyróżniono wśród nich, te które są
 śledzone od początku stygnięcia.
-\begin{figure}[htbp]
+\begin{figure}[p]
     \hspace*{\fill}
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
@@ -828,7 +824,7 @@ podczas stygnięcia i zlewania się.
 Działanie metody \ref{it:ratio_blob},~zliczającej stosunek śledzonych detali
 do ich pierwotnej liczby zobrazowano w~tabeli \ref{tab:blob_ratio}.~%
 Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
-\begin{table}[htb]
+\begin{table}[h]
     \centering
     \begin{tabular}{c|c|c|c|c|c}
         \toprule

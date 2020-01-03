@@ -46,7 +46,8 @@ umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
 Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
 Matematycznie dowiedziono, że jedna warstwa ukryta%
 \footnote{%
-    Przy pewnych obostrzeniach co do doboru funkcji aktywacji.}
+    Przy pewnych obostrzeniach co do doboru funkcji aktywacji.
+}
 wystarcza do aproksymacji dowolnej funkcji nieliniowej
 \cite{cybenko_approximations}.
 Nie oznacza to jednak, że w~praktyce tak mała sieć wystarczy, aby rozwiązać
@@ -91,7 +92,7 @@ Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
 przedstawiono na rysunku \ref{fig:softmax}.%~
 \begin{figure}[htb]
     \centering
-    \begin{tikzpicture}
+    \begin{tikzpicture}[trim axis left]
         \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
                 ylabel=$ \sigma(z) $, xlabel=$ z $, xmin=-5, xmax=5]
             \addplot[blue, domain=-5:5, samples=51]
@@ -113,7 +114,7 @@ Rozpatrzono trzy rodziny funkcji:
     \item funkcję tangens hiperboliczny.
 \end{itemize}
 Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.~%
-\begin{figure}[htb]
+\begin{figure}[h]
     \hspace*{\fill}
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
@@ -277,7 +278,7 @@ liczbę epok treningu, zwraca obiekt zawierający przebieg uczenia sieci.
 Na rysunku \ref{fig:training_history}~przedstawiono dokładność i~błąd
 w~kolejnych epokach treningu.
 Na ich podstawie określono, że odpowiednia liczba epok wynosi 300.
-\begin{figure}[htb]
+\begin{figure}[h]
     \hspace*{\fill}
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
@@ -338,7 +339,6 @@ Wyniki działania sieci przedstawia tabela \ref{tab:nn_test}.~%
 Przedstawione wartości błędu oraz dokładności potwierdzają przypuszczenia na
 temat użyteczności różnych metod zliczania detali, które przedstawiono
 w~podsekcji~\ref{subsec:data_vis}.
-
 \begin{table}[htb]
     \centering
     \begin{tabular}{c|C{2cm}|C{2cm}}
