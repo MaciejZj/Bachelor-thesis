@@ -106,10 +106,10 @@ W~przypadku pozostałych warstw wybór funkcji aktywacji jest mniej oczywisty.
 Rozpatrzono trzy rodziny funkcji:
 \begin{itemize}
     \item funkcję sigmoid,
-    \item funkcje z~grupy jednostek liniowych (ang. \emph{linear unit}):
+    \item funkcje z~grupy jednostek liniowych (ang. \textit{linear unit}):
           \begin{itemize}
-              \item ReLU (ang. \emph{Rectified Linear Unit}),
-              \item ELU (ang. \emph{Exponential Linear Unit}),
+              \item ReLU (ang. \textit{Rectified Linear Unit}),
+              \item ELU (ang. \textit{Exponential Linear Unit}),
           \end{itemize}
     \item funkcję tangens hiperboliczny.
 \end{itemize}
@@ -220,7 +220,7 @@ na części treningowe i~testowe.
 Odpowiednie wykorzystanie funkcji wymaga użycia jej parametrów opcjonalnych.
 Argument \mintinline{python}{stratify} sprawia, że podzielone zbiory zawierają
 takie same proporcje klas.
-Taka metoda podziału nazywana jest \emph{losowaniem warstowym}.
+Taka metoda podziału nazywana jest \emph{losowaniem warstwowym}.
 Uaktywnienie tej opcji jest szczególnie ważne, ze względu na mały rozmiar
 posiadanego zbioru danych.
 Gdyby dane dzielić w~pełni przypadkowo istniałoby ryzyko nadmiernej
@@ -246,8 +246,8 @@ Metoda przyjmuje parametry algorytmu optymalizacji sieci, miary błędu oraz
 metryki.
 Argument \mintinline{python}{optimizer} przyjmuje  nazwę stosowanego algorytmu
 uczenia sieci.
-Rozważono dwa popularne metody treningu: sgd (ang. \emph{stochastic gradient
-descent)} oraz adam (ang. \emph{adaptive moment estimation}).
+Rozważono dwie metody treningu: sgd (ang. \textit{stochastic gradient descent})
+oraz adam (ang. \textit{adaptive moment estimation}).
 Metoda sgd jest najbardziej popularnym i~podstawowym sposobem uczenia, jednak
 algorytm adam, jest rozwiązaniem nowszym, i~bardziej wydajnym.
 Jedną z~zalet drugiego algorytmu jest adaptacyjne obliczanie współczynnika
@@ -358,7 +358,7 @@ w~podsekcji~\ref{subsec:data_vis}.
 
 \section{Walidacja i~ocena działania sieci}
 \label{sec:nn_validation}
-Po stworzeniu prototypu klasyfkiatora przedstawionego w~rozdziale
+Po stworzeniu prototypu klasyfikiatora przedstawionego w~rozdziale
 \ref{subsec:nn_build}~należy przeprowadzić walidację zbudowanej sieci
 neuronowej.
 Najpopularniejszą metodą miarodajnej walidacji sieci jest \emph{k-krotny
@@ -425,12 +425,12 @@ Pozostałe metody zliczania okazały się mniej precyzyjne, co wskazuje że nale
 je odrzucić.
 
 Przedstawiony mechanizm walidacji wykorzystano do dostrojenia parametrów sieci
-opisywanych w~podeskcji \ref{subsec:nn_build}.~%
+opisywanych w~podsekcji \ref{subsec:nn_build}.~%
 Uzasadnienie doboru przedstawionej w~toku pracy struktury sieci wynika z~prób
-maksymalizacji dokładności oblicznej przy pomocy sprawdzianu krzyżowego.
-W~czasie prototypowania sieci dokonano liczbych porównań, aby znaleźć najlepszą
+maksymalizacji dokładności obliczonej przy pomocy sprawdzianu krzyżowego.
+W~czasie prototypowania sieci dokonano licznych porównań, aby znaleźć najlepszą
 strukturę.
-Szczegółowe zestaweienie rozpatrywanych konfiguracji i~wartości parametrów
+Szczegółowe zestawienie rozpatrywanych konfiguracji i~wartości parametrów
 załączono w~dodatku \ref{ch:nn_comparison_table}.
 
 \begin{listing}[htb]

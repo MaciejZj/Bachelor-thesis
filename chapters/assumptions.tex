@@ -80,12 +80,12 @@ być czasochłonne.
 Przebieg zmian temperatury najlepiej rejestrować na materiałach wideo, aby
 zmaksymalizować ilość danych zgromadzonych w~trakcie eksperymentu.
 
-\section{Kamera termowizyjna FLIR A320}
+\section{Kamera termowizyjna \textsc{Flir~A320}}
 \label{sec:camera}
 Przedmiotem projektu jest analiza obrazów pochodzących z~przemysłowej kamery
-termowizyjnej FLIR A320.
-Firma FLIR zajmuje się produkcją wysokiej jakości kamer i~detektorów do celów
-profesjonalnych i~przemysłowych.
+termowizyjnej \textsc{Flir~A320}.
+Firma \textsc{Flir} zajmuje się produkcją wysokiej jakości kamer i~detektorów do
+celów profesjonalnych i~przemysłowych.
 Używany aparat łączy wysoką jakość pomiaru z~nowoczesnymi funkcjami integracji
 z~oprogramowaniem komputerowym.
 Urządzenie komunikuje się z~komputerem za pomocą sieci internetowej, pozwalając
@@ -101,7 +101,7 @@ Na rysunku \ref{fig:camera}~przedstawiono zdjęcie wykorzystywanego urządzenia.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{flir_a320}
-    \caption{Kamera termowizyjna FLIR A320 \cite{flir_camera_specs}}
+    \caption{Kamera termowizyjna \textsc{Flir~A320} \cite{flir_camera_specs}}
     \label{fig:camera}
 \end{figure}
 Egzemplarz kamery znajdujący się w~laboratorium termowizji Politechniki Śląskiej 
@@ -154,15 +154,15 @@ rud miedzi.
 
 \subsection{Obiektyw kamery}
 \label{subsec:lens}
-Kamerę wyposażono w~obiektyw zbliżeniowy FLIR~T197415, pozwalający obserwować
-ziarna rud miedzi.
+Kamerę wyposażono w~obiektyw zbliżeniowy \textsc{Flir~T197415}, pozwalający
+obserwować ziarna rud miedzi.
 Jest to sprzęt zaprojektowany przez producentów używanej kamery i~przeznaczony
 do pracy z~urządzeniami termowizyjnymi.
 Przyrząd przedstawiono na rysunku \ref{fig:lens}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{flir_lens}
-    \caption{Obiektyw FLIR T197415 \cite{flir_lens_specs}}
+    \caption{Obiektyw \textsc{Flir~T197415} \cite{flir_lens_specs}}
     \label{fig:lens}
 \end{figure}
 Wybrany obiektyw jest przygotowany z~myślą o~obserwacji drobnych detali
@@ -197,9 +197,9 @@ powierzchni.
 \label{subsec:camera_soft}
 Jedną z~najważniejszych cech kamery jest łatwość integracji z~oprogramowaniem
 komputerowym.
-Kamerę można obsługiwać za pomocą programu FLIR Tools%
+Kamerę można obsługiwać za pomocą programu \textsc{Flir} Tools%
 \footnote{%
-    Strona produktu programu FLIR Tools:
+    Strona produktu programu \textsc{Flir} Tools:
     \url{https://www.flir.com/products/flir-tools/}
 }.
 Pozwala on na podgląd obrazu oraz wykonywanie zdjęć termowizyjnych.
@@ -207,12 +207,13 @@ Producent dostarcza również bibliotekę LabVIEW pozwalającą na zaawansowaną
 pracę z~kamerą.
 Do obsługi stanowiska został napisany program używający tych bibliotek, który
 pozwala na nagrywanie materiałów wideo przy pomocy kamery.
-Nagrania mają własnościowy format firmy FLIR, można je odtwarzać w~programie
-FLIR Tools.
-Program pozwala także na eksport stopklatek z~nagrania w~postaci plików JPEG.
+Nagrania mają własnościowy format firmy \textsc{Flir}, można je odtwarzać
+w~programie \textsc{Flir} Tools.
+Program pozwala także na eksport stopklatek z~nagrania w~postaci plików
+\textsc{jpeg}.
 Przy obsłudze narzędzia ważne jest ustawianie zakresu temperatur na obrazie.
 Wybrany zakres określa w~jaki sposób wartości temperatury są mapowane na kolory
-na zdjęciu, zawarte w~tablicy LUT.
+na zdjęciu, zawarte w~tablicy \textsc{lut}.
 Program oferuje tablice w~skali szarości, takie zostały użyte w~projekcie,
 możliwy jest także wybór tablic w~postaci kolorowych gradientów.
 Wybór zakresu wpływa na wygląd wyświetlanego obrazu oraz eksportowanych klatek.
@@ -220,7 +221,7 @@ Jego nieodpowiedni dobór może skutkować zbyt ciemnym, jasnym, lub mało
 kontrastowym obrazem.
 Aby zapewnić najlepsze wykorzystanie nagrań z~kamery oraz powtarzalny charakter
 eksportu stopklatek korzystano z~opcji automatycznego doboru zakresu temperatur, 
-jaki jest wbudowany w~program FLIR Tools.
+jaki jest wbudowany w~program \textsc{Flir} Tools.
 
 \section{Narzędzia programistyczne}
 

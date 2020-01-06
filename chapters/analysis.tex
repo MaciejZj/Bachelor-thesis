@@ -17,7 +17,7 @@ Rozważono dwie możliwości:
     \item \label{it:heat_method}
           ogrzewanie próbek przez ustalony czas%
           \footnote{%
-              Przy założeniu stałej masy nagrywanych próbek.
+              Przy założeniu stałej masy ogrzewanych próbek.
           }.
 \end{enumerate}
 Zdecydowano się na metodę \ref{it:heat_method},~ze względu na wygodę jej
@@ -43,7 +43,7 @@ początku każdej minuty nagrania.
 
 Po ustaleniu planu eksperymentu pomiarowego przystąpiono do jego wykonania.
 Zgodnie z~opisem badanych materiałów w~sekcji \ref{sec:grains},~zgromadzono
-nagrania wideo dla czterech klas ziaren rudy miedzi.
+nagrania wideo dla czterech klas ziaren rud miedzi.
 Ze względu na czasochłonność pomiarów dla każdej klasy materiału nagrano trzy
 filmy.
 Przy nagrywaniu stygnięcia tej samej klasy materiału pomiędzy pomiarami próbkę
@@ -155,9 +155,9 @@ Do standardowych technik należą: wyrównywanie histogramu oraz redukcja szumó
 i~wyostrzanie zdjęć.
 Po analizie zebranych obrazów i~wypróbowaniu wymienionych technik zdecydowano
 się jednak nie modyfikować zgromadzonych nagrań.
-Użyty podczas pomiarów program FLIR Tools posiada wbudowaną funkcję doboru
-zakresu temperatur, co przekłada się na ekspozycję i~kontrast eksportowanych
-zdjęć.
+Użyty podczas pomiarów program \textsc{Flir} Tools posiada wbudowaną funkcję
+doboru zakresu temperatur, co przekłada się na ekspozycję i~kontrast
+eksportowanych zdjęć.
 Próba wyrównywania histogramu oraz korekcji kontrastu sprawiłaby, że obraz
 rozkładu temperatur na zdjęciu stałby się przekłamany.
 Ze względu na niską, jak na standardy typowego przetwarzania zdjęć cyfrowych,
@@ -172,8 +172,8 @@ oddawał właściwości cieplne obiektu.
 Jak wspomniano w~sekcji \ref{subsec:camera_soft}~jednym z~kluczowych czynników
 decydujących o~wyglądzie obrazów pochodzących z~kamery jest zakres temperatur
 mapowany na kolory w~obrazie.
-Niestety aplikacja FLIR Tools nie pozwala na eksport zakresu temperatur wraz ze
-zdjęciami w~formacie liczbowym.
+Niestety aplikacja \textsc{Flir} Tools nie pozwala na eksport zakresu temperatur
+wraz ze zdjęciami w~formacie liczbowym.
 W~czasie zapisu zdjęć oprogramowanie dodaje do nich interfejs z~aktywną skalą
 pomiarową, jednak jest on graficznie naniesiony na obraz.
 Aby ułatwić w~przyszłości pracę z~materiałami z~kamery opracowano mechanizm
@@ -340,7 +340,7 @@ cech charakterystycznych:
     \item \label{it:fft}
           analiza częstotliwościowa obrazów,
     \item \label{it:glcm}
-          użycie macierzy GLCM,
+          użycie macierzy \textsc{glcm},
     \item \label{it:edge}
           detekcja krawędzi ziaren i~wyznaczanie reprezentacji liczbowej
           ich kształtów,
@@ -372,9 +372,9 @@ neuronowych.
 Analizę widmową ziaren przeprowadzono w~pracach naukowców Politechniki Śląskiej,
 w~rozpatrywanym przypadku zdecydowano się na poszukiwanie innego rozwiązania.
 
-Macierz GLCM (ang. \textit{Gray-Level Co-Occurrence Matrix}), na której może
-bazować opcja \ref{it:glcm},~to tablica zawierająca informacje o~relacjach
-wszystkich par pikseli na obrazie.
+Macierz \textsc{glcm} (ang. \textit{Gray-Level Co-Occurrence Matrix}), 
+a której może bazować opcja \ref{it:glcm},~to tablica zawierająca informacje
+o~relacjach wszystkich par pikseli na obrazie.
 Pozwala ona na analizę takich wartości jak: kontrast, korelacja, energia oraz
 homogeniczność.
 Jest to opcja dająca możliwość analizy dużej ilości informacji, z~pewnością
