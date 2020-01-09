@@ -237,8 +237,7 @@ W~obu tych dziedzinach wiodącym językiem jest Python%
 , posiadający bogaty zestaw bibliotek.
 Język ten oferuje dużą wygodę programowania, co jest istotne przy pracy
 badawczej.
-Jednocześnie Python jest zaopatrzony w~wydajną bibliotekę obliczeń numerycznych
-NumPy.
+Do wydajnych obliczeń numerycznych w~Pythonie służy biblioteka NumPy.
 Oferuje ona klasy macierzy numerycznych oraz bogaty zestaw operacji
 matematycznych.
 Macierze biblioteki NumPy są mniej elastyczne od zwykłych list języka Python,
@@ -271,17 +270,14 @@ Wybrana biblioteka charakteryzuje się również dobrą dokumentacją
 Wybór bibliotek głębokiego uczenia w~języku Python jest bardzo szeroki.
 Do najpopularniejszych pakietów należą: Keras, TensorFlow oraz PyTorch.
 Zdecydowano się na wybór interfejsu biblioteki Keras.
-Jest to pakiet nastawiony na elastyczność i~możliwość eksperymentowania, oferuje
-wysokopoziomową, matematyczną warstwę abstrakcji opisu sieci
-neuronowych \cite{chollet_keras}.
+Jest to pakiet nastawiony na elastyczność i~możliwość eksperymentowania
+\cite{chollet_keras}.
 Moduł Keras oferuje także rozbudowaną dokumentację oraz zestaw poradników
 \cite{keras_docs}.
-Keras nie jest jednak pełnym rozwiązaniem, a~raczej abstrakcyjnym interfejsem.
+Keras nie jest jednak samodzielną biblioteką sieci neuronowych,
+a~wyłącznie abstrakcyjnym interfejsem programistycznym.
 Używanie go wymaga wyboru wewnętrznego silnika biblioteki.
 Zdecydowano się na domyślną opcję użycia zaplecza pakietu TensorFlow.
-W~standardowy sposób interfejsu Keras używa się po osobnym zainstalowaniu jego
-modułów i~wskazaniu silnika sieci neuronowych.
-Biblioteka TensorFlow udostępnia jednak wewnętrzny interfejs Keras, co pozwala
-na zwiększenie wydajności obliczeniowej w~połączeniu dwóch bibliotek.
-Przy tworzeniu oprogramowania wzięto to pod uwagę i~użyto bardziej wydajnej
-metody importowania interfejsu Keras.
+Użyto wersji interfejsu Keras wchodzącej bezpośrednio w~skład modułu TensorFlow.
+Taki sposób użycia bibliotek zapewnia ich najlepszą współpracę.
+

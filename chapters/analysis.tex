@@ -30,9 +30,9 @@ czas, pozwala na obserwacje unikalnych wzorców stygnięcia ziaren.
 Następnie wybrano czas nagrywania materiałów wideo.
 Na podstawie próbnych nagrań zdecydowano się na ogrzewanie próbek przez jedną
 minutę oraz rejestrację ich stygnięcia przez cztery minuty.
-Taka konfiguracja daje, przy badanych pyłach rud miedzi, ostry i~szczegółowy
+Taka konfiguracja daje, przy badanych próbkach rud miedzi, ostry i~szczegółowy
 obraz w~początkowej fazie nagrywania oraz widocznie rozmazany i~mniej
-kontrastowy materiał pod koniec stygnięcia.
+kontrastowy obraz pod koniec stygnięcia.
 Charakter procesu przejścia między tymi stanami pozwoli na klasyfikację badanych
 ziaren rud miedzi.
 
@@ -56,7 +56,7 @@ i~powtarzalności.
 Obserwacja uzyskanych nagrań pokazała, że obrazy tej samej klasy ziaren
 niekoniecznie osiągały równą temperaturę po ogrzewaniu przez ustalony czas.
 Problemem okazało się również dostosowanie ostrości obrazu z~kamery.
-Jak wytłumaczono w~podsekcji \ref{subsec:lens}~wykorzystywany aparat cechuje
+Jak wytłumaczono w~podsekcji \ref{subsec:lens}~wykorzystywana obiektyw cechuje
 się bardzo małą głębią ostrości, co powoduje że drobne ruchy kamery mogą
 spowodować utratę czytelności obrazu.
 Z~kolei proces pomiarowy wymagał ciągłego przenoszenia próbki między
@@ -165,8 +165,9 @@ rozdzielczość obrazów zrezygnowano także z~redukcji szumów.
 Wiele detali ziaren ma wielkość zaledwie paru pikseli, proces usuwania szumu
 mógłby spowodować ich zanik.
 Nie oznacza to jednak, że zdjęcia charakteryzują się przypadkową ekspozycją.
-Algorytmy automatycznego doboru zakresu temperatur kamery dbają o~to, by obraz
-oddawał właściwości cieplne obiektu.
+Algorytmy automatycznego doboru zakresu temperatur oprogramowania kamery
+powodują, że jasność elementów na zdjęciu dobrze reprezentuje właściwości
+cieplne obiektu.
 
 \subsection{Odczyt zakresu pomiarowego temperatur z~obrazu}
 Jak wspomniano w~sekcji \ref{subsec:camera_soft}~jednym z~kluczowych czynników
@@ -357,8 +358,9 @@ Metoda bazująca na sieciach konwolucyjnych może wykorzystywać najnowsze
 rozwiązania w~dziecinie uczenia maszynowego.
 Utrudnieniem w~użyciu tej metody jest bardzo mały rozmiar posiadanego zbioru
 danych.
-Na zgromadzonych obrazach znajduje się wiele informacji i~szumów, a~złożoność
-jednego zdjęcia jest na tę chwilę nieproporcjonalna do wielkości zestawu danych.
+Na zgromadzonych obrazach znajdują się zarówno użyteczne informacje, jak i szumy
+pomiarowe, a~złożoność jednego zdjęcia jest na tę chwilę nieproporcjonalna do
+wielkości zestawu danych.
 Pomysł ten można wypróbować po rozszerzeniu zbioru nagrań.
 
 Technika polegająca na analizie częstotliwościowej obrazów wymaga zastosowania
@@ -373,15 +375,15 @@ Analizę widmową ziaren przeprowadzono w~pracach naukowców Politechniki Śląs
 w~rozpatrywanym przypadku zdecydowano się na poszukiwanie innego rozwiązania.
 
 Macierz \textsc{glcm} (ang. \textit{Gray-Level Co-Occurrence Matrix}), 
-a której może bazować opcja \ref{it:glcm},~to tablica zawierająca informacje
-o~relacjach wszystkich par pikseli na obrazie.
+na której może bazować opcja \ref{it:glcm},~to tablica zawierająca informacje
+o~relacjach wszystkich par pikseli w~obrazie.
 Pozwala ona na analizę takich wartości jak: kontrast, korelacja, energia oraz
 homogeniczność.
 Jest to opcja dająca możliwość analizy dużej ilości informacji, z~pewnością
 warta rozpatrzenia, jednak dosyć skomplikowana.
 Zdecydowano się na wybór mniej złożonej metody.
 
-Na obrazie można także wykrywać kształty ziaren za pomocą filtrów detekcji
+W~obrazie można także wykrywać kształty ziaren za pomocą filtrów detekcji
 krawędzi.
 Opcję tę testowano przy pomocy filtra \emph{Canny}.
 Uzyskane krawędzie nie pozwalają jednak na łatwą detekcję kształtów.
@@ -435,8 +437,8 @@ Opcja ta jest obiecująca, ponieważ nawet podczas wstępnej obserwacji próbek
 można dopatrywać się zależności miedzy klasami, a~obecnością omawianych detali.
 Można również zaobserwować, że w~czasie stygnięcia na kolejnych zdjęciach
 pojawiają się sporadycznie także nowe detale.
-Zjawisko ich powstawania jest jednak pomijalne przy zdecydowanej tendencji do
-zanika i~rozmywania plam, którą omówiono.
+Przy zdecydowanej tendencji do zanika i~rozmywania plam zjawisko ich powstawania
+jest jednak pomijalne.
 Fakt pojawiania się nowych detali wzięto pod uwagę przy późniejszym procesie
 projektowania algorytmów ich śledzenia.
 
@@ -465,11 +467,7 @@ najskuteczniej na zgromadzonych próbkach.
 
 Metoda bazująca na laplasjanie funkcji Gaussa jest najdokładniejsza, ale także
 najwolniejsza.
-Funkcja Gaussa, jest dana wzorem \ref{eq:gaussian},~gdzie:
-\begin{description}
-    \item[$ \sigma $] to odchylenie standardowe,
-    \item[$ \mu $] to wartość średnia.
-\end{description}
+Funkcja Gaussa, jest dana wzorem \ref{eq:gaussian}.
 \begin{equation}
     P(x) = \frac{1}{{\sigma \sqrt {2\pi } }}
     e^{{{ - \left( {x - \mu } \right)^2 }
@@ -477,6 +475,13 @@ Funkcja Gaussa, jest dana wzorem \ref{eq:gaussian},~gdzie:
             {2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}}
     \label{eq:gaussian}
 \end{equation}
+\begin{samepage}%
+Symbole we wzorze mają następujące znaczenia:
+\begin{description}
+    \item[$ \sigma $] to odchylenie standardowe,
+    \item[$ \mu $] to wartość średnia.
+\end{description}
+\end{samepage}
 Laplasjan to operator różniczkowy drugiego rzędu.
 Omawiany algorytm oblicza wartości funkcji Gaussa dla coraz większego odchylenia
 standardowego i~układa je w~sześcianie.
@@ -493,8 +498,8 @@ Metoda ta jest szybsza i~mniej dokładna od algorytmu bazującego na laplasjanie
 funkcji Gaussa, ale podobnie jak ona jest wolna w wykrywaniu dużych elementów.
 
 Ostatnia metoda jest najszybsza, ale najmniej dokładna.
-Polega na wyszukiwaniu maksimów w~macierzy Hesjanu, jest to macierz drugich
-pochodnych cząstkowych.
+Polega na wyszukiwaniu maksimów w~macierzy Hesjanu.
+Jest to macierz drugich pochodnych cząstkowych.
 Postać takiej macierzy w~n-wymiarowej przestrzeni zmiennych $ x $ przedstawia
 wzór \ref{eq:hessian}.~%
 Prędkość tej metody nie zależy od wielkości wykrywanych plam, ale małe elementy
@@ -614,7 +619,7 @@ pozwala aktywować śledzenie wyłącznie tych ziaren, które były obecne od po
 stygnięcia.
 Omawiany kod wykorzystuje funkcję wykrywania detali na zdjęciu przedstawioną na
 listingu \ref{lst:find_blobs}.~%
-\begin{listing}[htb]
+\begin{listing}[tb]
 \begin{minted}{python}
 def find_blob_series(imgs, only_remaining=True):
     '''
@@ -645,7 +650,7 @@ a~z~zestawem z poprzedniego analizowanego zdjęcia.
 
 Na listingu \ref{lst:find_remaining_blobs}~przedstawiono funkcję testującą,
 które z~detali znajdują się na kolejnych etapach stygnięcia.
-\begin{listing}[htb]
+\begin{listing}[tb]
 \begin{minted}{python}
 def find_remaining_blobs(new_blobs, old_blobs):
     '''
@@ -671,7 +676,7 @@ plamy, to zostaje on uznany za powtarzający się.
 Powtarzające się punkty są dołączane do zwracanej listy.
 Aby zrealizować ten zamysł zaimplementowano funkcję przedstawioną na listingu
 \ref{lst:inside_circle}.~%
-\begin{listing}[htb]
+\begin{listing}[tb]
 \begin{minted}{python}
 def inside_circle(x, y, a, b, r):
     '''
@@ -689,7 +694,7 @@ Ponieważ wiele punktów może znajdować się blisko siebie istnieje ryzyko, ż
 zostaną one zliczone wiele razy.
 Z~tego powodu przed zwróceniem listy należy usunąć z~niej duplikaty.
 W~tym celu utworzono funkcje pomocniczą widoczną na listingu \ref{lst:unique}.~%
-\begin{listing}[htb]
+\begin{listing}[tb]
 \begin{minted}{python}
 def unique(multilist):
     '''Get list without repeating values.'''
@@ -810,7 +815,7 @@ Wykryte punkty zaznaczono na obrazie z~początku tego procesu.
 Zmieniające się kolory obrazują detale wykryte w~kolejnych chwilach.
 Pozawala to zaobserwować przemieszczanie się środków ciężkości i~promieni plam
 podczas stygnięcia i zlewania się.
-\begin{figure}[htb]
+\begin{figure}[tb]
     \centering
     \caption*{\scriptsize Detekcja metodą laplasjanu funkcji Gaussa}
     \includegraphics[width=0.5\textwidth]{blob_tracker}
@@ -825,7 +830,7 @@ podczas stygnięcia i zlewania się.
 Działanie metody \ref{it:ratio_blob},~zliczającej stosunek śledzonych detali
 do ich pierwotnej liczby zobrazowano w~tabeli \ref{tab:blob_ratio}.~%
 Działanie zliczania przedstawiono dla każdej rozpatrywanej klasy ziaren.
-\begin{table}[h]
+\begin{table}[tb]
     \centering
     \begin{tabular}{c|c|c|c|c|c}
         \toprule
@@ -855,7 +860,7 @@ zliczania.
 
 Rysunek \ref{fig:blob_chart_all}~przedstawia wykres procesu zanikania plam dla
 wariantu z~wykrywaniem wszystkich detali na każdym etapie stygnięcia.
-\begin{figure}[htb]
+\begin{figure}[tb]
     \centering
     \input{figures/blob_analysis_all}
     \caption{Liczba wykrytych detali na~każdym etapie stygnięcia, w~wariancie
@@ -878,7 +883,7 @@ bezwzględna liczba zliczonych detali.
 
 Efekty drugiego sposób zliczania punktów przedstawiono na rysunku
 \ref{fig:blob_chart_rem}.~%
-\begin{figure}[htb]
+\begin{figure}[tb]
     \centering
     \input{figures/blob_analysis_remaining}
     \caption{Liczba detali wykrytych na zdjęciach, w~wariancie zliczającym
@@ -906,7 +911,7 @@ problem.
 Wyniki ostatniej metody, polegającej na ustaleniu stosunku śledzonych detali
 do ich pierwotnej liczby, został przedstawiona na rysunku
 \ref{fig:blob_chart_ratio}.~%
-\begin{figure}[htb]
+\begin{figure}[tb]
     \centering
     \input{figures/blob_analysis_ratio}
     \caption{Stosunek śledzonych detali do ich liczby na początku procesu
@@ -925,17 +930,19 @@ Jest to obserwacja wskazująca, że pozyskane cechy dobrze oddają naturę proce
 stygnięcia.
 Proces opadania temperatury ciał opisuje \emph{prawo stygnięcia Newtona}, które
 ma postać równania różniczkowego, przedstawionego we wzorze
-\ref{eq:newton_law_diff}~\cite{lienhard_heat}, gdzie:
+\ref{eq:newton_law_diff}~\cite{lienhard_heat}.
+\begin{equation}
+    \frac{dT \left( t \right)}{dt}=-k\left( T \left( t \right) -T_{R} \right)
+    \label{eq:newton_law_diff}
+\end{equation}%
+\begin{samepage}
+Oznaczenia we wzorze mają następujące znaczenia:
 \begin{description}
     \item $ T \left( t \right) $ to funkcja temperatury ciała w~czasie,
     \item $ T_R $ to temperatura otocznia,
     \item $ k $ to współczynnik liczbowy, charakterystyczny dla danego ciała.
 \end{description}
-
-\begin{equation}
-    \frac{dT \left( t \right)}{dt}=-k\left( T \left( t \right) -T_{R} \right)
-    \label{eq:newton_law_diff}
-\end{equation}
+\end{samepage}
 Rozwiązanie równania przedstawia wzór \ref{eq:newton_law},~jak widać ma ono
 charakter eksponencjalny, do którego zbliżone są wykresy na rysunkach
 \ref{fig:blob_chart_rem}~oraz \ref{fig:blob_chart_ratio}.

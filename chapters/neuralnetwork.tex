@@ -46,7 +46,7 @@ umieszcza się zestaw warstw nazywanych \emph{ukrytymi}.
 Zazwyczaj posiadają one najwięcej neuronów spośród warstw w~sieci.
 Matematycznie dowiedziono, że jedna warstwa ukryta%
 \footnote{%
-    Przy pewnych obostrzeniach co do doboru funkcji aktywacji.
+    Przy pewnych ograniczeniach co do doboru funkcji aktywacji.
 }
 wystarcza do aproksymacji dowolnej funkcji nieliniowej
 \cite{cybenko_approximations}.
@@ -60,8 +60,10 @@ Jest to rozmiar często spotykany w~sieciach tego typu, późniejsze testy
 pokazały, że wybrana liczba warstw daje dobre rezultaty.
 Sprawdzono, że zastosowanie jednej warstwy ukrytej powodowało pogorszenie
 działania sieci.
+Dodanie do sieci większej ilości warstw nie powodowało znacznej poprawy
+działania, a~komplikowało jej budowę i wydłużało~czas treningu.
 
-Kolejnym krokiem projektowania sieci jest decyzja o~ilości neuronów
+Kolejnym krokiem projektowania sieci jest decyzja co do~ilości neuronów
 w~poszczególnych warstwach.
 W przypadku pierwszej i~ostatniej warstwy jest to wartość prosta do określenia.
 Zaleca się, aby wejście sieci miało liczbę neuronów równą liczbie elementów
@@ -77,12 +79,6 @@ stwierdzono, że sieć osiąga dobre wyniki dla 256 neuronów w~pierwszej warstw
 ukrytej i~128 w~drugiej.
 Zmniejszenie liczby neuronów w~kolejnej warstwie ukrytej jest często spotykanym
 zabiegiem.
-Obecnie w~skomplikowanych sieciach coraz częściej stosuje się tę samą liczbę
-neuronów w~warstwach ukrytych w~celu łatwiejszej parametryzacji modelu
-\cite[str.~272]{geron_ml} .
-Ponieważ w~rozpatrywanym przypadku liczba warstw jest niewielka, zrezygnowano
-z~tej praktyki i~zdecydowano się na podejście polegające na zmniejszeniu liczby
-neuronów w~drugiej warstwie ukrytej.
 
 Następnie rozpatrzono dostępne funkcje aktywacji poszczególnych warstw.
 Dla warstwy wyjściowej należy wybrać funkcję o~wartościach od zera do jeden.
@@ -90,7 +86,7 @@ Jest to uzasadnione faktem, że wyjścia powinny reprezentować prawdopodobieńs
 zaliczenia próbki do danej klasy.
 Przy klasyfikacji zazwyczaj stosuje się funkcję softmax, jej wykres
 przedstawiono na rysunku \ref{fig:softmax}.%~
-\begin{figure}[htb]
+\begin{figure}[tb]
     \centering
     \begin{tikzpicture}[trim axis left]
         \begin{axis}[title={$ Softmax(z) $}, width=8cm, height=6cm,
@@ -111,10 +107,13 @@ Rozpatrzono trzy rodziny funkcji:
               \item ReLU (ang. \textit{Rectified Linear Unit}),
               \item ELU (ang. \textit{Exponential Linear Unit}),
           \end{itemize}
-    \item funkcję tangens hiperboliczny.
+    \item funkcję tangens hiperboliczny\footnote{%
+    Wzory matematyczne rozpatrywanych funkcji można znaleźć w~książce
+    \cite[str. 273]{geron_ml}.
+    }.%
 \end{itemize}
 Rozpatrywane funkcje aktywacji przedstawiono na rysunku \ref{fig:activation}.~%
-\begin{figure}[h]
+\begin{figure}[tb]
     \hspace*{\fill}
     \begin{subfigure}[t]{0.3\textwidth}
         \centering
@@ -392,7 +391,7 @@ Funkcja przyjmuje argumenty w~postaci skompilowanego modelu sieci oraz zbioru
 danych i~etykiet.
 Zwracana jest macierz, w~której rzędy oznaczają wyniki testów dla kolejnych
 podziałów zbioru danych.
-\begin{listing}[htb]
+\begin{listing}[tb]
 \begin{minted}{python}
 def network_cross_validation(model, X, y, n_splits):
     '''Compute cross validation fold scores for given keras model.'''
