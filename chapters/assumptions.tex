@@ -253,7 +253,14 @@ projektu.
 Język Python oferuje bogaty zestaw bibliotek przetwarzania obrazu.
 Najbardziej popularną z~nich jest biblioteka OpenCV napisana w~języku
 C\texttt{++}.
-Zdecydowano się jednak na wybór mniej znanego pakietu Scikit-image.
+Zdecydowano się jednak na wybór mniej znanego pakietu Scikit-image\footnote{%
+\label{foot:version_req}Wersje używanych bibliotek są zawarte w~pliku
+\texttt{requirements.txt} dołączonym do projektu.
+Na jego podstawie można utworzyć wirtualne środowisko języka Python
+z~odpowiednim zestawem bibliotek.
+Więcej informacji o~strukturze projektu zawarto w~dodatku
+\ref{ch:project_structure}.%
+}.
 Jest to biblioteka zorientowana na obliczenia naukowe i~badawcze oraz napisana
 bezpośrednio z~myślą o~języku Python \cite{scikit-image}.
 Scikit-image, w~porównaniu z OpenCV, oferuje bardziej spójny interfejs
@@ -269,7 +276,8 @@ Wybrana biblioteka charakteryzuje się również dobrą dokumentacją
 \label{subsec:software_network}
 Wybór bibliotek głębokiego uczenia w~języku Python jest bardzo szeroki.
 Do najpopularniejszych pakietów należą: Keras, TensorFlow oraz PyTorch.
-Zdecydowano się na wybór interfejsu biblioteki Keras.
+Zdecydowano się na wybór interfejsu biblioteki Keras%
+\footnoteref{foot:version_req}.
 Jest to pakiet nastawiony na elastyczność i~możliwość eksperymentowania
 \cite{chollet_keras}.
 Moduł Keras oferuje także rozbudowaną dokumentację oraz zestaw poradników

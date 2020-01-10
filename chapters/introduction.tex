@@ -34,12 +34,13 @@ o~nieznanej klasie, będzie w~stanie określić jej typ.
 W~rozpatrywanym zbiorze znajdują się cztery rodzaje rud miedzi, czyli należy
 zbudować klasyfikator \emph{wieloklasowy}.
 
-Zdecydowano się klasyfikować rudy miedzi według ich charakterystycznych wzorców
-stygnięcia, do rejestrowania których służy kamera termowizyjna.
+Zdecydowano się klasyfikować rudy miedzi na podstawie nagrań ich procesu
+stygnięcia, do rejestrowania którego służy kamera termowizyjna.
 Na podstawie nagrań z~kamery należy utworzyć zbiór danych, który będzie podstawą
 do treningu oraz oceny sieci neuronowej.
 Ponieważ próbki przeznaczone do treningu sieci mają znane klasy, to zadanie
-należy do grupy problemów \emph{nadzorowanego uczenia maszynowego}.
+należy do grupy problemów \emph{nadzorowanego uczenia maszynowego}
+\cite[str.~108]{chollet_dl}.
 Oznacza to, że sieć będzie uczona poprzez podanie danych wejściowych oraz klasy
 jaka jest oczekiwana na wyjściu.
 Trening sieci będzie polegał na dopasowaniu jej do etykiet (klas) zbioru

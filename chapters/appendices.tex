@@ -30,6 +30,7 @@
 \end{table}
 
 \chapter{Organizacja projektu}
+\label{ch:project_structure}
 \section{Struktura plików projektu}
 Podczas pisania funkcji języka Python dbano o~ich zwięzłość, dobry podział
 realizowanych zadań oraz ograniczenie długości bloków kodu.
@@ -51,7 +52,8 @@ Struktura plików w~projekcie jest następująca:
     \item[pliki demo.py]
         pliki demonstrujące działanie utworzonego oprogramowania,
     \item[thesis\_generator.py]
-        funkcje generujące obrazy, wykresy oraz tabele.
+        funkcje generujące obrazy, wykresy oraz tabele,
+    \item[docs] dokumentacja projektu.
 \end{description}
 
 Projekt zaopatrzono w~plik \texttt{requirements.txt} zawierający listę
@@ -70,6 +72,12 @@ Programując w~języku Python starano się utrzymać zgodność ze standardem
     Strona standardu PEP8: \url{https://www.python.org/dev/ peps/pep-0008/}}
 zapewniającym wysoką jakość i~czytelność kodu.
 
+\section{Dokumentacja projektu}
+Za pomocą modułu Pydoc wygenerowano dokumentację projektu w~postaci plików
+html.
+Zawierają one listę utworzonych funkcji oraz ich opisy.
+Pliki dokumentacji zawarto w~repozytorium projektu.
+
 \section{Narzędzia pomocnicze}
 W~czasie programowania oraz pisania pracy korzystano z~systemu wersjonowania
 Git.
@@ -81,3 +89,24 @@ Aby zapewnić odpowiednią jakość oprogramowania użyto programu Pylint%
 (\emph{lintera} języka Python), analizującego kod w~celu wykrycia błędów.
 Dokument opisujący projekt inżynierski napisano z~użyciem zestawu makr LaTex
 oraz systemu bibliografii BibTex.
+
+\chapter{Spis wykorzystanych funkcji bibliotecznych}
+\begin{description}
+    \item[Biblioteka standardowa języka Python] moduły: \texttt{glob},
+          \texttt{math} oraz \texttt{natsort}.
+    \item[Keras] funkcje i~klasy z~przestrzeni nazw \texttt{keras}.
+    \item[Matplotlib] funkcje z~przestrzeni nazw \texttt{mpatches} oraz
+          \texttt{plt}.
+    \item[Numpy] funkcje z~przestrzeni nazw \texttt{np}.
+    \item[Pillow] funkcje z~przestrzeni nazw \texttt{Image}.
+    \item[Pytesseract] funkcje z przestrzeni nazw \texttt{pytesseract}.
+    \item[Scikit-image] funkcje: \texttt{blob\_dog}, \texttt{blob\_doh},
+          \texttt{blob\_log}, \texttt{crop}, \texttt{histogram},
+          \texttt{img\_as\_ubyte}, \texttt{imread}, \texttt{imsave},
+          \texttt{invert}, \texttt{rescale}, \texttt{rgb2gray} oraz
+          \texttt{threshold\_otsu}.
+    \item[Scikit-learn] funkcja \texttt{train\_test\_split} oraz klasa 
+          \texttt{StratifiedKFold}.
+    \item[TensorFlow] funkcje i~klasy z~przestrzeni nazw \texttt{tf}.
+    \item[Tikzplotlib] funckje z przestrzeni nazw \texttt{tikzplotlib}.   
+\end{description}
