@@ -170,8 +170,8 @@ w~rozpatrywanym przypadku sieć osiągała najlepsze wyniki dla funkcji tangens.
 
 Opisany model sieci neuronowej należy zdefiniować za pomocą interfejsu Keras.
 Do inicjalizacji sieci o~standardowej liniowej strukturze służy funkcja
-\mintinline{python}{Sequential()}, która może przyjąć listę warstw w~sieci.
-Funkcja \mintinline{python}{Dense()} tworzy warstwę łącząca każdy neuron
+\mintinline{python}{Sequential}, która może przyjąć listę warstw w~sieci.
+Funkcja \mintinline{python}{Dense} tworzy warstwę łącząca każdy neuron
 z~każdym wyjściem poprzedniej warstwy.
 Jej parametry definiują liczbę neuronów w~warstwie oraz ich funkcję aktywacji.
 Funkcję języka Python implementują opisywaną sieć, za pomocą przedstawionych
@@ -214,7 +214,7 @@ W~skład zbioru testowego nie powinny wchodzić dane uczące.
 Ocena zdolności sieci do generalizacji problemu może bazować tylko na danych,
 które nie brały udziału w~jej treningu.
 Aby ułatwić podział Biblioteka Scikit-learn udostępnia funkcję
-\mintinline{python}{train_test_split()}, która zwraca podane zbiory, podzielone
+\mintinline{python}{train_test_split}, która zwraca podane zbiory, podzielone
 na części treningowe i~testowe.
 Odpowiednie wykorzystanie funkcji wymaga użycia jej parametrów opcjonalnych.
 Argument \mintinline{python}{stratify} sprawia, że podzielone zbiory zawierają
@@ -271,7 +271,7 @@ Wybrano standardową metrykę dokładności sieci, czyli stosunku poprawnie
 zakwalifikowanych próbek do wszystkich analizowanych.
 
 Ostatnim etapem uczenia jest realizacja treningu sieci, dokonywana za pomocą
-metody \mintinline{python}{model.fit()}.
+metody \mintinline{python}{model.fit}.
 Metoda przyjmuje argumenty zbioru treningowego wraz z~zestawem etykiet oraz
 liczbę epok treningu, zwraca obiekt zawierający przebieg uczenia sieci.
 Na rysunku \ref{fig:training_history}~przedstawiono dokładność i~błąd
