@@ -176,9 +176,9 @@ mapowany na kolory w~obrazie.
 Niestety aplikacja \textsc{Flir} Tools nie pozwala na eksport zakresu temperatur
 wraz ze zdjęciami w~formacie liczbowym.
 W~czasie zapisu zdjęć oprogramowanie dodaje do nich interfejs z~aktywną skalą
-pomiarową, jednak jest on graficznie naniesiony na obraz.
-Aby ułatwić w~przyszłości pracę z~materiałami z~kamery opracowano mechanizm
-ekstrakcji zakresu temperatur ze zdjęć pochodzących z~kamery.
+pomiarową, który jest graficznie naniesiony na obraz.
+Aby ułatwić pracę z~materiałami z~kamery opracowano mechanizm ekstrakcji
+zakresu temperatur ze zdjęć pochodzących z~kamery.
 
 W~celu odczytu wartości liczbowych z~obrazu posłużono się gotową siecią
 neuronową zaprojektowaną do detekcji tekstu na zdjęciach.
@@ -557,8 +557,7 @@ powolnych obliczeń na obszernych plamach.
 Aby wybrana funkcja laplasjanu funkcji Gaussa wykrywała tylko małe plamy należy
 podać jej odpowiednie parametry.
 Uczyniono to już na etapie porównania metod detekcji.
-Wywołanie omawianej funkcji ma postać przedstawioną na listingu
-\ref{lst:find_blobs}.~%
+Wywołanie omawianej funkcji przedstawiono na listingu \ref{lst:find_blobs}.~%
 Funkcji podano dwa dodatkowe argumenty, które są istotne dla pożądanego
 działania.
 Argument \mintinline{python}{max_sigma} ogranicza odchylenie standardowe

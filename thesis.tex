@@ -1,5 +1,5 @@
 % Paper, encoding and fonts settings
-\documentclass[a4paper, twoside, 12pt]{report}
+\documentclass[a4paper, openright, twoside, 12pt]{report}
 \usepackage{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -11,6 +11,7 @@
 \usepackage[toc,page]{appendix}
 \usepackage{fancyhdr}
 \usepackage{setspace}
+\usepackage{emptypage}
 \usepackage[absolute]{textpos}
 
 % Graphics and plotting
@@ -54,8 +55,8 @@
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 % Define header style
 \fancyhead{}
-\fancyhead[RE]{\nouppercase{\rightmark}}
-\fancyhead[LO]{\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}}
+\fancyhead[LE]{\nouppercase{\leftmark}}
 \pagestyle{fancy}
 % Forbid to split given words
 \hyphenation{LabVIEW}
@@ -86,14 +87,11 @@
 
 \begin{document}
 
+\pagenumbering{gobble}
+
 \input{titlepage}
 
-% Add empty page
-\newpage
-\thispagestyle{plain}
-\mbox{}
-
-\pagenumbering{gobble}
+\cleardoublepage
 
 % Introductory pages
 \begin{abstract}
@@ -129,7 +127,8 @@
 
 \tableofcontents
 
-\newpage
+\cleardoublepage
+
 \pagenumbering{arabic}
 
 % Chapters
@@ -151,8 +150,6 @@
 \begin{appendices}
     \input{chapters/appendices}
 \end{appendices}
-
-\newpage
 
 % Lists of objects
 \listoffigures
