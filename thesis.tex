@@ -8,6 +8,7 @@
 \usepackage[polish]{babel}
 
 % Document structure and layout
+\usepackage{pdfpages}
 \usepackage[toc,page]{appendix}
 \usepackage{fancyhdr}
 \usepackage{setspace}
@@ -90,6 +91,10 @@
 \pagenumbering{gobble}
 
 \input{titlepage}
+
+\cleardoublepage
+
+\includepdf[pages=-]{declaration.pdf}
 
 \cleardoublepage
 
