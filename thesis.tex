@@ -71,7 +71,6 @@
 % This is function is necessary to plot softmax
 \pgfmathdeclarefunction{sumexp}{3}{%
 \begingroup%
-\pgfkeys{/pgf/fpu,/pgf/fpu/output format=fixed}%
 \pgfmathsetmacro{\myx}{#1}%
 \pgfmathtruncatemacro{\myxmin}{#2}%
 \pgfmathtruncatemacro{\myxmax}{#3}%
@@ -91,10 +90,6 @@
 \pagenumbering{gobble}
 
 \input{titlepage}
-
-\cleardoublepage
-
-\includepdf[pages=-]{declaration.pdf}
 
 \cleardoublepage
 
